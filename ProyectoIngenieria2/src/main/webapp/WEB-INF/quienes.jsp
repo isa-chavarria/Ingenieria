@@ -11,7 +11,7 @@
         <meta name="author" content="">
 
         <title>Kinder lulú</title>
-
+     
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
