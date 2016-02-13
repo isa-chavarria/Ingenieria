@@ -27,8 +27,8 @@ public class ProfesorServiceImpl implements ProfesorService {
     }
 
     @Override
-    public void save(Profesor Profesor) {
-       this.Profesor.save(Profesor);
+    public void save(Profesor profesor) {
+       this.Profesor.save(profesor);
     }
 
     @Override
@@ -42,18 +42,18 @@ public class ProfesorServiceImpl implements ProfesorService {
     }
 
     @Override
-    public void UpdateEncargado(Profesor Encargado) {
-      Profesor Profesor = this.Profesor.findbyId(Encargado.getNombre());
-      if(Profesor!=null){
-          Profesor.setNombre(Profesor.getNombre());
-          Profesor.setApellido1(Profesor.getApellido1());
-          Profesor.setApellido2(Profesor.getApellido2());
-          Profesor.setId(Profesor.getId());
-          Profesor.setEmail(Profesor.getEmail());
-          Profesor.setFechanacimiento(Profesor.getFechanacimiento());
-          Profesor.setRol(Profesor.getRol());
-          Profesor.setTelefono(Profesor.getTelefono());
-          Profesor.setDireccion(Profesor.getDireccion());
+    public void UpdateProfesor(Profesor profesor) {
+      Profesor profe = this.Profesor.findbyId(profesor.getNombre());
+      if(profe!=null){
+          profe.setNombre(profesor.getNombre());
+         profe.setApellido1(profesor.getApellido1());
+          profe.setApellido2(profesor.getApellido2());
+          profe.setId(profesor.getId());
+          profe.setEmail(profesor.getEmail());
+          profe.setFechanacimiento(profesor.getFechanacimiento());
+          profe.setRol(profesor.getRol());
+          profe.setTelefono(profesor.getTelefono());
+          profe.setDireccion(profesor.getDireccion());
           
       }
     }
