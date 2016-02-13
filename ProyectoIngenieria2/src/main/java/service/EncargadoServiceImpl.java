@@ -27,8 +27,8 @@ public class EncargadoServiceImpl implements EncargadoService {
     }
 
     @Override
-    public void save(Encargado Encargado) {
-       this.Encargado.save(Encargado);
+    public void save(Encargado encargado) {
+       this.Encargado.save(encargado);
     }
 
     @Override

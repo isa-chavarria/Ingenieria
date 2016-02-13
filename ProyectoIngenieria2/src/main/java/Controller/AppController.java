@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.EncargadoService;
+import service.NinoService;
 import service.ProfesorService;
 import service.kinderService;
 
@@ -32,6 +33,8 @@ public class AppController {
     EncargadoService EncargadoService;
     @Autowired
     ProfesorService ProfesorService;
+    @Autowired
+    NinoService ninoService;
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");

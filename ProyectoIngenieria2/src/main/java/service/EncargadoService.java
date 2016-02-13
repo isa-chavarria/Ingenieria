@@ -17,5 +17,5 @@ public interface EncargadoService {
     void save(Encargado encargado);
     void DeletebyId(String id);
     List<Encargado> findAll();
-    void UpdateEncargado(Encargado Encargado);
+    void UpdateEncargado(Encargado encargado);
 }

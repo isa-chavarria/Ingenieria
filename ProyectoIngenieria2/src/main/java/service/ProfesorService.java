@@ -14,8 +14,8 @@ import modelo.Profesor;
  */
 public interface ProfesorService {
     Profesor findbyId(String id);
-    void save(Profesor Profesor);
+    void save(Profesor profesor);
     void DeletebyId(String id);
     List<Profesor> findAll();
-    void UpdateEncargado(Profesor Profesor);
+    void UpdateProfesor(Profesor profesor);
 }

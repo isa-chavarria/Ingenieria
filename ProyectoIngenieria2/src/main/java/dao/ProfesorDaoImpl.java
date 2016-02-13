@@ -19,30 +19,30 @@ import org.springframework.stereotype.Repository;
 public class ProfesorDaoImpl extends AbstractDao<String,Profesor> implements ProfesorDao{
       @Override
     public Profesor findbyId(String id) {
-      Profesor  Profesor  = getByKey(id);
-        return Profesor;
+      Profesor  profesor  = getByKey(id);
+        return profesor;
     }
 
     @Override
-    public void save(Profesor Profesor) {
-        persist(Profesor);
+    public void save(Profesor profesor) {
+        persist(profesor);
     }
 
     @Override
     public void DeletebyId(String id) {
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("id", id));
-        Profesor Profesor = (Profesor) crit.uniqueResult();
-        delete(Profesor);
+        Profesor profesor = (Profesor) crit.uniqueResult();
+        delete(profesor);
     }
 
     @Override
     public List<Profesor> findAll() {
         Criteria criteria = createEntityCriteria();
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-        List<Profesor> Profesor = (List<Profesor>) criteria.list();
+        List<Profesor> profesor = (List<Profesor>) criteria.list();
 
-        return Profesor;
+        return profesor;
     }
     
 }

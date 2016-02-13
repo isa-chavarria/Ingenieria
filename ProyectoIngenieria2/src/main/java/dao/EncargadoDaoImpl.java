@@ -19,30 +19,30 @@ import org.springframework.stereotype.Repository;
 public class EncargadoDaoImpl extends AbstractDao<String, Encargado> implements EncargadoDao{
      @Override
     public Encargado findbyId(String id) {
-        Encargado Encargado = getByKey(id);
-        return Encargado;
+        Encargado encargado = getByKey(id);
+        return encargado;
     }
 
     @Override
-    public void save(Encargado Encargado) {
-        persist(Encargado);
+    public void save(Encargado encargado) {
+        persist(encargado);
     }
 
     @Override
     public void DeletebyId(String id) {
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("id", id));
-        Encargado Encargado = (Encargado) crit.uniqueResult();
-        delete(Encargado);
+        Encargado encargado = (Encargado) crit.uniqueResult();
+        delete(encargado);
     }
 
     @Override
     public List<Encargado> findAll() {
         Criteria criteria = createEntityCriteria();
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-        List<Encargado> Encargado = (List<Encargado>) criteria.list();
+        List<Encargado> encargado = (List<Encargado>) criteria.list();
 
-        return Encargado;
+        return encargado;
     }
     
 }
