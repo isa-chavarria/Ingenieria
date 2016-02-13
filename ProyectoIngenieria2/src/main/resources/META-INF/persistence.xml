@@ -6,6 +6,7 @@
     <class>modelo.Kinder_1</class>
     <class>modelo.Contacto</class>
     <class>modelo.Profesor</class>
+    <class>dao.Nino</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kinder?zeroDateTimeBehavior=convertToNull"/>
