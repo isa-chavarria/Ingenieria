@@ -6,16 +6,15 @@
 package dao;
 
 import java.util.List;
-import modelo.Encargado;
-
+import modelo.Profesor;
 
 /**
  *
  * @author Isa
  */
-public interface EncargadoDao {
-    Encargado  findbyId(String id);
-    void save(Encargado  encargado);
+public interface ProfesorDao {
+     Profesor  findbyId(String id);
+    void save(Profesor profesor);
     void DeletebyId(String id);
-    List< Encargado > findAll();
+    List< Profesor > findAll();
 }

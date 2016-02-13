@@ -22,8 +22,8 @@ public class EncargadoServiceImpl implements EncargadoService {
      @Autowired
     private EncargadoDao Encargado;
     @Override
-    public Encargado findbyName(String name) {
-        return Encargado.findbyName(name);
+    public Encargado findbyId(String id) {
+        return Encargado.findbyId(id);
     }
 
     @Override
@@ -32,8 +32,8 @@ public class EncargadoServiceImpl implements EncargadoService {
     }
 
     @Override
-    public void DeletebyName(String name) {
-        this.Encargado.DeletebyName(name);
+    public void DeletebyId(String id) {
+        this.Encargado.DeletebyId(id);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class EncargadoServiceImpl implements EncargadoService {
     }
 
     @Override
-    public void UpdateKinder(Encargado Encargado) {
-      Encargado encargado = this.Encargado.findbyName(Encargado.getNombre());
+    public void UpdateEncargado(Encargado Encargado) {
+      Encargado encargado = this.Encargado.findbyId(Encargado.getNombre());
       if(encargado!=null){
           encargado.setNombre(Encargado.getNombre());
           encargado.setApellido1(Encargado.getApellido1());

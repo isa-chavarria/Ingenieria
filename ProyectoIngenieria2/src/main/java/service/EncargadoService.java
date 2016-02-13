@@ -13,9 +13,9 @@ import modelo.Encargado;
  * @author Isa
  */
 public interface EncargadoService {
-     Encargado findbyName(String name);
-    void save(Encargado kinder);
-    void DeletebyName(String name);
+     Encargado findbyId(String id);
+    void save(Encargado encargado);
+    void DeletebyId(String id);
     List<Encargado> findAll();
-    void UpdateKinder(Encargado Encargado);
+    void UpdateEncargado(Encargado Encargado);
 }

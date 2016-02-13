@@ -3,6 +3,9 @@
   <persistence-unit name="com.group17_ProyectoIngenieria_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.Encargado</class>
+    <class>modelo.Kinder_1</class>
+    <class>modelo.Contacto</class>
+    <class>modelo.Profesor</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kinder?zeroDateTimeBehavior=convertToNull"/>

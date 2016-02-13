@@ -7,12 +7,14 @@ package Controller;
 
 import modelo.Encargado;
 import modelo.Kinder;
+import modelo.Profesor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.EncargadoService;
+import service.ProfesorService;
 import service.kinderService;
 
 /**
@@ -25,26 +27,35 @@ public class AppController {
 
     @Autowired
     kinderService kinderService;
-    
+
     @Autowired
     EncargadoService EncargadoService;
-
-    @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
+    @Autowired
+    ProfesorService ProfesorService;
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        if(kinder != null)
+        if (kinder != null) {
             model.addAttribute("kinder", kinder);
+        }
         return "quienes";
     }
-    
-        @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String listEncargado(ModelMap model) {
-        Encargado Encargado = EncargadoService.findbyName("David");
-       // for (int i = 0; i < Encargado.size(); i++) {
-            if (Encargado != null){
-            //    model.addAttribute("encargado", Encargado.get(i).getNombre()+" "+Encargado.get(i).getApellido1()+" "+Encargado.get(i).getApellido2()+" "+Encargado.get(i).getId()+ " "+Encargado.get(i).getFechaNacimiento()+ " "+Encargado.get(i).getEmail()+" "+Encargado.get(i).getDireccion()+" "+Encargado.get(i).getTelefono());
-          //  }
-          model.addAttribute("encargado",Encargado);
+        Encargado en = EncargadoService.findbyId("90110010");
+        if (en != null) {
+
+            model.addAttribute("encargado", en);
+        }
+        return "quienes";
+    }
+      @RequestMapping(value = {"ProfesorEjemplo"}, method = RequestMethod.GET)
+    public String listProfesor(ModelMap model) {
+        Profesor profesor = ProfesorService.findbyId("116130203");
+        if (profesor != null) {
+
+            model.addAttribute("profesor", profesor);
         }
         return "quienes";
     }

@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-md-12">
                         <strong>
-                           <td>${encargado.nombre}</td>
+                            <td>${encargado.nombre}</td>
                         </strong>
                     </div>
                     <div class="col-lg-12">
