@@ -10,6 +10,9 @@
     <class>modelo.Clase</class>
     <class>modelo.Planilla</class>
     <class>modelo.Usuario</class>
+    <class>modelo.Factura</class>
+    <class>modelo.LineaPago</class>
+    <class>modelo.Planilla</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kinder?zeroDateTimeBehavior=convertToNull"/>
