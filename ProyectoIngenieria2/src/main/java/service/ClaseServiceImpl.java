@@ -43,7 +43,7 @@ public class ClaseServiceImpl implements ClaseService{
 
     @Override
     public void UpdateClase(Clase clase) {
-      Clase cla = this.Clase.findbyId(clase.getNombre());
+      Clase cla = this.Clase.findbyId(clase.getId());
       if(cla!=null){
           cla.setNombre(clase.getNombre());
           cla.setId(clase.getId());
