@@ -13,6 +13,8 @@
     <class>modelo.Factura</class>
     <class>modelo.LineaPago</class>
     <class>modelo.Planilla</class>
+    <class>modelo.Album</class>
+    <class>modelo.Imagen</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kinder?zeroDateTimeBehavior=convertToNull"/>
