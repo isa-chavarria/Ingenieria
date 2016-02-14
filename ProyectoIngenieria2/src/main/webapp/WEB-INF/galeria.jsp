@@ -1,6 +1,6 @@
 <%-- 
-    Document   : quienes
-    Created on : 04/02/2016, 05:54:44 PM
+    Document   : galeria
+    Created on : 04/02/2016, 06:54:22 PM
     Author     : josvr_000
 --%>
 
@@ -48,7 +48,7 @@
 
             <div  class="col-sm-8" style=" padding: 1%">
 
-                <div class="brand">¿Quiénes Somos?</div>
+                <div class="brand">Galería imágenes</div>
             </div>
         </div>
 
@@ -73,13 +73,13 @@
                             <a href="index.jsp">Inicio</a>
                         </li>
                         <li>
-                            <a href="galeria.jsp">Galeria</a>
+                            <a href="quienes.jsp">¿Quiénes Somos?</a>
                         </li>
                         <li>
                             <a href="requerimientos.jsp">Requerimientos de matricula</a>
                         </li>
                         <li>
-                            <a href="contacto.jsp">Contacto</a>
+                            <a href="contacto.jsp">Contactenos</a>
                         </li>
                     </ul>
                 </div>
@@ -92,71 +92,86 @@
         <div class="container">
 
 
-            <div class="row">
-                <div class="box">
-                    
-                     <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Nuestra Historia
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>
-                            El Jardín de Niños Lulú empezó a formarse en el mes de marzo de 1986, cuando en ese entonces la señora Rosibeth Jiménez García decidió brindar la educación a su hija menor y a su sobrino, ya que; en la comunidad no se encontraba ningún kinder, donde los niños recibieran una educación de calidad, donde el juego no fuera simplemente un juego, sino un motivo de aprendizaje. 
-                            Para mediados de ese mismo año, ingresan dos vecinos y la prima de una de ellos.
-
-                            El Jardín de Niños Lulú, está ubicado en San Sebastián, Calle tres 75 m sur, 100 m este y 250 m sur de la entrada principal del Walmark<br>
-
-                            Dicho Jardín lleva el nombre de Lulú, en honor al sobrenombre que se le utilizaba a la fundadora, por el parecido a la pequeña Lulú,
-                            perteneciente a una caricatura con el mismo nombre, la cual, es una niña muy simpática, aunque a veces muy traviesa, que tiene una personalidad alegre, dinámica y muy inteligente.
-
-                            En los primeros diez años, trabajó con los niveles de preparatoria y kinder. 
-                            Para 1997 se abre el nivel de prekinder y en el 2004 se da la apertura del nivel de materno.
-
-                            El Jardín de Niños Lulú es un centro de educación preescolar de carácter privado,
-                            que atiende a niños de edades comprendidas entre dos y cinco años, de nivel socioeconómico medio y medio alto, sin embargo; se caracteriza por el favorecimiento a los alumnos de escasos recursos.
-                            Obtiene los recursos económicos para su funcionamiento de las cuotas de matrícula y de las mensualidades.
-
-                            Tiene como tarea, estimular el desarrollo intelectual, por medio de la invención de nuevas ideas, la modificación constante del curriculum, 
-                            según las necesidades de cada educando, con el fin de la búsqueda de la excelencia integral de cada niño, usando como fundamentos el amor, el rigor y la fe, para que los estudiantes se desarrollen plenamente en la dimensión cognoscitiva, socio-afectiva, psicomotora y espiritual.
-                        </strong>
-                    </div>
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Mision
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>
-                            Ser una comunidad humana y académica, que busca promover a los niños y las niñas, 
-                            sin distinciones, hacia estados de superación y realización integral, 
-                            mediante una formación de calidad, 
-                            de acuerdo al avance tecnológico, pero a bajo costo económico.
-                        </strong>
-                    </div>
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Vision
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>
-                            Brindar a los educandos, a bajo costo económico, 
-                            la oportunidad de instrucción a la vez de suplirles la necesidad recreativa latente en la comunidad,
-                            lo anterior con el propósito de perfeccionar su ser,logrando así, 
-                            personas preparadas para desempeñar responsablemente sus funciones en la sociedad.
-                        </strong>
-                    </div>
-                    <div class="clearfix"></div>
-                    
-                </div>
+            <div class="col-lg-12">
+                <hr>
+                <h2 class="intro-text text-center">Nuestros
+                    Estudiantes
+                </h2>
+                <hr>
             </div>
-            
-             <div class="row">
-                <div class="box">
+            <div class="imagenes" >
+                <div class="row"  >
+                    <div style=" overflow: scroll ; height: 400px " class="box">
+
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/aa.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/graduacion.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/profesiones.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/equipo.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/dos.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/ll.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/n.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/ninos.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/parq.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/pintar.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/tres.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="#">
+                                <img class="img-responsive" src="img/arreglada3.jpg" style="height: 300%; width: 400%;">
+                            </a>
+                        </div>
+                       
+                    </div>
+
+                </div>
+
+                <div class="row">
+
                     <div class="col-lg-12">
                         <hr>
                         <h2 class="intro-text text-center">Nuestro
@@ -183,7 +198,10 @@
                         </h3>
                     </div>
                     <div class="clearfix"></div>
+
                 </div>
+
+
             </div>
 
 

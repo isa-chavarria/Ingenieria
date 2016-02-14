@@ -13,7 +13,6 @@ body {
     -o-background-size: cover;
 }
 
-
 h1,
 h2,
 h3,
@@ -40,7 +39,6 @@ hr {
 .brand,
 .address-bar {
     display: none;
-
 }
 
 .navbar-brand {
@@ -82,9 +80,14 @@ hr {
 .box {
     margin-bottom: 20px;
     padding: 30px 15px;
-    /* background: #fff;
-    //background: rgba(255,255,255,0.9);*/
-    background: #cccccc;
+    background: #fff;
+    
+    border-color:#1d1d1d;
+ 
+    border: 1px solid #999999;
+    background-color: #E6E6E6;
+    box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);
+    border-radius: 10px;
 }
 
 .intro-text {
@@ -106,33 +109,35 @@ hr {
 }
 
 footer {
-    /*background: #fff;
-    //background: rgba(255,255,255,0.9);*/
-    background: #ff3333;
-    border: solid 2px #990000;
+    background: #fff;
+  
+    background: rgba(193, 88, 88, 0.9);
+    box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);
+
 }
 
 footer p {
     margin: 0;
-    padding: 40px 0;
+    padding: 50px 0;
+
 }
 
-h1{
-    
-    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
 @media screen and (min-width:768px) {
     .brand {
         display: inherit;
         margin: 0;
         padding: 30px 0 10px;
-        text-align: center;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+
+        text-align:  left;
+        text-shadow:  0px 0px 20px   rgba(0,0,0,0.3);
         font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 5em;
+     
+        font-size: 4em;
         font-weight: 700;
         line-height: normal;
-        color: #fff;
+       
+        color: #A94442;
+
     }
 
     .top-divider {
@@ -159,48 +164,44 @@ h1{
 
     .navbar {
         border-radius: 0;
-
     }
 
     .navbar-header {
         display: none;
-
     }
 
     .navbar {
         min-height: 0;
-
     }
 
     .navbar-default {
-        border: solid 2px #990000;
-        /* background: #fff;*/
+        border: none;
+        background: #fff;
+       
+        background: rgba(193, 88, 88, 0.9);
+        box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);
+        position:fixed; 
+        top: 0;
+        width: 100%;
+        z-index:1;
 
-        background: #ff3333;
-        /* background: rgba(255,255,255,0.9);*/
+
     }
 
     .nav>li>a {
-        padding: 33px;
-        /*        padding-top: 35px;
-                padding-bottom: 35px;
-                padding-left: 5%;
-                padding-rigth: 5%;*/
+        padding: 35px;
     }
 
     .navbar-nav>li>a {
         line-height: normal;
-        display: inline-block;
-      /*font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;*/
     }
 
     .navbar-nav {
-        display: inline;
+        display: table;
         float: none;
         margin: 0 auto;
-        la-layout: fixed;
+        table-layout: fixed;
         font-size: 1.25em;
-        text-align: center;
     }
 }
 
@@ -212,34 +213,44 @@ h1{
     }
 }
 
-/*---------------------------------------------------------------------------------*/
 
-container-nav{
-    margin: 0 auto;
+/* -------------------AGREGADOS---------------------------------*/
+
+
+
+#arriba{
+    margin-top: 8%;
+    border-bottom: 2px solid #cccccc;
+    margin-bottom: 5%;
+
+
 }
 
-/*----------------------------*/
+/*------PERFIL-------------*/
+
 .img-circle {
     border-radius: 50%;
     border: solid 2px #990000;
 }
 
-.left {
-    /*max-width: 100%;*/
+.leftImage {
+   
     width: 25%;
-    /*background:red;*/
+
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     -ms-text-overflow:ellipsis;
     float: left;
 }
-.right {
-    /*background:yellow;*/
+
+.rightImage {
+   
 
     margin-left: 0%;
     white-space:nowrap;
     overflow:hidden;
+
     text-overflow:ellipsis;
     -ms-text-overflow:ellipsis;
     text-align: left;
@@ -250,9 +261,11 @@ container-nav{
 .infodisplay{
     margin-left: 25%;
     margin-top: 2%;
-    width: 75%;
-    height: 600px;
+  
     background:darkgrey;
+    padding: 5%;
+    box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);
+    border-radius: 5px;
 }
 
 .spac{
@@ -264,8 +277,11 @@ container-nav{
 }
 .dec{
     border: solid 2px #990000;
-    background:#990000;
-    width: 80%; 
+
+    background: rgba(193, 88, 88, 0.9);
+    box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);
+    border-radius: 5px;
+    width: auto; 
     height: 120px;
     margin-left: 24%;
 
