@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import java.util.Collection;
+import modelo.Contacto;
 import modelo.Encargado;
 import modelo.Kinder;
 import modelo.Profesor;
@@ -40,6 +42,9 @@ public class AppController {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
+            Collection<Contacto> l = kinder.getContactos();
+            if(l!=null && l.size() > 0)
+                model.addAttribute("contactos", ((Contacto)l.toArray()[0]).getDescripcion());
         }
         return "quienes";
     }

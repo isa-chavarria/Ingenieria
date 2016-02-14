@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Isa
  */
 @Entity
-@Table(name = "Encargado")
+@Table(name = "encargado")
 public class Encargado implements Serializable {
 
     @Size(max = 50)

@@ -6,9 +6,14 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,7 +23,7 @@ import javax.validation.constraints.Size;
  * @author Isa
  */
 @Entity
-@Table(name="Kinder")
+@Table(name="kinder")
 public class Kinder implements Serializable{
 
     @Id
@@ -37,6 +42,18 @@ public class Kinder implements Serializable{
     @Size(max = 5000)
     private String vision;
 
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="kinder")
+    Collection<Contacto> contactos;
+
+    public Collection<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(Collection<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+    
     public String getNombre() {
         return nombre;
     }
