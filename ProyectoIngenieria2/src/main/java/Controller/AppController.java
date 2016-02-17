@@ -37,7 +37,8 @@ public class AppController {
     ProfesorService ProfesorService;
     @Autowired
     NinoService ninoService;
-    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+    
+    @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
@@ -50,6 +51,11 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String loadIndex(ModelMap model) {
+        return "index";
+    }
+    
+    @RequestMapping(value = {"/quienes-ejemplo-encargado"}, method = RequestMethod.GET)
     public String listEncargado(ModelMap model) {
         Encargado en = EncargadoService.findbyId("90110010");
         if (en != null) {
@@ -58,11 +64,11 @@ public class AppController {
         }
         return "quienes";
     }
-      @RequestMapping(value = {"ProfesorEjemplo"}, method = RequestMethod.GET)
+      
+    @RequestMapping(value = {"ProfesorEjemplo"}, method = RequestMethod.GET)
     public String listProfesor(ModelMap model) {
         Profesor profesor = ProfesorService.findbyId("116130203");
         if (profesor != null) {
-
             model.addAttribute("profesor", profesor);
         }
         return "quienes";

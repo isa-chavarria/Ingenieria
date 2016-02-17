@@ -1,10 +1,5 @@
-<%-- 
-    Document   : index
-    Created on : 03/02/2016, 06:45:36 PM
-    Author     : josvr_000
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,13 +10,13 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="css/business-casual.css" rel="stylesheet">
+        <link href="resources/css/business-casual.css" rel="stylesheet">
 
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -31,7 +26,7 @@
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.resources/js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
     </head>
@@ -40,7 +35,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="img/escudo.png" alt="">
+                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -54,7 +49,7 @@
 
                     </div>
                     <div style="margin-right: 1% " class="form-group">
-                        <input  style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2)" type="text"  class="form-control" placeholder="CONTRASEÃ±A"/>
+                        <input  style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2)" type="text"  class="form-control" placeholder="CONTRASEñA"/>
                     </div>
                     <button  style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2)" type="ingresar"  class="btn btn-info">INGRESAR</button>
 
@@ -80,10 +75,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="quienes.jsp">Â¿QuiÃ©nes Somos?</a>
+                            <a href="quienes">¿Quiénes Somos?</a>
                         </li>
                         <li>
-                            <a href="galeria.jsp">GalerÃ­a</a>
+                            <a href="galeria.jsp">Galería</a>
                         </li>
 
                         <li>
@@ -116,13 +111,13 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="img-responsive img-full" src="img/18.jpg" alt="">
+                                    <img class="img-responsive img-full" src="resources/img/18.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="img-responsive img-full" src="img/aa.jpg" alt="">
+                                    <img class="img-responsive img-full" src="resources/img/aa.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="img-responsive img-full" src="img/20.jpg" alt="">
+                                    <img class="img-responsive img-full" src="resources/img/20.jpg" alt="">
                                 </div>
                             </div>
 
@@ -137,7 +132,7 @@
                         <h2 class="brand-before">
                             <small>Bienvenidos al sitio web del</small>
                         </h2>
-                        <h1 class="brand-name">Kinder LulÃº</h1>
+                        <h1 class="brand-name">Kinder Lulú</h1>
                         <hr class="tagline-divider">
                         <h2>
 
@@ -154,17 +149,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
         </footer>
 
         <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+        <script src="resources/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
 
         <!-- Script to Activate the Carousel -->
         <script>
