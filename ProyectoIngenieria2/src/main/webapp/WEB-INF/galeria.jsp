@@ -18,10 +18,10 @@
         <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="css/business-casual.css" rel="stylesheet">
+        <link href="resources/css/business-casual.css" rel="stylesheet">
 
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="img/escudo.png" alt="">
+                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -64,22 +64,22 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    <a class="navbar-brand" href="index.html">Business Casual</a>
+                    <a class="navbar-brand" href="index">Business Casual</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="index.jsp">Inicio</a>
+                            <a href="index">Inicio</a>
                         </li>
                         <li>
-                            <a href="quienes.jsp">¿Quiénes Somos?</a>
+                            <a href="quienes">¿Quiénes Somos?</a>
                         </li>
                         <li>
-                            <a href="requerimientos.jsp">Requerimientos de matricula</a>
+                            <a href="requerimientos">Requerimientos de matricula</a>
                         </li>
                         <li>
-                            <a href="contacto.jsp">Contactenos</a>
+                            <a href="contacto">Contactenos</a>
                         </li>
                     </ul>
                 </div>
@@ -105,64 +105,64 @@
 
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/aa.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/aa.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/graduacion.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/graduacion.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/profesiones.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/profesiones.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/equipo.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/equipo.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
 
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/dos.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/dos.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/ll.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/ll.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/n.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/n.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/ninos.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/ninos.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/parq.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/parq.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/pintar.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/pintar.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/tres.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/tres.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="img/arreglada3.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/arreglada3.jpg" style="height: 300%; width: 400%;">
                             </a>
                         </div>
                        
@@ -180,19 +180,19 @@
                         <hr>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="img/rosi.jpg" alt="">
+                        <img class="img-responsive" src="resources/img/rosi.jpg" alt="">
                         <h3>Rosibeth Garcia
 
                         </h3>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="img/mari.jpg" alt="">
+                        <img class="img-responsive" src="resources/img/mari.jpg" alt="">
                         <h3>Maria Solano
 
                         </h3>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="img/equipo.jpg" alt="">
+                        <img class="img-responsive" src="resources/img/equipo.jpg" alt="">
                         <h3>Maestras
 
                         </h3>
@@ -218,10 +218,10 @@
         </footer>
 
         <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+        <script src="resources/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
 
         <!-- Script to Activate the Carousel -->
         <script>

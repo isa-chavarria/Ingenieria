@@ -69,7 +69,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    <a class="navbar-brand" href="index.html">Business Casual</a>
+                    <a class="navbar-brand" href="index">Business Casual</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -78,14 +78,14 @@
                             <a href="quienes">¿Quiénes Somos?</a>
                         </li>
                         <li>
-                            <a href="galeria.jsp">Galería</a>
+                            <a href="galeria">Galería</a>
                         </li>
 
                         <li>
-                            <a href="requerimientos.jsp">Requerimientos de matricula</a>
+                            <a href="requerimientos">Requerimientos de matricula</a>
                         </li>
                         <li>
-                            <a href="contacto.jsp">Contactenos</a>
+                            <a href="contacto">Contactenos</a>
                         </li>
                     </ul>
                 </div>

@@ -59,22 +59,22 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    <a class="navbar-brand" href="index.html">Business Casual</a>
+                    <a class="navbar-brand" href="index">Business Casual</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="index.jsp">Inicio</a>
+                            <a href="index">Inicio</a>
                         </li>
                         <li>
-                            <a href="galeria.jsp">Galeria</a>
+                            <a href="galeria">Galeria</a>
                         </li>
                         <li>
-                            <a href="requerimientos.jsp">Requerimientos de matricula</a>
+                            <a href="requerimientos">Requerimientos de matricula</a>
                         </li>
                         <li>
-                            <a href="contacto.jsp">Contacto</a>
+                            <a href="contacto">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -110,10 +110,7 @@
                     </div>
                     <div class="col-md-12">
                         <strong>
-                            Ser una comunidad humana y académica, que busca promover a los niños y las niñas, 
-                            sin distinciones, hacia estados de superación y realización integral, 
-                            mediante una formación de calidad, 
-                            de acuerdo al avance tecnológico, pero a bajo costo económico.
+                        
                         </strong>
                     </div>
                     <div class="col-lg-12">
@@ -124,10 +121,7 @@
                     </div>
                     <div class="col-md-12">
                         <strong>
-                            Brindar a los educandos, a bajo costo económico, 
-                            la oportunidad de instrucción a la vez de suplirles la necesidad recreativa latente en la comunidad,
-                            lo anterior con el propósito de perfeccionar su ser,logrando así, 
-                            personas preparadas para desempeñar responsablemente sus funciones en la sociedad.
+                           
                         </strong>
                     </div>
                     <div class="clearfix"></div>

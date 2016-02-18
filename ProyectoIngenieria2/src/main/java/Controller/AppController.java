@@ -38,7 +38,7 @@ public class AppController {
     @Autowired
     NinoService ninoService;
     
-    @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
@@ -54,6 +54,65 @@ public class AppController {
     public String loadIndex(ModelMap model) {
         return "index";
     }
+        @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+    public String loadIndexAllTheTimes(ModelMap model) {
+        return "index";
+    }
+      @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
+    public String loadQuienes(ModelMap model) {
+        return "quienes";
+    }
+      @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
+    public String loadEncargado(ModelMap model) {
+        return "Encargado";
+    }
+      @RequestMapping(value = {"/administracion"}, method = RequestMethod.GET)
+    public String loadAdministracion(ModelMap model) {
+        return "Administracion";
+    }
+    
+      @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
+    public String loadContacto(ModelMap model) {
+        return "contacto";
+    }
+    
+      @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
+    public String loadGaleria(ModelMap model) {
+        return "galeria";
+    }
+      @RequestMapping(value = {"/informacion-nino"}, method = RequestMethod.GET)
+    public String loadInformacionNino(ModelMap model) {
+        return "informacionNino";
+    }
+    
+      @RequestMapping(value = {"/matricula"}, method = RequestMethod.GET)
+    public String loadMatricula(ModelMap model) {
+        return "matricula";
+    }
+    
+      @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
+    public String loadMensajes(ModelMap model) {
+        return "mensajes";
+    }
+    
+      @RequestMapping(value = {"/pagos"}, method = RequestMethod.GET)
+    public String loadPagos(ModelMap model) {
+        return "pagos";
+    }
+    
+      @RequestMapping(value = {"/perfil"}, method = RequestMethod.GET)
+    public String loadPerfil(ModelMap model) {
+        return "perfl";
+    }
+    
+      @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)
+    public String loadRequerimientos(ModelMap model) {
+        return "requerimientos";
+    }
+      @RequestMapping(value = {"/Visualizar-Pagos"}, method = RequestMethod.GET)
+    public String loadVisualizarPagos(ModelMap model) {
+        return "visualizarPagos";
+    }
     
     @RequestMapping(value = {"/quienes-ejemplo-encargado"}, method = RequestMethod.GET)
     public String listEncargado(ModelMap model) {
@@ -63,8 +122,8 @@ public class AppController {
             model.addAttribute("encargado", en);
         }
         return "quienes";
-    }
-      
+    }  
+    
     @RequestMapping(value = {"ProfesorEjemplo"}, method = RequestMethod.GET)
     public String listProfesor(ModelMap model) {
         Profesor profesor = ProfesorService.findbyId("116130203");
