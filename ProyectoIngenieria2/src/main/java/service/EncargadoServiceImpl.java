@@ -54,6 +54,7 @@ public class EncargadoServiceImpl implements EncargadoService {
           encargado.setFechaNacimiento(Encargado.getFechaNacimiento());
           encargado.setRol(Encargado.getRol());
           encargado.setTelefono(Encargado.getTelefono());
+          encargado.setFacturasEncargado(Encargado.getFacturasEncargado());
           
       }
     }

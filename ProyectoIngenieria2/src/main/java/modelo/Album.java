@@ -8,16 +8,16 @@ package modelo;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -34,9 +34,18 @@ public class Album implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "album")
-    private Collection<Imagen> imagenCollection;
+    
+ @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="album")
+  private Collection<Imagen> imagenes;
 
+    public Collection<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(Collection<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
 
     public String getNombre() {
         return nombre;
@@ -46,14 +55,6 @@ public class Album implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public Collection<Imagen> getImagenCollection() {
-        return imagenCollection;
-    }
-
-    public void setImagenCollection(Collection<Imagen> imagenCollection) {
-        this.imagenCollection = imagenCollection;
-    }
 
     @Override
     public int hashCode() {

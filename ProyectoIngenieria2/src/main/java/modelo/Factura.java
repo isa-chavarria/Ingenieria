@@ -6,13 +6,16 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,6 +37,17 @@ public class Factura implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "codigo")
     private String codigo;
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="factura")
+    Collection<Factura> lineasDePago;
+
+    public Collection<Factura> getLineasDePago() {
+        return lineasDePago;
+    }
+
+    public void setLineasDePago(Collection<Factura> lineasDePago) {
+        this.lineasDePago = lineasDePago;
+    }
 
     public Factura() {
     }

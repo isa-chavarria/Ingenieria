@@ -6,12 +6,17 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,6 +39,17 @@ public class Clase implements Serializable {
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
+        @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="clase")
+    Collection<Factura> ninos;
+
+    public Collection<Factura> getNinos() {
+        return ninos;
+    }
+
+    public void setNinos(Collection<Factura> ninos) {
+        this.ninos = ninos;
+    }
 
     public String getId() {
         return id;
