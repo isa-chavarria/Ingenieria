@@ -144,7 +144,7 @@ public class AppController {
         return "agregarContacto";
     }
     
-    @RequestMapping(value = {"/AgregarContactosKinder"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/AgregarContactosKinder"}, method = RequestMethod.GET)
     public String addContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         if(result.hasErrors()) {
             return "agregarContacto";
