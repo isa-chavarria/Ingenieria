@@ -8,13 +8,18 @@ package modelo;
 
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,6 +59,17 @@ public class Nino implements Serializable {
     @Size(max = 1000)
     @Column(name = "ruta_imagen")
     private String rutaImagen;
+        @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="id_nino")
+    Collection<Factura> enfermedades;
+
+    public Collection<Factura> getEnfermedades() {
+        return enfermedades;
+    }
+
+    public void setEnfermedades(Collection<Factura> enfermedades) {
+        this.enfermedades = enfermedades;
+    }
 
     public String getId() {
         return id;

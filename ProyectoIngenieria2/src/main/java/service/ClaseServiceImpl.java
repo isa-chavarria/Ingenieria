@@ -47,6 +47,7 @@ public class ClaseServiceImpl implements ClaseService{
       if(cla!=null){
           cla.setNombre(clase.getNombre());
           cla.setId(clase.getId());
+          cla.setNinos(clase.getNinos());
           
       }
     }

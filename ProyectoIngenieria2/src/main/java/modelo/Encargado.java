@@ -6,12 +6,17 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -52,9 +57,20 @@ public class Encargado implements Serializable {
     @Size(max = 50)
     @Column(name = "fecha_nacimiento")
     private String fechaNacimiento;
-    @Size(max = 50)
+@Size(max = 50)
     @Column(name = "rol")
     private String rol;
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="encargado")
+    Collection<Factura> facturasEncargado;
+    public Collection<Factura> getFacturasEncargado() {
+        return facturasEncargado;
+    }
+
+    public void setFacturasEncargado(Collection<Factura> facturasEncargado) {
+        this.facturasEncargado = facturasEncargado;
+    }
+    
 
     public String getNombre() {
         return nombre;

@@ -52,7 +52,7 @@ public class NinoServiceImpl implements NinoService {
           ni.setFechanacimiento(nino.getFechanacimiento());
           ni.setRutaImagen(nino.getRutaImagen());
           ni.setDireccion(nino.getDireccion());
-          
+          ni.setEnfermedades(nino.getEnfermedades());
       }
     }
 }

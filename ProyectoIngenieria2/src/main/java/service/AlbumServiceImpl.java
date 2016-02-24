@@ -46,7 +46,7 @@ public class AlbumServiceImpl implements AlbumService{
       Album al = this.Album.findbyId(album.getNombre());
       if(al!=null){
           al.setNombre(album.getNombre());
-
+          al.setImagenes(album.getImagenes());
       }
     }
 }

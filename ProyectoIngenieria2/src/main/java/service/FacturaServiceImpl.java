@@ -45,6 +45,7 @@ public class FacturaServiceImpl implements FacturaService {
         if (ki != null) {
             ki.setFechaActual(factura.getFechaActual());
             ki.setMontoFinal(factura.getMontoFinal());
+            ki.setLineasDePago(factura.getLineasDePago());
         }
     }
 }

@@ -45,7 +45,30 @@ public class Kinder implements Serializable{
     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name="kinder")
     Collection<Contacto> contactos;
+     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="kinder")
+    Collection<Album> albums;
+      @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="kinder")
+    Collection<Factura> facturas;
 
+    public Collection<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Collection<Album> albums) {
+        this.albums = albums;
+    }
+
+    public Collection<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(Collection<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
+      
     public Collection<Contacto> getContactos() {
         return contactos;
     }
