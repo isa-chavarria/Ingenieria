@@ -6,6 +6,7 @@
 package Controller;
 
 import java.util.Collection;
+import javax.validation.Valid;
 import modelo.Contacto;
 import modelo.Encargado;
 import modelo.Kinder;
@@ -13,6 +14,7 @@ import modelo.Profesor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.EncargadoService;
@@ -33,8 +35,10 @@ public class AppController {
 
     @Autowired
     EncargadoService EncargadoService;
+    
     @Autowired
     ProfesorService ProfesorService;
+    
     @Autowired
     NinoService ninoService;
     
@@ -131,5 +135,27 @@ public class AppController {
             model.addAttribute("profesor", profesor);
         }
         return "quienes";
+    }
+    
+    @RequestMapping(value = {"/AgregarContacto"}, method = RequestMethod.GET)
+    public String newContacto(ModelMap model) {
+        Contacto contacto = new Contacto();
+        model.addAttribute("contacto", contacto);
+        return "agregarContacto";
+    }
+    
+    @RequestMapping(value = {"/AgregarContacto"}, method = RequestMethod.POST)
+    public String addContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
+        if(result.hasErrors()) {
+            return "agregarContacto";
+        }
+        
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        kinder.getContactos().add(contacto);
+        
+        kinderService.UpdateKinder(kinder);
+        
+        model.addAttribute("exito", "Se agrego el contacto con exito");
+        return "agregarContacto";
     }
 }
