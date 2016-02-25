@@ -42,7 +42,7 @@ public class AppController {
     @Autowired
     NinoService ninoService;
     
-    @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
@@ -62,7 +62,7 @@ public class AppController {
     public String loadIndexAllTheTimes(ModelMap model) {
         return "index";
     }
-      @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
+     @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
     public String loadQuienes(ModelMap model) {
         return "quienes";
     }
