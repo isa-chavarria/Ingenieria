@@ -39,13 +39,13 @@ public class Factura implements Serializable {
     private String codigo;
     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name="factura")
-    Collection<Factura> lineasDePago;
+    Collection<LineaPago> lineasDePago;
 
-    public Collection<Factura> getLineasDePago() {
+    public Collection<LineaPago> getLineasDePago() {
         return lineasDePago;
     }
 
-    public void setLineasDePago(Collection<Factura> lineasDePago) {
+    public void setLineasDePago(Collection<LineaPago> lineasDePago) {
         this.lineasDePago = lineasDePago;
     }
 
