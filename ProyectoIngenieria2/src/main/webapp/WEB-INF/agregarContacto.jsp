@@ -113,6 +113,8 @@
                         <div class="form-group">
                             </div>
                         </div>
+                            <form:input type="hidden" class="form-control" path="codigo" id="codigo"
+                                       value="2"/>
                         <p>${exito}</p>
                     </form:form>
 
