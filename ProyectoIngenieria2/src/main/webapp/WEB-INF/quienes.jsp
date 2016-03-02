@@ -99,7 +99,6 @@
                     <div class="col-md-12">
                         <strong>
                             ${kinder.nombre}
-                            ${contactos}
                         </strong>
                     </div>
                     <div class="col-lg-12">
