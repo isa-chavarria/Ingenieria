@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository("ContactoDao")
-public class ContactoDaoImpl extends AbstractDao<String, Contacto> implements ContactoDao{
+public class ContactoDaoImpl extends AbstractDao<Long, Contacto> implements ContactoDao{
     @Override
-    public Contacto findbyCodigo(String codigo) {
+    public Contacto findbyCodigo(Long codigo) {
         Contacto contacto = getByKey(codigo);
         return contacto;
     }

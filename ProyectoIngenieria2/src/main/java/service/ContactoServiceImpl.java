@@ -20,8 +20,8 @@ public class ContactoServiceImpl implements ContactoService{
     private ContactoDao contacto;
 
     @Override
-    public Contacto findbyCodigo(String name) {
-        return contacto.findbyCodigo(name);
+    public Contacto findbyCodigo(Long codigo) {
+        return contacto.findbyCodigo(codigo);
     }
 
     @Override
@@ -45,6 +45,7 @@ public class ContactoServiceImpl implements ContactoService{
         if (ki != null) {
             ki.setDescripcion(contacto.getDescripcion());
             ki.setTitulo(contacto.getTitulo());
+            ki.setKinder(contacto.getKinder());
         }
     }
 }

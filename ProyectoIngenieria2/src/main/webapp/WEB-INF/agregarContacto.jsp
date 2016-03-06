@@ -93,7 +93,7 @@
                     </div>
 
 
-                    <form:form method="POST" action="AgregarContactosKinder" modelAttribute="contacto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                    <form:form method="POST" modelAttribute="contacto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                         <div  class="form-group">
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Titulo:</label>
                             <div class="col-lg-10">
@@ -113,9 +113,7 @@
                         <div class="form-group">
                             </div>
                         </div>
-                            <form:input type="hidden" class="form-control" path="codigo" id="codigo"
-                                       value="2"/>
-                        <p>${exito}</p>
+                        <p>${msg}</p>
                     </form:form>
 
                 </div>

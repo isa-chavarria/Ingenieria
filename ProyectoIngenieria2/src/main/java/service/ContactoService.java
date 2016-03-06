@@ -13,7 +13,7 @@ import modelo.Contacto;
  * @author david
  */
 public interface ContactoService {
-    Contacto findbyCodigo(String codigo);
+    Contacto findbyCodigo(Long codigo);
     void save(Contacto encargado);
     void DeletebyCodigo(String codigo);
     List<Contacto> findAll();

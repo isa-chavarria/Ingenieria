@@ -10,7 +10,7 @@ import modelo.Contacto;
 
 
 public interface ContactoDao {
-    Contacto findbyCodigo(String codigo);
+    Contacto findbyCodigo(Long codigo);
     void save(Contacto codigo);
     void DeletebyCodigo(String codigo);
     List<Contacto> findAll();

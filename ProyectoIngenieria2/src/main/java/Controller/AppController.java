@@ -138,29 +138,4 @@ public class AppController {
         }
         return "quienes";
     }
-    
-    @RequestMapping(value = {"/AgregarContactoKinder"}, method = RequestMethod.GET)
-    public String newContacto(ModelMap model) {
-        SecureRandom random = new SecureRandom();
-        Contacto contacto = new Contacto();
-        contacto.setCodigo(new BigInteger(130, random).toString(32));
-        model.addAttribute("contacto", contacto);
-        return "agregarContacto";
-    }
-    
-    @RequestMapping(value = {"/AgregarContactosKinder"}, method = RequestMethod.POST)
-    public String addContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
-        System.out.println(contacto.toString());
-        if(result.hasErrors()) {
-            System.out.println("has errors");            
-            model.addAttribute("msg", "No se agrego el contacto con exito");
-            return "agregarContacto";
-        }
-        
-        Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        kinder.getContactos().add(contacto);
-        kinderService.UpdateKinder(kinder);
-        model.addAttribute("msg", "Se agrego el contacto con exito");
-        return "agregarContacto";
-    }
 }
