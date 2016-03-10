@@ -35,9 +35,9 @@ public class Album implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     
- @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="album")
-  private Collection<Imagen> imagenes;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "album")
+    private Collection<Imagen> imagenes;
 
     public Collection<Imagen> getImagenes() {
         return imagenes;

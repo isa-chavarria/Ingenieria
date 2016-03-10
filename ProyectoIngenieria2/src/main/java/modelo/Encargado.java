@@ -7,6 +7,8 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,6 +25,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -57,20 +62,34 @@ public class Encargado implements Serializable {
     @Size(max = 50)
     @Column(name = "fecha_nacimiento")
     private String fechaNacimiento;
-@Size(max = 50)
-    @Column(name = "rol")
-    private String rol;
-    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="encargado")
-    Collection<Factura> facturasEncargado;
-    public Collection<Factura> getFacturasEncargado() {
-        return facturasEncargado;
+    @Size(max = 1000)
+    @Column(name = "ruta_imagen")
+    private String ruta_imagen;
+
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usu_enc",
+            joinColumns = {
+                @JoinColumn(name = "enc_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "user_id")})
+    private Set<Usuario> usuario = new HashSet<Usuario>();
+
+    public Set<Usuario> getUsuario() {
+        return usuario;
     }
 
-    public void setFacturasEncargado(Collection<Factura> facturasEncargado) {
-        this.facturasEncargado = facturasEncargado;
+    public void setUsuario(Set<Usuario> usuario) {
+        this.usuario = usuario;
     }
-    
+
+    public String getRuta_imagen() {
+        return ruta_imagen;
+    }
+
+    public void setRuta_imagen(String ruta_imagen) {
+        this.ruta_imagen = ruta_imagen;
+    }
 
     public String getNombre() {
         return nombre;
@@ -136,14 +155,6 @@ public class Encargado implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -168,5 +179,5 @@ public class Encargado implements Serializable {
     public String toString() {
         return "modelo.Encargado[ id=" + id + " ]";
     }
-    
+
 }

@@ -19,38 +19,44 @@ import org.springframework.stereotype.Service;
 @Service("UsuarioService")
 @Transactional
 public class UsuarioServiceImpl implements UsuarioService {
-
+    
     @Autowired
     private UsuarioDao Usuario;
-
+    
     @Override
     public Usuario findbyId(String id) {
         return Usuario.findbyId(id);
     }
-
+    
     @Override
     public void save(Usuario usuario) {
         this.Usuario.save(usuario);
     }
-
+    
     @Override
     public void DeletebyId(String id) {
         this.Usuario.DeletebyId(id);
     }
-
+    
     @Override
     public List<Usuario> findAll() {
         return Usuario.findAll();
     }
-
+    
     @Override
     public void UpdateUsuario(Usuario usuario) {
         Usuario usua = this.Usuario.findbyId(usuario.getId());
         if (usua != null) {
-         usua.setContrasena(usuario.getContrasena());
-         usua.setId(usuario.getId());
-         usua.setRoleSeccion(usuario.getRoleSeccion());
-
+            usua.setContrasena(usuario.getContrasena());
+            usua.setId(usuario.getId());
+            usua.setRoleSeccion(usuario.getRoleSeccion());
+            usua.setEmail(usuario.getEmail());
+            usua.setEncargado(usuario.getEncargado());
         }
+    }
+
+    @Override
+    public Usuario findByLogin(String email, String password) {
+       return Usuario.findbyLogin(email, password);
     }
 }

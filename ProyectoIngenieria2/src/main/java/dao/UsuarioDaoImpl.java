@@ -8,6 +8,7 @@ package dao;
 import java.util.List;
 import modelo.Usuario;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +17,16 @@ import org.springframework.stereotype.Repository;
  * @author Isa
  */
 @Repository("UsuarioDao")
-public class UsuarioDaoImpl extends AbstractDao<String,Usuario> implements UsuarioDao{
-      @Override
+public class UsuarioDaoImpl extends AbstractDao<String, Usuario> implements UsuarioDao {
+
+    @Override
     public Usuario findbyId(String id) {
-      Usuario  usuario  = getByKey(id);
-        return usuario;
+        Usuario user = getByKey(id);
+
+        if(user!=null){
+			Hibernate.initialize(user.getEncargado());
+		}
+        return user;
     }
 
     @Override
@@ -43,5 +49,22 @@ public class UsuarioDaoImpl extends AbstractDao<String,Usuario> implements Usuar
         List<Usuario> usuario = (List<Usuario>) criteria.list();
 
         return usuario;
+    }
+
+    @Override
+    public Usuario findbyLogin(String email, String password) {
+        System.out.println("Email : " + email);
+        System.out.println("Password : " + password);
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("email", email));
+        Usuario user = (Usuario) crit.uniqueResult();
+        if (user != null) {
+            if (user.getContrasena().equals(password)) {
+                Hibernate.initialize(user.getEncargado());
+                return user;
+            }
+
+        }
+        return null;
     }
 }

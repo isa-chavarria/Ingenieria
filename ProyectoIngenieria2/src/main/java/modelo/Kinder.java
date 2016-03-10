@@ -41,34 +41,15 @@ public class Kinder implements Serializable{
     private String mision;
     @Size(max = 5000)
     private String vision;
-
-    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="kinder")
-    Collection<Contacto> contactos;
+    
      @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name="kinder")
-    Collection<Album> albums;
-      @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    Collection<Contacto> contactos;
+     
+     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name="kinder")
-    Collection<Factura> facturas;
+    Collection<Noticia> noticias;
 
-    public Collection<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(Collection<Album> albums) {
-        this.albums = albums;
-    }
-
-    public Collection<Factura> getFacturas() {
-        return facturas;
-    }
-
-    public void setFacturas(Collection<Factura> facturas) {
-        this.facturas = facturas;
-    }
-
-      
     public Collection<Contacto> getContactos() {
         return contactos;
     }
@@ -76,6 +57,16 @@ public class Kinder implements Serializable{
     public void setContactos(Collection<Contacto> contactos) {
         this.contactos = contactos;
     }
+
+    public Collection<Noticia> getNoticias() {
+        return noticias;
+    }
+
+    public void setNoticias(Collection<Noticia> noticias) {
+        this.noticias = noticias;
+    }
+
+    
     
     public String getNombre() {
         return nombre;

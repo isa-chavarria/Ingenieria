@@ -6,10 +6,16 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -32,13 +38,41 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "id")
     private String id;
-    @Size(max = 50)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "email", unique = true)
+    private String email;
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "contrasena")
     private String contrasena;
     @Size(max = 50)
-    @Column(name = "role_seccion")
+    @Column(name = "rol")
     private String roleSeccion;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usu_enc",
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "enc_id")})
+    private Set<Encargado> encargado = new HashSet<Encargado>();
+
+    public Set<Encargado> getEncargado() {
+        return encargado;
+    }
+
+    public void setEncargado(Set<Encargado> encargado) {
+        this.encargado = encargado;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getId() {
         return id;
@@ -88,5 +122,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "modelo.Usuario[ id=" + id + " ]";
     }
-    
+
 }

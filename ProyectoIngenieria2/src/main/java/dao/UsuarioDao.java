@@ -6,6 +6,7 @@
 package dao;
 
 import java.util.List;
+import modelo.Kinder;
 import modelo.Usuario;
 
 /**
@@ -17,4 +18,5 @@ public interface UsuarioDao {
     void save(Usuario nino);
     void DeletebyId(String id);
     List< Usuario > findAll();
+    Usuario findbyLogin(String email, String password);
 }

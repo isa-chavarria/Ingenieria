@@ -16,5 +16,6 @@ public interface KinderDao {
     Kinder findbyName(String name);
     void save(Kinder kinder);
     void DeletebyName(String name);
+    
     List<Kinder> findAll();
 }

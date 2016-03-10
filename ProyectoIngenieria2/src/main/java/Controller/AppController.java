@@ -5,14 +5,10 @@
  */
 package Controller;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.Collection;
 import javax.validation.Valid;
 import modelo.Contacto;
-import modelo.Encargado;
 import modelo.Kinder;
-import modelo.Profesor;
+import modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,8 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.EncargadoService;
-import service.NinoService;
-import service.ProfesorService;
+import service.UsuarioService;
 import service.kinderService;
 
 /**
@@ -36,106 +31,119 @@ public class AppController {
     kinderService kinderService;
 
     @Autowired
-    EncargadoService EncargadoService;
-    
+    UsuarioService usuarioService;
+
     @Autowired
-    ProfesorService ProfesorService;
-    
-    @Autowired
-    NinoService ninoService;
-    
-    @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
+    EncargadoService encargadoService;
+
+    @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
+    public String loadPrueba(ModelMap model) {
+
+        Usuario user = usuarioService.findbyId("402270021");
+        model.addAttribute("user", user);
+
+        return "prueba";
+    }
+
+    @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            Collection<Contacto> l = kinder.getContactos();
-            if(l!=null && l.size() > 0)
-                model.addAttribute("contactos", ((Contacto)l.toArray()[0]).getDescripcion());
         }
         return "quienes";
     }
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String loadIndex(ModelMap model) {
+        Usuario user = new Usuario();
+        model.addAttribute("user", user);
         return "index";
     }
-        @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     public String loadIndexAllTheTimes(ModelMap model) {
+
+        Usuario user = new Usuario();
+        model.addAttribute("user", user);
         return "index";
     }
-      @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
+    public String realizarLoging(@Valid Usuario user, BindingResult result,
+            ModelMap model) {
+
+        String password = user.getContrasena();
+        String email = user.getEmail();
+        Usuario usu = usuarioService.findByLogin(email, password);
+        if (usu != null) {
+            return "Administracion";
+        }
+        Usuario u = new Usuario();
+        model.addAttribute("user", u);
+        return "index";
+    }
+
+    @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
     public String loadQuienes(ModelMap model) {
         return "quienes";
     }
-      @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
     public String loadEncargado(ModelMap model) {
         return "Encargado";
     }
-      @RequestMapping(value = {"/administracion"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/administracion"}, method = RequestMethod.GET)
     public String loadAdministracion(ModelMap model) {
         return "Administracion";
     }
-    
-      @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
     public String loadContacto(ModelMap model) {
         return "contacto";
     }
-    
-      @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         return "galeria";
     }
-      @RequestMapping(value = {"/informacion-nino"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/informacion-nino"}, method = RequestMethod.GET)
     public String loadInformacionNino(ModelMap model) {
         return "informacionNino";
     }
-    
-      @RequestMapping(value = {"/matricula"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/matricula"}, method = RequestMethod.GET)
     public String loadMatricula(ModelMap model) {
         return "matricula";
     }
-    
-      @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
     public String loadMensajes(ModelMap model) {
         return "mensajes";
     }
-    
-      @RequestMapping(value = {"/pagos"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/pagos"}, method = RequestMethod.GET)
     public String loadPagos(ModelMap model) {
         return "pagos";
     }
-    
-      @RequestMapping(value = {"/perfil"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/perfil"}, method = RequestMethod.GET)
     public String loadPerfil(ModelMap model) {
         return "perfl";
     }
-    
-      @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)
     public String loadRequerimientos(ModelMap model) {
         return "requerimientos";
     }
-      @RequestMapping(value = {"/Visualizar-Pagos"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/Visualizar-Pagos"}, method = RequestMethod.GET)
     public String loadVisualizarPagos(ModelMap model) {
         return "visualizarPagos";
     }
-    
-    @RequestMapping(value = {"/quienes-ejemplo-encargado"}, method = RequestMethod.GET)
-    public String listEncargado(ModelMap model) {
-        Encargado en = EncargadoService.findbyId("90110010");
-        if (en != null) {
 
-            model.addAttribute("encargado", en);
-        }
-        return "quienes";
-    }  
     
-    @RequestMapping(value = {"ProfesorEjemplo"}, method = RequestMethod.GET)
-    public String listProfesor(ModelMap model) {
-        Profesor profesor = ProfesorService.findbyId("116130203");
-        if (profesor != null) {
-            model.addAttribute("profesor", profesor);
-        }
-        return "quienes";
-    }
+
 }

@@ -12,10 +12,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,30 +26,22 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "contacto")
 public class Contacto implements Serializable {
-    
+
     @Size(max = 50)
     @Column(name = "titulo")
     private String titulo;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "codigo")
-    private Long codigo;
-    
+    private Integer codigo;
+    ;
     @Size(max = 50)
     @Column(name = "descripcion")
     private String descripcion;
 
-    /* TODO: Agregar este atributo en todas las relaciones */
-    @ManyToOne
-    @JoinColumn(name="kinder")
-    private Kinder kinder;
-    
     public Contacto() {
     }
 
-    public Contacto(Long codigo) {
+    public Contacto(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -59,11 +53,11 @@ public class Contacto implements Serializable {
         this.titulo = titulo;
     }
 
-    public Long getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Long codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -100,12 +94,4 @@ public class Contacto implements Serializable {
         return "modelo.Contacto[ codigo=" + codigo + " ]";
     }
 
-    public Kinder getKinder() {
-        return kinder;
-    }
-
-    public void setKinder(Kinder kinder) {
-        this.kinder = kinder;
-    }
-    
 }

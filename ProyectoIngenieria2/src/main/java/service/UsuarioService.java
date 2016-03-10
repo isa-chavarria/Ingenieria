@@ -22,4 +22,6 @@ public interface UsuarioService {
     List<Usuario> findAll();
 
     void UpdateUsuario(Usuario usuario);
+    
+    Usuario findByLogin(String email,String password);
 }

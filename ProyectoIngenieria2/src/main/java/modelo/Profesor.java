@@ -6,26 +6,28 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Isa
+ * @author josvr_000
  */
 @Entity
-@Table(name="profesor")
+@Table(name = "profesor")
 public class Profesor implements Serializable {
 
     @Size(max = 50)
@@ -37,7 +39,7 @@ public class Profesor implements Serializable {
     @Size(max = 50)
     @Column(name = "apellido2")
     private String apellido2;
-   
+
     @Column(name = "salario")
     private Float salario;
     @Size(max = 50)
@@ -58,11 +60,21 @@ public class Profesor implements Serializable {
     @Size(max = 50)
     @Column(name = "telefono")
     private String telefono;
-     @Size(max = 50)
+    @Size(max = 50)
     @Column(name = "rol")
     private String rol;
-    
-   
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "profesor")
+    private Collection<Clase> grupo;
+
+    public Collection<Clase> getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Collection<Clase> grupo) {
+        this.grupo = grupo;
+    }
 
     public String getNombre() {
         return nombre;
@@ -119,6 +131,7 @@ public class Profesor implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getDireccion() {
         return direccion;
     }
@@ -134,13 +147,15 @@ public class Profesor implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-        public String getRol() {
+
+    public String getRol() {
         return rol;
     }
 
     public void setRol(String rol) {
         this.rol = rol;
     }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -165,5 +180,5 @@ public class Profesor implements Serializable {
     public String toString() {
         return "modelo.Profesor[ id=" + id + " ]";
     }
-    
+
 }

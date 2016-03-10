@@ -52,10 +52,10 @@ public class EncargadoServiceImpl implements EncargadoService {
           encargado.setDireccion(Encargado.getDireccion());
           encargado.setEmail(Encargado.getEmail());
           encargado.setFechaNacimiento(Encargado.getFechaNacimiento());
-          encargado.setRol(Encargado.getRol());
+          encargado.setRuta_imagen(Encargado.getRuta_imagen());
           encargado.setTelefono(Encargado.getTelefono());
-          encargado.setFacturasEncargado(Encargado.getFacturasEncargado());
-          
+          encargado.setUsuario(Encargado.getUsuario());
+         
       }
     }
 }

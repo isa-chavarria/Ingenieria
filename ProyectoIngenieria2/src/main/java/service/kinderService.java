@@ -13,7 +13,7 @@ import modelo.Kinder;
  * @author Isa
  */
 public interface kinderService {
-       Kinder findbyName(String name);
+    Kinder findbyName(String name);
     void save(Kinder kinder);
     void DeletebyName(String name);
     List<Kinder> findAll();
