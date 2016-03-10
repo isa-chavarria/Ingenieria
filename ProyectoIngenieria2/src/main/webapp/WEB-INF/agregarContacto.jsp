@@ -1,8 +1,20 @@
+<%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
+
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+    
+    if (user != null && user.isAdministrador()) {
+
+    } else {
+        response.sendRedirect("index");
+    }
+%>
 <html lang="en">
     <head>
 
@@ -44,7 +56,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div class="brand">KINDER LULU</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -53,7 +65,7 @@
 
         <div id="second"  class="row">
 
-            <h1 id="Titulo">AGREGAR CONTACTO</h1>
+            <h3 id="Titulo">AGREGAR CONTACTO</h3>
 
 
 

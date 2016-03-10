@@ -30,7 +30,7 @@
 
     </head>
     <body>
-        <div  id="arriba" class="row">
+       <div  id="arriba" class="row">
             <div class="col-sm-4">
 
 
@@ -41,7 +41,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div class="brand">KINDER LULU</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -50,7 +50,7 @@
 
         <div id="second"  class="row">
 
-            <h1 id="Titulo">CONTACTENOS</h1>
+            <h3 id="Titulo">CONTACTENOS</h3>
 
 
 

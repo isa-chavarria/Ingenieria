@@ -4,8 +4,19 @@
     Author     : josvr_000
 --%>
 
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    if (user != null && user.isEncargado()) {
+
+    } else {
+        response.sendRedirect("index");
+    }
+%>
 <html lang="en">
     <head>
 
@@ -47,7 +58,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div class="brand">KINDER LULU</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -57,7 +68,7 @@
         <div id="second"  class="row">
 
 
-            <h1 id="Titulo">BIENVENIDO AL SITIO WEB DEL KINDER LULU</h1>
+            <h3 id="Titulo" style="text-transform: uppercase">Bienvenido al sitio web del Kinder Lulú</h3>
 
 
         </div>

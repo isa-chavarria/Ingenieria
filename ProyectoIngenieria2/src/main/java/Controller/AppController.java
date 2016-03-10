@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import modelo.Contacto;
 import modelo.Kinder;
@@ -25,7 +27,7 @@ import service.kinderService;
  */
 @Controller
 @RequestMapping("/")
-public class AppController {
+public class AppController extends HttpServlet {
 
     @Autowired
     kinderService kinderService;
@@ -54,33 +56,44 @@ public class AppController {
         return "quienes";
     }
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String loadIndex(ModelMap model) {
         Usuario user = new Usuario();
         model.addAttribute("user", user);
+        model.addAttribute("fallo", false);
         return "index";
     }
 
-    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
-    public String loadIndexAllTheTimes(ModelMap model) {
+    /* @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+     public String loadIndexAllTheTimes(ModelMap model) {
 
-        Usuario user = new Usuario();
-        model.addAttribute("user", user);
-        return "index";
-    }
-
+     Usuario user = new Usuario();
+     model.addAttribute("user", user);
+     model.addAttribute("fallo", false);
+     return "index";
+     }
+     */
     @RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
     public String realizarLoging(@Valid Usuario user, BindingResult result,
-            ModelMap model) {
+            ModelMap model, HttpServletRequest request) {
 
         String password = user.getContrasena();
         String email = user.getEmail();
         Usuario usu = usuarioService.findByLogin(email, password);
         if (usu != null) {
-            return "Administracion";
+            if (usu.isAdministrador()) {
+
+                request.getSession().setAttribute("user", usu);
+                return "Administracion";
+            }
+            if (usu.isEncargado()) {
+                request.getSession().setAttribute("user", usu);
+                return "Encargado";
+            }
         }
         Usuario u = new Usuario();
         model.addAttribute("user", u);
+        model.addAttribute("fallo", true);
         return "index";
     }
 
@@ -143,7 +156,5 @@ public class AppController {
     public String loadVisualizarPagos(ModelMap model) {
         return "visualizarPagos";
     }
-
-    
 
 }

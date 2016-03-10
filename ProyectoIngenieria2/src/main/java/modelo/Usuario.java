@@ -82,6 +82,14 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    public boolean isAdministrador() {
+        return roleSeccion.equals("Administrador");
+    }
+
+    public boolean isEncargado() {
+        return roleSeccion.equals("Encargado");
+    }
+
     public String getContrasena() {
         return contrasena;
     }

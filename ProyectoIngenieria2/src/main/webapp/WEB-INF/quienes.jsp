@@ -41,8 +41,8 @@
             </div>
 
 
-            <div class="col-sm-8" style="  padding: 1%">
-                <div class="brand">KINDER LULU</div>
+           <div class="col-sm-8" style="  padding: 1%">
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -52,7 +52,7 @@
         <div id="second"  class="row">
 
 
-            <h1 id="Titulo">¿QUIENES SOMOS?</h1>
+            <h3 id="Titulo">¿QUIENES SOMOS?</h3>
 
 
         </div>

@@ -45,7 +45,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div class="brand">KINDER LULU</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -53,8 +53,13 @@
 
 
         <div style="text-align: center;" id="second"  class="row">
-            
-           
+
+            <c:if test="${fallo}">
+                <div  class="alert alert-danger">
+                    <p style="color:#ff3333;">Usuario invalido.</p>
+                </div>
+            </c:if>
+
 
             <form:form method="POST" action="Login" modelAttribute="user" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-inline" role="form">
                 <form:input type="hidden" path="id" id="id"/>
@@ -73,11 +78,13 @@
 
                 </div>
 
-                <button type="submit" class="btn btn-info">INICIAR SESION</button>
+                <button type="submit" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2)" class="btn btn-info">INICIAR SESION</button>
 
-                <form:input type="hidden" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2)" class="form-control" path="id" id="id"/>
+                <form:input type="hidden"  class="form-control" path="id" id="id"/>
 
             </form:form>
+
+
 
         </div>
 
@@ -98,19 +105,16 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+                   <ul class="nav navbar-nav">
                         <li>
-                            <a href="quienes">¿Quiénes Somos?</a>
-                        </li>
-                        <li>
-                            <a href="galeria">Galería</a>
+                            <a href="quienes"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>
                         </li>
 
                         <li>
-                            <a href="requerimientos">Requerimientos de matricula</a>
+                            <a href="requerimientos"><i class="fa fa-book"></i> Requerimientos de matricula</a>
                         </li>
                         <li>
-                            <a href="contacto">Contactenos</a>
+                            <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>
                         </li>
                     </ul>
                 </div>
