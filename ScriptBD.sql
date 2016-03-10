@@ -1,4 +1,3 @@
--- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -373,13 +372,15 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`matricula` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+---------- FALTA PAGOS (NO SE COMO)---------
 
+<<<<<<< HEAD
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 ---------- FALTA PAGOS (NO SE COMO)---------
-
+=======
 ----------------------------------------------------------------------------------------------------------------------------
 -----------------------TABLA CHIQUILLOS----------------------------------------------
 
@@ -426,6 +427,65 @@ DROP TABLE IF EXISTS `kinderBD`.`encargado` ;
 DROP TABLE IF EXISTS `kinderBD`.`clase` ;
 DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
 DROP TABLE IF EXISTS `kinderBD`.`usuario` ;
+
+
+
+
+
+>>>>>>> 07f223c5af43d6f61dcb89166cbb1f54465c2d67
+
+----------------------------------------------------------------------------------------------------------------------------
+-----------------------TABLA CHIQUILLOS----------------------------------------------
+
+
+<<<<<<< HEAD
+/*use kinderBD;
+
+CREATE TABLE IF NOT EXISTS `kinderbd`.`Matriculin` (
+  `NombreNino` VARCHAR(50) NOT NULL,
+  `ApellidoNino` VARCHAR(45) NOT NULL,
+  `CedulaNino` VARCHAR(45) NOT NULL,
+  `FechaNac` DATE NOT NULL,
+  `Padecimientos` VARCHAR(100) NOT NULL,
+  `NombreEncargado` VARCHAR(45) NOT NULL,
+  `CedulaEncargado` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Direccion` VARCHAR(45) NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`CedulaNino`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 */
 
 
+-------------------------------------DROPS DE LAS TABLAS-----------------------------------------------------------------------
+
+
+/*
+DROP TABLE IF EXISTS `kinderBD`.`noticia` ;
+DROP TABLE IF EXISTS `kinderBD`.`contacto` ;
+DROP TABLE IF EXISTS `kinderBD`.`fechaPago` ;
+DROP TABLE IF EXISTS `kinderBD`.`imagen` ;
+DROP TABLE IF EXISTS `KinderBD`.`album` ;
+DROP TABLE IF EXISTS `KinderBD`.`kinder` ;
+DROP TABLE IF EXISTS `kinderBD`.`matricula` ;
+DROP TABLE IF EXISTS `kinderBD`.`enfermedad` ;
+DROP TABLE IF EXISTS `kinderBD`.`telefono` ;
+DROP TABLE IF EXISTS `kinderBD`.`asignacion` ;
+DROP TABLE IF EXISTS `kinderBD`.`enc_nino` ;
+DROP TABLE IF EXISTS `kinderBD`.`usu_enc` ;
+DROP TABLE IF EXISTS `kinderBD`.`informacion` ;
+DROP TABLE IF EXISTS `kinderBD`.`familiar` ;
+DROP TABLE IF EXISTS `kinderBD`.`nino` ;
+DROP TABLE IF EXISTS `kinderBD`.`encargado` ;
+DROP TABLE IF EXISTS `kinderBD`.`clase` ;
+DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
+DROP TABLE IF EXISTS `kinderBD`.`usuario` ;
+*/
+
+
+=======
+
+
+*/
+>>>>>>> 07f223c5af43d6f61dcb89166cbb1f54465c2d67

@@ -229,8 +229,13 @@ footer p {
 
 #arriba{
     margin-top: 8%;
+<<<<<<< HEAD
     // border-bottom: 2px solid #cccccc;
     //margin-bottom: 2%;
+=======
+    border-bottom: 2px solid #cccccc;
+   
+>>>>>>> 07f223c5af43d6f61dcb89166cbb1f54465c2d67
 }
 #second{
     border-bottom: 2px solid #fff;
