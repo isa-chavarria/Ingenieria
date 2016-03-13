@@ -123,6 +123,17 @@ public class AppController extends HttpServlet {
         }
         return "contacto";
     }
+        @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.GET)
+    public String loadContactoAdmin(ModelMap model) {
+         Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+            
+        }else{
+        model.addAttribute("kinder", new Kinder());
+        }
+        return "contactoAdministrador";
+    }
 
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
