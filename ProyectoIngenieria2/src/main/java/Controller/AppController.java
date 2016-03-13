@@ -114,6 +114,13 @@ public class AppController extends HttpServlet {
 
     @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
     public String loadContacto(ModelMap model) {
+         Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+            
+        }else{
+        model.addAttribute("kinder", new Kinder());
+        }
         return "contacto";
     }
 

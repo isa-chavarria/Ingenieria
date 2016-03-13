@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder Lulú</title>
+        <title>Kinder Lul�</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +44,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lul�</div>
             </div>
 
 
@@ -107,11 +110,11 @@
                     </div>
 
                     <div class="text-center">
-                        <table style="margin-left: 30%; ">
-                            <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left">Teléfono: </td><td style="padding:  4%; text-align: left">2227-3171.</td></tr>
-                            <tr style="border-bottom: solid 1px"><td  style="padding:  4%; text-align: left">Facebook:</td><td  style="padding:  4%; text-align: left"><strong><a href="http://facebook.com/kinderlulu1986">Kinder Lulu Facebook.</a></strong></td></tr>
-                            <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left">Dirección:</td><td style="padding:  4%; text-align: left">San Sebastian Calle tres, 100 m este y 250 m sur.</td></tr>
-                            <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left">Correo electrónico: </td><td style="padding:  4%; text-align: left">kinderlulu1986@hotmail.com.</td></tr>
+
+                        <table style="margin-left: 30%;">
+                            <c:forEach items="${kinder.contactos}" var="contacto">
+                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${contacto.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${contacto.descripcion}"></c:out></td></tr>
+                            </c:forEach>
                         </table>
                     </div>
                     <div class="clearfix"></div>
@@ -126,7 +129,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>Administración del Kinder. Copyright 2016</p>
+                        <p>Administraci�n del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
