@@ -19,18 +19,18 @@ import javax.validation.constraints.Size;
  *
  * @author josvr_000
  */
-
 @Entity
 @Table(name = "telefono")
 public class Telefono {
-     @Id
+
+    @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "numero")
     private String numero;
-     
-     @JoinColumn(name = "idFamiliar", referencedColumnName = "id")
+
+    @JoinColumn(name = "idFamiliar", referencedColumnName = "id")
     @ManyToOne
     private Familiar familiar;
 
@@ -49,7 +49,8 @@ public class Telefono {
     public void setFamiliar(Familiar familiar) {
         this.familiar = familiar;
     }
-     @Override
+
+    @Override
     public boolean equals(Object object) {
 
         if (!(object instanceof Telefono)) {
@@ -61,10 +62,10 @@ public class Telefono {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "modelo.clase[ id=" + numero + " ]";
     }
-     
+
 }

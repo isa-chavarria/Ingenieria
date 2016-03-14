@@ -23,6 +23,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "matricula")
 public class Matricula implements Serializable {
+
     @Id
     @Basic(optional = false)
     @NotNull
@@ -40,15 +41,15 @@ public class Matricula implements Serializable {
     @Size(max = 1000)
     @Column(name = "matricula")
     private String matricula;
-    
+
     @Size(max = 50)
     @Column(name = "cursolectivo")
     private String cursolectivo;
-    
+
     @Size(max = 50)
     @Column(name = "realizadoPor")
     private String realizadoPor;
-    
+
     @JoinColumn(name = "id_nino", referencedColumnName = "id")
     @ManyToOne
     private Nino nino;
@@ -124,7 +125,7 @@ public class Matricula implements Serializable {
     public void setNino(Nino nino) {
         this.nino = nino;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -144,10 +145,10 @@ public class Matricula implements Serializable {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "modelo.clase[ id=" + id + " ]";
     }
-    
+
 }

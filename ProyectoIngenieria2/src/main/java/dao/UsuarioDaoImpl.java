@@ -23,9 +23,9 @@ public class UsuarioDaoImpl extends AbstractDao<String, Usuario> implements Usua
     public Usuario findbyId(String id) {
         Usuario user = getByKey(id);
 
-        if(user!=null){
-			Hibernate.initialize(user.getEncargado());
-		}
+        if (user != null) {
+            Hibernate.initialize(user.getEncargado());
+        }
         return user;
     }
 
@@ -61,6 +61,7 @@ public class UsuarioDaoImpl extends AbstractDao<String, Usuario> implements Usua
         if (user != null) {
             if (user.getContrasena().equals(password)) {
                 Hibernate.initialize(user.getEncargado());
+                
                 return user;
             }
 

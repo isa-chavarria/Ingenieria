@@ -19,7 +19,7 @@ import dao.KinderDao;
 @Service("kinderService")
 @Transactional
 public class kinderServiceImpl implements kinderService {
-    
+
     @Autowired
     private KinderDao kinder;
 
@@ -27,22 +27,22 @@ public class kinderServiceImpl implements kinderService {
     public Kinder findbyName(String name) {
         return kinder.findbyName(name);
     }
-    
+
     @Override
     public void save(Kinder kinder) {
         this.kinder.save(kinder);
     }
-    
+
     @Override
     public void DeletebyName(String name) {
         this.kinder.DeletebyName(name);
     }
-    
+
     @Override
     public List<Kinder> findAll() {
         return kinder.findAll();
     }
-    
+
     @Override
     public void UpdateKinder(Kinder kinder) {
         Kinder ki = this.kinder.findbyName(kinder.getNombre());
@@ -53,9 +53,9 @@ public class kinderServiceImpl implements kinderService {
             ki.setHistoria(kinder.getHistoria());
             ki.setTelefono(kinder.getTelefono());
             ki.setContactos(kinder.getContactos());
-           // ki.setNoticias(kinder.getNoticias());
-            
+            // ki.setNoticias(kinder.getNoticias());
+
         }
     }
-    
+
 }

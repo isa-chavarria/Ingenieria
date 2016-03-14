@@ -14,9 +14,14 @@ import modelo.Usuario;
  * @author Isa
  */
 public interface UsuarioDao {
-     Usuario  findbyId(String id);
+
+    Usuario findbyId(String id);
+
     void save(Usuario nino);
+
     void DeletebyId(String id);
-    List< Usuario > findAll();
+
+    List< Usuario> findAll();
+
     Usuario findbyLogin(String email, String password);
 }

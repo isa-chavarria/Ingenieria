@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "noticia")
 public class Noticia implements Serializable {
+
     @Id
     @Basic(optional = false)
     @NotNull
@@ -30,9 +31,6 @@ public class Noticia implements Serializable {
     @Size(max = 1000)
     @Column(name = "descripcion")
     private String descripcion;
-    
-    
-    
 
     public String getCodigo() {
         return codigo;
@@ -49,7 +47,7 @@ public class Noticia implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;

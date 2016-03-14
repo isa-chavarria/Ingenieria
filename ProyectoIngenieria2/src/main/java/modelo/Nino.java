@@ -6,6 +6,7 @@ package modelo;
  * and open the template in the editor.
  */
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -48,7 +49,7 @@ public class Nino implements Serializable {
     @Column(name = "estado")
     private Boolean estado;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "enc_nino",
             joinColumns = {
                 @JoinColumn(name = "nino_id")},
@@ -56,30 +57,31 @@ public class Nino implements Serializable {
                 @JoinColumn(name = "enc_id")})
     private Set<Encargado> encargado = new HashSet<Encargado>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idnino")
-    private Collection<Informacion> informacion;
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "idnino")
+//    private Collection<Informacion> informacion = new ArrayList<Informacion>();
+//    ;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idnino")
-    private Collection<Familiar> familiares;
-
+    private Collection<Familiar> familiares = new ArrayList<Familiar>();
     
-  @JoinColumn(name = "grupo", referencedColumnName = "id")
+
+    @JoinColumn(name = "grupo", referencedColumnName = "id")
     @ManyToOne
     private Clase clase;
-  
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_nino")
-    private Collection<Matricula> matricula;
 
-    public Collection<Matricula> getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(Collection<Matricula> matricula) {
-        this.matricula = matricula;
-    }
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_nino")
+//    private Collection<Matricula> matricula;
+//
+//    public Collection<Matricula> getMatricula() {
+//        return matricula;
+//    }
+//
+//    public void setMatricula(Collection<Matricula> matricula) {
+//        this.matricula = matricula;
+//    }
 
     public Clase getClase() {
         return clase;
@@ -88,8 +90,6 @@ public class Nino implements Serializable {
     public void setClase(Clase clase) {
         this.clase = clase;
     }
-    
-   
 
     public Collection<Familiar> getFamiliares() {
         return familiares;
@@ -99,23 +99,13 @@ public class Nino implements Serializable {
         this.familiares = familiares;
     }
 
-   
-
-    public Collection<Familiar> getFamiliar() {
-        return familiares;
-    }
-
-    public void setFamiliar(Collection<Familiar> familiar) {
-        this.familiares = familiar;
-    }
-
-    public Collection<Informacion> getInformacion() {
-        return informacion;
-    }
-
-    public void setInformacion(Collection<Informacion> informacion) {
-        this.informacion = informacion;
-    }
+//    public Collection<Informacion> getInformacion() {
+//        return informacion;
+//    }
+//
+//    public void setInformacion(Collection<Informacion> informacion) {
+//        this.informacion = informacion;
+//    }
 
     public Set<Encargado> getEncargado() {
         return encargado;

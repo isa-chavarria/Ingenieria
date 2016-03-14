@@ -13,6 +13,7 @@ import modelo.Usuario;
  * @author Isa
  */
 public interface UsuarioService {
+
     Usuario findbyId(String id);
 
     void save(Usuario usuario);
@@ -22,6 +23,6 @@ public interface UsuarioService {
     List<Usuario> findAll();
 
     void UpdateUsuario(Usuario usuario);
-    
-    Usuario findByLogin(String email,String password);
+
+    Usuario findByLogin(String email, String password);
 }

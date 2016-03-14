@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -66,7 +67,7 @@ public class Profesor implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "profesor")
-    private Collection<Clase> grupo;
+    private Collection<Clase> grupo=new ArrayList<Clase>();
 
     public Collection<Clase> getGrupo() {
         return grupo;

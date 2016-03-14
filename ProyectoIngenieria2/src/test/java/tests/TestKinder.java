@@ -10,5 +10,7 @@ package tests;
  * @author Isa
  */
 public class TestKinder {
-    void main(){}
+
+    void main() {
+    }
 }

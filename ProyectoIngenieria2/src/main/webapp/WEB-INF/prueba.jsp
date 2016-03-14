@@ -35,10 +35,10 @@
                             <td>${user.id}</td>
                             <td>${user.email}</td>
                             <td>${user.roleSeccion}</td>
-                            <td>${user.encargado.iterator().next().nombre}</td>
+                            <td>${nombre}</td>
                             <td><a href="" class="btn btn-success custom-width">edit</a></td>
                             <td><a href="" class="btn btn-danger custom-width">delete</a></td>
-                            
+
 
                         </tr>
 

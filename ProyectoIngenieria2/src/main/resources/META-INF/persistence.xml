@@ -14,7 +14,6 @@
     <class>modelo.Informacion</class>
     <class>modelo.Telefono</class>
     <class>modelo.Profesor</class>
-    <class>modelo.Clase</class>
     <class>modelo.Matricula</class>
     <class>modelo.Familiar</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>

@@ -19,10 +19,10 @@ import javax.validation.constraints.Size;
  *
  * @author josvr_000
  */
-
 @Entity
 @Table(name = "informacion")
 public class Informacion {
+
     @Id
     @Basic(optional = false)
     @NotNull
@@ -32,13 +32,11 @@ public class Informacion {
     @Size(max = 50)
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @Size(max = 50)
     @Column(name = "titulo")
     private String titulo;
-    
-    
-   
+
     @JoinColumn(name = "idnino", referencedColumnName = "id")
     @ManyToOne
     private Nino nino;
@@ -74,9 +72,8 @@ public class Informacion {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
-    
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (codigo != null ? codigo.hashCode() : 0);

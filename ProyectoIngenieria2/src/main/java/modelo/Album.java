@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -28,16 +29,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "album")
 
 public class Album implements Serializable {
+
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "nombre")
     private String nombre;
-    
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "album")
-    private Collection<Imagen> imagenes;
+    private Collection<Imagen> imagenes = new ArrayList<Imagen>();
+
+    ;
 
     public Collection<Imagen> getImagenes() {
         return imagenes;
@@ -54,7 +58,6 @@ public class Album implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 
     @Override
     public int hashCode() {
@@ -80,5 +83,5 @@ public class Album implements Serializable {
     public String toString() {
         return "modelo.Album[ nombre=" + nombre + " ]";
     }
-    
+
 }

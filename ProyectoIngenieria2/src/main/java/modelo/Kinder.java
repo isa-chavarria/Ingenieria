@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.io.Serializable;
@@ -23,8 +18,8 @@ import javax.validation.constraints.Size;
  * @author Isa
  */
 @Entity
-@Table(name="kinder")
-public class Kinder implements Serializable{
+@Table(name = "kinder")
+public class Kinder implements Serializable {
 
     @Id
     @Basic(optional = false)
@@ -45,9 +40,9 @@ public class Kinder implements Serializable{
      @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="kinder")
     Collection<Contacto> contactos;
-     
-     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="kinder")
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "kinder")
     Collection<Noticia> noticias;
 
     public Collection<Contacto> getContactos() {
@@ -66,8 +61,6 @@ public class Kinder implements Serializable{
         this.noticias = noticias;
     }
 
-    
-    
     public String getNombre() {
         return nombre;
     }
@@ -140,5 +133,5 @@ public class Kinder implements Serializable{
     public String toString() {
         return "modelo.Kinder[ nombre=" + nombre + " ]";
     }
-    
+
 }

@@ -19,8 +19,10 @@ import org.springframework.stereotype.Service;
 @Service("EncargadoService")
 @Transactional
 public class EncargadoServiceImpl implements EncargadoService {
-     @Autowired
+
+    @Autowired
     private EncargadoDao Encargado;
+
     @Override
     public Encargado findbyId(String id) {
         return Encargado.findbyId(id);
@@ -28,7 +30,7 @@ public class EncargadoServiceImpl implements EncargadoService {
 
     @Override
     public void save(Encargado encargado) {
-       this.Encargado.save(encargado);
+        this.Encargado.save(encargado);
     }
 
     @Override
@@ -38,24 +40,25 @@ public class EncargadoServiceImpl implements EncargadoService {
 
     @Override
     public List<Encargado> findAll() {
-       return Encargado.findAll();
+        return Encargado.findAll();
     }
 
     @Override
     public void UpdateEncargado(Encargado Encargado) {
-      Encargado encargado = this.Encargado.findbyId(Encargado.getNombre());
-      if(encargado!=null){
-          encargado.setNombre(Encargado.getNombre());
-          encargado.setApellido1(Encargado.getApellido1());
-          encargado.setApellido2(Encargado.getApellido2());
-          encargado.setId(Encargado.getId());
-          encargado.setDireccion(Encargado.getDireccion());
-          encargado.setEmail(Encargado.getEmail());
-          encargado.setFechaNacimiento(Encargado.getFechaNacimiento());
-          encargado.setRuta_imagen(Encargado.getRuta_imagen());
-          encargado.setTelefono(Encargado.getTelefono());
-          encargado.setUsuario(Encargado.getUsuario());
-         
-      }
+        Encargado encargado = this.Encargado.findbyId(Encargado.getNombre());
+        if (encargado != null) {
+            encargado.setNombre(Encargado.getNombre());
+            encargado.setApellido1(Encargado.getApellido1());
+            encargado.setApellido2(Encargado.getApellido2());
+            encargado.setId(Encargado.getId());
+            encargado.setDireccion(Encargado.getDireccion());
+            encargado.setEmail(Encargado.getEmail());
+            encargado.setFechaNacimiento(Encargado.getFechaNacimiento());
+            encargado.setRuta_imagen(Encargado.getRuta_imagen());
+            encargado.setTelefono(Encargado.getTelefono());
+            encargado.setUsuario(Encargado.getUsuario());
+            encargado.setNino(Encargado.getNino());
+
+        }
     }
 }

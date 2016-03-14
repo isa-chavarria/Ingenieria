@@ -33,7 +33,7 @@
 
     </head>
     <body>
-       <div  id="arriba" class="row">
+        <div  id="arriba" class="row">
             <div class="col-sm-4">
 
 
@@ -71,7 +71,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    
+
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

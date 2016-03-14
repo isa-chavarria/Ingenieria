@@ -66,7 +66,6 @@ public class Encargado implements Serializable {
     @Column(name = "ruta_imagen")
     private String ruta_imagen;
 
-    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usu_enc",
             joinColumns = {
@@ -74,6 +73,22 @@ public class Encargado implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "user_id")})
     private Set<Usuario> usuario = new HashSet<Usuario>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "enc_nino",
+            joinColumns = {
+                @JoinColumn(name = "enc_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "nino_id")})
+    private Set<Nino> nino = new HashSet<Nino>();
+
+    public Set<Nino> getNino() {
+        return nino;
+    }
+
+    public void setNino(Set<Nino> nino) {
+        this.nino = nino;
+    }
 
     public Set<Usuario> getUsuario() {
         return usuario;

@@ -46,6 +46,4 @@ public class KinderDaoImpl extends AbstractDao<String, Kinder> implements Kinder
         return kinder;
     }
 
-    
-
 }

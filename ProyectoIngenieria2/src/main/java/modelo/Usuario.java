@@ -82,6 +82,14 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    public void serEncargado() {
+        this.setRoleSeccion("Encargado");
+    }
+
+    public void serAdministrador() {
+        this.setRoleSeccion("Administrador");
+    }
+
     public boolean isAdministrador() {
         return roleSeccion.equals("Administrador");
     }

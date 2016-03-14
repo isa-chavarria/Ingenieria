@@ -16,8 +16,9 @@ import org.springframework.stereotype.Repository;
  * @author Isa
  */
 @Repository("EncargadoDao")
-public class EncargadoDaoImpl extends AbstractDao<String, Encargado> implements EncargadoDao{
-     @Override
+public class EncargadoDaoImpl extends AbstractDao<String, Encargado> implements EncargadoDao {
+
+    @Override
     public Encargado findbyId(String id) {
         Encargado encargado = getByKey(id);
         return encargado;
@@ -44,5 +45,5 @@ public class EncargadoDaoImpl extends AbstractDao<String, Encargado> implements 
 
         return encargado;
     }
-    
+
 }

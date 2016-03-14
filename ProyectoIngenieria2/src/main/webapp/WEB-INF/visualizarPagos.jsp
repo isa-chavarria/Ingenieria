@@ -52,7 +52,7 @@
             </div>
 
 
-           <div class="col-sm-8" style="  padding: 1%">
+            <div class="col-sm-8" style="  padding: 1%">
                 <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 

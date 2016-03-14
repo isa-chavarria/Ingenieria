@@ -41,7 +41,6 @@ public class Imagen implements Serializable {
     @ManyToOne
     private Album album;
 
-
     public String getRutaImagen() {
         return rutaImagen;
     }
@@ -90,5 +89,5 @@ public class Imagen implements Serializable {
     public String toString() {
         return "modelo.Imagen[ codigo=" + codigo + " ]";
     }
-    
+
 }

@@ -30,7 +30,7 @@
 
     </head>
     <body>
-       <div  id="arriba" class="row">
+        <div  id="arriba" class="row">
             <div class="col-sm-4">
 
 
@@ -40,7 +40,7 @@
             </div>
 
 
-           <div class="col-sm-8" style="  padding: 1%">
+            <div class="col-sm-8" style="  padding: 1%">
                 <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
@@ -100,7 +100,7 @@
 
                     <div class="col-lg-12 text-center">
 
-                       
+
 
 
                         <hr>

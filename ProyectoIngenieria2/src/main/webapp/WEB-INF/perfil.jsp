@@ -1,5 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="modelo.Usuario"%>
+<%@page import="modelo.Encargado"%>
 <!DOCTYPE html>
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+    Encargado enc = (Encargado) session.getAttribute("enc");
+%>
 <html lang="en">
     <head>
 
@@ -92,13 +99,13 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="resources/img/daryl.jpg" width="50%" height="160px"alt="">
+                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="160px"alt="">
                     </div>
 
                     <div class="rightImage"  >
 
                         <hr>
-                        <h2 class="intro-text text-center" style=" color: #000;" >Daryl Chinchilla </h2>
+                        <h2 class="intro-text text-center" style=" color: #000;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());   %> </h2>
                         <hr> 
 
 
@@ -116,7 +123,7 @@
 
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">Daryl Chinchilla Navarro </p>
+                            <p class="col-lg-5"><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());   %> </p>
                         </div>
                         </br>
                         <div class="spac"></div>
@@ -124,7 +131,7 @@
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">Cédula:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">1-1581-0474 </p>
+                            <p class="col-lg-5"><% out.print(enc.getId());  %> </p>
                         </div> 
 
                         </br>
@@ -133,7 +140,7 @@
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">Fecha de nacimiento:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">29/08/1994 </p>
+                            <p class="col-lg-5"> <% out.print(enc.getFechaNacimiento()); %> </p>
                         </div> 
 
                         </br>
@@ -143,7 +150,7 @@
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
 
-                            <p class="col-lg-5">  Astma </p>
+                            <p class="col-lg-5">  <% out.print("Esta no se"); %> </p>
                         </div> 
 
                         </br>
@@ -152,14 +159,14 @@
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">Encargados:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">  Ana lucia Rojas </p>
+                            <p class="col-lg-5">  <% out.print("tampoco se"); %> </p>
 
                         </div> 
 
                         <label for="ejemplo_email_3" class="col-lg-2 control-label"> </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">  Roger Alfaro Chinchilla </p>
+                            <p class="col-lg-5">  <% out.print("tampoco se");%> </p>
 
                         </div> 
 
@@ -171,7 +178,7 @@
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">teléfono:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5"> 8696-6019 </p>
+                            <p class="col-lg-5">  <% out.print(enc.getTelefono());%> </p>
 
                         </div> 
 
@@ -182,7 +189,7 @@
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">Dirección:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5"> 1 km al sur de la iglesia de San Luis </p>
+                            <p class="col-lg-5"> <% out.print(enc.getDireccion());%></p>
 
                         </div> 
 

@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,11 +24,10 @@ import javax.validation.constraints.Size;
  *
  * @author josvr_000
  */
-
 @Entity
 @Table(name = "familiar")
 public class Familiar {
-    
+
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
@@ -49,18 +49,30 @@ public class Familiar {
     @Size(max = 50)
     @Column(name = "lugarTrabajo")
     private String lugarTrabajo;
-    
+    @Size(max = 50)
     @Column(name = "ocupacion")
     private String ocupacion;
-    
-    
+    @Size(max = 50)
+    @Column(name = "parentesco")
+    private String parentesco;
+
     @JoinColumn(name = "idnino", referencedColumnName = "id")
     @ManyToOne
     private Nino nino;
-    
-    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="idnino")
-    private Collection<Telefono> telefonos;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idFamiliar")
+    private Collection<Telefono> telefonos = new ArrayList<Telefono>();
+
+    ;
+
+    public String getParentesco() {
+        return parentesco;
+    }
+
+    public void setParentesco(String parentesco) {
+        this.parentesco = parentesco;
+    }
 
     public Collection<Telefono> getTelefonos() {
         return telefonos;
@@ -133,8 +145,7 @@ public class Familiar {
     public void setNino(Nino nino) {
         this.nino = nino;
     }
-    
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -159,5 +170,5 @@ public class Familiar {
     public String toString() {
         return "modelo.familiar[ id=" + id + " ]";
     }
-    
+
 }

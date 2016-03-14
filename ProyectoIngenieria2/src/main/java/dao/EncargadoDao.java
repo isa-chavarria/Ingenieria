@@ -8,14 +8,17 @@ package dao;
 import java.util.List;
 import modelo.Encargado;
 
-
 /**
  *
  * @author Isa
  */
 public interface EncargadoDao {
-    Encargado  findbyId(String id);
-    void save(Encargado  encargado);
+
+    Encargado findbyId(String id);
+
+    void save(Encargado encargado);
+
     void DeletebyId(String id);
-    List< Encargado > findAll();
+
+    List< Encargado> findAll();
 }

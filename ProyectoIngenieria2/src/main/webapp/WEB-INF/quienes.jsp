@@ -41,7 +41,7 @@
             </div>
 
 
-           <div class="col-sm-8" style="  padding: 1%">
+            <div class="col-sm-8" style="  padding: 1%">
                 <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
@@ -132,6 +132,7 @@
                     <div class="col-md-12">
                         <strong>
                             ${kinder.vision}
+                          
                         </strong>
                     </div>
                     <div class="clearfix"></div>
