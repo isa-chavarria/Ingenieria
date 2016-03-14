@@ -137,6 +137,7 @@
                                             <form:hidden path="codigo" value="${contacto1.codigo}"/>
                                             <form:hidden path="titulo" value="${contacto1.titulo}"/>
                                             <form:hidden path="descripcion" value="${contacto1.descripcion}"/>
+                                            <form:hidden path="kinder" value="${contacto1.kinder}"/>
                                             <button type="submit" class="btn btn-default" aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </button></form:form></td>

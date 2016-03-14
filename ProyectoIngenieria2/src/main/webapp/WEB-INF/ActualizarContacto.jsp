@@ -120,21 +120,22 @@
                     </div>
 
 
-                    <form:form method="POST" modelAttribute="contacto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                    <form:form method="POST" action="ModificarContactoModicado" modelAttribute="contacto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                         <div  class="form-group">
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Titulo:</label>
                             <div class="col-lg-10">
                                 <form:input type="text" class="form-control" path="titulo" id="titulo"
-                                            placeholder="Facebook"/>
+                                            placeholder="Facebook" value="${contactoBase.titulo}"/>
                             </div>
                         </div>
                         <div  class="form-group">
                             <label for="ejemplo_password_3" class="col-lg-2 control-label">Descripción:</label>
                             <div class="col-lg-10">
                                 <form:input type="text" class="form-control" path="descripcion" id="descripcion" 
-                                            placeholder="kinder@facebook.com" />
+                                            placeholder="kinder@facebook.com" value="${contactoBase.descripcion}" />
                             </div>
                         </div>
+                         <form:hidden path="codigo" value="${contactoBase.codigo}"/>
                         <div class="col-lg-offset-2 col-lg-10">
                             <button type="submit" class="btn btn-info">Modifica</button>
                             <div class="form-group">

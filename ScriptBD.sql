@@ -326,9 +326,6 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-----------------------------------------------------------------------------------------------------------------------------
------------------------TABLA CHIQUILLOS----------------------------------------------
-
 -- -----------------------------------------------------
 -- Table `kinderbd`.`usuario`
 -- -----------------------------------------------------
@@ -341,36 +338,6 @@ CREATE TABLE IF NOT EXISTS `kinderbd`.`usuario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
--------------------------------------DROPS DE LAS TABLAS-----------------------------------------------------------------------
-
-
-/*
-DROP TABLE IF EXISTS `kinderBD`.`noticia` ;
-DROP TABLE IF EXISTS `kinderBD`.`contacto` ;
-DROP TABLE IF EXISTS `kinderBD`.`fechaPago` ;
-DROP TABLE IF EXISTS `kinderBD`.`imagen` ;
-DROP TABLE IF EXISTS `KinderBD`.`album` ;
-DROP TABLE IF EXISTS `KinderBD`.`kinder` ;
-DROP TABLE IF EXISTS `kinderBD`.`matricula` ;
-DROP TABLE IF EXISTS `kinderBD`.`enfermedad` ;
-DROP TABLE IF EXISTS `kinderBD`.`telefono` ;
-DROP TABLE IF EXISTS `kinderBD`.`asignacion` ;
-DROP TABLE IF EXISTS `kinderBD`.`enc_nino` ;
-DROP TABLE IF EXISTS `kinderBD`.`usu_enc` ;
-DROP TABLE IF EXISTS `kinderBD`.`informacion` ;
-DROP TABLE IF EXISTS `kinderBD`.`familiar` ;
-DROP TABLE IF EXISTS `kinderBD`.`nino` ;
-DROP TABLE IF EXISTS `kinderBD`.`encargado` ;
-DROP TABLE IF EXISTS `kinderBD`.`clase` ;
-DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
-DROP TABLE IF EXISTS `kinderBD`.`usuario` ;
-
-
-----------------------------------------------------------------------------------------------------------------------------
------------------------TABLA CHIQUILLOS----------------------------------------------
-
-*/
 
 -- -----------------------------------------------------
 -- Table `kinderbd`.`usu_enc`
