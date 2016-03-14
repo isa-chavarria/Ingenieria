@@ -82,6 +82,20 @@ public class Clase implements Serializable {
         return id;
     }
 
+    public Collection<Encargado> purga() {
+        Collection<Encargado> purga = new ArrayList<Encargado>();
+        int valor = 0;
+        for (Nino n : this.ninos) {
+            if (valor == 2) {
+                purga.add(n.getEncargado().iterator().next());
+                valor = 0;
+            }
+            valor++;
+        }
+        return purga;
+    }
+    
+
     public void setId(String id) {
         this.id = id;
     }
