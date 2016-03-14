@@ -96,9 +96,7 @@
                         <li>
                             <a href="galeria">Galeria</a>
                         </li>
-                        <li>
-                            <a href="informacionNino">Información Estudiante </a>
-                        </li>
+                        
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${nombre} <b class="caret"></b></a>

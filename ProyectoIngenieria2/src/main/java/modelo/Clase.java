@@ -86,7 +86,7 @@ public class Clase implements Serializable {
         Collection<Encargado> purga = new ArrayList<Encargado>();
         int valor = 0;
         for (Nino n : this.ninos) {
-            if (valor == 2) {
+            if (!purga.contains(n.getEncargado().iterator().next())) {
                 purga.add(n.getEncargado().iterator().next());
                 valor = 0;
             }
@@ -94,7 +94,6 @@ public class Clase implements Serializable {
         }
         return purga;
     }
-    
 
     public void setId(String id) {
         this.id = id;

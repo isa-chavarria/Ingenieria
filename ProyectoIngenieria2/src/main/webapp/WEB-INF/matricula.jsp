@@ -31,6 +31,8 @@
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
         <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
 
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -91,7 +93,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="Encargado">Regresar al menú</a>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -125,25 +127,25 @@
 
 
 
-                    <form:form method="POST" action="Matricular"  modelAttribute="persona" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" role="form">
+                    <form:form method="POST" action="Matricular"  modelAttribute="persona" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validarContrasena()" role="form">
                         <div id='wrapper' style=' border: solid 1px #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
                             <div  class="form-group">
                                 <label for="nombre" class="col-lg-2 control-label">Nombre del alumno:</label>
                                 <div class="col-lg-8">
                                     <form:input path="nombre" type="text" class="form-control" id="nombre"
-                                                placeholder="Nombre del niño"/>
+                                                placeholder="Nombre del niño" onkeydown="return validarLetras(event)"/>
                                 </div>
                             </div>
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="primerApellido" class="col-lg-2 control-label">Primero apellido:</label>
                                 <div class="col-lg-4">
                                     <form:input path="apellido1" type="text" class="form-control" id="primerApellido" 
-                                                placeholder="Apellidos del niño"  />
+                                                placeholder="Apellidos del niño" onkeydown="return validarLetras(event)" />
                                 </div>
                                 <label for="segundoApellido" class="col-lg-2 control-label">Segundo apellido:</label>
                                 <div class="col-lg-4">
                                     <form:input path="apellido2" type="text" class="form-control" id="segundoApellido" 
-                                                placeholder="Apellidos del niño"  />
+                                                placeholder="Apellidos del niño" onkeydown="return validarLetras(event)" />
                                 </div>
                             </div>
 
@@ -162,8 +164,8 @@
                                 </div>
                                 <label for="telefono" class="col-lg-2 control-label">Teléfono del domicilio:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="telefono" type="text" class="form-control" id="telefono" 
-                                                placeholder="Teléfono"  />
+                                    <form:input path="telefono" type="text" class="form-control" name="telefono" id="telefono" 
+                                                placeholder="Teléfono" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -193,7 +195,10 @@
                                 <label for="passwordC" class="col-lg-2 control-label">Confirmar contraseña:</label>
                                 <div class="col-lg-8">
                                     <form:input path="" type="password" class="form-control" id="passwordC"
-                                                name="passwordC"    placeholder="Contraseña" required="true"/>
+                                                name="passwordC"    placeholder="Contraseña" onchange="validarContrasena()" required="true"/>
+                                </div>
+                                <div id="seccionError">
+                                    <p style="color: red;" id="error">
                                 </div>
                             </div>
 
@@ -205,7 +210,7 @@
                                 <label for="nombrePadre" class="col-lg-2 control-label">Nombre del padre:</label>
                                 <div class="col-lg-8">
                                     <form:input path="nombrePadre" type="text" class="form-control" id="nombrePadre"
-                                                placeholder="Nombre del padre"/>
+                                                placeholder="Nombre del padre" onkeydown="return validarLetras(event)"/>
                                 </div>
                             </div>
                             <div style='margin-bottom: 7%'  class="form-inline">
@@ -257,7 +262,7 @@
                                 <label for="nombreMadre" class="col-lg-2 control-label">Nombre de la madre</label>
                                 <div class="col-lg-8">
                                     <form:input path="nombreMadre" type="text" class="form-control" id="nombreMadre"
-                                                placeholder="Nombre del la madre"/>
+                                                placeholder="Nombre del la madre" onkeydown="return validarLetras(event)"/>
                                 </div>
                             </div>
                             <div style='margin-bottom: 7%'  class="form-inline">
@@ -309,7 +314,7 @@
                                 <label for="nombreEncargado" class="col-lg-2 control-label">Nombre de persona encargada(caso de emergencia):</label>
                                 <div class="col-lg-8">
                                     <form:input path="nombreEncargado" type="text" class="form-control" id="nombreEncargado"
-                                                placeholder="Nombre del encargado"/>
+                                                placeholder="Nombre del encargado" onkeydown="return validarLetras(event)"/>
                                 </div>
                             </div>
 
@@ -410,7 +415,7 @@
                                 <label for="persona" class="col-lg-2 control-label">Matrícula realizada por:</label>
                                 <div class="col-lg-8">
                                     <form:input path="persona" type="text" class="form-control" id="persona"
-                                                placeholder="Nombre persona que realizo la matrícula "/>
+                                                placeholder="Nombre persona que realizo la matrícula " onkeydown="return validarLetras(event)"/>
                                 </div>
                             </div>
 
@@ -421,6 +426,10 @@
                             <div class="col-lg-offset-2 col-lg-8">
                                 <button type="submit" class="btn btn-info">Matricular</button>
                             </div>
+                        </div>
+
+                        <div id="seccionError">
+                            <p style="color: red;" id="error">
                         </div>
 
                     </form:form>

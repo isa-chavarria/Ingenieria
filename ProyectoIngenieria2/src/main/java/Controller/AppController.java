@@ -47,59 +47,59 @@ import service.kinderService;
 @RequestMapping("/")
 
 public class AppController {
-    
+
     @Autowired
     kinderService kinderService;
-    
+
     @Autowired
     UsuarioService usuarioService;
-    
+
     @Autowired
     EncargadoService encargadoService;
-    
+
     @Autowired
     ContactoService contactoService;
-    
+
     @Autowired
     NinoService ninoService;
-    
+
     @Autowired
     ClaseService claseService;
-    
+
     @Autowired
     FamiliarService familiarService;
-    
+
     @Autowired
     TelefonoService telefonoService;
-    
+
     @Autowired
     ProfesorService profesorService;
-    
+
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
-        
+
         Usuario user = usuarioService.findbyId("402270021");
         model.addAttribute("user", user);
         String nombre = user.getEncargado().iterator().next().getNombre();
         model.addAttribute("nombre", nombre);
-        
+
         return "prueba";
     }
-    
+
     @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
-            
+
             model.addAttribute("kinder", kinder);
-            
+
         }
         return "quienes";
     }
-    
+
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String loadIndex(ModelMap model, HttpServletRequest request) {
-        
+
         HttpSession sesion = request.getSession(true);
 
         //Cerrar sesion
@@ -240,31 +240,31 @@ public class AppController {
         //-----Uniendo-------------
         trabajoP.setFamiliar(padre);
         personalP.setFamiliar(padre);
-        
+
         trabajoM.setFamiliar(madre);
         personalM.setFamiliar(madre);
-        
+
         telefonoEnc.setFamiliar(enc);
-        
+
         padre.getTelefonos().add(trabajoP);
         padre.getTelefonos().add(personalP);
-        
+
         madre.getTelefonos().add(trabajoM);
         madre.getTelefonos().add(personalM);
-        
+
         enc.getTelefonos().add(telefonoEnc);
-        
+
         padre.setNino(n);
         madre.setNino(n);
         enc.setNino(n);
-        
+
         n.setClase(g);
         g.getNinos().add(n);
-        
+
         n.getFamiliares().add(padre);
         n.getFamiliares().add(madre);
         n.getFamiliares().add(enc);
-        
+
         usuarioService.save(u);
         encargadoService.save(encargado);
         ninoService.save(n);
@@ -277,44 +277,23 @@ public class AppController {
         usuarioService.UpdateUsuario(u);
 
         //------GUARDANDO---------------------------
-        //------UPDATES-----------------------------------
-        /*this.telefonoService.UpdateTelefono(trabajoP);
-         this.telefonoService.UpdateTelefono(personalP);
-
-         this.telefonoService.UpdateTelefono(trabajoM);
-         this.telefonoService.UpdateTelefono(personalM);
-
-         this.telefonoService.UpdateTelefono(telefonoEnc);
-
-         this.familiarService.UpdateFamiliar(padre);
-         this.familiarService.UpdateFamiliar(madre);
-         this.familiarService.UpdateFamiliar(enc);
-
-         this.ninoService.UpdateNino(n);
-
-         this.claseService.UpdateClase(g);
-
-         this.encargadoService.UpdateEncargado(encargado);
-
-         this.usuarioService.UpdateUsuario(u);
-         */
         //-------FIN------------------------------------------------------------
         Usuario user = new Usuario();
         model.addAttribute("user", user);
         model.addAttribute("fallo", false);
-        return "index";
+        return "MatriculaCorrecta";
     }
-    
+
     @RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
     public String realizarLoging(@Valid Usuario user, BindingResult result,
             ModelMap model, HttpServletRequest request) {
-        
+
         String password = user.getContrasena();
         String email = user.getEmail();
         Usuario usu = usuarioService.findByLogin(email, password);
         if (usu != null) {
             String nombre = usu.getEncargado().iterator().next().getNombre();
-            
+
             if (usu.isAdministrador()) {
                 model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
@@ -329,36 +308,36 @@ public class AppController {
         Usuario u = new Usuario();
         model.addAttribute("user", u);
         model.addAttribute("fallo", true);
-        return "index";
+        return "MatriculaCorrecta";
     }
-    
+
     @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
     public String loadQuienes(ModelMap model) {
         return "quienes";
     }
-    
+
     @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
     public String loadEncargado(ModelMap model) {
         return "Encargado";
     }
-    
+
     @RequestMapping(value = {"/administracion"}, method = RequestMethod.GET)
     public String loadAdministracion(ModelMap model) {
         return "Administracion";
     }
-    
+
     @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
     public String loadContacto(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            
+
         } else {
             model.addAttribute("kinder", new Kinder());
         }
         return "contacto";
     }
-    
+
     @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.GET)
     public String loadContactoAdmin(ModelMap model) {
         Contacto contacto = new Contacto();
@@ -366,17 +345,17 @@ public class AppController {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            
+
         } else {
             model.addAttribute("kinder", new Kinder());
         }
         return "contactoAdministrador";
     }
-    
+
     @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.POST)
     public String removeContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
-        
+
         Contacto contacto1 = contactoService.findbyCodigo(contacto.getCodigo());
         if (contacto1 != null) {
             contactoService.DeletebyCodigo(contacto1.getCodigo());
@@ -386,24 +365,24 @@ public class AppController {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            
+
         } else {
             model.addAttribute("kinder", new Kinder());
         }
         return "contactoAdministrador";
     }
-    
+
     @RequestMapping(value = {"/ModificarContacto"}, method = RequestMethod.POST)
     public String updateContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
         Contacto cont = new Contacto();
         model.addAttribute("contacto", cont);
-        
+
         model.addAttribute("contactoBase", contacto);
-        
+
         return "ActualizarContacto";
     }
-    
+
     @RequestMapping(value = {"/ModificarContactoModicado"}, method = RequestMethod.POST)
     public String updateContacto2(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
@@ -416,39 +395,39 @@ public class AppController {
         con.setTitulo(contacto.getTitulo());
         con.setDescripcion(contacto.getDescripcion());
         contactoService.UpdateContacto(con);
-        
+
         model.addAttribute("msg", "Se agrego el contacto con exito");
         return "agregarContacto";
     }
-    
+
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         return "galeria";
     }
-    
+
     @RequestMapping(value = {"/informacion-nino"}, method = RequestMethod.GET)
     public String loadInformacionNino(ModelMap model) {
         return "informacionNino";
     }
-    
+
     @RequestMapping(value = {"/matricula"}, method = RequestMethod.GET)
     public String loadMatricula(ModelMap model) {
         SuperMatricula persona = new SuperMatricula();
-        
+
         model.addAttribute("persona", persona);
         return "matricula";
     }
-    
+
     @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
     public String loadMensajes(ModelMap model) {
         return "mensajes";
     }
-    
+
     @RequestMapping(value = {"/pagos"}, method = RequestMethod.GET)
     public String loadPagos(ModelMap model) {
         return "pagos";
     }
-    
+
     @RequestMapping(value = {"/perfil"}, method = RequestMethod.GET)
     public String loadPerfil(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
@@ -456,17 +435,17 @@ public class AppController {
         request.getSession().setAttribute("enc", enc);
         return "perfil";
     }
-    
+
     @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)
     public String loadRequerimientos(ModelMap model) {
         return "requerimientos";
     }
-    
+
     @RequestMapping(value = {"/Visualizar-Pagos"}, method = RequestMethod.GET)
     public String loadVisualizarPagos(ModelMap model) {
         return "visualizarPagos";
     }
-    
+
     @RequestMapping(value = {"/Estudiantes"}, method = RequestMethod.GET)
     public String loadEstudiantes(ModelMap model) {
         Clase g = new Clase();
@@ -475,17 +454,17 @@ public class AppController {
         model.addAttribute("grupito", c);
         return "Estudiantes";
     }
-    
+
     @RequestMapping(value = {"/seleccionar"}, method = RequestMethod.POST)
     public String seleccionar(@Valid Clase clase, BindingResult result, ModelMap model) {
         Clase g = new Clase();
         model.addAttribute("grupo", g);
         Clase c = claseService.findbyId(this.calcularCodigo(clase.getNivel()));
         model.addAttribute("grupito", c);
-        
+
         return "Estudiantes";
     }
-    
+
     @ModelAttribute("niveles")
     public ArrayList<String> initializeProfiles() {
         ArrayList<String> l = new ArrayList<>();
@@ -495,7 +474,7 @@ public class AppController {
         l.add("Preparatoria");
         return l;
     }
-    
+
     @ModelAttribute("opciones")
     public ArrayList<String> initializeOpciones() {
         ArrayList<String> l = new ArrayList<>();
@@ -503,12 +482,12 @@ public class AppController {
         l.add("No");
         return l;
     }
-    
+
     public String calcularCodigo(String nivel) {
         if (nivel.equalsIgnoreCase("Materno")) {
             return "1";
         }
-        
+
         if (nivel.equalsIgnoreCase("Prekinder")) {
             return "2";
         }
@@ -518,8 +497,8 @@ public class AppController {
         if (nivel.equalsIgnoreCase("Preparatoria")) {
             return "4";
         }
-        
+
         return "0";
     }
-    
+
 }
