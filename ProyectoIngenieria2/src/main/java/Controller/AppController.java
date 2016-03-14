@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import modelo.Clase;
 import modelo.Contacto;
@@ -58,8 +59,8 @@ public class AppController {
 
     @Autowired
     ContactoService contactoService;
-	
-	@Autowired
+
+    @Autowired
     NinoService ninoService;
 
     @Autowired
@@ -77,7 +78,7 @@ public class AppController {
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
 
-        Usuario user = usuarioService.findbyId("1-0304-0551");
+        Usuario user = usuarioService.findbyId("402270021");
         model.addAttribute("user", user);
         String nombre = user.getEncargado().iterator().next().getNombre();
         model.addAttribute("nombre", nombre);
@@ -97,7 +98,13 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String loadIndex(ModelMap model) {
+    public String loadIndex(ModelMap model, HttpServletRequest request) {
+
+        HttpSession sesion = request.getSession(true);
+
+        //Cerrar sesion
+        sesion.invalidate();
+        //  sesion.removeAttribute("user");
         Usuario user = new Usuario();
         model.addAttribute("user", user);
         model.addAttribute("fallo", false);
@@ -306,12 +313,15 @@ public class AppController {
         String email = user.getEmail();
         Usuario usu = usuarioService.findByLogin(email, password);
         if (usu != null) {
-            if (usu.isAdministrador()) {
+            String nombre = usu.getEncargado().iterator().next().getNombre();
 
+            if (usu.isAdministrador()) {
+                model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
                 return "Administracion";
             }
             if (usu.isEncargado()) {
+                model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
                 return "Encargado";
             }
@@ -390,18 +400,18 @@ public class AppController {
         model.addAttribute("contacto", cont);
 
         model.addAttribute("contactoBase", contacto);
-        
+
         return "ActualizarContacto";
     }
-    
+
     @RequestMapping(value = {"/ModificarContactoModicado"}, method = RequestMethod.POST)
     public String updateContacto2(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
-       /* if (result.hasErrors()) {
-            System.out.println("has errors");
-            model.addAttribute("msg", "No se agrego el contacto con exito");
-            return "agregarContacto";
-        }*/
+        /* if (result.hasErrors()) {
+         System.out.println("has errors");
+         model.addAttribute("msg", "No se agrego el contacto con exito");
+         return "agregarContacto";
+         }*/
         Contacto con = contactoService.findbyCodigo(contacto.getCodigo());
         con.setTitulo(contacto.getTitulo());
         con.setDescripcion(contacto.getDescripcion());
@@ -410,7 +420,7 @@ public class AppController {
         model.addAttribute("msg", "Se agrego el contacto con exito");
         return "agregarContacto";
     }
-    
+
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         return "galeria";

@@ -10,7 +10,7 @@
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    
+
     if (user != null && user.isAdministrador()) {
 
     } else {
@@ -90,9 +90,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="mensajes">Mensajes</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Pagos <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -102,12 +100,15 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="visualizarPagos"><i class="fa fa-fw fa-gear"></i> Observar Pagos</a>
+                                    <a href="visualizarPagos"><i class="fa fa-fw fa-gear"></i> Verificar Pagos</a>
                                 </li>   
                             </ul>
                         </li>
                         <li>
                             <a href="matricula">Matricula</a>
+                        </li>
+                        <li>
+                            <a href="">Estudiantes</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Modificar <b class="caret"></b></a>
@@ -124,10 +125,11 @@
                                 <li>
                                     <a href="contactoAdministrador"><i class="fa fa-fw fa-power-off"></i> Contacto</a>
                                 </li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> nombre <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>${nombre}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="perfil."><i class="fa fa-fw fa-user"></i> Perfil</a>
@@ -135,6 +137,10 @@
                                 <li class="divider"></li>
                                 <li>
                                     <a href="index"><i class="fa fa-fw fa-envelope"></i>Salir</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="mensajes">Mensajes</a>
                                 </li>
                             </ul>
                         </li>
