@@ -170,6 +170,23 @@ public class AppController extends HttpServlet {
 
         model.addAttribute("contactoBase", contacto);
         
+        return "ActualizarContacto";
+    }
+    
+    @RequestMapping(value = {"/ModificarContactoModicado"}, method = RequestMethod.POST)
+    public String updateContacto2(@Valid Contacto contacto, BindingResult result, ModelMap model) {
+        System.out.println(contacto.toString());
+       /* if (result.hasErrors()) {
+            System.out.println("has errors");
+            model.addAttribute("msg", "No se agrego el contacto con exito");
+            return "agregarContacto";
+        }*/
+        Contacto con = contactoService.findbyCodigo(contacto.getCodigo());
+        con.setTitulo(contacto.getTitulo());
+        con.setDescripcion(contacto.getDescripcion());
+        contactoService.UpdateContacto(con);
+
+        model.addAttribute("msg", "Se agrego el contacto con exito");
         return "agregarContacto";
     }
     
