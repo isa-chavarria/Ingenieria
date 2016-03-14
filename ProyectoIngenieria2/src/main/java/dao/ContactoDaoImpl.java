@@ -26,7 +26,7 @@ public class ContactoDaoImpl extends AbstractDao<Long, Contacto> implements Cont
     }
 
     @Override
-    public void DeletebyCodigo(String codigo) {
+    public void DeletebyCodigo(Long codigo) {
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("codigo", codigo));
         Contacto contacto = (Contacto) crit.uniqueResult();

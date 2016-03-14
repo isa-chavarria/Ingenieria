@@ -122,7 +122,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="contacto"><i class="fa fa-fw fa-power-off"></i> Contacto</a>
+                                    <a href="contactoAdministrador"><i class="fa fa-fw fa-power-off"></i> Contacto</a>
                                 </li>
                             </ul>
                         </li>

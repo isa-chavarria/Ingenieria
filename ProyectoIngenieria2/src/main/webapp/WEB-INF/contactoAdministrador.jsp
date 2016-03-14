@@ -7,7 +7,7 @@
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    
+
     if (user != null && user.isAdministrador()) {
 
     } else {
@@ -30,13 +30,9 @@
 
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        
-        
-        <!-- MetisMenu CSS -->
-        <link href="resources/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-         <!-- Social Buttons CSS -->
-         <link href="resources/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+
+
 
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -51,7 +47,7 @@
 
     </head>
     <body>
-       <div  id="arriba" class="row">
+        <div  id="arriba" class="row">
             <div class="col-sm-4">
 
 
@@ -89,7 +85,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    
+
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -123,26 +119,30 @@
                     <div style="margin-bottom: 5%;" class="col-lg-12">
                         <hr>
                         <h2 class="intro-text text-center">Contacto
+                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
+                            </button>
                         </h2>
+
+
                         <hr>
                     </div>
 
                     <div class="text-center">
-                            <button type="button" class="btn btn-default btn-circle"><i class="fa fa-check"></i>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i>
-                            </button>
-                            <button type="button" class="btn btn-success btn-circle"><i class="fa fa-link"></i>
-                            </button>
-                            <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-heart"></i>
-                            </button>
+
                         <table style="margin-left: 30%;">
-                            <c:forEach items="${kinder.contactos}" var="contacto">
-                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${contacto.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${contacto.descripcion}"></c:out></td></tr>
+                            <c:forEach items="${kinder.contactos}" var="contacto1">
+                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${contacto1.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${contacto1.descripcion}"></c:out></td>
+                                        <td> <button type="button" class="btn btn-default" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            </button></td>
+                                                <td><form:form method="POST"  modelAttribute="contacto">
+                                            <form:hidden path="codigo" value="${contacto1.codigo}"/>
+                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button></form:form></td>
+                                            
+                                    </tr>
                             </c:forEach>
                         </table>
                     </div>
@@ -172,9 +172,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                                    $('.carousel').carousel({
+                                        interval: 5000 //changes the speed
+                                    })
         </script>
 
     </body>

@@ -21,12 +21,13 @@ import service.kinderService;
 //Esto puede ser cualquier nombre
 @RequestMapping("AgregarContacto.html")
 public class AgregarContactosController {
+
     @Autowired
     kinderService kinderService;
-    
+
     @Autowired
     ContactoService contactoService;
-    
+
     //Usar siempre get aca
     @RequestMapping(method = RequestMethod.GET)
     public String newContacto(ModelMap model) {
@@ -34,22 +35,24 @@ public class AgregarContactosController {
         model.addAttribute("contacto", contacto);
         return "agregarContacto";
     }
+
     //Usar siempre post aca
     @RequestMapping(method = RequestMethod.POST)
     public String addContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
-        if(result.hasErrors()) {
-            System.out.println("has errors");            
+        if (result.hasErrors()) {
+            System.out.println("has errors");
             model.addAttribute("msg", "No se agrego el contacto con exito");
             return "agregarContacto";
         }
-        
+
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         contacto.setKinder(kinder);
         contactoService.save(contacto);
         kinder.getContactos().add(contacto);
-        
+
         model.addAttribute("msg", "Se agrego el contacto con exito");
         return "agregarContacto";
     }
+
 }

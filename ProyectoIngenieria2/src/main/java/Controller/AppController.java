@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import service.ContactoService;
 import service.EncargadoService;
 import service.UsuarioService;
 import service.kinderService;
@@ -37,6 +38,9 @@ public class AppController extends HttpServlet {
 
     @Autowired
     EncargadoService encargadoService;
+
+    @Autowired
+    ContactoService contactoService;
 
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
@@ -114,23 +118,46 @@ public class AppController extends HttpServlet {
 
     @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
     public String loadContacto(ModelMap model) {
-         Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            
-        }else{
-        model.addAttribute("kinder", new Kinder());
+
+        } else {
+            model.addAttribute("kinder", new Kinder());
         }
         return "contacto";
     }
-        @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.GET)
     public String loadContactoAdmin(ModelMap model) {
-         Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        Contacto contacto = new Contacto();
+        model.addAttribute("contacto", contacto);
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            
-        }else{
-        model.addAttribute("kinder", new Kinder());
+
+        } else {
+            model.addAttribute("kinder", new Kinder());
+        }
+        return "contactoAdministrador";
+    }
+
+    @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.POST)
+    public String removeContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
+        System.out.println(contacto.toString());
+
+        Contacto contacto1 = contactoService.findbyCodigo(contacto.getCodigo());
+        if (contacto1 != null) {
+            contactoService.DeletebyCodigo(contacto1.getCodigo());
+            model.addAttribute("msg", "Se elimino el contacto con exito");
+        }
+        model.addAttribute("msg", "No se elimino el contacto con exito");
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+
+        } else {
+            model.addAttribute("kinder", new Kinder());
         }
         return "contactoAdministrador";
     }

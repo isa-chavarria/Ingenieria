@@ -15,7 +15,7 @@ import modelo.Contacto;
 public interface ContactoService {
     Contacto findbyCodigo(Long codigo);
     void save(Contacto encargado);
-    void DeletebyCodigo(String codigo);
+    void DeletebyCodigo(Long codigo);
     List<Contacto> findAll();
     void UpdateContacto(Contacto contacto);
 }

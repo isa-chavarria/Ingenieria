@@ -12,6 +12,6 @@ import modelo.Contacto;
 public interface ContactoDao {
     Contacto findbyCodigo(Long codigo);
     void save(Contacto codigo);
-    void DeletebyCodigo(String codigo);
+    void DeletebyCodigo(Long codigo);
     List<Contacto> findAll();
 }

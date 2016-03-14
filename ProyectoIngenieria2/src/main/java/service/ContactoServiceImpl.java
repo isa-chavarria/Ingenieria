@@ -30,7 +30,7 @@ public class ContactoServiceImpl implements ContactoService{
     }
 
     @Override
-    public void DeletebyCodigo(String name) {
+    public void DeletebyCodigo(Long name) {
         this.contacto.DeletebyCodigo(name);
     }
 

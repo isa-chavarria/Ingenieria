@@ -89,7 +89,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="Encargado">Regresar al menú</a>
+                            <a href="contactoAdministrador">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -140,10 +140,12 @@
 
                 </div>
             </div>
-
-
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong> ${msg}
+            </div>
         </div>
-
+      
         <footer>
             <div class="container">
                 <div class="row">

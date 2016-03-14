@@ -42,7 +42,7 @@ public class Kinder implements Serializable{
     @Size(max = 5000)
     private String vision;
     
-     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="kinder")
     Collection<Contacto> contactos;
      
