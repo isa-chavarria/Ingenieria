@@ -120,14 +120,14 @@
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Titulo:</label>
                             <div class="col-lg-10">
                                 <form:input type="text" class="form-control" path="titulo" id="titulo"
-                                            placeholder="Facebook"/>
+                                            placeholder="Facebook" value="${contactoBase.titulo}"/>
                             </div>
                         </div>
                         <div  class="form-group">
                             <label for="ejemplo_password_3" class="col-lg-2 control-label">Descripción:</label>
                             <div class="col-lg-10">
                                 <form:input type="text" class="form-control" path="descripcion" id="descripcion" 
-                                            placeholder="kinder@facebook.com" />
+                                            placeholder="kinder@facebook.com" value="${contactoBase.descripcion}"/>
                             </div>
                         </div>
                         <div class="col-lg-offset-2 col-lg-10">

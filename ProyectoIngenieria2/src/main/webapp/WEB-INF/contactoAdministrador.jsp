@@ -5,7 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
-
     Usuario user = (Usuario) session.getAttribute("user");
 
     if (user != null && user.isAdministrador()) {
@@ -133,10 +132,16 @@
                         <table style="margin-left: 30%;">
                             <c:forEach items="${kinder.contactos}" var="contacto1">
                                 <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${contacto1.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${contacto1.descripcion}"></c:out></td>
-                                        <td> <button type="button" class="btn btn-default" aria-label="Left Align">
+                                        
+                                            <td><form:form method="POST"  modelAttribute="contacto" action="ModificarContacto">
+                                            <form:hidden path="codigo" value="${contacto1.codigo}"/>
+                                            <form:hidden path="titulo" value="${contacto1.titulo}"/>
+                                            <form:hidden path="descripcion" value="${contacto1.descripcion}"/>
+                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                            </button></td>
-                                                <td><form:form method="POST"  modelAttribute="contacto">
+                                            </button></form:form></td>
+                                            
+                                            <td><form:form method="POST"  modelAttribute="contacto">
                                             <form:hidden path="codigo" value="${contacto1.codigo}"/>
                                             <button type="submit" class="btn btn-default" aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

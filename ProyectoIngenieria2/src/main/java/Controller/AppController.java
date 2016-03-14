@@ -162,6 +162,17 @@ public class AppController extends HttpServlet {
         return "contactoAdministrador";
     }
 
+    @RequestMapping(value = {"/ModificarContacto"}, method = RequestMethod.POST)
+    public String updateContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
+        System.out.println(contacto.toString());
+        Contacto cont = new Contacto();
+        model.addAttribute("contacto", cont);
+
+        model.addAttribute("contactoBase", contacto);
+        
+        return "agregarContacto";
+    }
+    
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         return "galeria";
