@@ -351,8 +351,8 @@ public class AppController {
     }
         @RequestMapping(value = {"/quienesAdministrador"}, method = RequestMethod.GET)
     public String loadQuienesAdmin(ModelMap model) {
-        Contacto contacto = new Contacto();
-        model.addAttribute("quienes", contacto);
+        Kinder kin = new Kinder();
+        model.addAttribute("kinder", kin);
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
