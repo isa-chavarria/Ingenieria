@@ -6,8 +6,6 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,7 +15,6 @@ import modelo.Encargado;
 import modelo.Familiar;
 import modelo.Kinder;
 import modelo.Nino;
-import modelo.Profesor;
 import modelo.SuperMatricula;
 import modelo.Telefono;
 import modelo.Usuario;
@@ -29,7 +26,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.ContactoService;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import service.ClaseService;
 import service.EncargadoService;
 import service.FamiliarService;
@@ -74,6 +70,8 @@ public class AppController {
 
     @Autowired
     ProfesorService profesorService;
+ 
+    
 
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
@@ -351,7 +349,28 @@ public class AppController {
         }
         return "contactoAdministrador";
     }
+        @RequestMapping(value = {"/quienesAdministrador"}, method = RequestMethod.GET)
+    public String loadQuienesAdmin(ModelMap model) {
+        Contacto contacto = new Contacto();
+        model.addAttribute("quienes", contacto);
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
 
+        } else {
+            model.addAttribute("kinder", new Kinder());
+        }
+        return "quienesAdministrador";
+    }
+        @RequestMapping(value = {"/ModificaQuienes"}, method = RequestMethod.POST)
+    public String updateQuienes(@Valid Kinder kinder, BindingResult result, ModelMap model) {
+        System.out.println(kinder.toString());
+        Kinder kinder1 = new Kinder();
+        model.addAttribute("kinder", kinder1);
+         model.addAttribute("kinderBase", kinder);
+
+        return "ActualizarQuienes";
+    }
     @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.POST)
     public String removeContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
@@ -377,20 +396,25 @@ public class AppController {
         System.out.println(contacto.toString());
         Contacto cont = new Contacto();
         model.addAttribute("contacto", cont);
-
         model.addAttribute("contactoBase", contacto);
-
         return "ActualizarContacto";
+    }
+        @RequestMapping(value = {"/ModificarQuienesModicado"}, method = RequestMethod.POST)
+    public String updateQuienes2(@Valid Kinder kinder, BindingResult result, ModelMap model) {
+        System.out.println(kinder.toString());
+       Kinder kin = kinderService.findbyName("Kinder Lulu");
+       kin.setHistoria(kinder.getHistoria());
+       kin.setMision(kinder.getMision());
+       kin.setVision(kinder.getVision());
+       kinderService.UpdateKinder(kin);
+       
+        return "agregarContacto";
     }
 
     @RequestMapping(value = {"/ModificarContactoModicado"}, method = RequestMethod.POST)
     public String updateContacto2(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
-        /* if (result.hasErrors()) {
-         System.out.println("has errors");
-         model.addAttribute("msg", "No se agrego el contacto con exito");
-         return "agregarContacto";
-         }*/
+   
         Contacto con = contactoService.findbyCodigo(contacto.getCodigo());
         con.setTitulo(contacto.getTitulo());
         con.setDescripcion(contacto.getDescripcion());

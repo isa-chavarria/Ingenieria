@@ -119,7 +119,7 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="quienes"><i class="fa fa-fw fa-gear"></i> ¿Quiénes Somos?</a>
+                                    <a href="quienesAdministrador"><i class="fa fa-fw fa-gear"></i> ¿Quiénes Somos?</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
