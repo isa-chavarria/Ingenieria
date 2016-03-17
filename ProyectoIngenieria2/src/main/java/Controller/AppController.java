@@ -408,7 +408,7 @@ public class AppController {
        kin.setVision(kinder.getVision());
        kinderService.UpdateKinder(kin);
        
-        return "agregarContacto";
+        return "ActualizarQuienes";
     }
 
     @RequestMapping(value = {"/ModificarContactoModicado"}, method = RequestMethod.POST)
