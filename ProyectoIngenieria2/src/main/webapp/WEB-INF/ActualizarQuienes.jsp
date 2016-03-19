@@ -126,22 +126,20 @@
                             <label  class="col-lg-2 control-label">Nuestra Historia:</label>
                             <div class="col-lg-10">
                                 
-                                <form:textarea rows="4" type="text" class="form-control" path="historia" id="historia"
-                                            value="${kinderBase.historia}"/>
+                                <form:textarea rows="4" type="text" class="form-control" path="historia" id="historia"/>
                             </div>
                         </div>
                         <div  class="form-group">
                             <label  class="col-lg-2 control-label">Mision:</label>
                             <div class="col-lg-10">
                                 <form:textarea rows="4" type="text" class="form-control" path="mision" id="mision" 
-                                             value="${kinderBase.mision}" />
+                                          />
                             </div>
                         </div>
                             <div  class="form-group">
                             <label  class="col-lg-2 control-label">Vision:</label>
                             <div class="col-lg-10">
-                                <form:textarea rows="4" type="text" class="form-control" path="vision" id="vision" 
-                                            value="${kinder.vision}" />
+                                <form:textarea rows="4" type="text" class="form-control" path="vision" id="vision"/>
                             </div>
                         </div>
                         <div class="col-lg-offset-2 col-lg-10">

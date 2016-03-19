@@ -6,7 +6,7 @@
 package Controller;
 
 import javax.validation.Valid;
-import modelo.Contacto;
+
 import modelo.Kinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,18 +19,43 @@ import service.kinderService;
 
 @Controller
 //Esto puede ser cualquier nombre
-@RequestMapping("ModificaQuienes.html")
+//@RequestMapping("ModificaQuienes.html")
 public class ModificarQuienesController {
 
     @Autowired
     kinderService kinderService;
-
-    //Usar siempre get aca
-    @RequestMapping(method = RequestMethod.GET)
-    public String newQuienes(ModelMap model) {
-        Kinder kinder = new Kinder();
+    @RequestMapping(value = {"/ModificaQuienes"}, method = RequestMethod.POST)
+    public String updateQuienes(@Valid Kinder kinder, BindingResult result, ModelMap model) {
+        System.out.println(kinder.getVision());
+        
         model.addAttribute("kinder", kinder);
+     
+
         return "ActualizarQuienes";
+    }
+        @RequestMapping(value = {"/ModificarQuienesModicado"}, method = RequestMethod.POST)
+    public String updateQuienes2(@Valid Kinder kinder, BindingResult result, ModelMap model) {
+        System.out.println(kinder.toString());
+        Kinder kin = kinderService.findbyName("Kinder Lulu");
+        kin.setHistoria(kinder.getHistoria());
+        kin.setMision(kinder.getMision());
+        kin.setVision(kinder.getVision());
+        kinderService.UpdateKinder(kin);
+        model.addAttribute("kinder", kin);
+        return "quienesAdministrador";
+    }
+      @RequestMapping(value = {"/quienesAdministrador"}, method = RequestMethod.GET)
+    public String loadQuienesAdmin(ModelMap model) {
+        Kinder kin = new Kinder();
+        model.addAttribute("kinder", kin);
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+
+        } else {
+            model.addAttribute("kinder", new Kinder());
+        }
+        return "quienesAdministrador";
     }
 
 }

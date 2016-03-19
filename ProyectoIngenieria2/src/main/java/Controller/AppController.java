@@ -70,8 +70,6 @@ public class AppController {
 
     @Autowired
     ProfesorService profesorService;
- 
-    
 
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
@@ -349,28 +347,31 @@ public class AppController {
         }
         return "contactoAdministrador";
     }
-        @RequestMapping(value = {"/quienesAdministrador"}, method = RequestMethod.GET)
-    public String loadQuienesAdmin(ModelMap model) {
-        Kinder kin = new Kinder();
-        model.addAttribute("kinder", kin);
-        Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        if (kinder != null) {
-            model.addAttribute("kinder", kinder);
 
-        } else {
-            model.addAttribute("kinder", new Kinder());
-        }
-        return "quienesAdministrador";
-    }
-        @RequestMapping(value = {"/ModificaQuienes"}, method = RequestMethod.POST)
-    public String updateQuienes(@Valid Kinder kinder, BindingResult result, ModelMap model) {
-        System.out.println(kinder.toString());
-        Kinder kinder1 = new Kinder();
-        model.addAttribute("kinder", kinder1);
-         model.addAttribute("kinderBase", kinder);
+//    @RequestMapping(value = {"/quienesAdministrador"}, method = RequestMethod.GET)
+//    public String loadQuienesAdmin(ModelMap model) {
+//        Kinder kin = new Kinder();
+//        model.addAttribute("kinder", kin);
+//        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+//        if (kinder != null) {
+//            model.addAttribute("kinder", kinder);
+//
+//        } else {
+//            model.addAttribute("kinder", new Kinder());
+//        }
+//        return "quienesAdministrador";
+//    }
 
-        return "ActualizarQuienes";
-    }
+//    @RequestMapping(value = {"/ModificaQuienes"}, method = RequestMethod.POST)
+//    public String updateQuienes(@Valid Kinder kinder, BindingResult result, ModelMap model) {
+//        System.out.println(kinder.getVision());
+//        
+//        model.addAttribute("kinder", kinder);
+//     
+//
+//        return "ActualizarQuienes";
+//    }
+
     @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.POST)
     public String removeContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
@@ -399,22 +400,23 @@ public class AppController {
         model.addAttribute("contactoBase", contacto);
         return "ActualizarContacto";
     }
-        @RequestMapping(value = {"/ModificarQuienesModicado"}, method = RequestMethod.POST)
-    public String updateQuienes2(@Valid Kinder kinder, BindingResult result, ModelMap model) {
-        System.out.println(kinder.toString());
-       Kinder kin = kinderService.findbyName("Kinder Lulu");
-       kin.setHistoria(kinder.getHistoria());
-       kin.setMision(kinder.getMision());
-       kin.setVision(kinder.getVision());
-       kinderService.UpdateKinder(kin);
-       
-        return "ActualizarQuienes";
-    }
+
+//    @RequestMapping(value = {"/ModificarQuienesModicado"}, method = RequestMethod.POST)
+//    public String updateQuienes2(@Valid Kinder kinder, BindingResult result, ModelMap model) {
+//        System.out.println(kinder.toString());
+//        Kinder kin = kinderService.findbyName("Kinder Lulu");
+//        kin.setHistoria(kinder.getHistoria());
+//        kin.setMision(kinder.getMision());
+//        kin.setVision(kinder.getVision());
+//        kinderService.UpdateKinder(kin);
+//
+//        return "ActualizarQuienes";
+//    }
 
     @RequestMapping(value = {"/ModificarContactoModicado"}, method = RequestMethod.POST)
     public String updateContacto2(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
-   
+
         Contacto con = contactoService.findbyCodigo(contacto.getCodigo());
         con.setTitulo(contacto.getTitulo());
         con.setDescripcion(contacto.getDescripcion());

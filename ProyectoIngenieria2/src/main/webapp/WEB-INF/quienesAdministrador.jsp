@@ -6,6 +6,7 @@
 
 <%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
@@ -112,60 +113,65 @@
 
         <div class="container">
 
+            <form:form method="POST"  modelAttribute="kinder" action="ModificaQuienes">
+                <form:hidden path="nombre" value="${kinder.nombre}"/>
+                <div class="row">
+                    <div class="box">
 
-            <div class="row">
-                <div class="box">
+                        <div class="col-lg-12">
+
+                            <hr>
+                            <h2 class="intro-text text-center">Nuestra Historia
+                                <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </button>
+                            </h2>
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <strong>
+                                ${kinder.historia}
+                                <form:hidden path="historia" value="${kinder.historia}"/>
+
+
+                            </strong>
+                        </div>
+                        <div class="col-lg-12">
+                            <hr>
+                            <h2 class="intro-text text-center">Mision
+                                <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </button>
+                            </h2>
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <strong>
+                                ${kinder.mision}
+                                <form:hidden path="mision" value="${kinder.mision}"/>
+                            </strong>
+                        </div>
+                        <div class="col-lg-12">
+                            <hr>
+                            <h2 class="intro-text text-center">Vision
+                                <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span>
+                                </button>
+                            </h2>
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <strong>
+                                ${kinder.vision}
+                                <form:hidden path="vision" value="${kinder.vision}"/>
+                            </strong>
+                        </div>
                   
-                    <div class="col-lg-12">
-                      
-                        <hr>
-                        <h2 class="intro-text text-center">Nuestra Historia
-                              <button type="submit" class="btn btn-default" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="location.href = 'ModificaQuienes.html';"></span>
-                        </button>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>
-                            ${kinder.historia}
+                        <div class="clearfix"></div>
 
-
-                        </strong>
                     </div>
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Mision
-                              <button type="submit" class="btn btn-default" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="location.href = 'ModificaQuienes.html';"></span>
-                        </button>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>
-                            ${kinder.mision}
-                        </strong>
-                    </div>
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Vision
-                              <button type="submit" class="btn btn-default" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="location.href = 'ModificaQuienes.html';"></span>
-                        </button>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>
-                            ${kinder.vision}
-                            <a href="ActualizarQuienes">Editar</a>
-                        </strong>
-                    </div>
-                    <div class="clearfix"></div>
-
                 </div>
-            </div>
+            </form:form>
 
             <div class="row">
                 <div class="box">
@@ -219,9 +225,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-                            $('.carousel').carousel({
-                                interval: 5000 //changes the speed
-                            })
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
         </script>
 
     </body>
