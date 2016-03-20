@@ -114,7 +114,7 @@
 
             <div class="row">
                 <div style=" overflow: scroll ; height: 600px " class="box">
-                    <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" role="form">
+                    <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
 
                         <div   class="form-inline">
                             <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
