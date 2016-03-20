@@ -334,7 +334,7 @@ public class AppController {
         }
         return "contactoAdministrador";
     }
-
+    
     @RequestMapping(value = {"/contactoAdministrador"}, method = RequestMethod.POST)
     public String removeContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
         System.out.println(contacto.toString());
@@ -361,7 +361,6 @@ public class AppController {
         Contacto cont = new Contacto();
         model.addAttribute("contacto", cont);
 
-        
         model.addAttribute("contactoBase", contacto);
         
         return "ActualizarContacto";
