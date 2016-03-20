@@ -80,7 +80,14 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="Encargado">Regresar al menú</a>
+                            <a href="<%
+                                if(user.isAdministrador()){
+                                out.print("administracion");
+                                }else{
+                                out.print("encargado");
+                                }        %>
+                                
+                                ">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -150,7 +157,7 @@
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
 
-                            <p class="col-lg-5">  <% out.print("Esta no se"); %> </p>
+                            <p class="col-lg-5">  <% out.print("Asma, "); %> </p>
                         </div> 
 
                         </br>
@@ -159,14 +166,14 @@
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">Encargados:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">  <% out.print("tampoco se"); %> </p>
+                            <p class="col-lg-5">  <% out.print("Fernando Chinchilla delgado"); %> </p>
 
                         </div> 
 
                         <label for="ejemplo_email_3" class="col-lg-2 control-label"> </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
-                            <p class="col-lg-5">  <% out.print("tampoco se");%> </p>
+                            <p class="col-lg-5">  <% out.print("Yalile Navarro Oviedo");%> </p>
 
                         </div> 
 

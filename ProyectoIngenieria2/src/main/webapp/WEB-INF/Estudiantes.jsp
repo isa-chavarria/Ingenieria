@@ -97,7 +97,7 @@
                     <ul class="nav navbar-nav">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="encargado">Regresar al menú</a>
+                                <a href="administracion">Regresar al menú</a>
                             </li>
                         </ul>
 

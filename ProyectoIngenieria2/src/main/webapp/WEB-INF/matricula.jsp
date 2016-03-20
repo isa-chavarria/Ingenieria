@@ -93,7 +93,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="encargado">Regresar al menú</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

@@ -55,16 +55,36 @@ public class Familiar {
     @Size(max = 50)
     @Column(name = "parentesco")
     private String parentesco;
+     @Size(max = 50)
+    @Column(name = "numeroTrabajo")
+    private String numeroTrabajo;
+      @Size(max = 50)
+    @Column(name = "numeroPersonal")
+    private String numeroPersonal;
 
     @JoinColumn(name = "idnino", referencedColumnName = "id")
     @ManyToOne
     private Nino nino;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idFamiliar")
-    private Collection<Telefono> telefonos = new ArrayList<Telefono>();
+    public String getNumeroTrabajo() {
+        return numeroTrabajo;
+    }
 
-    ;
+    public void setNumeroTrabajo(String numeroTrabajo) {
+        this.numeroTrabajo = numeroTrabajo;
+    }
+
+    public String getNumeroPersonal() {
+        return numeroPersonal;
+    }
+
+    public void setNumeroPersonal(String numeroPersonal) {
+        this.numeroPersonal = numeroPersonal;
+    }
+
+    
+
+    
 
     public String getParentesco() {
         return parentesco;
@@ -74,13 +94,7 @@ public class Familiar {
         this.parentesco = parentesco;
     }
 
-    public Collection<Telefono> getTelefonos() {
-        return telefonos;
-    }
-
-    public void setTelefonos(Collection<Telefono> telefonos) {
-        this.telefonos = telefonos;
-    }
+    
 
     public String getNombre() {
         return nombre;

@@ -7,7 +7,7 @@
 <%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
+<!--%
 
     Usuario user = (Usuario) session.getAttribute("user");
 
@@ -16,7 +16,7 @@
     } else {
         response.sendRedirect("index");
     }
-%>
+%-->
 <html lang="en">
     <head>
 
@@ -95,12 +95,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Pagos <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="pagos"><i class="fa fa-fw fa-user"></i> Realizar Pago</a>
+                                    <a href="pagosSeleccionar"><i class="fa fa-fw fa-user"></i> Realizar Pago</a>
                                 </li>
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="visualizarPagos"><i class="fa fa-fw fa-gear"></i> Verificar Pagos</a>
+                                    <a href="Visualizar-Pagos"><i class="fa fa-fw fa-gear"></i> Verificar Pagos</a>
                                 </li>   
                             </ul>
                         </li>

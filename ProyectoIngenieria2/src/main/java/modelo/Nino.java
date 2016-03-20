@@ -70,6 +70,10 @@ public class Nino implements Serializable {
     @JoinColumn(name = "grupo", referencedColumnName = "id")
     @ManyToOne
     private Clase clase;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_nino")
+    private Collection<Factura> facturas = new ArrayList<Factura>();
 
 //    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_nino")
@@ -83,6 +87,17 @@ public class Nino implements Serializable {
 //        this.matricula = matricula;
 //    }
 
+    public Collection<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(Collection<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
+   
+
+    
     public Clase getClase() {
         return clase;
     }

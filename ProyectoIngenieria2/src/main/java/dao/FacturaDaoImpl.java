@@ -6,40 +6,39 @@
 package dao;
 
 import java.util.List;
-import modelo.Telefono;
+import modelo.Factura;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-@Repository("TelefonoDao")
-public class TelefonoDaoImpl extends AbstractDao<String, Telefono> implements TelefonoDao {
+@Repository("FacturaDao")
+public class FacturaDaoImpl extends AbstractDao<Long, Factura> implements FacturaDao {
 
     @Override
-    public Telefono findbyId(String id) {
-        Telefono planilla = getByKey(id);
-        return planilla;
+    public Factura findbyCodigo(Long codigo) {
+        Factura factura = getByKey(codigo);
+        return factura;
     }
 
     @Override
-    public void save(Telefono planilla) {
-        persist(planilla);
+    public void save(Factura factura) {
+        persist(factura);
     }
 
     @Override
-    public void DeletebyId(String id) {
+    public void DeletebyCodigo(Long codigo) {
         Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("id", id));
-        Telefono planilla = (Telefono) crit.uniqueResult();
-        delete(planilla);
+        crit.add(Restrictions.eq("codigo", codigo));
+        Factura factura = (Factura) crit.uniqueResult();
+        delete(factura);
     }
 
     @Override
-    public List<Telefono> findAll() {
+    public List<Factura> findAll() {
         Criteria criteria = createEntityCriteria();
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-        List<Telefono> planilla = (List<Telefono>) criteria.list();
+        List<Factura> factura = (List<Factura>) criteria.list();
 
-        return planilla;
+        return factura;
     }
-
 }

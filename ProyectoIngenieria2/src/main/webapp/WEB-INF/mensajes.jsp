@@ -1,4 +1,12 @@
+<%@page import="modelo.Encargado"%>
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    Encargado enc = (Encargado) session.getAttribute("enc");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -74,7 +82,14 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="Encargado">Regresar al menú</a>
+                            <a href="<%
+                                if(user.isAdministrador()){
+                                out.print("administracion");
+                                }else{
+                                out.print("encargado");
+                                }
+                                %>
+                                ">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

@@ -6,16 +6,21 @@
 package service;
 
 import java.util.List;
-import modelo.Telefono;
+import modelo.Factura;
 
 /**
  *
  * @author david
  */
-public interface TelefonoService {
-    Telefono findbyId(String id);
-    void save(Telefono planilla);
-    void DeletebyId(String id);
-    List<Telefono> findAll();
-    void UpdateTelefono(Telefono planilla);
+public interface FacturaService {
+
+    Factura findbyCodigo(Long codigo);
+
+    void save(Factura encargado);
+
+    void DeletebyCodigo(Long codigo);
+
+    List<Factura> findAll();
+
+    void UpdateFactura(Factura Factura);
 }

@@ -20,30 +20,30 @@ import org.springframework.stereotype.Service;
 @Service("FamiliarService")
 @Transactional
 public class FamiliarServiceImpl implements FamiliarService {
-
+    
     @Autowired
     private FamiliarDao Album;
-
+    
     @Override
     public Familiar findbyId(String id) {
         return Album.findbyId(id);
     }
-
+    
     @Override
     public void save(Familiar album) {
         this.Album.save(album);
     }
-
+    
     @Override
     public void DeletebyId(String id) {
         this.Album.DeletebyId(id);
     }
-
+    
     @Override
     public List<Familiar> findAll() {
         return Album.findAll();
     }
-
+    
     @Override
     public void UpdateFamiliar(Familiar familiar) {
         Familiar al = this.Album.findbyId(familiar.getId());
@@ -57,8 +57,10 @@ public class FamiliarServiceImpl implements FamiliarService {
             al.setOcupacion(familiar.getOcupacion());
             al.setNino(familiar.getNino());
             al.setParentesco(familiar.getParentesco());
+            al.setNumeroTrabajo(familiar.getNumeroTrabajo());
+            al.setNumeroPersonal(familiar.getNumeroPersonal());
             //al.setTelefonos(familiar.getTelefonos());
         }
     }
-
+    
 }

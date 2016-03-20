@@ -1,10 +1,15 @@
+<%-- 
+    Document   : PagosSeleccionar
+    Created on : 14/03/2016, 12:30:15 PM
+    Author     : josvr_000
+--%>
+
 <%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
-<%
+<!--%
 
     Usuario user = (Usuario) session.getAttribute("user");
 
@@ -13,7 +18,7 @@
     } else {
         response.sendRedirect("index");
     }
-%>
+%-->
 <html lang="en">
     <head>
 
@@ -24,6 +29,9 @@
         <meta name="author" content="">
 
         <title>Kinder Lulú</title>
+
+        <!--link href="resources/css/app.css" rel="stylesheet"-->
+        <link href="resources/css/bootstrap.css" rel="stylesheet">
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +73,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">PAGOS</h3>
+            <h3 id="Titulo">Estudiantes </h3>
 
 
         </div>
@@ -87,9 +95,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="administracion">Regresar al menú</a>
-                        </li>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="administracion">Regresar al menú</a>
+                            </li>
+                        </ul>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -102,73 +113,56 @@
 
 
             <div class="row">
-                <div class="box">
+                <div style=" overflow: scroll ; height: 600px " class="box">
+                    <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" role="form">
 
-
-                    <form:form method="POST" action="RealizarPago"  modelAttribute="factura" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validarContrasena()" role="form">
-
-                        <div class="form-group">
-
-                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre Completo:</label>
-
-                            <div class="col-lg-10">
-                                <form:input type="text" path="nombre" id="nombre" class="form-control input-sm" disabled="true"/>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Cédula:  </label>
-
-                            <div class="col-lg-10">
-                                <form:input type="text" path="id" id="id" itemValue="id" class="form-control input-sm" disabled="true"/>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="monto" class="col-lg-2 control-label">Monto a pagar:</label>
-                            <div class="col-lg-10">
-                                <form:input path="monto" type="text" class="form-control" id="nombre"
-                                            placeholder="monto" />
-                            </div>
-                        </div>
-
-                        <div  class="form-group">
-                            <label for="nivel" class="col-lg-2 control-label">Seleccione el mes:</label>
+                        <div   class="form-inline">
+                            <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
                             <div class="col-lg-4">
-                                <form:select path="mes" items="${Meses}" itemValue="codigo" itemLabel="mes" class="form-control input-sm" id="nivel" required="true" />
+                                <form:select path="nivel" items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
 
                             </div>
-                        </div>
-
-
-
-                        <div class="form-group">
-
-                            <table style="margin-left: 20%;"> 
-                                <tr> 
-                                    <td colspan="2"></td>
-                                    <td style="left:inherit;" > 
-                                        <div class="form-group">
-
-                                            <div class="form-group">
-                                                <div class="col-lg-offset-2 col-lg-8">
-                                                    <button type="submit" class="btn btn-info">Realizar pago</button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </td> 
-
-                                </tr> 
-                            </table>
-
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <button type="submit" class="btn btn-info">Buscar</button>
+                                </div>
+                            </div>
                         </div>
                     </form:form>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="lead">Estudiantes ${grupito.nivel}</span></div>
+                        <table class="table table-hover" style="boder: solid 2px gray;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOMBRE</th>
+                                    <th>APELLIDOS</th>
+                                    <th>FECHA NACIMIENTO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach items="${grupito.purga()}" var="stu">
+                                    <tr>
+                                        <td style="boder: solid 2px gray;">${stu.id}</td>
+                                        <td style="boder: solid 2px gray;">${stu.nombre}</td>
+                                        <td style="boder: solid 2px gray;">${stu.apellido1} ${stu.apellido2}</td>
+                                        <td style="boder: solid 2px gray;">${stu.fechaNacimiento}</td>
+                                        <td><a href="<c:url value='/pagos-user-${stu.id}' />" class="btn btn-success custom-width">Realizar pago</a></td>
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
 
                 </div>
             </div>

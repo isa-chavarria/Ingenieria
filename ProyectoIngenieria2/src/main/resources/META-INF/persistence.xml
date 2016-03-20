@@ -12,7 +12,6 @@
     <class>modelo.Usuario</class>
     <class>modelo.Nino</class>
     <class>modelo.Informacion</class>
-    <class>modelo.Telefono</class>
     <class>modelo.Profesor</class>
     <class>modelo.Matricula</class>
     <class>modelo.Familiar</class>

@@ -6,15 +6,15 @@
 package dao;
 
 import java.util.List;
-import modelo.Telefono;
+import modelo.Factura;
 
-public interface TelefonoDao {
+public interface FacturaDao {
 
-    Telefono findbyId(String id);
+    Factura findbyCodigo(Long codigo);
 
-    void save(Telefono planilla);
+    void save(Factura codigo);
 
-    void DeletebyId(String id);
+    void DeletebyCodigo(Long codigo);
 
-    List<Telefono> findAll();
+    List<Factura> findAll();
 }

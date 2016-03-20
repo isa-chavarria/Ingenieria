@@ -19,30 +19,30 @@ import org.springframework.stereotype.Service;
 @Service("NinoService")
 @Transactional
 public class NinoServiceImpl implements NinoService {
-
+    
     @Autowired
     private NinoDao Nino;
-
+    
     @Override
     public Nino findbyId(String id) {
         return Nino.findbyId(id);
     }
-
+    
     @Override
     public void save(Nino nino) {
         this.Nino.save(nino);
     }
-
+    
     @Override
     public void DeletebyId(String id) {
         this.Nino.DeletebyId(id);
     }
-
+    
     @Override
     public List<Nino> findAll() {
         return Nino.findAll();
     }
-
+    
     @Override
     public void UpdateNino(Nino nino) {
         Nino ni = this.Nino.findbyId(nino.getId());
@@ -53,7 +53,8 @@ public class NinoServiceImpl implements NinoService {
             // ni.setFamiliares(nino.getFamiliares());
             ni.setEncargado(nino.getEncargado());
            // ni.setInformacion(nino.getInformacion());
-           //  ni.setMatricula(nino.getMatricula());
+            //  ni.setMatricula(nino.getMatricula());
+            ni.setFacturas(nino.getFacturas());
         }
     }
 }
