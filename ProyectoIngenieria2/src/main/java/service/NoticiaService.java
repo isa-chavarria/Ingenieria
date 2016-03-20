@@ -6,16 +6,16 @@
 package service;
 
 import java.util.List;
-import modelo.Contacto;
+import modelo.Noticia;
 
 /**
  *
- * @author david
+ * @author Isa
  */
-public interface ContactoService {
-    Contacto findbyCodigo(Long codigo);
-    void save(Contacto contacto);
+public interface NoticiaService {
+    Noticia findbyCodigo(Long codigo);
+    void save(Noticia noticia);
     void DeletebyCodigo(Long codigo);
-    List<Contacto> findAll();
-    void UpdateContacto(Contacto contacto);
+    List<Noticia> findAll();
+    void UpdateNoticia(Noticia noticia);
 }

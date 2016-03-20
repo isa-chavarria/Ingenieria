@@ -17,10 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author david
- */
+
 @Entity
 @Table(name = "contacto")
 public class Contacto implements Serializable {

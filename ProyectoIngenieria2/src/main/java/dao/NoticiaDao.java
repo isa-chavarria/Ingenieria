@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package dao;
 
 import java.util.List;
-import modelo.Contacto;
+import modelo.Noticia;
+
 
 /**
  *
- * @author david
+ * @author Isa
  */
-public interface ContactoService {
-    Contacto findbyCodigo(Long codigo);
-    void save(Contacto contacto);
+public interface NoticiaDao {
+    Noticia findbyCodigo(Long codigo);
+    void save(Noticia codigo);
     void DeletebyCodigo(Long codigo);
-    List<Contacto> findAll();
-    void UpdateContacto(Contacto contacto);
+    List<Noticia> findAll();
 }

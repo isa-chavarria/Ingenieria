@@ -41,7 +41,7 @@ public class Kinder implements Serializable {
     @JoinColumn(name="kinder")
     Collection<Contacto> contactos;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
     Collection<Noticia> noticias;
 

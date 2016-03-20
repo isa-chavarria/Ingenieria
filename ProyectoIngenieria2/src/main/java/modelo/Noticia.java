@@ -6,37 +6,57 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author josvr_000
- */
+
 @Entity
 @Table(name = "noticia")
 public class Noticia implements Serializable {
 
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "codigo")
-    private String codigo;
     @Size(max = 1000)
+    @Column(name = "titulo")
+    private String titulo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name="codigo")
+    private Long codigo;
+    
+    @Size(max = 5000)
     @Column(name = "descripcion")
     private String descripcion;
+    
+    @ManyToOne
+    @JoinColumn(name="kinder")
+    private Kinder kinder;
 
-    public String getCodigo() {
+    public Noticia() {
+    }
+    
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
@@ -46,6 +66,14 @@ public class Noticia implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Kinder getKinder() {
+        return kinder;
+    }
+
+    public void setKinder(Kinder kinder) {
+        this.kinder = kinder;
     }
 
     @Override
@@ -58,7 +86,7 @@ public class Noticia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Noticia)) {
+        if (!(object instanceof Contacto)) {
             return false;
         }
         Noticia other = (Noticia) object;
@@ -70,6 +98,7 @@ public class Noticia implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.noticia[ codigo=" + codigo + " ]";
+        return "modelo.Contacto[ codigo=" + codigo + " ]";
     }
+
 }

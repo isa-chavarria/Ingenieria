@@ -328,12 +328,12 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- NOTICIA
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `kinderBD`.`noticia` ;
 
-CREATE TABLE IF NOT EXISTS `kinderBD`.`noticia` (
-  `codigo` VARCHAR(50) NOT NULL,
-  `descripcion` VARCHAR(1000) NULL DEFAULT NULL,
-   `kinder` VARCHAR(50) NULL DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `kinderbd`.`noticia` (
+  `titulo` VARCHAR(1000) NULL DEFAULT NULL,
+  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(5000) NULL DEFAULT NULL,
+  `kinder` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `idx_noticia` (`kinder` ASC),
   CONSTRAINT `fk_noticia`
