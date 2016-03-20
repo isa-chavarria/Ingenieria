@@ -127,7 +127,7 @@
 
 
 
-                    <form:form method="POST" action="Matricular"  modelAttribute="persona" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                    <form:form method="POST" action="Matricular"  modelAttribute="persona" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
                         <div id='wrapper' style=' border: solid 1px #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
                             <div  class="form-group">
                                 <label for="nombre" class="col-lg-2 control-label">Nombre del alumno:</label>
@@ -371,7 +371,7 @@
                             <div  class="form-group">
                                 <label for="completa" class="col-lg-2 control-label">Documentación completa:</label>
                                 <div class="col-lg-4">
-                                    <form:select path="infoCompleta" items="${opciones}" class="form-control input-sm" id="completa"required="true" />
+                                    <form:select path="infoCompleta" items="${opciones}" class="form-control input-sm" id="completa" required="true" />
 
                                 </div>
                             </div>
