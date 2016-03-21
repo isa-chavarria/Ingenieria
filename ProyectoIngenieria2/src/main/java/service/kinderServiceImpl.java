@@ -53,7 +53,7 @@ public class kinderServiceImpl implements kinderService {
             ki.setHistoria(kinder.getHistoria());
             ki.setTelefono(kinder.getTelefono());
             ki.setContactos(kinder.getContactos());
-            // ki.setNoticias(kinder.getNoticias());
+            ki.setNoticias(kinder.getNoticias());
 
         }
     }

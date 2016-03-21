@@ -116,7 +116,9 @@
                         <li>
                             <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>
                         </li>
-                       
+                          <li>
+                            <a href="noticias"><i class="fa fa-phone"></i> Noticias</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

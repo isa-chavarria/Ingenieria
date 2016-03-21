@@ -18,6 +18,7 @@ import modelo.Familiar;
 import modelo.Kinder;
 import modelo.Mes;
 import modelo.Nino;
+import modelo.Noticia;
 import modelo.Pago;
 import modelo.SuperMatricula;
 import modelo.Usuario;
@@ -36,6 +37,7 @@ import service.FacturaService;
 import service.FamiliarService;
 import service.MesService;
 import service.NinoService;
+import service.NoticiaService;
 import service.ProfesorService;
 import service.UsuarioService;
 import service.kinderService;
@@ -78,6 +80,8 @@ public class AppController {
     
     @Autowired
     FacturaService facturaService;
+      @Autowired
+    NoticiaService NoticiaService;
     
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
@@ -294,10 +298,6 @@ public class AppController {
         return "index";
     }
     
-    @RequestMapping(value = {"/LI"}, method = RequestMethod.GET)
-    public String loadQuienes(ModelMap model) {
-        return "quienes";
-    }
     
     @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
     public String loadEncargado(ModelMap model) {
@@ -378,7 +378,77 @@ public class AppController {
         model.addAttribute("msg", "Se agrego el contacto con exito");
         return "agregarContacto";
     }
+    @RequestMapping(value = {"/noticia"}, method = RequestMethod.GET)
+    public String loadNoticia(ModelMap model) {
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        System.out.println(kinder.getNoticias()+"caca seca");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+            
+        } else {
+            model.addAttribute("kinder", new Kinder());
+        }
+        return "noticias";
+    }
     
+    @RequestMapping(value = {"/noticiasAdministrador"}, method = RequestMethod.GET)
+    public String loadNoticiasAdmin(ModelMap model) {
+        Noticia noticia = new Noticia();
+        model.addAttribute("noticia", noticia);
+             Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        System.out.println(kinder.getNoticias());
+             if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+            
+        } else {
+            model.addAttribute("kinder", new Kinder());
+        }
+        return "noticiasAdministrador";
+    }
+    
+    @RequestMapping(value = {"/noticiasAdministrador"}, method = RequestMethod.POST)
+    public String removeNoticias(@Valid  Noticia noticia, BindingResult result, ModelMap model) {
+        System.out.println(noticia.toString());
+        
+        Noticia noticia1 = NoticiaService.findbyCodigo(noticia.getCodigo());
+        if (noticia1 != null) {
+            NoticiaService.DeletebyCodigo(noticia1.getCodigo());
+            model.addAttribute("msg", "Se elimino la noticia con exito");
+        }
+        model.addAttribute("msg", "No se elimino la noticia con exito");
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (kinder != null) {
+            model.addAttribute("kinder", kinder);
+            
+        } else {
+            model.addAttribute("kinder", new Kinder());
+        }
+        return "noticiasAdministrador";
+    }
+    
+    @RequestMapping(value = {"/ModificarNoticias"}, method = RequestMethod.POST)
+    public String updateNoticias(@Valid Noticia noticia, BindingResult result, ModelMap model) {
+        System.out.println(noticia.toString());
+        Noticia noti = new Noticia();
+        model.addAttribute("noticia", noti);
+
+        model.addAttribute("noticiaBase",noticia);
+        
+        return "ActualizarNoticia";
+    }
+    
+    @RequestMapping(value = {"/ModificarNoticiaModicado"}, method = RequestMethod.POST)
+    public String updateContacto2(@Valid Noticia noticia, BindingResult result, ModelMap model) {
+        System.out.println(noticia.toString());
+
+        Noticia noti = NoticiaService.findbyCodigo(noticia.getCodigo());
+        noti.setTitulo(noticia.getTitulo());
+        noti.setDescripcion(noticia.getDescripcion());
+        NoticiaService.UpdateNoticia(noti);
+        
+        model.addAttribute("msg", "Se agrego el noticia con exito");
+        return "ActualizarNoticias";
+    }
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         return "galeria";

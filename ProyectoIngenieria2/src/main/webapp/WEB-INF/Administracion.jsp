@@ -125,7 +125,10 @@
                                 <li>
                                     <a href="contactoAdministrador"><i class="fa fa-fw fa-power-off"></i> Contacto</a>
                                 </li>
-
+                                 <li class="divider"></li>
+                                   <li>
+                                    <a href="noticiasAdministrador"><i class="fa fa-fw fa-power-off"></i> Noticias</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="dropdown">
