@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<!--%
+<%
 
     Usuario user = (Usuario) session.getAttribute("user");
     
@@ -13,7 +13,7 @@
     } else {
         response.sendRedirect("index");
     }
-%-->
+%>
 <html lang="en">
     <head>
 

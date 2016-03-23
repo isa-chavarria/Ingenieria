@@ -6,6 +6,12 @@
 
     Usuario user = (Usuario) session.getAttribute("user");
     Encargado enc = (Encargado) session.getAttribute("enc");
+    
+    if (user != null) {
+        
+    } else {
+        response.sendRedirect("index");
+    }
 %>
 <html lang="en">
     <head>

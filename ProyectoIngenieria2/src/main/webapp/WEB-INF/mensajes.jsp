@@ -6,6 +6,13 @@
     Usuario user = (Usuario) session.getAttribute("user");
 
     Encargado enc = (Encargado) session.getAttribute("enc");
+
+    if (user != null) {
+
+    } else {
+        response.sendRedirect("index");
+    }
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,14 +89,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<%
-                                if(user.isAdministrador()){
-                                out.print("administracion");
-                                }else{
-                                out.print("encargado");
+                            <a href="<%                                if (user.isAdministrador()) {
+                                    out.print("administracion");
+                                } else {
+                                    out.print("encargado");
                                 }
-                                %>
-                                ">Regresar al menú</a>
+                               %>
+                               ">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

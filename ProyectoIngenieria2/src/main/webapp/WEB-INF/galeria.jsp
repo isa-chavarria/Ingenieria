@@ -4,8 +4,20 @@
     Author     : josvr_000
 --%>
 
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    if (user != null) {
+        
+    } else {
+        response.sendRedirect("index");
+    }
+%>
 <html lang="en">
     <head>
 
@@ -79,17 +91,15 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="index">Inicio</a>
-                        </li>
-                        <li>
-                            <a href="quienes">¿Quiénes Somos?</a>
-                        </li>
-                        <li>
-                            <a href="requerimientos">Requerimientos de matricula</a>
-                        </li>
-                        <li>
-                            <a href="contacto">Contactenos</a>
+                         <li>
+                            <a href="<%
+                                if(user.isAdministrador()){
+                                out.print("administracion");
+                                }else{
+                                out.print("encargado");
+                                }        %>
+                                
+                                ">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

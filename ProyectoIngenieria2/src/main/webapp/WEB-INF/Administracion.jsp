@@ -4,10 +4,11 @@
     Author     : josvr_000
 --%>
 
+<%@page import="modelo.Encargado"%>
 <%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--%
+<%
 
     Usuario user = (Usuario) session.getAttribute("user");
 
@@ -16,7 +17,7 @@
     } else {
         response.sendRedirect("index");
     }
-%-->
+%>
 <html lang="en">
     <head>
 
@@ -37,7 +38,7 @@
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -92,58 +93,59 @@
                     <ul class="nav navbar-nav">
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Pagos <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i> Pagos <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="pagosSeleccionar"><i class="fa fa-fw fa-user"></i> Realizar Pago</a>
+                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Realizar Pago</a>
                                 </li>
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="Visualizar-Pagos"><i class="fa fa-fw fa-gear"></i> Verificar Pagos</a>
+                                    <a href="Visualizar-Pagos"><i class="fa fa-search"></i> Verificar Pagos</a>
                                 </li>   
                             </ul>
                         </li>
                         <li>
-                            <a href="matricula">Matricula</a>
+                            <a href="matricula"><i class="fa fa-archive"></i> Matricula</a>
                         </li>
                         <li>
-                            <a href="Estudiantes">Estudiantes</a>
+                            <a href="Estudiantes"><i class="fa fa-users"></i> Estudiantes</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Modificar <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Modificar <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="galeria"><i class="fa fa-fw fa-user"></i> Galeria</a>
+                                    <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
                                 </li>
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="quienesAdministrador"><i class="fa fa-fw fa-gear"></i> ¿Quiénes Somos?</a>
+                                    <a href="quienesAdministrador"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="contactoAdministrador"><i class="fa fa-fw fa-power-off"></i> Contacto</a>
+                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Contacto</a>
                                 </li>
-                                 <li class="divider"></li>
-                                   <li>
-                                    <a href="noticiasAdministrador"><i class="fa fa-fw fa-power-off"></i> Noticias</a>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="noticiasAdministrador"><i class="fa fa-bell"></i> Noticias</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>${nombre}<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= user.getEncargadoOriginal().getNombre()%><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="perfil."><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
+
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="index"><i class="fa fa-fw fa-envelope"></i>Salir</a>
+                                    <a href="mensajes"><i class="fa fa-envelope"></i> Mensajes</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="mensajes">Mensajes</a>
+                                    <a href="index"><i class="fa fa-home"></i> Salir</a>
                                 </li>
                             </ul>
                         </li>

@@ -282,12 +282,12 @@ public class AppController {
             String nombre = usu.getEncargado().iterator().next().getNombre();
             
             if (usu.isAdministrador()) {
-                model.addAttribute("nombre", nombre);
+               // model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
                 return "Administracion";
             }
             if (usu.isEncargado()) {
-                model.addAttribute("nombre", nombre);
+              //  model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
                 return "Encargado";
             }
@@ -378,7 +378,7 @@ public class AppController {
         model.addAttribute("msg", "Se agrego el contacto con exito");
         return "agregarContacto";
     }
-    @RequestMapping(value = {"/noticia"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/noticias"}, method = RequestMethod.GET)
     public String loadNoticia(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         System.out.println(kinder.getNoticias()+"caca seca");

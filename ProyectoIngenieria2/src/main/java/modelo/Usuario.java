@@ -114,6 +114,10 @@ public class Usuario implements Serializable {
         this.roleSeccion = roleSeccion;
     }
 
+    public Encargado getEncargadoOriginal() {
+        return this.encargado.iterator().next();
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

@@ -77,9 +77,7 @@
                         <li>
                             <a href="index">Inicio</a>
                         </li>
-                        <li>
-                            <a href="galeria">Galeria</a>
-                        </li>
+                       
                         <li>
                             <a href="requerimientos">Requerimientos de matricula</a>
                         </li>

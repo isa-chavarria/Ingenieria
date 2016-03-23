@@ -92,16 +92,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="index">Inicio</a>
-                        </li>
-                        <li>
-                            <a href="galeria">Galeria</a>
-                        </li>
-                        <li>
-                            <a href="requerimientos">Requerimientos de matricula</a>
-                        </li>
-                        <li>
-                            <a href="contacto">Contacto</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

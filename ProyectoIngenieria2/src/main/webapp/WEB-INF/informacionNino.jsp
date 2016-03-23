@@ -1,5 +1,17 @@
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    if (user != null && user.isEncargado()) {
+        
+    } else {
+        response.sendRedirect("index");
+    }
+%>
 <html lang="en">
     <head>
 

@@ -56,7 +56,7 @@
 
             <c:if test="${fallo}">
                 <div  class="alert alert-danger">
-                    <p style="color:#ff3333;">Usuario invalido.</p>
+                    <p style="color:#ff3333;">Usuario inválido.</p>
                 </div>
             </c:if>
 
@@ -115,9 +115,6 @@
                         </li>
                         <li>
                             <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>
-                        </li>
-                          <li>
-                            <a href="noticias"><i class="fa fa-phone"></i> Noticias</a>
                         </li>
                     </ul>
                 </div>

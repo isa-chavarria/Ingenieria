@@ -4,10 +4,20 @@
     Author     : josvr_000
 --%>
 
+<%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%
 
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    if (user != null && user.isAdministrador()) {
+        
+    } else {
+        response.sendRedirect("index");
+    }
+%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
