@@ -149,23 +149,15 @@
 
                         <div class="form-group">
 
-                            <table style="margin-left: 20%;"> 
-                                <tr> 
-                                    <td colspan="2"></td>
-                                    <td style="left:inherit;" > 
-                                        <div class="form-group">
 
-                                            <div class="form-group">
-                                                <div class="col-lg-offset-2 col-lg-8">
-                                                    <button type="submit" class="btn btn-info">Realizar pago</button>
-                                                </div>
-                                            </div>
 
-                                        </div>
-                                    </td> 
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <button type="submit" class="btn btn-info">Realizar pago</button>
+                                </div>
+                            </div>
 
-                                </tr> 
-                            </table>
+
 
                         </div>
                     </form:form>

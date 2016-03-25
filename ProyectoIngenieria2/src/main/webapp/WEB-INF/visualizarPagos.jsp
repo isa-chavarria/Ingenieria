@@ -112,7 +112,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="success">
+                            <tr>
                                 <td>John</td>
                                 <td>Doe</td>
                                 <td>Juan</td>

@@ -71,7 +71,7 @@
 
         <div id="second"  class="row">
 
-            <h3 id="Titulo">MODIFICAR QUIENES</h3>
+            <h3 id="Titulo">MODIFICAR ¿QUIENES SOMOS?</h3>
 
 
 
@@ -113,7 +113,7 @@
 
                     <div class="col-lg-12 text-center">
 
-                        <h2 class="intro-text text-center">Modificar Contacto
+                        <h2 class="intro-text text-center">Modificar ¿quienes somos?
                         </h2>
 
 
@@ -130,14 +130,14 @@
                             </div>
                         </div>
                         <div  class="form-group">
-                            <label  class="col-lg-2 control-label">Mision:</label>
+                            <label  class="col-lg-2 control-label">Misión:</label>
                             <div class="col-lg-10">
                                 <form:textarea rows="4" type="text" class="form-control" path="mision" id="mision" 
                                           />
                             </div>
                         </div>
                             <div  class="form-group">
-                            <label  class="col-lg-2 control-label">Vision:</label>
+                            <label  class="col-lg-2 control-label">Visión:</label>
                             <div class="col-lg-10">
                                 <form:textarea rows="4" type="text" class="form-control" path="vision" id="vision"/>
                             </div>

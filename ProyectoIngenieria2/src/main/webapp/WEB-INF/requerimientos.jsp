@@ -20,6 +20,7 @@
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,16 +75,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="index">Inicio</a>
+                            <a href="index"><i class="fa fa-home"></i> Inicio</a>
                         </li>
                         <li>
-                            <a href="quienes">Quienes Somos</a>
+                            <a href="quienes"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>
                         </li>
                         <li>
-                            <a href="galeria">Galeria</a>
-                        </li>
-                        <li>
-                            <a href="contacto">Contacto</a>
+                            <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>
                         </li>
                     </ul>
                 </div>

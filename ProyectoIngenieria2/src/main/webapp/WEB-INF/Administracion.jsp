@@ -96,7 +96,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i> Pagos <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Realizar Pago</a>
+                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Registrar Pago</a>
                                 </li>
                                 <li class="divider"></li>
 

@@ -107,6 +107,95 @@ public class Clase implements Serializable {
         this.nombre = nombre;
     }
 
+    public String tablaEstudiantesPagos() {
+        Collection<Encargado> lista = this.purga();
+
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Estudiantes de " + nivel + "</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
+
+        s.append("<table style='font-family: \"Josefin Slab\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;' class=\"table\">");// abrir table
+
+        s.append("<thead>");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>NOMBRE</th>");
+        s.append("<th>PRIMER APELLIDO</th>");
+        s.append("<th>SEGUNDO APELLIDO</th>");
+        s.append("<th>FECHA DE NACIMIENTO</th>");
+        s.append("<th></th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody>");
+
+        for (Encargado e : lista) {
+            s.append("<tr>");
+            s.append("<td>" + e.getId() + "</td>");
+            s.append("<td>" + e.getNombre() + "</td>");
+            s.append("<td>" + e.getApellido1() + "</td>");
+            s.append("<td>" + e.getApellido2() + "</td>");
+            s.append("<td>" + e.getFechaNacimiento() + "</td>");
+            s.append("<td><a href='pagos-user-"+e.getId()+"' class=\"btn btn-success custom-width\">Realizar pago</a></td>");
+
+            s.append("</tr>");
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
+    public String tablaEstudiantes() {
+
+        Collection<Encargado> lista = this.purga();
+
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Estudiantes de " + nivel + "</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
+
+        s.append("<table style='font-family: \"Josefin Slab\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;' class=\"table\">");// abrir table
+
+        s.append("<thead>");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>NOMBRE</th>");
+        s.append("<th>PRIMER APELLIDO</th>");
+        s.append("<th>SEGUNDO APELLIDO</th>");
+        s.append("<th>FECHA DE NACIMIENTO</th>");
+        s.append("<th></th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody>");
+
+        for (Encargado e : lista) {
+            s.append("<tr>");
+            s.append("<td>" + e.getId() + "</td>");
+            s.append("<td>" + e.getNombre() + "</td>");
+            s.append("<td>" + e.getApellido1() + "</td>");
+            s.append("<td>" + e.getApellido2() + "</td>");
+            s.append("<td>" + e.getFechaNacimiento() + "</td>");
+            s.append("<td><a href=\"<c:url value='" + e.getId() + "' />\" class=\"btn btn-success custom-width\">Editar</a></td>");
+            s.append("<td><a href=\"<c:url value='" + e.getId() + "' />\" class=\"btn btn-danger custom-width\">Eliminar</a></td>");
+            s.append("</tr>");
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

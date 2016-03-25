@@ -111,8 +111,7 @@
 
                         <div class="col-lg-12">
 
-                            <hr>
-                            <h2 class="intro-text text-center">Nuestra Historia
+                            <h2 class="intro-text text-center">Nuestra Historia 
                                 <button type="submit" class="btn btn-default" aria-label="Left Align">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 </button>
@@ -120,16 +119,15 @@
                             <hr>
                         </div>
                         <div class="col-md-12">
-                            <strong>
+                            <p style="color: #666666">
                                 ${kinder.historia}
                                 <form:hidden path="historia" value="${kinder.historia}"/>
 
 
-                            </strong>
+                            </p>
                         </div>
                         <div class="col-lg-12">
-                            <hr>
-                            <h2 class="intro-text text-center">Mision
+                            <h2 class="intro-text text-center">Misión
                                 <button type="submit" class="btn btn-default" aria-label="Left Align">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 </button>
@@ -137,14 +135,13 @@
                             <hr>
                         </div>
                         <div class="col-md-12">
-                            <strong>
+                            <p style="color: #666666">
                                 ${kinder.mision}
                                 <form:hidden path="mision" value="${kinder.mision}"/>
-                            </strong>
+                            </p>
                         </div>
                         <div class="col-lg-12">
-                            <hr>
-                            <h2 class="intro-text text-center">Vision
+                            <h2 class="intro-text text-center">Visión
                                 <button type="submit" class="btn btn-default" aria-label="Left Align">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span>
                                 </button>
@@ -152,12 +149,12 @@
                             <hr>
                         </div>
                         <div class="col-md-12">
-                            <strong>
+                            <p style="color: #666666">
                                 ${kinder.vision}
                                 <form:hidden path="vision" value="${kinder.vision}"/>
-                            </strong>
+                            </p>
                         </div>
-                  
+
                         <div class="clearfix"></div>
 
                     </div>
@@ -168,8 +165,7 @@
                 <div class="box">
                     <div class="col-lg-12">
                         <hr>
-                        <h2 class="intro-text text-center">Nuestro
-                            <strong>Equipo</strong>
+                        <h2 class="intro-text text-center">Nuestro Equipo
                         </h2>
                         <hr>
                     </div>

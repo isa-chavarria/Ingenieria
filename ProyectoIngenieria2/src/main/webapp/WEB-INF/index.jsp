@@ -78,7 +78,7 @@
 
                 </div>
 
-                <button type="submit" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2)" class="btn btn-info">INICIAR SESION</button>
+                <button type="submit" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2);text-transform:uppercase;" class="btn btn-info">Iniciar sesión</button>
 
                 <form:input type="hidden"  class="form-control" path="id" id="id"/>
 
@@ -111,7 +111,7 @@
                         </li>
 
                         <li>
-                            <a href="requerimientos"><i class="fa fa-book"></i> Requerimientos de matricula</a>
+                            <a href="requerimientos"><i class="fa fa-book"></i> Requerimientos de matrícula</a>
                         </li>
                         <li>
                             <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>

@@ -30,9 +30,6 @@
 
         <title>Kinder Lulú</title>
 
-        <!--link href="resources/css/app.css" rel="stylesheet"-->
-        <link href="resources/css/bootstrap.css" rel="stylesheet">
-
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -42,7 +39,8 @@
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -95,12 +93,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="administracion">Regresar al menú</a>
-                            </li>
-                        </ul>
-
+                        <li>
+                            <a href="administracion">Regresar al menú</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -113,55 +108,53 @@
 
 
             <div class="row">
-                <div style=" overflow: scroll ; height: 600px " class="box">
-                    <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
 
-                        <div   class="form-inline">
-                            <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
-                            <div class="col-lg-4">
-                                <form:select path="nivel" items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
+                <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
 
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-8">
-                                    <button type="submit" class="btn btn-info">Buscar</button>
-                                </div>
-                            </div>
+                    <div   class="form-inline">
+                        <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
+                        <div class="col-lg-4">
+                            <form:select path="nivel"  items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
+
                         </div>
-                    </form:form>
+                    </div>                 
+                </form:form>
+                <div id="tablita">
+                    <h4>Estudiantes de ${grupito.nivel}</h4>
 
-                    <br/>
-                    <br/>
-                    <br/>
+                    <div style=" overflow: scroll ; height: 500px " class="box">
 
-                    <div class="panel panel-default">
-                        <!-- Default panel contents -->
-                        <div class="panel-heading"><span class="lead">Estudiantes ${grupito.nivel}</span></div>
-                        <table class="table table-hover" style="boder: solid 2px gray;">
+
+
+
+                        <table style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>NOMBRE</th>
-                                    <th>APELLIDOS</th>
-                                    <th>FECHA NACIMIENTO</th>
+                                    <th>PRIMER APELLIDO</th>
+                                    <th>SEGUNDO APELLIDO</th>
+                                    <th>FECHA DE NACIMIENTO</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <c:forEach items="${grupito.purga()}" var="stu">
                                     <tr>
-                                        <td style="boder: solid 2px gray;">${stu.id}</td>
-                                        <td style="boder: solid 2px gray;">${stu.nombre}</td>
-                                        <td style="boder: solid 2px gray;">${stu.apellido1} ${stu.apellido2}</td>
-                                        <td style="boder: solid 2px gray;">${stu.fechaNacimiento}</td>
+                                        <td>${stu.id}</td>
+                                        <td>${stu.nombre}</td>
+                                        <td>${stu.apellido1}</td>
+                                        <td>${stu.apellido2}</td>
+                                        <td>${stu.fechaNacimiento}</td>
+                                        <td><a href="<c:url value='' />" class="btn btn-success custom-width">Editar</a></td>
+                                        <td><a href="<c:url value='' />" class="btn btn-danger custom-width">Eliminar</a></td>
                                     </tr>
                                 </c:forEach>
 
                             </tbody>
                         </table>
                     </div>
-
-
 
                 </div>
             </div>
@@ -193,4 +186,18 @@
         </script>
 
     </body>
+
+    <script>
+        $(document).ready(function () {
+            $('#nivel').change(function (event) {
+                var nombreVar = $('#nivel').val();
+                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                $.post('seleccionar', {
+                    nombre: nombreVar
+                }, function (responseText) {
+                    $('#tablita').html(responseText);
+                });
+            });
+        });
+    </script>
 </html>
