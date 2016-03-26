@@ -121,7 +121,7 @@
 
                         <table style="margin-left: 30%;">
                             <c:forEach items="${kinder.noticias}" var="noticia1">
-                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${noticia1.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${noticia1.descripcion}"></c:out></td>
+                                <tr><td><c:out value="${noticia1.titulo}"></c:out> </td><td><c:out value="${noticia1.descripcion}"></c:out></td>
                                         
                                             <td><form:form method="POST"  modelAttribute="noticia" action="ModificarNoticias">
                                             <form:hidden path="codigo" value="${noticia1.codigo}"/>

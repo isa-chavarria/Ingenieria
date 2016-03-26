@@ -107,7 +107,7 @@
                 <div class="box">
                     <div style="margin-bottom: 5%;" class="col-lg-12">
                         <hr>
-                        <h2 class="intro-text text-center">Contacto
+                        <h2 class="intro-text text-center">Contactos
                             <button type="button" class="btn btn-default" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
                             </button>
@@ -121,7 +121,7 @@
 
                         <table style="margin-left: 30%;">
                             <c:forEach items="${kinder.contactos}" var="contacto1">
-                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${contacto1.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${contacto1.descripcion}"></c:out></td>
+                                <tr><td><c:out value="${contacto1.titulo}"></c:out> </td><td><c:out value="${contacto1.descripcion}"></c:out></td>
                                         
                                             <td><form:form method="POST"  modelAttribute="contacto" action="ModificarContacto">
                                             <form:hidden path="codigo" value="${contacto1.codigo}"/>
