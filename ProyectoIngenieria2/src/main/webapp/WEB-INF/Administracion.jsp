@@ -114,10 +114,10 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Modificar <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>
+                                <!--li>
                                     <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
                                 </li>
-                                <li class="divider"></li>
+                                <li class="divider"></li-->
 
                                 <li>
                                     <a href="quienesAdministrador"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>

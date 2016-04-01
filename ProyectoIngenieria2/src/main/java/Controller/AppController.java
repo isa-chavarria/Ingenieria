@@ -378,7 +378,7 @@ public class AppController {
         con.setDescripcion(contacto.getDescripcion());
         contactoService.UpdateContacto(con);
 
-        model.addAttribute("msg", "Se agrego el contacto con exito");
+        model.addAttribute("msg", "Se Modificó el contacto con exito");
         return "agregarContacto";
     }
 
@@ -450,7 +450,7 @@ public class AppController {
         noti.setDescripcion(noticia.getDescripcion());
         NoticiaService.UpdateNoticia(noti);
 
-        model.addAttribute("msg", "Se agrego el noticia con exito");
+        model.addAttribute("msg", "Se Modificó la noticia con exito");
         return "ActualizarNoticias";
     }
 
@@ -526,18 +526,6 @@ public class AppController {
         return "Estudiantes";
     }
 
-//    @RequestMapping(value = {"/seleccionar"}, method = RequestMethod.POST)
-//    public String seleccionar(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request) {
-//        System.out.println("AQUIIIIIII");
-//        String nivel = (String) request.getParameter("nombre");
-//       // String nivel = clase.getNivel();
-//        Clase g = new Clase();
-//        model.addAttribute("grupo", g);
-//        Clase c = claseService.findbyId(this.calcularCodigo(nivel));
-//        model.addAttribute("grupito", c);
-//
-//        return "Estudiantes";
-//    }
     @RequestMapping(value = {"/seleccionar"}, method = RequestMethod.POST)
     public void seleccionar(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("AQUIIIIIII");

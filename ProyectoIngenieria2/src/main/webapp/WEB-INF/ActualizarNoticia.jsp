@@ -137,7 +137,7 @@
                         </div>
                          <form:hidden path="codigo" value="${noticiaBase.codigo}"/>
                         <div class="col-lg-offset-2 col-lg-10">
-                            <button type="submit" class="btn btn-info">Modifica</button>
+                            <button type="submit" class="btn btn-info">Modificar</button>
                             <div class="form-group">
                             </div>
                         </div>

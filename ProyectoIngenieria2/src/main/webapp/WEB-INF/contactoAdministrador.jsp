@@ -104,25 +104,27 @@
 
 
             <div class="row">
-                <div class="box">
-                    <div style="margin-bottom: 5%;" class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Contactos
-                            <button type="button" class="btn btn-default" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
-                            </button>
-                        </h2>
+
+                <div style="margin-bottom: 5%;" class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Contactos
+                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
+                        </button>
+                    </h2>
 
 
-                        <hr>
-                    </div>
+                    <hr>
+                </div>
+                <div style=" overflow: scroll ; height: 400px " class="box">
+
 
                     <div class="text-center">
 
-                        <table style="margin-left: 30%;">
+                        <table style="margin-left: 28%; border: solid 1px #cccccc; box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);">
                             <c:forEach items="${kinder.contactos}" var="contacto1">
                                 <tr><td><c:out value="${contacto1.titulo}"></c:out> </td><td><c:out value="${contacto1.descripcion}"></c:out></td>
-                                        
+
                                             <td><form:form method="POST"  modelAttribute="contacto" action="ModificarContacto">
                                             <form:hidden path="codigo" value="${contacto1.codigo}"/>
                                             <form:hidden path="titulo" value="${contacto1.titulo}"/>
@@ -131,13 +133,13 @@
                                             <button type="submit" class="btn btn-default" aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </button></form:form></td>
-                                            
-                                            <td><form:form method="POST"  modelAttribute="contacto">
+
+                                        <td><form:form method="POST"  modelAttribute="contacto">
                                             <form:hidden path="codigo" value="${contacto1.codigo}"/>
                                             <button type="submit" class="btn btn-default" aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </button></form:form></td>
-                                            
+
                                     </tr>
                             </c:forEach>
                         </table>
@@ -168,9 +170,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-                                    $('.carousel').carousel({
-                                        interval: 5000 //changes the speed
-                                    })
+                                $('.carousel').carousel({
+                                    interval: 5000 //changes the speed
+                                })
         </script>
 
     </body>

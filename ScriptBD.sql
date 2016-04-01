@@ -329,7 +329,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- NOTICIA
 -- -----------------------------------------------------
-
+DROP TABLE IF EXISTS `kinderBD`.`noticia` ;
 CREATE TABLE IF NOT EXISTS `kinderbd`.`noticia` (
   `titulo` VARCHAR(1000) NULL DEFAULT NULL,
   `codigo` INT NOT NULL AUTO_INCREMENT,

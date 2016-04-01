@@ -107,7 +107,7 @@
 
 
             <div class="row">
-                <div class="box">
+                <div  class="box">
 
                     <div class="leftImage">
 
@@ -132,7 +132,7 @@
 
 
                     <div class="infodisplay"  style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif; '>
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre completo:  </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">Nombre completo:  </label>
 
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
@@ -141,7 +141,7 @@
                         </br>
                         <div class="spac"></div>
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">Cédula:   </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">Cédula:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
                             <p class="col-lg-5"><% out.print(enc.getId());  %> </p>
@@ -150,7 +150,7 @@
                         </br>
                         <div class="spac"></div>
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">Fecha de nacimiento:   </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">Fecha de nacimiento:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
                             <p class="col-lg-5"> <% out.print(enc.getFechaNacimiento()); %> </p>
@@ -159,7 +159,7 @@
                         </br>
                         <div class="spac"></div>
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">Padecimientos:   </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">Padecimientos:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
 
@@ -169,14 +169,14 @@
                         </br>
                         <div class="spac"></div>
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">Encargados:   </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">Encargados:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
                             <p class="col-lg-5">  <% out.print("Fernando Chinchilla delgado"); %> </p>
 
                         </div> 
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label"> </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label"> </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
                             <p class="col-lg-5">  <% out.print("Yalile Navarro Oviedo");%> </p>
@@ -188,7 +188,7 @@
                         </br>
                         <div class="spac"></div>
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">teléfono:   </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">teléfono:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
                             <p class="col-lg-5">  <% out.print(enc.getTelefono());%> </p>
@@ -199,7 +199,7 @@
                         <div class="spac"></div>
 
 
-                        <label for="ejemplo_email_3" class="col-lg-2 control-label">Dirección:   </label>
+                        <label for="ejemplo_email_3" class="col-lg-4 control-label">Dirección:   </label>
                         <div class="col-lg-10">
                             <p class="col-lg-5">   </p>
                             <p class="col-lg-5"> <% out.print(enc.getDireccion());%></p>
