@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -36,12 +39,12 @@ public class Kinder implements Serializable {
     private String mision;
     @Size(max = 5000)
     private String vision;
-    
-     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name="kinder")
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "kinder")
     Collection<Contacto> contactos;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
     Collection<Noticia> noticias;
 
@@ -56,6 +59,8 @@ public class Kinder implements Serializable {
     public Collection<Noticia> getNoticias() {
         return noticias;
     }
+
+   
 
     public void setNoticias(Collection<Noticia> noticias) {
         this.noticias = noticias;

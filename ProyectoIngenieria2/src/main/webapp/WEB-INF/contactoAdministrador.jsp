@@ -106,7 +106,6 @@
             <div class="row">
 
                 <div style="margin-bottom: 5%;" class="col-lg-12">
-                    <hr>
                     <h2 class="intro-text text-center">Contactos
                         <button type="button" class="btn btn-default" aria-label="Left Align">
                             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
@@ -119,11 +118,12 @@
                 <div style=" overflow: scroll ; height: 400px " class="box">
 
 
-                    <div class="text-center">
+                    <div class="text-left">
 
-                        <table style="margin-left: 28%; border: solid 1px #cccccc; box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);">
+                        <table class="table table-bordered table-hover">
+                            <tbody class="cuerpoTabla">
                             <c:forEach items="${kinder.contactos}" var="contacto1">
-                                <tr><td><c:out value="${contacto1.titulo}"></c:out> </td><td><c:out value="${contacto1.descripcion}"></c:out></td>
+                                <tr class="active"><td><c:out value="${contacto1.titulo}"></c:out> </td><td><c:out value="${contacto1.descripcion}"></c:out></td>
 
                                             <td><form:form method="POST"  modelAttribute="contacto" action="ModificarContacto">
                                             <form:hidden path="codigo" value="${contacto1.codigo}"/>
@@ -142,6 +142,7 @@
 
                                     </tr>
                             </c:forEach>
+                            </tbody>
                         </table>
                     </div>
                     <div class="clearfix"></div>

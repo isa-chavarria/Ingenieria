@@ -106,7 +106,7 @@
             <div class="row">
 
                 <div style="margin-bottom: 5%;" class="col-lg-12">
-                    <hr>
+
                     <h2 class="intro-text text-center">Noticias
                         <button type="button" class="btn btn-default" aria-label="Left Align">
                             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarNoticias'"></span>
@@ -119,29 +119,31 @@
                 <div style=" overflow: scroll ; height: 400px " class="box">
 
 
-                    <div class="text-center">
+                    <div class="text-left">
 
-                        <table style="margin-left: 28%; border: solid 1px #cccccc; box-shadow: 0px 0px 20px   rgba(0,0,0,0.4);">
-                            <c:forEach items="${kinder.noticias}" var="noticia1">
-                                <tr><td><c:out value="${noticia1.titulo}"></c:out> </td><td><c:out value="${noticia1.descripcion}"></c:out></td>
+                        <table class="table table-bordered table-hover">
+                            <tbody class="cuerpoTabla">
+                                <c:forEach items="${noticias}" var="noticia1">
+                                    <tr class="active"><td><c:out value="${noticia1.titulo}"></c:out> </td><td><c:out value="${noticia1.descripcion}"></c:out></td>
 
-                                            <td><form:form method="POST"  modelAttribute="noticia" action="ModificarNoticias">
-                                            <form:hidden path="codigo" value="${noticia1.codigo}"/>
-                                            <form:hidden path="titulo" value="${noticia1.titulo}"/>
-                                            <form:hidden path="descripcion" value="${noticia1.descripcion}"/>
-                                            <form:hidden path="kinder" value="${noticia1.kinder}"/>
-                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                            </button></form:form></td>
+                                                <td><form:form method="POST"  modelAttribute="noticia" action="ModificarNoticias">
+                                                <form:hidden path="codigo" value="${noticia1.codigo}"/>
+                                                <form:hidden path="titulo" value="${noticia1.titulo}"/>
+                                                <form:hidden path="descripcion" value="${noticia1.descripcion}"/>
+                                                <form:hidden path="kinder" value="${noticia1.kinder}"/>
+                                                <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                </button></form:form></td>
 
-                                        <td><form:form method="POST"  modelAttribute="noticia">
-                                            <form:hidden path="codigo" value="${noticia1.codigo}"/>
-                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            </button></form:form></td>
+                                            <td><form:form method="POST"  modelAttribute="noticia">
+                                                <form:hidden path="codigo" value="${noticia1.codigo}"/>
+                                                <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button></form:form></td>
 
-                                    </tr>
-                            </c:forEach>
+                                        </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                     </div>
                     <div class="clearfix"></div>
@@ -170,9 +172,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-                                    $('.carousel').carousel({
-                                        interval: 5000 //changes the speed
-                                    })
+                                $('.carousel').carousel({
+                                    interval: 5000 //changes the speed
+                                })
         </script>
 
     </body>

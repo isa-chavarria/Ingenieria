@@ -90,10 +90,10 @@ public class AppController {
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
 
-        Usuario user = usuarioService.findbyId("402270021");
-        model.addAttribute("user", user);
-        String nombre = user.getEncargado().iterator().next().getNombre();
-        model.addAttribute("nombre", nombre);
+        //Usuario user = usuarioService.findbyId("402270021");
+//        model.addAttribute("user", user);
+//        String nombre = user.getEncargado().iterator().next().getNombre();
+//        model.addAttribute("nombre", nombre);
 
         return "prueba";
     }
@@ -274,6 +274,11 @@ public class AppController {
         model.addAttribute("fallo", false);
         return "MatriculaCorrecta";
     }
+    
+    @RequestMapping(value = {"/correcta"}, method = RequestMethod.GET)
+    public String loadMatriculaCorrecta(ModelMap model) {
+        return "MatriculaCorrecta";
+    }
 
     @RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
     public String realizarLoging(@Valid Usuario user, BindingResult result,
@@ -401,8 +406,10 @@ public class AppController {
         model.addAttribute("noticia", noticia);
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         System.out.println(kinder.getNoticias());
+        List<Noticia> lista = NoticiaService.findAll();
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
+            model.addAttribute("noticias",lista);
 
         } else {
             model.addAttribute("kinder", new Kinder());
@@ -505,6 +512,14 @@ public class AppController {
         Encargado enc = encargadoService.findbyId(usu.getId());
         request.getSession().setAttribute("enc", enc);
         return "perfil";
+    }
+    
+    @RequestMapping(value = {"/perfilAdministrador"}, method = RequestMethod.GET)
+    public String loadPerfilAdministrador(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        request.getSession().setAttribute("enc", enc);
+        return "PerfilAdministrador";
     }
 
     @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)

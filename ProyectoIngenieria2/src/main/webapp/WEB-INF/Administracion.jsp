@@ -31,7 +31,7 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
 
@@ -136,7 +136,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= user.getEncargadoOriginal().getNombre()%><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="perfil."><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
 
                                 <li class="divider"></li>

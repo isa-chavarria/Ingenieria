@@ -15,7 +15,7 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
 
@@ -78,8 +78,9 @@
 
                 </div>
 
-                <button type="submit" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2);text-transform:uppercase;" class="btn btn-info">Iniciar sesión</button>
+                <button type="submit" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2);text-transform:uppercase; margin-right: 5%;" class="btn btn-info">Iniciar sesión</button>
 
+                <a href='administracion' class="btn btn-default custom-width">¿Olvido su constraseña?</a>
                 <form:input type="hidden"  class="form-control" path="id" id="id"/>
 
             </form:form>
@@ -114,7 +115,7 @@
                             <a href="requerimientos"><i class="fa fa-book"></i> Requerimientos de matrícula</a>
                         </li>
                         <li>
-                            <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>
+                            <a href="contacto"><i class="fa fa-phone"></i> Contáctenos</a>
                         </li>
                     </ul>
                 </div>
@@ -140,13 +141,13 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="img-responsive img-full" src="resources/img/18.jpg" alt="">
+                                    <img class="img-responsive img-full" src="resources/img/1.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/aa.jpg" alt="">
+                                    <img class="img-responsive img-full" src="resources/img/2.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/20.jpg" alt="">
+                                    <img class="img-responsive img-full" src="resources/img/3.jpg" alt="">
                                 </div>
                             </div>
 

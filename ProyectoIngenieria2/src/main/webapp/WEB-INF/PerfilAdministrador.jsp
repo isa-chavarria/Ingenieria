@@ -7,7 +7,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     Encargado enc = (Encargado) session.getAttribute("enc");
 
-    if (user != null /*&& user.isEncargado()*/) {
+    if (user != null && user.isAdministrador()) {
 
     } else {
         response.sendRedirect("index");
@@ -86,7 +86,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="encargado">Regresar al menú</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -151,9 +151,7 @@
 
                                             <li><a style="font-size: small;" href="#">cuenta</a></li>
 
-                                            <li><a style="font-size: small;" href="#">Familiares</a></li>
-
-                                            <li><a style="font-size: small;" href="#">Padecimientos</a></li>
+                                          
                                         </ul>
                                     </div><!--/.nav-collapse -->
                                 </div>

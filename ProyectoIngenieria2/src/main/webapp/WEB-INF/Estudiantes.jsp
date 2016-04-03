@@ -127,8 +127,8 @@
 
 
 
-                        <table style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="table">
-                            <thead>
+                        <table class="table table-bordered table-hover">
+                            <thead class="titulosTabla">
                                 <tr>
                                     <th>ID</th>
                                     <th>NOMBRE</th>
@@ -139,9 +139,9 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="cuerpoTabla">
                                 <c:forEach items="${grupito.purga()}" var="stu">
-                                    <tr>
+                                    <tr class="active">
                                         <td>${stu.id}</td>
                                         <td>${stu.nombre}</td>
                                         <td>${stu.apellido1}</td>

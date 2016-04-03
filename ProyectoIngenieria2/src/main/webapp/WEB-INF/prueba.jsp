@@ -14,40 +14,37 @@
     </head>
 
     <body>
-        <div class="generic-container">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><span class="lead">List of Users </span></div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>rol</th>
-                            <th>nombre</th>
-                            <th width="100"></th>
-                            <th width="100"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>${user.id}</td>
-                            <td>${user.email}</td>
-                            <td>${user.roleSeccion}</td>
-                            <td>${nombre}</td>
-                            <td><a href="" class="btn btn-success custom-width">edit</a></td>
-                            <td><a href="" class="btn btn-danger custom-width">delete</a></td>
-
-
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="well">
-                <a href="<c:url value='/newuser' />">Add New User</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="sidebar-nav">
+                        <div class="navbar navbar-default" role="navigation">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <span class="visible-xs navbar-brand">Sidebar menu</span>
+                            </div>
+                            <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="#">Menu Item 1</a></li>
+                                    <li><a href="#">Menu Item 2</a></li>
+                                    <li><a href="#">Menu Item 3</a></li>
+                                    <li><a href="#">Menu Item 4</a></li>
+                                    <li><a href="#">Reviews <span class="badge">1,118</span></a></li>
+                                </ul>
+                            </div><!--/.nav-collapse -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    Main content goes here
+                </div>
             </div>
         </div>
+
     </body>
 </html>

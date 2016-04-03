@@ -54,7 +54,7 @@
 
         <div id="second"  class="row">
 
-            <h3 id="Titulo">CONTACTENOS</h3>
+            <h3 id="Titulo">Contáctenos</h3>
 
 
 
@@ -98,23 +98,30 @@
 
 
             <div class="row">
-                <div class="box">
-                    <div style="margin-bottom: 5%;" class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Contactos
-                        </h2>
-                        <hr>
-                    </div>
+                
+                <div style="margin-bottom: 5%;" class="col-lg-12">
+                    <h2 class="intro-text text-center">Contactos
+                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
+                        </button>
+                    </h2>
 
-                    <div class="text-center">
 
-                        <table style="margin-left:33%;">
+                    <hr>
+                </div>
+                <div style=" overflow: scroll ; height: 400px " class="box">
+                    <div class="text-left">
+                        <table class="table table-bordered table-hover">
                             <!--tr><th>Título</th><th>Descripción</th></tr-->
-                                    <c:forEach items="${kinder.contactos}" var="contacto">
-                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${contacto.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${contacto.descripcion}"></c:out></td></tr>
+                            <tbody class="cuerpoTabla">
+                                <c:forEach items="${kinder.contactos}" var="contacto">
+                                    <tr class="active"><td><c:out value="${contacto.titulo}"></c:out> </td><td><c:out value="${contacto.descripcion}"></c:out></td></tr>
                                 </c:forEach>
+                            </tbody>
                         </table>
                     </div>
+
+
                     <div class="clearfix"></div>
 
                 </div>

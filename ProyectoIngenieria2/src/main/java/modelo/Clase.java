@@ -84,16 +84,14 @@ public class Clase implements Serializable {
 
     public Collection<Encargado> purga() {
         Collection<Encargado> purga = new ArrayList<Encargado>();
-        int valor = 0;
         for (Nino n : this.ninos) {
             if (!purga.contains(n.getEncargado().iterator().next())) {
                 purga.add(n.getEncargado().iterator().next());
-                valor = 0;
             }
-            valor++;
         }
         return purga;
     }
+    
 
     public void setId(String id) {
         this.id = id;
@@ -114,9 +112,9 @@ public class Clase implements Serializable {
         s.append("<h4>Estudiantes de " + nivel + "</h4>");
         s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
 
-        s.append("<table style='font-family: \"Josefin Slab\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;' class=\"table\">");// abrir table
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
 
-        s.append("<thead>");
+        s.append("<thead class=\"titulosTabla\">");
         s.append("<tr>");
         s.append("<th>ID</th>");
         s.append("<th>NOMBRE</th>");
@@ -124,20 +122,19 @@ public class Clase implements Serializable {
         s.append("<th>SEGUNDO APELLIDO</th>");
         s.append("<th>FECHA DE NACIMIENTO</th>");
         s.append("<th></th>");
-        s.append("<th></th>");
         s.append("</tr>");
         s.append("</thead>");
 
-        s.append("<tbody>");
+        s.append("<tbody class=\"cuerpoTabla\">");
 
         for (Encargado e : lista) {
-            s.append("<tr>");
+            s.append("<tr class=\"active\">");
             s.append("<td>" + e.getId() + "</td>");
             s.append("<td>" + e.getNombre() + "</td>");
             s.append("<td>" + e.getApellido1() + "</td>");
             s.append("<td>" + e.getApellido2() + "</td>");
             s.append("<td>" + e.getFechaNacimiento() + "</td>");
-            s.append("<td><a href='pagos-user-"+e.getId()+"' class=\"btn btn-success custom-width\">Realizar pago</a></td>");
+            s.append("<td><a href='pagos-user-" + e.getId() + "' class=\"btn btn-success custom-width\">Realizar pago</a></td>");
 
             s.append("</tr>");
         }
@@ -159,9 +156,9 @@ public class Clase implements Serializable {
         s.append("<h4>Estudiantes de " + nivel + "</h4>");
         s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
 
-        s.append("<table style='font-family: \"Josefin Slab\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;' class=\"table\">");// abrir table
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
 
-        s.append("<thead>");
+        s.append("<thead class=\"titulosTabla\">");
         s.append("<tr>");
         s.append("<th>ID</th>");
         s.append("<th>NOMBRE</th>");
@@ -173,10 +170,10 @@ public class Clase implements Serializable {
         s.append("</tr>");
         s.append("</thead>");
 
-        s.append("<tbody>");
+        s.append("<tbody  class=\"cuerpoTabla\">");
 
         for (Encargado e : lista) {
-            s.append("<tr>");
+            s.append("<tr class=\"active\">");
             s.append("<td>" + e.getId() + "</td>");
             s.append("<td>" + e.getNombre() + "</td>");
             s.append("<td>" + e.getApellido1() + "</td>");
