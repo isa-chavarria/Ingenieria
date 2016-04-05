@@ -94,7 +94,6 @@ public class AppController {
 //        model.addAttribute("user", user);
 //        String nombre = user.getEncargado().iterator().next().getNombre();
 //        model.addAttribute("nombre", nombre);
-
         return "prueba";
     }
 
@@ -274,7 +273,7 @@ public class AppController {
         model.addAttribute("fallo", false);
         return "MatriculaCorrecta";
     }
-    
+
     @RequestMapping(value = {"/correcta"}, method = RequestMethod.GET)
     public String loadMatriculaCorrecta(ModelMap model) {
         return "MatriculaCorrecta";
@@ -320,12 +319,10 @@ public class AppController {
     @RequestMapping(value = {"/contacto"}, method = RequestMethod.GET)
     public String loadContacto(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        if (kinder != null) {
-            model.addAttribute("kinder", kinder);
 
-        } else {
-            model.addAttribute("kinder", new Kinder());
-        }
+        List<Contacto> contactos = this.contactoService.findAll();
+        model.addAttribute("contactos", contactos);
+
         return "contacto";
     }
 
@@ -334,12 +331,15 @@ public class AppController {
         Contacto contacto = new Contacto();
         model.addAttribute("contacto", contacto);
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        if (kinder != null) {
-            model.addAttribute("kinder", kinder);
 
-        } else {
-            model.addAttribute("kinder", new Kinder());
-        }
+        List<Contacto> contactos = this.contactoService.findAll();
+        model.addAttribute("contactos", contactos);
+//        if (kinder != null) {
+//            model.addAttribute("kinder", kinder);
+//
+//        } else {
+//            model.addAttribute("kinder", new Kinder());
+//        }
         return "contactoAdministrador";
     }
 
@@ -351,15 +351,19 @@ public class AppController {
         if (contacto1 != null) {
             contactoService.DeletebyCodigo(contacto1.getCodigo());
             model.addAttribute("msg", "Se elimino el contacto con exito");
-        }
-        model.addAttribute("msg", "No se elimino el contacto con exito");
-        Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        if (kinder != null) {
-            model.addAttribute("kinder", kinder);
-
         } else {
-            model.addAttribute("kinder", new Kinder());
+            model.addAttribute("msg", "No se elimino el contacto con exito");
         }
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+
+        List<Contacto> contactos = this.contactoService.findAll();
+        model.addAttribute("contactos", contactos);
+//        if (kinder != null) {
+//            model.addAttribute("kinder", kinder);
+//
+//        } else {
+//            model.addAttribute("kinder", new Kinder());
+//        }
         return "contactoAdministrador";
     }
 
@@ -390,10 +394,10 @@ public class AppController {
     @RequestMapping(value = {"/noticias"}, method = RequestMethod.GET)
     public String loadNoticia(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        System.out.println(kinder.getNoticias() + "caca seca");
+        List<Noticia> lista = NoticiaService.findAll();
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-
+            model.addAttribute("noticias", lista);
         } else {
             model.addAttribute("kinder", new Kinder());
         }
@@ -409,7 +413,7 @@ public class AppController {
         List<Noticia> lista = NoticiaService.findAll();
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
-            model.addAttribute("noticias",lista);
+            model.addAttribute("noticias", lista);
 
         } else {
             model.addAttribute("kinder", new Kinder());
@@ -511,15 +515,58 @@ public class AppController {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
         request.getSession().setAttribute("enc", enc);
+        String nivel = enc.getNino().iterator().next().getClase().getNivel();
+        model.addAttribute("nivel", nivel);
         return "perfil";
     }
-    
+
     @RequestMapping(value = {"/perfilAdministrador"}, method = RequestMethod.GET)
     public String loadPerfilAdministrador(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
         request.getSession().setAttribute("enc", enc);
+
         return "PerfilAdministrador";
+    }
+
+    @RequestMapping(value = {"/perfilCuenta"}, method = RequestMethod.GET)
+    public String loadperfilCuenta(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        request.getSession().setAttribute("enc", enc);
+        model.addAttribute("usuario", usu);
+        return "PerfilCuenta";
+    }
+
+    @RequestMapping(value = {"/perfilCuentaUsuario"}, method = RequestMethod.GET)
+    public String loadperfilCuentaUsuario(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        request.getSession().setAttribute("enc", enc);
+        model.addAttribute("usuario", usu);
+        return "PerfilCuentaUsuario";
+    }
+
+    @RequestMapping(value = {"/editarInformacionPerfil"}, method = RequestMethod.GET)
+    public String loadEditarPerfilAdministrador(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        request.getSession().setAttribute("enc", enc);
+        String id = enc.getId();
+        model.addAttribute("encargado", enc);
+        return "editarInformacionPerfil";
+    }
+
+    @RequestMapping(value = {"/editarInformacionUsuario"}, method = RequestMethod.GET)
+    public String loadEditarPerfilUsuario(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        request.getSession().setAttribute("enc", enc);
+        String id = enc.getId();
+        model.addAttribute("encargado", enc);
+        String nivel = enc.getNino().iterator().next().getClase().getNivel();
+        model.addAttribute("nivel", nivel);
+        return "editarInformacionUsuario";
     }
 
     @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)

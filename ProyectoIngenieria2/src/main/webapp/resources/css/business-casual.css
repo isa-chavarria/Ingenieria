@@ -191,7 +191,7 @@ footer p {
     }
 
     .nav>li>a {
-        padding: 30px;
+        padding: 20px;
     }
 
     .navbar-nav>li>a {
@@ -204,7 +204,7 @@ footer p {
         float: none;
         margin: 0 auto;
         table-layout: fixed;
-        font-size: 1.25em;
+        font-size: 1em;
     }
 }
 
@@ -222,7 +222,7 @@ footer p {
 
 
 #arriba{
-    margin-top: 8%;
+    margin-top: 5%;
     border-bottom: 2px solid #cccccc;
 }
 #second{
@@ -320,25 +320,41 @@ footer p {
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
-  .sidebar-nav .navbar ul {
-    float: none;
-  }
-  .sidebar-nav .navbar ul:not {
-    display: block;
-  }
-  .sidebar-nav .navbar li {
-    float: none;
-    display: block;
-  }
-  .sidebar-nav .navbar li a {
-    padding-top: 12px;
-    padding-bottom: 10px;
-    
-  }
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+    .sidebar-nav .navbar ul {
+        float: none;
+    }
+    .sidebar-nav .navbar ul:not {
+        display: block;
+    }
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 10px;
+
+    }
+}
+
+
+
+.tableInvisivle td{
+
+    width: 1%;
+    padding: 2%;
+    font-size: medium;
+    border-bottom: solid 1px #cccccc;
+    text-align: left;
+
+}
+
+.tableInvisivle{
+    margin-left: 3%;
 }
 
 

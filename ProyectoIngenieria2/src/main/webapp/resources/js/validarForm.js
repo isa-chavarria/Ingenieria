@@ -175,23 +175,23 @@ function validarFecha(date) {
 }
 
 jQuery(function ($) {
-    $("#telefono").mask("(999) 9999-9999");
+    $("#telefono").mask("9999-9999");
 });
 jQuery(function ($) {
-    $("#telefonoTrabajoPadre").mask("(999) 9999-9999");
+    $("#telefonoTrabajoPadre").mask("9999-9999");
 });
 jQuery(function ($) {
-    $("#telefonoPersonalPadre").mask("(999) 9999-9999");
+    $("#telefonoPersonalPadre").mask("9999-9999");
 });
 jQuery(function ($) {
-    $("#telefonoTrabajoMadre").mask("(999) 9999-9999");
+    $("#telefonoTrabajoMadre").mask("9999-9999");
 });
 
 jQuery(function ($) {
-    $("#telefonoPersonalMadre").mask("(999) 9999-9999");
+    $("#telefonoPersonalMadre").mask("9999-9999");
 });
 jQuery(function ($) {
-    $("#telefonoEncargado").mask("(999) 9999-9999");
+    $("#telefonoEncargado").mask("9999-9999");
 });
 jQuery(function ($) {
     $("#cedula").mask("9-9999-9999");

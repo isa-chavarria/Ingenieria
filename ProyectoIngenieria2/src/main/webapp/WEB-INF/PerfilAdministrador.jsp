@@ -26,14 +26,16 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -84,6 +86,80 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-right top-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu message-dropdown">
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="message-footer">
+                                    <a href="#">Read All New Messages</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                </li>
+
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="index"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="administracion">Regresar al menú</a>
@@ -147,11 +223,11 @@
                                     </div>
                                     <div class="navbar-collapse collapse sidebar-navbar-collapse" >
                                         <ul class="nav navbar-nav">
-                                            <li class="active"><a style="font-size: small;" href="#">Información</a></li>
+                                            <li class="active"><a style="font-size: small;" href="perfilAdministrador">Información</a></li>
 
-                                            <li><a style="font-size: small;" href="#">cuenta</a></li>
+                                            <li><a style="font-size: small;" href="perfilCuenta">cuenta</a></li>
 
-                                          
+
                                         </ul>
                                     </div><!--/.nav-collapse -->
                                 </div>
@@ -165,63 +241,38 @@
                 <div class="col-lg-9 text-center">
                     <div class="panel panel-default">
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                            <table class="tableInvisivle">
+                                <tr>
+                                    <td>Nombre completo:</td>
+                                    <td><% out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%></td>
+                                </tr>
 
-                            <div id='wrapper' style=' border-bottom: solid 1px #cccccc; border-radius: 2px; margin-bottom:3%;   padding: 2%'>
-                                <label for="ejemplo_email_3" class="col-lg-4 control-label">Nombre completo:  </label>
+                                <tr>
+                                    <td>Cédula:</td>
+                                    <td><% out.print(enc.getId());%></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de nacimiento:</td>
+                                    <td><% out.print(enc.getFechaNacimiento());%></td>
+                                </tr>
 
-                                <div class="col-lg-8">
-                                    <p class="col-lg-2">   </p>
-                                    <p class="col-lg-6"><% out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </p>
-                                </div>
-                                </br>
+                                <tr>
+                                    <td>teléfono del domicilio:</td>
+                                    <td><% out.print(enc.getTelefono());%></td>
+                                </tr>
+                                <tr>
+                                    <td>Dirección del domicilio:</td>
+                                    <td><%out.print(enc.getDireccion());%></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a href='editarInformacionPerfil' class="btn btn-success custom-width">Editar información</a></td>
 
-                            </div>
-
-                            <div id='wrapper' style=' border-bottom: solid 1px #cccccc; border-radius: 2px; margin-bottom:3%;   padding: 2%'>
-
-                                <label for="ejemplo_email_3" class="col-lg-4 control-label">Cédula:  </label>
-
-                                <div class="col-lg-8">
-                                    <p class="col-lg-2">   </p>
-                                    <p class="col-lg-6"><% out.print(enc.getId());%> </p>
-                                </div>
-                                </br>
-                            </div>
-
-                            <div id='wrapper' style=' border-bottom: solid 1px #cccccc; border-radius: 2px; margin-bottom:3%;   padding: 2%'>
-                                <label for="ejemplo_email_3" class="col-lg-4 control-label">Fecha de nacimiento:  </label>
-
-                                <div class="col-lg-8">
-                                    <p class="col-lg-2">   </p>
-                                    <p class="col-lg-6"><% out.print(enc.getFechaNacimiento());%> </p>
-                                </div>
-                                </br>
-                            </div>
-
-                            <div id='wrapper' style=' border-bottom: solid 1px #cccccc; border-radius: 2px; margin-bottom:3%;   padding: 2%'>
-                                <label for="ejemplo_email_3" class="col-lg-4 control-label">teléfono:  </label>
-
-                                <div class="col-lg-8">
-                                    <p class="col-lg-2">   </p>
-                                    <p class="col-lg-6"><% out.print(enc.getTelefono());%> </p>
-                                </div>
-                                </br>
-                            </div>
-
-                            <div id='wrapper' style=' border-bottom: solid 1px #cccccc; border-radius: 2px; margin-bottom:3%;   padding: 2%'>
-                                <label for="ejemplo_email_3" class="col-lg-4 control-label">Dirección  </label>
-
-                                <div class="col-lg-8">
-                                    <p class="col-lg-2">   </p>
-                                    <p class="col-lg-6"><%out.print(enc.getDireccion());%> </p>
-                                </div>
-                                </br>
-                            </div>
+                                </tr>
 
 
 
-                            <a href='administracion' class="btn btn-success custom-width">Editar</a>
-
+                            </table>
                         </div>
                     </div>
                 </div>

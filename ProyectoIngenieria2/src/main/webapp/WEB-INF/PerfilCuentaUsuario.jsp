@@ -1,19 +1,15 @@
-<%--
-    Document   : Estudiantes
-    Created on : 14/03/2016, 12:29:37 AM
-    Author     : josvr_000
---%>
-
-<%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="modelo.Usuario"%>
+<%@page import="modelo.Encargado"%>
 <!DOCTYPE html>
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
+    Encargado enc = (Encargado) session.getAttribute("enc");
 
-    if (user != null && user.isAdministrador()) {
+    if (user != null && user.isEncargado()) {
 
     } else {
         response.sendRedirect("index");
@@ -32,22 +28,64 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <style type="text/css">
+            .bs-example{
+                margin: 20px;
+            }
+        </style>
+
+        <style>
+            .vis{
+                display:block;
+
+            }
+
+            .inv{
+                display:none;
+
+            }
+        </style>
+        <script>
+
+            function Cambiar() {
+
+
+
+                var formulario = document.getElementById('2');
+                var formulario1 = document.getElementById('1');
+
+                if (formulario.className == "inv") {
+                    formulario.className = 'vis';
+                    formulario1.className = 'inv';
+                } else {
+                    formulario.className = 'inv';
+                    formulario1.className = 'btn btn-success btn-block';
+
+                }
+
+            }
+
+        </script>
+
+
 
     </head>
     <body>
@@ -72,8 +110,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">Estudiantes </h3>
-
+            <h3 id="Titulo">Configuración de la cuenta</h3>
 
         </div>
 
@@ -93,7 +130,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+                    
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -153,7 +190,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                    <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
                                     <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
@@ -166,11 +203,10 @@
                             </ul>
                         </li>
                     </ul>
-
-
+                    
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="administracion">Regresar al menú</a>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -183,57 +219,134 @@
         <div class="container">
 
 
+
+
             <div class="row">
-
-                <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-
-                    <div   class="form-inline">
-                        <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
-                        <div class="col-lg-4">
-                            <form:select path="nivel"  items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
-
-                        </div>
-                    </div>                 
-                </form:form>
-                <div id="tablita">
-                    <h4>Estudiantes de ${grupito.nivel}</h4>
-
-                    <div style=" overflow: scroll ; height: 500px " class="box">
+                <div class="box">
+                    <div class="leftImage">
 
 
-
-
-                        <table class="table table-bordered table-hover">
-                            <thead class="titulosTabla">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRIMER APELLIDO</th>
-                                    <th>SEGUNDO APELLIDO</th>
-                                    <th>FECHA DE NACIMIENTO</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="cuerpoTabla">
-                                <c:forEach items="${grupito.purga()}" var="stu">
-                                    <tr class="active">
-                                        <td>${stu.id}</td>
-                                        <td>${stu.nombre}</td>
-                                        <td>${stu.apellido1}</td>
-                                        <td>${stu.apellido2}</td>
-                                        <td>${stu.fechaNacimiento}</td>
-                                        <td><a href="<c:url value='' />" class="btn btn-success custom-width">Editar</a></td>
-                                        <td><a href="<c:url value='' />" class="btn btn-danger custom-width">Eliminar</a></td>
-                                    </tr>
-                                </c:forEach>
-
-                            </tbody>
-                        </table>
+                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="150px" alt="">
                     </div>
 
+                    <div class="rightImage"  >
+
+                        <hr>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </h2>
+                        <hr>
+
+
+
+                    </div>
+
+                    <div class="dec">  </div>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+                            <div class="sidebar-nav">
+                                <div role="navigation">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                                    </div>
+                                    <div class="navbar-collapse collapse sidebar-navbar-collapse" >
+                                        <ul class="nav navbar-nav">
+                                            <li class="active"><a style="font-size: small;" href="perfil">Información</a></li>
+
+                                            <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
+
+
+                                        </ul>
+                                    </div><!--/.nav-collapse -->
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                            <table class="tableInvisivle">
+                                <tr>
+                                    <td>Nombre completo:</td>
+                                    <td><% out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%></td>
+                                </tr>
+                                <tr>
+                                    <td>Correo electrónico:</td>
+                                    <td><% out.print(enc.getEmail());%> </td>
+                                </tr>
+
+                            </table>
+
+                            <button type="button"  id="1" onclick='Cambiar();' class="btn btn-success btn-block">Editar contraseña</button>
+
+                            <div id='2' class="inv"  style='background: #F2F2F2; border:solid 1px #999999;border-radius: 2px; margin-bottom:3%;   padding: 2%'>
+                                <form:form method="POST" action="Login"  modelAttribute="usuario" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+
+                                    <table class="tableInvisivle">
+
+                                        <tr>
+                                            <td>Contraseña anterior:</td>
+                                            <td><form:input type="password"  path="" id="constrasenaA" required ="true" class="form-control input-sm" /></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contraseña nueva:</td>
+                                            <td><form:input type="password"  path="" id="constrasenaA" required ="true" class="form-control input-sm" /></td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Repetir contraseña nueva:</td>
+                                            <td><form:input type="password"  path="" id="constrasenaA" required ="true" class="form-control input-sm" /></td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td><button type="submit" class="btn btn-success">Guardar</button>        <button type="button"  class="btn btn-danger" onclick='Cambiar();'  data-toggle="collapse" data-target="#demo">Cancelar</button></td>
+                                            <td></td>
+                                        </tr>
+
+
+                                    </table>
+
+                                </form:form>
+                            </div>
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
+
+
+
+            <div class="clearfix"></div>
+
+
 
 
         </div>
@@ -256,24 +369,11 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                                                $('.carousel').carousel({
+                                                    interval: 5000 //changes the speed
+                                                })
         </script>
 
     </body>
-
-    <script>
-        $(document).ready(function () {
-            $('#nivel').change(function (event) {
-                var nombreVar = $('#nivel').val();
-                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-                $.post('seleccionar', {
-                    nombre: nombreVar
-                }, function (responseText) {
-                    $('#tablita').html(responseText);
-                });
-            });
-        });
-    </script>
 </html>
+

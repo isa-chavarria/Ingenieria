@@ -9,9 +9,9 @@
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    
-    if (user != null) {
-        
+
+    if (user != null && user.isEncargado()) {
+
     } else {
         response.sendRedirect("index");
     }
@@ -29,10 +29,10 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -88,22 +88,83 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="index">Inicio</a>
-                        </li>
-                        <li>
-                            <a href="quienes">Quienes Somos</a>
-                        </li>
-                        <li>
-                            <a href="galeria">Galeria</a>
+
+                    <ul class="nav navbar-right top-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu message-dropdown">
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="message-footer">
+                                    <a href="#">Read All New Messages</a>
+                                </li>
+                            </ul>
                         </li>
 
-                        <li>
-                            <a href="requerimientos">Requerimientos de matricula</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                </li>
+
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="index"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                                </li>
+                            </ul>
                         </li>
-                          <li>
-                            <a href="contacto">Contacto</a>
+                    </ul>
+
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -117,20 +178,29 @@
 
 
             <div class="row">
-                <div class="box">
-                    <div style="margin-bottom: 5%;" class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Noticias
-                        </h2>
-                        <hr>
-                    </div>
 
-                    <div class="text-center">
+                <div style="margin-bottom: 5%;" class="col-lg-12">
 
-                        <table style="margin-left: 30%;">
-                            <c:forEach items="${kinder.noticias}" var="noticia">
-                                <tr style="border-bottom: solid 1px"><td style="padding:  4%; text-align: left"><c:out value="${noticia.titulo}"></c:out> </td><td style="padding:  4%; text-align: left"><c:out value="${noticia.descripcion}"></c:out></td></tr>
-                            </c:forEach>
+                    <h2 class="intro-text text-center">Noticias
+
+                    </h2>
+
+
+                    <hr>
+                </div>
+                <div style=" overflow: scroll ; height: 400px " class="box">
+
+
+                    <div class="text-left">
+
+                        <table class="table table-bordered table-hover">
+                            <tbody class="cuerpoTabla">
+
+                                <c:forEach items="${noticias}" var="noticia">
+                                    <tr class="active"><td>${noticia.titulo}</td><td>${noticia.descripcion}</td></tr>
+                                </c:forEach>
+
+                            </tbody>
                         </table>
                     </div>
                     <div class="clearfix"></div>
@@ -140,7 +210,6 @@
 
 
         </div>
-
         <footer>
             <div class="container">
                 <div class="row">

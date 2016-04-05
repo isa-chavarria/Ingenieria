@@ -1,19 +1,15 @@
-<%--
-    Document   : Estudiantes
-    Created on : 14/03/2016, 12:29:37 AM
-    Author     : josvr_000
---%>
-
-<%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="modelo.Usuario"%>
+<%@page import="modelo.Encargado"%>
 <!DOCTYPE html>
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
+    Encargado enc = (Encargado) session.getAttribute("enc");
 
-    if (user != null && user.isAdministrador()) {
+    if (user != null && user.isEncargado()) {
 
     } else {
         response.sendRedirect("index");
@@ -29,19 +25,19 @@
         <meta name="author" content="">
 
         <title>Kinder Lulú</title>
-
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -72,8 +68,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">Estudiantes </h3>
-
+            <h3 id="Titulo">EDITAR información PERFIL</h3>
 
         </div>
 
@@ -93,7 +88,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+                    
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -153,7 +148,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                    <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
                                     <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
@@ -166,11 +161,10 @@
                             </ul>
                         </li>
                     </ul>
-
-
+                    
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="administracion">Regresar al menú</a>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -183,57 +177,155 @@
         <div class="container">
 
 
+
+
             <div class="row">
-
-                <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-
-                    <div   class="form-inline">
-                        <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
-                        <div class="col-lg-4">
-                            <form:select path="nivel"  items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
-
-                        </div>
-                    </div>                 
-                </form:form>
-                <div id="tablita">
-                    <h4>Estudiantes de ${grupito.nivel}</h4>
-
-                    <div style=" overflow: scroll ; height: 500px " class="box">
+                <div class="box">
+                    <div class="leftImage">
 
 
-
-
-                        <table class="table table-bordered table-hover">
-                            <thead class="titulosTabla">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRIMER APELLIDO</th>
-                                    <th>SEGUNDO APELLIDO</th>
-                                    <th>FECHA DE NACIMIENTO</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="cuerpoTabla">
-                                <c:forEach items="${grupito.purga()}" var="stu">
-                                    <tr class="active">
-                                        <td>${stu.id}</td>
-                                        <td>${stu.nombre}</td>
-                                        <td>${stu.apellido1}</td>
-                                        <td>${stu.apellido2}</td>
-                                        <td>${stu.fechaNacimiento}</td>
-                                        <td><a href="<c:url value='' />" class="btn btn-success custom-width">Editar</a></td>
-                                        <td><a href="<c:url value='' />" class="btn btn-danger custom-width">Eliminar</a></td>
-                                    </tr>
-                                </c:forEach>
-
-                            </tbody>
-                        </table>
+                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="150px" alt="">
                     </div>
 
+                    <div class="rightImage"  >
+
+                        <hr>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </h2>
+                        <hr>
+
+
+
+                    </div>
+
+                    <div class="dec">  </div>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+                            <div class="sidebar-nav">
+                                <div role="navigation">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                                    </div>
+                                    <div class="navbar-collapse collapse sidebar-navbar-collapse" >
+                                        <ul class="nav navbar-nav">
+                                            <li class="active"><a style="font-size: small;" href="#">Información</a></li>
+
+                                            <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
+
+                                            <li><a style="font-size: small;" href="#">Familiares</a></li>
+
+                                            <li><a style="font-size: small;" href="#">Padecimientos</a></li>
+                                        </ul>
+                                    </div><!--/.nav-collapse -->
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                            <form:form method="POST" action="Matricular"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                                <table class="tableInvisivle">
+
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td><form:input path="nombre" type="text" class="form-control col-lg-6" id="nombre"
+                                                    placeholder="Nombre del niño" onkeydown="return validarLetras(event)"/></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Cédula:</td>
+                                        <td><form:input type="text" path="id" id="id" itemValue="id" class="form-control input-sm" disabled="true"/></td>
+                                        <td></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>Primer apellido:</td>
+                                        <td><form:input path="apellido1" type="text" class="form-control col-lg-6" id="nombre"
+                                                    placeholder="Primer apellido" onkeydown="return validarLetras(event)"/></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo Apellido:</td>
+                                        <td><form:input path="apellido2" type="text" class="form-control col-lg-6" id="nombre"
+                                                    placeholder="Segundo apellido" onkeydown="return validarLetras(event)"/></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Fecha de nacimiento:</td>
+                                        <td><form:input path="fechaNacimiento" itemValue="fechaNacimiento" type="Date" class="form-control" id="fechaN" /></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Nivel:</td>
+                                        <td><input type="text"  id="nivel" value="${nivel}" placeholder="${nivel}" class="form-control input-sm" disabled="true"/></td>
+                                        <td></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>teléfono del domicilio:</td>
+                                        <td><form:input path="telefono"  type="text" itemValue="telefono" class="form-control" placeholder="####-####" name="telefono" id="telefono"/></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dirección del domicilio:</td>
+                                        <td><form:input path="direccion" type="text" class="form-control" id="direccion"
+                                                    placeholder="Dirección del hogar"/></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+
+
+
+                                    <tr>
+                                        <td></td>
+                                        <td><a href='administracion' class="btn btn-success custom-width">Guardar</a></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+
+
+
+
+                            </form:form>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
+
+
+
+            <div class="clearfix"></div>
+
+
 
 
         </div>
@@ -262,18 +354,4 @@
         </script>
 
     </body>
-
-    <script>
-        $(document).ready(function () {
-            $('#nivel').change(function (event) {
-                var nombreVar = $('#nivel').val();
-                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-                $.post('seleccionar', {
-                    nombre: nombreVar
-                }, function (responseText) {
-                    $('#tablita').html(responseText);
-                });
-            });
-        });
-    </script>
 </html>

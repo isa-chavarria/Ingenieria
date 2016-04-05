@@ -16,10 +16,10 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -98,7 +98,7 @@
 
 
             <div class="row">
-                
+
                 <div style="margin-bottom: 5%;" class="col-lg-12">
                     <h2 class="intro-text text-center">Contactos
                         <button type="button" class="btn btn-default" aria-label="Left Align">
@@ -114,7 +114,7 @@
                         <table class="table table-bordered table-hover">
                             <!--tr><th>Título</th><th>Descripción</th></tr-->
                             <tbody class="cuerpoTabla">
-                                <c:forEach items="${kinder.contactos}" var="contacto">
+                                <c:forEach items="${contactos}" var="contacto">
                                     <tr class="active"><td><c:out value="${contacto.titulo}"></c:out> </td><td><c:out value="${contacto.descripcion}"></c:out></td></tr>
                                 </c:forEach>
                             </tbody>
@@ -148,9 +148,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                                $('.carousel').carousel({
+                                    interval: 5000 //changes the speed
+                                })
         </script>
 
     </body>

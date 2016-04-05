@@ -24,6 +24,7 @@
 	<title>Registration Confirmation Page</title>
 	<link href="resources/css/app.css" rel="stylesheet">
         <link href="resources/css/bootstrap.css" rel="stylesheet">
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
 </head>
 <body>
 <div class="generic-container">
