@@ -185,11 +185,29 @@
                         <li>
                             <a href="matricula"><i class="fa fa-archive"></i> Matricula</a>
                         </li>
-                        <li>
-                            <a href="Estudiantes"><i class="fa fa-users"></i> Estudiantes</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Control de la institución <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <!--li>
+                                    <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
+                                </li>
+                                <li class="divider"></li-->
+
+                                <li>
+                                    <a href="Estudiantes"><i class="fa fa-university"></i> Estudiantes</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Personal docente</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="noticiasAdministrador"><i class="fa fa-bell"></i> Niveles</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Modificar <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Configuración <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <!--li>
                                     <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>

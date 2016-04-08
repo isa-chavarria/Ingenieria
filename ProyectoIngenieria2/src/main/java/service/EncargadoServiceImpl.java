@@ -45,7 +45,7 @@ public class EncargadoServiceImpl implements EncargadoService {
 
     @Override
     public void UpdateEncargado(Encargado Encargado) {
-        Encargado encargado = this.Encargado.findbyId(Encargado.getNombre());
+        Encargado encargado = this.Encargado.findbyId(Encargado.getId());
         if (encargado != null) {
             encargado.setNombre(Encargado.getNombre());
             encargado.setApellido1(Encargado.getApellido1());

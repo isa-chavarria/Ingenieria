@@ -7,7 +7,6 @@
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    Encargado enc = (Encargado) session.getAttribute("enc");
 
     if (user != null && user.isEncargado()) {
 
@@ -28,24 +27,16 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
         <style type="text/css">
             .bs-example{
                 margin: 20px;
@@ -71,10 +62,12 @@
 
                 var formulario = document.getElementById('2');
                 var formulario1 = document.getElementById('1');
+                var div = document.getElementById("notificacion");
 
                 if (formulario.className == "inv") {
                     formulario.className = 'vis';
                     formulario1.className = 'inv';
+                    div.innerHTML = "";
                 } else {
                     formulario.className = 'inv';
                     formulario1.className = 'btn btn-success btn-block';
@@ -130,7 +123,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
+
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -203,7 +196,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="encargado">Regresar al menú</a>
@@ -226,13 +219,13 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="150px" alt="">
+                        <img class="img-circle" src="  ${enc.ruta_imagen} " width="50%" height="150px" alt="">
                     </div>
 
                     <div class="rightImage"  >
 
                         <hr>
-                        <h2 class="intro-text text-center" style=" color: #ffffff;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </h2>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
                         <hr>
 
 
@@ -288,37 +281,40 @@
                             <table class="tableInvisivle">
                                 <tr>
                                     <td>Nombre completo:</td>
-                                    <td><% out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%></td>
+                                    <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
                                 </tr>
                                 <tr>
                                     <td>Correo electrónico:</td>
-                                    <td><% out.print(enc.getEmail());%> </td>
+                                    <td>${enc.email} </td>
                                 </tr>
 
                             </table>
 
                             <button type="button"  id="1" onclick='Cambiar();' class="btn btn-success btn-block">Editar contraseña</button>
 
-                            <div id='2' class="inv"  style='background: #F2F2F2; border:solid 1px #999999;border-radius: 2px; margin-bottom:3%;   padding: 2%'>
-                                <form:form method="POST" action="Login"  modelAttribute="usuario" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validarContrasena()" role="form">
-
+                            <div id='2' class="inv"  style='background: #F2F2F2; border:solid 1px #0066ff;border-radius: 2px; margin-bottom:3%;   padding: 2%'>
+                                <form:form method="POST" action="modificarCuentaUsuario"  modelAttribute="usuario" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validar()" role="form">
+                                    <form:input type="hidden" path="id" id="id"/>
+                                    <form:input type="hidden" path="email" id="email"/>
+                                    <form:input type="hidden" path="roleSeccion" id="roleSeccion"/>
+                                    <form:input type="hidden" path="passAnt" id="passAnt"/>
                                     <table class="tableInvisivle">
 
                                         <tr>
                                             <td>Contraseña anterior:</td>
-                                            <td><form:input type="password"  path="" id="constrasenaA" required ="true" class="form-control input-sm" /></td>
-                                            <td></td>
+                                            <td><form:input type="password"  path="contrasenaA" id="passwordA" required ="true" class="form-control input-sm" onchange="validarContrasenaAnterior()" /></td>
+                                            <td><p  style=" font-size: small; color: red;" id="errorAnterior"></td>
                                         </tr>
                                         <tr>
                                             <td>Contraseña nueva:</td>
-                                            <td><form:input type="password"  path="" id="constrasenaA" required ="true" class="form-control input-sm" /></td>
+                                            <td><form:input type="password"  path="contrasena" id="password" required ="true" class="form-control input-sm" /></td>
                                             <td></td>
                                         </tr>
 
                                         <tr>
                                             <td>Repetir contraseña nueva:</td>
-                                            <td><form:input type="password"  path="" id="constrasenaA" required ="true" class="form-control input-sm" /></td>
-                                            <td></td>
+                                            <td><form:input type="password"  path="" id="passwordC" required ="true" class="form-control input-sm" onchange="validarContrasena()" /></td>
+                                            <td><p  style=" font-size: small; color: red;" id="error"></td>
                                         </tr>
 
                                         <tr>
@@ -332,7 +328,7 @@
 
                                 </form:form>
                             </div>
-
+                            <div style="margin-top: 2%" id ='notificacion'>${msg}</div>
 
                         </div>
                     </div>

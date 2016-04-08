@@ -5,7 +5,7 @@
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    Encargado enc = (Encargado) session.getAttribute("enc");
+
 
     if (user != null && user.isEncargado()) {
 
@@ -180,13 +180,13 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="150px" alt="">
+                        <img class="img-circle" src=" ${enc.ruta_imagen} " width="50%" height="150px" alt="">
                     </div>
 
                     <div class="rightImage"  >
 
                         <hr>
-                        <h2 class="intro-text text-center" style=" color: #ffffff;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </h2>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
                         <hr>
 
 
@@ -245,16 +245,16 @@
                             <table class="tableInvisivle">
                                 <tr>
                                     <td>Nombre completo:</td>
-                                    <td><% out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%></td>
+                                    <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
                                 </tr>
 
                                 <tr>
                                     <td>Cédula:</td>
-                                    <td><% out.print(enc.getId());%></td>
+                                    <td>${enc.id}</td>
                                 </tr>
                                 <tr>
                                     <td>Fecha de nacimiento:</td>
-                                    <td><% out.print(enc.getFechaNacimiento());%></td>
+                                    <td>${enc.fechaNacimiento}</td>
                                 </tr>
                                 <tr>
                                     <td>Nivel:</td>
@@ -263,14 +263,14 @@
 
                                 <tr>
                                     <td>teléfono del domicilio:</td>
-                                    <td><% out.print(enc.getTelefono());%></td>
+                                    <td>${enc.telefono}</td>
                                 </tr>
                                 <tr>
                                     <td>Dirección del domicilio:</td>
-                                    <td><%out.print(enc.getDireccion());%></td>
+                                    <td>${enc.direccion}</td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td style="color: #33cc00">${msg}</td>
                                     <td><a href='editarInformacionUsuario' class="btn btn-success custom-width">Editar información</a></td>
 
                                 </tr>

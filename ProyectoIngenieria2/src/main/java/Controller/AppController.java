@@ -26,6 +26,7 @@ import modelo.Noticia;
 import modelo.Pago;
 import modelo.SuperMatricula;
 import modelo.Usuario;
+import modelo.UsuarioM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -287,7 +288,6 @@ public class AppController {
         String email = user.getEmail();
         Usuario usu = usuarioService.findByLogin(email, password);
         if (usu != null) {
-            String nombre = usu.getEncargado().iterator().next().getNombre();
 
             if (usu.isAdministrador()) {
                 // model.addAttribute("nombre", nombre);
@@ -514,7 +514,7 @@ public class AppController {
     public String loadPerfil(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
-        request.getSession().setAttribute("enc", enc);
+        model.addAttribute("enc", enc);
         String nivel = enc.getNino().iterator().next().getClase().getNivel();
         model.addAttribute("nivel", nivel);
         return "perfil";
@@ -524,7 +524,7 @@ public class AppController {
     public String loadPerfilAdministrador(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
-        request.getSession().setAttribute("enc", enc);
+        model.addAttribute("enc", enc);
 
         return "PerfilAdministrador";
     }
@@ -532,18 +532,30 @@ public class AppController {
     @RequestMapping(value = {"/perfilCuenta"}, method = RequestMethod.GET)
     public String loadperfilCuenta(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        UsuarioM u = new UsuarioM();
+        u.setId(usu.getId());
+        u.setEmail(usu.getEmail());
+        u.setRoleSeccion(usu.getRoleSeccion());
+        String pass = usu.getContrasena();
+        u.setPassAnt(pass);
         Encargado enc = encargadoService.findbyId(usu.getId());
-        request.getSession().setAttribute("enc", enc);
-        model.addAttribute("usuario", usu);
+        model.addAttribute("enc", enc);
+        model.addAttribute("usuario", u);
         return "PerfilCuenta";
     }
 
     @RequestMapping(value = {"/perfilCuentaUsuario"}, method = RequestMethod.GET)
     public String loadperfilCuentaUsuario(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        UsuarioM u = new UsuarioM();
+        u.setId(usu.getId());
+        u.setEmail(usu.getEmail());
+        u.setRoleSeccion(usu.getRoleSeccion());
+        String pass = usu.getContrasena();
+        u.setPassAnt(pass);
         Encargado enc = encargadoService.findbyId(usu.getId());
-        request.getSession().setAttribute("enc", enc);
-        model.addAttribute("usuario", usu);
+        model.addAttribute("enc", enc);
+        model.addAttribute("usuario", u);
         return "PerfilCuentaUsuario";
     }
 
@@ -551,7 +563,7 @@ public class AppController {
     public String loadEditarPerfilAdministrador(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
-        request.getSession().setAttribute("enc", enc);
+        model.addAttribute("enc", enc);
         String id = enc.getId();
         model.addAttribute("encargado", enc);
         return "editarInformacionPerfil";
@@ -561,14 +573,143 @@ public class AppController {
     public String loadEditarPerfilUsuario(ModelMap model, HttpServletRequest request) {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
-        request.getSession().setAttribute("enc", enc);
         String id = enc.getId();
-        model.addAttribute("encargado", enc);
+        model.addAttribute("enc", enc);
         String nivel = enc.getNino().iterator().next().getClase().getNivel();
         model.addAttribute("nivel", nivel);
         return "editarInformacionUsuario";
     }
 
+    //-------------------------------------------------------------------------------------
+    @RequestMapping(value = {"/modificarPerfilAdministrador"}, method = RequestMethod.POST)
+    public String modificarPerfilAdministrador(@Valid Encargado enc, BindingResult result, ModelMap model, HttpServletRequest request) {
+        String msg = "";
+
+        String id = enc.getId();
+
+        Usuario u = this.usuarioService.findbyId(id);
+
+        enc.getUsuario().add(u);
+
+        if (result.hasErrors()) {
+            msg = "La Información no pudo modificarse";
+        } else {
+            msg = "Información modificada correctamente";
+            encargadoService.UpdateEncargado(enc);
+        }
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado en = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", en);
+        model.addAttribute("msg", msg);
+
+        //       model.addAttribute("msg", "Su información se modifico correctamente");
+        return "PerfilAdministrador";
+    }
+
+    @RequestMapping(value = {"/modificarPerfilUsuario"}, method = RequestMethod.POST)
+    public String modificarPerfilUsuario(@Valid Encargado enc, BindingResult result, ModelMap model, HttpServletRequest request) {
+        String msg = "";
+
+        String id = enc.getId();
+
+        Usuario u = this.usuarioService.findbyId(id);
+
+        enc.getUsuario().add(u);
+
+        Nino aux = ninoService.findbyId(id);
+
+        enc.getNino().add(aux);
+
+        if (result.hasErrors()) {
+            msg = "La Información no pudo modificarse";
+        } else {
+            msg = "Información modificada correctamente";
+            encargadoService.UpdateEncargado(enc);
+        }
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado en = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", en);
+        model.addAttribute("msg", msg);
+
+        String nivel = enc.getNino().iterator().next().getClase().getNivel();
+        model.addAttribute("nivel", nivel);
+
+        //       model.addAttribute("msg", "Su información se modifico correctamente");
+        return "perfil";
+    }
+
+    //-------------------------------------------------------------------------------
+    @RequestMapping(value = {"/modificarCuentaAdministrador"}, method = RequestMethod.POST)
+    public String modificarCuentaAdministrador(@Valid UsuarioM u, BindingResult result, ModelMap model, HttpServletRequest request) {
+        String msg = "";
+        Usuario modificado = new Usuario();
+
+        modificado.setContrasena(u.getContrasena());
+        modificado.setId(u.getId());
+        modificado.setEmail(u.getEmail());
+        modificado.setRoleSeccion(u.getRoleSeccion());
+
+        Encargado encar = encargadoService.findbyId(u.getId());
+
+        modificado.getEncargado().add(encar);
+
+        if (result.hasErrors()) {
+            msg = "<div class=\"alert alert-warning\" role=\"alert\">La contraseña no pudo modificarse</div>";
+        } else {
+
+            msg = "<div class=\"alert alert-success\" role=\"alert\">La contraseña se modificó correctamente</div>";
+
+            usuarioService.UpdateUsuario(modificado);
+            u.actualizar();
+        }
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        model.addAttribute("usuario", u);
+        model.addAttribute("msg", msg);
+
+        //       model.addAttribute("msg", "Su información se modifico correctamente");
+        return "PerfilCuenta";
+    }
+
+    @RequestMapping(value = {"/modificarCuentaUsuario"}, method = RequestMethod.POST)
+    public String modificarCuentaUsuario(@Valid UsuarioM u, BindingResult result, ModelMap model, HttpServletRequest request) {
+        String msg = "";
+
+        Usuario modificado = new Usuario();
+
+        modificado.setContrasena(u.getContrasena());
+        modificado.setId(u.getId());
+        modificado.setEmail(u.getEmail());
+        modificado.setRoleSeccion(u.getRoleSeccion());
+
+        Encargado encar = encargadoService.findbyId(u.getId());
+
+        modificado.getEncargado().add(encar);
+
+        if (result.hasErrors()) {
+            msg = "<div class=\"alert alert-warning\" role=\"alert\">La contraseña no pudo modificarse</div>";
+        } else {
+            msg = "<div class=\"alert alert-success\" role=\"alert\">La contraseña se modificó correctamente</div>";
+            usuarioService.UpdateUsuario(modificado);
+            u.actualizar();
+
+        }
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        model.addAttribute("usuario", u);
+        model.addAttribute("msg", msg);
+
+        //       model.addAttribute("msg", "Su información se modifico correctamente");
+        return "PerfilCuentaUsuario";
+    }
+
+    ///-----------------------------------------------------------------------------------------
     @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)
     public String loadRequerimientos(ModelMap model) {
         return "requerimientos";

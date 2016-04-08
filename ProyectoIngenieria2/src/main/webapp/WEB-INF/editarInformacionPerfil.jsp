@@ -7,7 +7,7 @@
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    Encargado enc = (Encargado) session.getAttribute("enc");
+
 
     if (user != null && user.isAdministrador()) {
 
@@ -184,13 +184,13 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="150px" alt="">
+                        <img class="img-circle" src="  ${enc.ruta_imagen} " width="50%" height="150px" alt="">
                     </div>
 
                     <div class="rightImage"  >
 
                         <hr>
-                        <h2 class="intro-text text-center" style=" color: #ffffff;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </h2>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
                         <hr>
 
 
@@ -243,7 +243,10 @@
                 <div class="col-lg-9 text-center">
                     <div class="panel panel-default">
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                            <form:form method="POST" action="Matricular"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                            <form:form method="POST" action="modificarPerfilAdministrador"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                               <form:input type="hidden" path="id" id="id"/>
+                               <form:input type="hidden" path="email" id="email"/>
+                               <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
                                 <table class="tableInvisivle">
 
                                     <tr>
@@ -255,7 +258,7 @@
 
                                     <tr>
                                         <td>Cédula:</td>
-                                        <td><form:input type="text" path="id" id="id" itemValue="id" class="form-control input-sm" disabled="true"/></td>
+                                        <td><form:input type="text" path="id" id="id" class="form-control input-sm" disabled="true"/></td>
                                         <td></td>
 
                                     </tr>
@@ -295,7 +298,7 @@
 
                                     <tr>
                                         <td></td>
-                                        <td><a href='administracion' class="btn btn-success custom-width">Guardar</a></td>
+                                        <td><button type="submit" class="btn btn-success">Guardar</button></td>
                                         <td></td>
                                     </tr>
                                 </table>
