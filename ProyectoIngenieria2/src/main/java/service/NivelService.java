@@ -3,28 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package service;
 
 import java.util.List;
-import modelo.Kinder;
-import modelo.Usuario;
+import modelo.Clase;
 
 /**
  *
  * @author Isa
  */
-public interface UsuarioDao {
+public interface ClaseService {
 
-    Usuario findbyId(String id);
+    Clase findbyId(String id);
 
-    void save(Usuario nino);
+    void save(Clase clase);
 
     void DeletebyId(String id);
 
-    List< Usuario> findAll();
+    List<Clase> findAll();
 
-    Usuario findbyLogin(String email, String password);
-
-    boolean isIdUnique(String id);
-
+    void UpdateClase(Clase clase);
 }

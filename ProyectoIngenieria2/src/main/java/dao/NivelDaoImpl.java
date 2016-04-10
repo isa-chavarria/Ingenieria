@@ -6,7 +6,7 @@
 package dao;
 
 import java.util.List;
-import modelo.Familiar;
+import modelo.Clase;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -15,34 +15,35 @@ import org.springframework.stereotype.Repository;
  *
  * @author Isa
  */
-@Repository("FamiliarDao")
-public class FamiliarDaoImpl extends AbstractDao<Long, Familiar> implements FamiliarDao {
+@Repository("ClaseDao")
+public class ClaseDaoImpl extends AbstractDao<String, Clase> implements ClaseDao {
 
     @Override
-    public Familiar findbyCodigo(Long codigo) {
-        Familiar familiar = getByKey(codigo);
-        return familiar;
+    public Clase findbyId(String id) {
+        Clase Clase = getByKey(id);
+        return Clase;
     }
 
     @Override
-    public void save(Familiar familiar) {
-        persist(familiar);
+    public void save(Clase clase) {
+        persist(clase);
     }
 
     @Override
-    public void DeletebyId(Long codigo) {
+    public void DeletebyId(String id) {
         Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("codigo", codigo));
-        Familiar familiar = (Familiar) crit.uniqueResult();
-        delete(familiar);
+        crit.add(Restrictions.eq("id", id));
+        Clase Clase = (Clase) crit.uniqueResult();
+        delete(Clase);
     }
 
     @Override
-    public List<Familiar> findAll() {
+    public List<Clase> findAll() {
         Criteria criteria = createEntityCriteria();
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-        List<Familiar> familiar = (List<Familiar>) criteria.list();
+        List<Clase> clase = (List<Clase>) criteria.list();
 
-        return familiar;
+        return clase;
     }
+
 }

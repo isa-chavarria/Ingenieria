@@ -200,31 +200,29 @@
                         <div  class="form-group">
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Titulo:</label>
                             <div class="col-lg-10">
-                                <form:input type="text" class="form-control" path="titulo" id="titulo"
-                                            value="${noticiaBase.titulo}"/>
+                                <form:input type="text" class="form-control" path="titulo" id="titulo"/>
                             </div>
                         </div>
                         <div  class="form-group">
                             <label for="ejemplo_password_3" class="col-lg-2 control-label">Descripción:</label>
                             <div class="col-lg-10">
-                                <form:input type="text" class="form-control" path="descripcion" id="descripcion" 
-                                            value="${noticiaBase.descripcion}" />
+                                <form:input type="text" class="form-control" path="descripcion" id="descripcion" />
                             </div>
                         </div>
-                        <form:hidden path="codigo" value="${noticiaBase.codigo}"/>
+                        <form:hidden path="codigo"/>
                         <div class="col-lg-offset-2 col-lg-10">
                             <button type="submit" class="btn btn-info">Modificar</button>
                             <div class="form-group">
                             </div>
                         </div>
-                        <p>${msg}</p>
+                        <p></p>
                     </form:form>
 
                 </div>
             </div>
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Warning!</strong> ${msg}
+                <strong></strong>${msg} <a style="margin-left: 5%;" href="<c:url value='/contactoAdministrador' />">Ver lista de noticias</a>
             </div>
         </div>
 

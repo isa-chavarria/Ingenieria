@@ -38,7 +38,9 @@ public class Clase implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "id")
     private String id;
-
+    @Size(max = 50)
+    @Column(name = "nombre")
+    private String nombre;
 
     @Size(max = 50)
     @Column(name = "nivel")
@@ -95,7 +97,13 @@ public class Clase implements Serializable {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public String tablaEstudiantesPagos() {
         Collection<Encargado> lista = this.purga();

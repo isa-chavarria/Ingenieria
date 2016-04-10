@@ -42,7 +42,7 @@ public class AgregarContactosController {
         System.out.println(contacto.toString());
         if (result.hasErrors()) {
             System.out.println("has errors");
-            model.addAttribute("msg", "No se agrego el contacto con exito");
+            model.addAttribute("msg", "No se agregó el contacto con éxito");
             return "agregarContacto";
         }
 
@@ -51,7 +51,7 @@ public class AgregarContactosController {
         contactoService.save(contacto);
         kinder.getContactos().add(contacto);
 
-        model.addAttribute("msg", "Se agrego el contacto con exito");
+        model.addAttribute("msg", "Se agregó el contacto con éxito");
         return "agregarContacto";
     }
 

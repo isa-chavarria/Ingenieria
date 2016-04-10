@@ -48,7 +48,7 @@ public class  AgregarNoticiasController  {
         System.out.println(noticia.toString());
         if (result.hasErrors()) {
             System.out.println("has errors");
-            model.addAttribute("msg", "No se agrego el noticia con exito");
+            model.addAttribute("msg", "No se agregó la noticia con éxito");
             return "agregarNoticia";
         }
 
@@ -56,9 +56,9 @@ public class  AgregarNoticiasController  {
         noticia.setKinder(kinder);
         noticiaService.save(noticia);
         kinder.getNoticias().add(noticia);
-        System.out.println(kinder.getNoticias() +"caca de gato");
+
                 
-        model.addAttribute("msg", "Se agrego el noticia con exito");
+        model.addAttribute("msg", "Se agregó la noticia con éxito");
         return "agregarNoticia";
     }
 

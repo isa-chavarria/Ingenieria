@@ -50,10 +50,10 @@ public class Encargado implements Serializable {
     @Size(max = 50)
     @Column(name = "apellido2")
     private String apellido2;
-    @Size(max = 50)
+    @Size(max = 1000)
     @Column(name = "email")
     private String email;
-    @Size(max = 50)
+    @Size(max = 1000)
     @Column(name = "direccion")
     private String direccion;
     @Size(max = 50)
@@ -65,6 +65,10 @@ public class Encargado implements Serializable {
     @Size(max = 1000)
     @Column(name = "ruta_imagen")
     private String ruta_imagen;
+
+    @Size(max = 50)
+    @Column(name = "sexo")
+    private String sexo;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usu_enc",
@@ -81,6 +85,16 @@ public class Encargado implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "nino_id")})
     private Set<Nino> nino = new HashSet<Nino>();
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
 
     public Set<Nino> getNino() {
         return nino;

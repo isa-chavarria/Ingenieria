@@ -21,6 +21,7 @@ public class SuperMatricula {
     String telefono;
     String enfermedad;
     String medicamento;
+    String sexo;
     //------------PADRE--------------------------
     String nombrePadre;
     String edadPadre;
@@ -49,6 +50,16 @@ public class SuperMatricula {
     String tieneFotos;
     String monto;
     String curso;
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
 
     public String getCedulaEncargado() {
         return cedulaEncargado;

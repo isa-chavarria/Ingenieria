@@ -29,7 +29,7 @@ public class Informacion {
     @Size(min = 1, max = 50)
     @Column(name = "codigo")
     private String codigo;
-    @Size(max = 50)
+    @Size(max = 2000)
     @Column(name = "descripcion")
     private String descripcion;
 

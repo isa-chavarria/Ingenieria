@@ -50,6 +50,7 @@ public class EncargadoServiceImpl implements EncargadoService {
             encargado.setNombre(Encargado.getNombre());
             encargado.setApellido1(Encargado.getApellido1());
             encargado.setApellido2(Encargado.getApellido2());
+            encargado.setSexo(Encargado.getSexo());
             encargado.setId(Encargado.getId());
             encargado.setDireccion(Encargado.getDireccion());
             encargado.setEmail(Encargado.getEmail());

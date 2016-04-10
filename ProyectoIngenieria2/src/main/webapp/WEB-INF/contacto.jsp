@@ -101,9 +101,7 @@
 
                 <div style="margin-bottom: 5%;" class="col-lg-12">
                     <h2 class="intro-text text-center">Contactos
-                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
-                        </button>
+                        
                     </h2>
 
 

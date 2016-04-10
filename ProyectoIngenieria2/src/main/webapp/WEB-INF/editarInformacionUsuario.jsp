@@ -282,6 +282,11 @@
                                         <td><form:input path="fechaNacimiento" itemValue="fechaNacimiento" type="Date" class="form-control" id="fechaN" /></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
+                                    <tr>
+                                        <td>Sexo</td>
+                                        <td><form:select path="sexo" items="${genero}"   class="form-control input-sm" id="sexo"  /></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
 
                                     <tr>
                                         <td>Nivel:</td>

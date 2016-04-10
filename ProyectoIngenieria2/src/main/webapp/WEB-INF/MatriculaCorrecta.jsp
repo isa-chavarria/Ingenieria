@@ -33,7 +33,7 @@
 	</div>
 	
 	<span class="well floatRight">
-		Go to <a href="<c:url value='/administracion' />">Continuar</a>
+		 <a href="<c:url value='/Estudiantes' />">Continuar</a>
 	</span>
 </div>
 </body>

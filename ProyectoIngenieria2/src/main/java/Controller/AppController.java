@@ -148,9 +148,18 @@ public class AppController {
         String telefono = persona.getTelefono();
         String direccion = persona.getDireccion();
         String fecha = persona.getFechaNacimiento();
-        String password = persona.getPassword();
+        String password = "0000";
         String enfermedad = persona.getEnfermedad();
         String medicamento = persona.getMedicamento();
+        String sexo = persona.getSexo();
+
+        if (this.usuarioService.isIdUnique(id) == false) {
+            Usuario user = new Usuario();
+            model.addAttribute("user", user);
+            model.addAttribute("fallo", false);
+            return "MatriculaCorrecta";
+        }
+
         //------------PADRE--------------------------
         String nombrePadre = persona.getNombrePadre();
         String edadPadre = persona.getEdadPadre();
@@ -197,6 +206,7 @@ public class AppController {
         encargado.setDireccion(direccion);
         encargado.setTelefono(telefono);
         encargado.setFechaNacimiento(fecha);
+        encargado.setSexo(sexo);
         //-----------Nino-------------
         Nino n = new Nino();
         n.setId(id);
@@ -233,15 +243,17 @@ public class AppController {
 //------------PAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE-----------------------------------------------
         //---------GRUPO---------------
         Clase g = claseService.findbyId(this.calcularCodigo(nivel));
-        String prueba = g.getNivel();
 
         //-----Uniendo-------------
         padre.setNino(n);
         madre.setNino(n);
         enc.setNino(n);
 
-        n.setClase(g);
-        g.getNinos().add(n);
+        if (g != null) {
+            n.setClase(g);
+            g.getNinos().add(n);
+        }
+
         String idpa = padre.getId();
         String idma = madre.getId();
         String idenc = enc.getId();
@@ -262,10 +274,10 @@ public class AppController {
         encargado.getUsuario().add(u);
         encargado.getNino().add(n);
         encargadoService.UpdateEncargado(encargado);
-        n.getEncargado().add(encargado);
-        ninoService.UpdateNino(n);
-        u.getEncargado().add(encargado);
-        usuarioService.UpdateUsuario(u);
+//        n.getEncargado().add(encargado);
+//        ninoService.UpdateNino(n);
+//        u.getEncargado().add(encargado);
+//        usuarioService.UpdateUsuario(u);
 
         //------GUARDANDO---------------------------
         //-------FIN------------------------------------------------------------
@@ -350,9 +362,9 @@ public class AppController {
         Contacto contacto1 = contactoService.findbyCodigo(contacto.getCodigo());
         if (contacto1 != null) {
             contactoService.DeletebyCodigo(contacto1.getCodigo());
-            model.addAttribute("msg", "Se elimino el contacto con exito");
+            model.addAttribute("msg", "Se elimino el contacto con éxito");
         } else {
-            model.addAttribute("msg", "No se elimino el contacto con exito");
+            model.addAttribute("msg", "No se elimino el contacto con éxito");
         }
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
 
@@ -387,7 +399,7 @@ public class AppController {
         con.setDescripcion(contacto.getDescripcion());
         contactoService.UpdateContacto(con);
 
-        model.addAttribute("msg", "Se Modificó el contacto con exito");
+        model.addAttribute("msg", "Se Modificó el contacto con éxito");
         return "agregarContacto";
     }
 
@@ -428,9 +440,9 @@ public class AppController {
         Noticia noticia1 = NoticiaService.findbyCodigo(noticia.getCodigo());
         if (noticia1 != null) {
             NoticiaService.DeletebyCodigo(noticia1.getCodigo());
-            model.addAttribute("msg", "Se elimino la noticia con exito");
+            model.addAttribute("msg", "Se elimino la noticia con éxito");
         }
-        model.addAttribute("msg", "No se elimino la noticia con exito");
+        model.addAttribute("msg", "No se elimino la noticia con éxito");
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (kinder != null) {
             model.addAttribute("kinder", kinder);
@@ -445,10 +457,9 @@ public class AppController {
     public String updateNoticias(@Valid Noticia noticia, BindingResult result, ModelMap model) {
         System.out.println(noticia.toString());
         Noticia noti = new Noticia();
-        model.addAttribute("noticia", noti);
+        model.addAttribute("noticia", noticia);
 
-        model.addAttribute("noticiaBase", noticia);
-
+        //      model.addAttribute("noticiaBase", noticia);
         return "ActualizarNoticia";
     }
 
@@ -460,9 +471,9 @@ public class AppController {
         noti.setTitulo(noticia.getTitulo());
         noti.setDescripcion(noticia.getDescripcion());
         NoticiaService.UpdateNoticia(noti);
-
-        model.addAttribute("msg", "Se Modificó la noticia con exito");
-        return "ActualizarNoticias";
+        model.addAttribute("noticia", noti);
+        model.addAttribute("msg", "Se Modificó la noticia con éxito");
+        return "ActualizarNoticia";
     }
 
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
@@ -790,6 +801,14 @@ public class AppController {
         ArrayList<String> l = new ArrayList<>();
         l.add("Si");
         l.add("No");
+        return l;
+    }
+
+    @ModelAttribute("genero")
+    public ArrayList<String> initializeGenero() {
+        ArrayList<String> l = new ArrayList<>();
+        l.add("Masculino");
+        l.add("Femenino");
         return l;
     }
 

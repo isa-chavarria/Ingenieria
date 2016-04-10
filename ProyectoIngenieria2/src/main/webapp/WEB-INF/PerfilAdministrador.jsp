@@ -254,6 +254,10 @@
                                     <td>Fecha de nacimiento:</td>
                                     <td>${enc.fechaNacimiento}</td>
                                 </tr>
+                                <tr>
+                                    <td>sexo:</td>
+                                    <td>${enc.sexo}</td>
+                                </tr>
 
                                 <tr>
                                     <td>teléfono del domicilio:</td>

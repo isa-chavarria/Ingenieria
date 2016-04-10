@@ -59,4 +59,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario findByLogin(String email, String password) {
         return Usuario.findbyLogin(email, password);
     }
+    
+    @Override
+    public boolean isIdUnique(String id) {
+        return Usuario.isIdUnique(id);
+    }
 }

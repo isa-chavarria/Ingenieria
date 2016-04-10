@@ -55,7 +55,7 @@ public class Profesor implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "id")
     private String id;
-    @Size(max = 50)
+    @Size(max = 1000)
     @Column(name = "direccion")
     private String direccion;
     @Size(max = 50)

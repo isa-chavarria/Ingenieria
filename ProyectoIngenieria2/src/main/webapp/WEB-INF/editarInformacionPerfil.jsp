@@ -275,6 +275,11 @@
                                                     placeholder="Segundo apellido" onkeydown="return validarLetras(event)"/></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
+                                    <tr>
+                                        <td>Sexo</td>
+                                        <td><form:select path="sexo" items="${genero}"   class="form-control input-sm" id="sexo"  /></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
 
                                     <tr>
                                         <td>Fecha de nacimiento:</td>

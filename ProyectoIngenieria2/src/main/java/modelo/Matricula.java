@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,11 +27,10 @@ import javax.validation.constraints.Size;
 public class Matricula implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "id")
-    private String id;
+    @Column(name="codigo")
+    private Long codigo;
     @Column(name = "completa")
     private Boolean competa;
     @Column(name = "constanciaNac")
@@ -54,13 +55,15 @@ public class Matricula implements Serializable {
     @ManyToOne
     private Nino nino;
 
-    public String getId() {
-        return id;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
+
+    
 
     public Boolean getCompeta() {
         return competa;
@@ -129,7 +132,7 @@ public class Matricula implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -140,7 +143,7 @@ public class Matricula implements Serializable {
             return false;
         }
         Matricula other = (Matricula) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -148,7 +151,7 @@ public class Matricula implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.clase[ id=" + id + " ]";
+        return "modelo.clase[ id=" + codigo + " ]";
     }
 
 }

@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS `KinderBD`.`kinder` ;
 
 CREATE TABLE IF NOT EXISTS `KinderBD`.`kinder` (
   `nombre` VARCHAR(50) NOT NULL,
-  `direccion` VARCHAR(50) NULL DEFAULT NULL,
+  `direccion` VARCHAR(1000) NULL DEFAULT NULL,
   `telefono` VARCHAR(50) NULL DEFAULT NULL,
   `historia` VARCHAR(5000) NULL DEFAULT NULL,
   `mision` VARCHAR(5000) NULL DEFAULT NULL,
@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`encargado` (
   `id` VARCHAR(50) NOT NULL,
   `apellido1` VARCHAR(50) NULL DEFAULT NULL,
   `apellido2` VARCHAR(50) NULL DEFAULT NULL,
+  `sexo` VARCHAR(50) NULL DEFAULT NULL,
   `email` VARCHAR(1000) NULL DEFAULT NULL,
   `direccion` VARCHAR(1000) NULL DEFAULT NULL,
   `telefono` VARCHAR(50) NULL DEFAULT NULL,
@@ -150,8 +151,10 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`usu_enc` (
   `user_id` VARCHAR(50) NOT NULL,
   `enc_id` VARCHAR(50)NOT NULL,
    PRIMARY KEY (`user_id`,`enc_id`),
-   CONSTRAINT `FK_USER` FOREIGN KEY (`user_id`) REFERENCES `kinderBD`.`usuario` (`id`),
-   CONSTRAINT `FK_ENC` FOREIGN KEY (`enc_id`) REFERENCES `kinderBD`.`encargado` (`id`)
+   CONSTRAINT `FK_USER` FOREIGN KEY (`user_id`) REFERENCES `kinderBD`.`usuario` (`id`)ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+   CONSTRAINT `FK_ENC` FOREIGN KEY (`enc_id`) REFERENCES `kinderBD`.`encargado` (`id`)ON DELETE CASCADE
+    ON UPDATE NO ACTION
   )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -224,8 +227,10 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`enc_nino` (
   `enc_id` VARCHAR(50) NOT NULL,
   `nino_id` VARCHAR(50) NOT NULL,
    PRIMARY KEY (`enc_id`,`nino_id`),
-   CONSTRAINT `FK_ENCA` FOREIGN KEY (`enc_id`) REFERENCES `kinderBD`.`encargado` (`id`),
-   CONSTRAINT `FK_NIN` FOREIGN KEY (`nino_id`) REFERENCES `kinderBD`.`nino` (`id`)
+   CONSTRAINT `FK_ENCA` FOREIGN KEY (`enc_id`) REFERENCES `kinderBD`.`encargado` (`id`)ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+   CONSTRAINT `FK_NIN` FOREIGN KEY (`nino_id`) REFERENCES `kinderBD`.`nino` (`id`) ON DELETE CASCADE
+    ON UPDATE NO ACTION
   )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -256,8 +261,9 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderBD`.`familiar` ;
 
 CREATE TABLE IF NOT EXISTS `kinderBD`.`familiar` (
+`codigo` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NULL DEFAULT NULL,
-  `id` VARCHAR(50) NOT NULL,
+  `id` VARCHAR(50)  NULL DEFAULT NULL,
   `apellido1` VARCHAR(50) NULL DEFAULT NULL,
   `apellido2` VARCHAR(50) NULL DEFAULT NULL,
   `edad` VARCHAR(50) NULL DEFAULT NULL,
@@ -267,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`familiar` (
   `parentesco` VARCHAR(100) NULL DEFAULT NULL,
   `numeroTrabajo` VARCHAR(50) NULL DEFAULT NULL,
   `numeroPersonal` VARCHAR(50)NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_familiar`
     FOREIGN KEY (`idnino`)
     REFERENCES `kinderBD`.`nino` (`id`)
@@ -277,30 +283,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`familiar` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
--- -----------------------------------------------------
--- TELEFONO
--- -----------------------------------------------------
---DROP TABLE IF EXISTS `kinderBD`.`telefono` ;
 
-/*CREATE TABLE IF NOT EXISTS `kinderBD`.`telefono` (
-  `numero` VARCHAR(50) NOT NULL,
-  `idFamiliar` VARCHAR(50) NOT NULL,
-   PRIMARY KEY (`numero`),
-   CONSTRAINT `fk_telefono`
-   FOREIGN KEY (`idFamiliar`)
-   REFERENCES `kinderBD`.`familiar` (`id`)
-   ON DELETE CASCADE
-   ON UPDATE NO ACTION
-  )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-*/
-
-
--- -----------------------------------------------------
--- ASIGNACION
--- -----------------------------------------------------
 
 
 
@@ -312,7 +295,7 @@ DROP TABLE IF EXISTS `kinderBD`.`enfermedad` ;
 CREATE TABLE IF NOT EXISTS `kinderBD`.`enfermedad` (
   `nombre` VARCHAR(50) NULL DEFAULT NULL,
   `descripcion` VARCHAR(1000) NULL DEFAULT NULL,
-  `codigo` VARCHAR(50) NOT NULL,
+  `codigo` INT NOT NULL AUTO_INCREMENT,
   `id_nino` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fk_enfermedad` (`id_nino` ASC),
@@ -356,7 +339,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderBD`.`matricula` ;
 
 CREATE TABLE IF NOT EXISTS `kinderBD`.`matricula` (
-  `codigo` VARCHAR(50) NOT NULL,
+  `codigo` INT NOT NULL AUTO_INCREMENT,
   `completa` TINYINT(1) NULL DEFAULT NULL,
   `constanciaNac` TINYINT(1) NULL DEFAULT NULL,
   `carnetvac` TINYINT(1) NULL DEFAULT NULL,

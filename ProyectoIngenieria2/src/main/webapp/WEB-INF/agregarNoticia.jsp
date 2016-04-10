@@ -207,14 +207,14 @@
                             <div class="form-group">
                             </div>
                         </div>
-                        <p>${msg}</p>
+                        <p></p>
                     </form:form>
 
                 </div>
             </div>
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Warning!</strong> ${msg}
+                <strong></strong> ${msg} <a style="margin-left: 5%;" href="<c:url value='/contactoAdministrador' />">Ver lista de noticias</a>
             </div>
         </div>
 

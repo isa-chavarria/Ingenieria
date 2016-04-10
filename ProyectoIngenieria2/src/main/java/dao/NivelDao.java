@@ -6,25 +6,19 @@
 package dao;
 
 import java.util.List;
-import modelo.Kinder;
-import modelo.Usuario;
+import modelo.Clase;
 
 /**
  *
  * @author Isa
  */
-public interface UsuarioDao {
+public interface ClaseDao {
 
-    Usuario findbyId(String id);
+    Clase findbyId(String id);
 
-    void save(Usuario nino);
+    void save(Clase clase);
 
     void DeletebyId(String id);
 
-    List< Usuario> findAll();
-
-    Usuario findbyLogin(String email, String password);
-
-    boolean isIdUnique(String id);
-
+    List< Clase> findAll();
 }

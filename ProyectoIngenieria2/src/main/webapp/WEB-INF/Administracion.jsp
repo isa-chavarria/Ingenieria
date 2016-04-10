@@ -186,7 +186,7 @@
                             <a href="matricula"><i class="fa fa-archive"></i> Matricula</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Control de la institución <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Institución <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <!--li>
                                     <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>

@@ -68,4 +68,11 @@ public class UsuarioDaoImpl extends AbstractDao<String, Usuario> implements Usua
         }
         return null;
     }
+    
+    @Override
+    public boolean isIdUnique(String id) {
+        Usuario user = getByKey(id);
+
+        return user == null;
+    }
 }

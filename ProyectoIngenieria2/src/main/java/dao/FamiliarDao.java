@@ -14,11 +14,11 @@ import modelo.Familiar;
  */
 public interface FamiliarDao {
 
-    Familiar findbyId(String id);
+    Familiar findbyCodigo(Long codigo);
 
     void save(Familiar album);
 
-    void DeletebyId(String id);
+    void DeletebyId(Long codigo);
 
     List< Familiar> findAll();
 }

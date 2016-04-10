@@ -29,7 +29,7 @@ public class Kinder implements Serializable {
     @NotNull
     @Size(min = 1, max = 50)
     private String nombre;
-    @Size(max = 50)
+    @Size(max = 1000)
     private String direccion;
     @Size(max = 50)
     private String telefono;

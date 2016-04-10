@@ -4,10 +4,10 @@ Dicho Jardín lleva el nombre de Lulú, en honor al sobrenombre que se le utiliz
 
 -------------------INSERT GRUPOS----------------------------------------------------------
 
-insert into kinderbd.clase values ('1','G1','4-0569-0203','Materno');
-insert into kinderbd.clase values ('2','G2','1-07720-0892','Prekinder');
-insert into kinderbd.clase values ('3','G3','2-0315-0116','kinder');
-insert into kinderbd.clase values ('4','G4','1-0304-0551','Preparatoria');
+insert into kinderbd.clase values ('1','4-0569-0203','Materno');
+insert into kinderbd.clase values ('2','1-07720-0892','Prekinder');
+insert into kinderbd.clase values ('3','2-0315-0116','kinder');
+insert into kinderbd.clase values ('4','1-0304-0551','Preparatoria');
 
 -------------------INSERT PROFESORES----------------------------------------------------------
 insert into kinderbd.profesor values ('Maria','Solano','Jimenez',300000,'maria.solano@hotmail.com','1985-05-12','4-0569-0203','','','Profesor');
@@ -19,7 +19,7 @@ select * from kinderbd.usuario;
 select * from kinderbd.encargado;
 select * from kinderbd.usu_enc;
 insert into kinderbd.usuario values('12345678','daryl@hotmail.com','1234','Administrador');
-insert into kinderbd.encargado values('Daryl','12345678','Chinchilla','Navarro','daryl@hotmail.com','','','','');
+insert into kinderbd.encargado values('Daryl','12345678','Chinchilla','Navarro','Masculino','daryl@hotmail.com','','','','');
 insert into kinderbd.usu_enc values('12345678','12345678');
 
 

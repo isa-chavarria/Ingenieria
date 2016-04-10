@@ -25,4 +25,6 @@ public interface UsuarioService {
     void UpdateUsuario(Usuario usuario);
 
     Usuario findByLogin(String email, String password);
+
+    boolean isIdUnique(String id);
 }

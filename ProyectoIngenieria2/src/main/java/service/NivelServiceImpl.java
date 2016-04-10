@@ -47,7 +47,7 @@ public class ClaseServiceImpl implements ClaseService {
     public void UpdateClase(Clase clase) {
         Clase cla = this.Clase.findbyId(clase.getId());
         if (cla != null) {
-
+            cla.setNombre(clase.getNombre());
             cla.setId(clase.getId());
             cla.setNivel(clase.getNivel());
             cla.setProfesor(clase.getProfesor());

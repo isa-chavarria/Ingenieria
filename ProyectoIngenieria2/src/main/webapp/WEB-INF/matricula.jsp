@@ -47,6 +47,70 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <style>
+            .vis{
+                display:block;
+
+            }
+
+            .inv{
+                display:none;
+
+            }
+        </style>
+        <script>
+
+            function Cambiar() {
+                var formulario = document.getElementById('2');
+                var formulario1 = document.getElementById('1');
+                var div = document.getElementById("notificacion");
+
+                if (formulario.className == "inv") {
+                    formulario.className = 'vis';
+                    formulario1.className = 'inv';
+                    div.innerHTML = "";
+                } else {
+                    formulario.className = 'inv';
+                    formulario1.className = 'btn btn-success btn-block';
+
+                }
+
+            }
+            function Cambiar2() {
+                var formulario = document.getElementById('4');
+                var formulario1 = document.getElementById('3');
+                var div = document.getElementById("notificacion");
+
+                if (formulario.className == "inv") {
+                    formulario.className = 'vis';
+                    formulario1.className = 'inv';
+                    div.innerHTML = "";
+                } else {
+                    formulario.className = 'inv';
+                    formulario1.className = 'btn btn-info btn-block';
+
+                }
+
+            }
+
+            function Cambiar3() {
+                var formulario = document.getElementById('6');
+                var formulario1 = document.getElementById('5');
+                var div = document.getElementById("notificacion");
+
+                if (formulario.className == "inv") {
+                    formulario.className = 'vis';
+                    formulario1.className = 'inv';
+                    div.innerHTML = "";
+                } else {
+                    formulario.className = 'inv';
+                    formulario1.className = 'btn btn-dafault btn-block';
+
+                }
+
+            }
+        </script>
+
     </head>
     <body>
         <div  id="arriba" class="row">
@@ -185,7 +249,7 @@
 
                     <div class="col-lg-12 text-center" >
 
-                        <h2 class="intro-text text-center">Boleta de matrícula  
+                        <h2 class="intro-text text-center">Boleta de matrícula
                         </h2>
 
 
@@ -201,7 +265,7 @@
 
 
 
-                    <form:form method="POST" action="Matricular"  modelAttribute="persona" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                    <form:form method="POST" action="Matricular"  modelAttribute="persona" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal"  role="form">
                         <div id='wrapper' style=' border: solid 1px #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
                             <div  class="form-group">
                                 <label for="nombre" class="col-lg-2 control-label">Nombre del alumno:</label>
@@ -213,12 +277,12 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="primerApellido" class="col-lg-2 control-label">Primero apellido:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="apellido1" type="text" class="form-control" id="primerApellido" 
+                                    <form:input path="apellido1" type="text" class="form-control" id="primerApellido"
                                                 placeholder="Apellidos del niño" onkeydown="return validarLetras(event)" />
                                 </div>
                                 <label for="segundoApellido" class="col-lg-2 control-label">Segundo apellido:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="apellido2" type="text" class="form-control" id="segundoApellido" 
+                                    <form:input path="apellido2" type="text" class="form-control" id="segundoApellido"
                                                 placeholder="Apellidos del niño" onkeydown="return validarLetras(event)" />
                                 </div>
                             </div>
@@ -233,12 +297,12 @@
                             <div style='margin-bottom: 7%' class="form-inline">
                                 <label for="fechaN" class="col-lg-2 control-label">Fecha de nacimiento:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="fechaNacimiento" type="Date" class="form-control" id="fechaN" 
+                                    <form:input path="fechaNacimiento" type="Date" class="form-control" id="fechaN"
                                                 placeholder="dd/mm/yyyy"  />
                                 </div>
                                 <label for="telefono" class="col-lg-2 control-label">Teléfono del domicilio:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="telefono" type="text" class="form-control" name="telefono" id="telefono" 
+                                    <form:input path="telefono" type="text" class="form-control" name="telefono" id="telefono"
                                                 placeholder="Teléfono" />
                                 </div>
                             </div>
@@ -249,6 +313,15 @@
                                                 placeholder="Dirección del hogar"/>
                                 </div>
                             </div>
+
+                            <div  class="form-group">
+                                <label for="fotos" class="col-lg-2 control-label">Sexo: </label>
+                                <div class="col-lg-4">
+                                    <form:select path="sexo" items="${genero}"   class="form-control input-sm" id="sexo" required="true" />
+
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="email" class="col-lg-2 control-label">Correo electrónico para crear perfil:</label>
                                 <div class="col-lg-8">
@@ -256,30 +329,13 @@
                                                 placeholder="ejemplo@gmail.com" required="true"/>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="password" class="col-lg-2 control-label">Contraseña:</label>
-                                <div class="col-lg-8">
-                                    <form:input path="password" type="password" class="form-control" id="password"
-                                                name="password"    placeholder="Contraseña" required="true"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="passwordC" class="col-lg-2 control-label">Confirmar contraseña:</label>
-                                <div class="col-lg-8">
-                                    <form:input path="" type="password" class="form-control" id="passwordC"
-                                                name="passwordC"    placeholder="Contraseña" onchange="validarContrasena()" required="true"/>
-                                </div>
-                                <div id="seccionError">
-                                    <p style="color: red;" id="error">
-                                </div>
-                            </div>
-
-
                         </div>
 
-                        <div id='wrapper' style=' border: solid 1px #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
+
+                        <button type="button"  id="1" onclick='Cambiar();' style="margin:2%; width: 96%;" class="btn btn-success btn-block">Agregar información del padre</button>
+
+
+                        <div id='2' class="inv"  style='background: #E3F2E1; border:solid 2px #00cc00; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
                             <div  class="form-group">
                                 <label for="nombrePadre" class="col-lg-2 control-label">Nombre del padre:</label>
                                 <div class="col-lg-8">
@@ -290,12 +346,12 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="edadPadre" class="col-lg-2 control-label">Edad:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="edadPadre" type="text" class="form-control" id="edadPadre" 
+                                    <form:input path="edadPadre" type="text" class="form-control" id="edadPadre"
                                                 placeholder="Edad del padre"  />
                                 </div>
                                 <label for="cedulaPadre" class="col-lg-2 control-label">Cédula:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="cedulaPadre" type="text" class="form-control" id="cedulaPadre" 
+                                    <form:input path="cedulaPadre" type="text" class="form-control" id="cedulaPadre"
                                                 placeholder="#-####-####"  />
                                 </div>
                             </div>
@@ -305,12 +361,12 @@
                             <div style='margin-bottom: 12%' class="form-inline">
                                 <label for="telefonoTrabajoPadre" class="col-lg-2 control-label">Teléfono del trabajo:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="telefonoTrabajoPadre" type="text" class="form-control" id="telefonoTrabajoPadre" 
+                                    <form:input path="telefonoTrabajoPadre" type="text" class="form-control" id="telefonoTrabajoPadre"
                                                 placeholder="Teléfono"  />
                                 </div>
                                 <label for="telefonoPersonalPadre" class="col-lg-2 control-label">Teléfono personal:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="telefonoPersonalPadre" type="text" class="form-control" id="telefonoPersonalPadre" 
+                                    <form:input path="telefonoPersonalPadre" type="text" class="form-control" id="telefonoPersonalPadre"
                                                 placeholder="Teléfono"  />
                                 </div>
                             </div>
@@ -328,10 +384,22 @@
                                                 placeholder="Lugar de trabajo"/>
                                 </div>
                             </div>
+                            <div  class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <button type="button"  class="btn btn-danger" onclick='Cambiar();'  data-toggle="collapse" data-target="#demo">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
 
 
-                        <div id='wrapper' style=' border: solid 1px #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
+
+
+
+
+                        <button type="button"  id="3" style="margin:2%; width: 96%;" onclick='Cambiar2();' class="btn btn-info btn-block">Agregar información de la madre</button>
+
+
+                        <div id='4' class="inv" style=' background: #D6E8FE; border:solid 2px #0099ff; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
                             <div  class="form-group">
                                 <label for="nombreMadre" class="col-lg-2 control-label">Nombre de la madre</label>
                                 <div class="col-lg-8">
@@ -342,27 +410,25 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="edadMadre" class="col-lg-2 control-label">Edad:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="edadMadre" type="text" class="form-control" id="edadMadre" 
+                                    <form:input path="edadMadre" type="text" class="form-control" id="edadMadre"
                                                 placeholder="Edad"  />
                                 </div>
                                 <label for="cedulaMadre" class="col-lg-2 control-label">Cédula:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="cedulaMadre" type="text" class="form-control" id="cedulaMadre" 
+                                    <form:input path="cedulaMadre" type="text" class="form-control" id="cedulaMadre"
                                                 placeholder="#-####-####"  />
                                 </div>
                             </div>
 
-
-
                             <div style='margin-bottom: 12%' class="form-inline">
                                 <label for="telefonoTrabajoMadre" class="col-lg-2 control-label">Teléfono del trabajo:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="telefonoTrabajoMadre" type="text" class="form-control" id="telefonoTrabajoMadre" 
+                                    <form:input path="telefonoTrabajoMadre" type="text" class="form-control" id="telefonoTrabajoMadre"
                                                 placeholder="Teléfono del trabajo"  />
                                 </div>
                                 <label for="telefonoPersonalMadre" class="col-lg-2 control-label">Teléfono personal:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="telefonoPersonalMadre" type="text" class="form-control" id="telefonoPersonalMadre" 
+                                    <form:input path="telefonoPersonalMadre" type="text" class="form-control" id="telefonoPersonalMadre"
                                                 placeholder="Teléfono personal"  />
                                 </div>
                             </div>
@@ -380,9 +446,28 @@
                                                 placeholder="Lugar de trabajo"/>
                                 </div>
                             </div>
+                            <div  class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <button type="button"  class="btn btn-danger" onclick='Cambiar2();'  data-toggle="collapse" data-target="#demo">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
 
-                        <div id='wrapper' style=' border: solid 1px #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
+
+
+
+
+
+
+
+
+                        <button type="button"  id="5" style="margin:2%; width: 96%;" onclick='Cambiar3();' class="btn btn-default btn-block">Agregar información del encargado</button>
+
+
+
+
+
+                        <div id='6'  class="inv" style=' background: #ffffff; border:solid 2px   #cccccc; border-radius: 5px; margin-bottom: 3%; padding: 2%'>
 
                             <div  class="form-group">
                                 <label for="nombreEncargado" class="col-lg-2 control-label">Nombre de persona encargada(caso de emergencia):</label>
@@ -407,7 +492,27 @@
                                                 placeholder="Teléfono "/>
                                 </div>
                             </div>
+
+                            <div  class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <button type="button"  class="btn btn-danger" onclick='Cambiar3();'  data-toggle="collapse" data-target="#demo">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <h2 class="brand-before">
                             <small>Información del niño </small>
                         </h2>
@@ -475,12 +580,12 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="monto" class="col-lg-2 control-label">Canceló matrícula ¢;</label>
                                 <div class="col-lg-4">
-                                    <form:input path="monto" type="text" class="form-control" id="monto" 
+                                    <form:input path="monto" type="text" class="form-control" id="monto"
                                                 placeholder="monto" required="true" />
                                 </div>
                                 <label for="curso" class="col-lg-2 control-label">Curso:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="curso" type="text" class="form-control" id="curso" 
+                                    <form:input path="curso" type="text" class="form-control" id="curso"
                                                 placeholder="2016" required="true"  />
                                 </div>
                             </div>
@@ -532,9 +637,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script type="text/javascript">
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            });
+                                        $('.carousel').carousel({
+                                            interval: 5000 //changes the speed
+                                        });
 
 
         </script>

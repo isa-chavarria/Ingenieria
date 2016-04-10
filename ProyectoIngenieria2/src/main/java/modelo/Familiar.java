@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,10 +33,13 @@ public class Familiar {
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Column(name="codigo")
+    private Long codigo;
+    @Size(max = 50)
     @Column(name = "id")
     private String id;
     @Size(max = 50)
@@ -65,6 +70,16 @@ public class Familiar {
     @JoinColumn(name = "idnino", referencedColumnName = "id")
     @ManyToOne
     private Nino nino;
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
+    
+    
 
     public String getNumeroTrabajo() {
         return numeroTrabajo;
@@ -163,7 +178,7 @@ public class Familiar {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -174,7 +189,7 @@ public class Familiar {
             return false;
         }
         Familiar other = (Familiar) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -182,7 +197,7 @@ public class Familiar {
 
     @Override
     public String toString() {
-        return "modelo.familiar[ id=" + id + " ]";
+        return "modelo.familiar[ id=" + codigo + " ]";
     }
 
 }

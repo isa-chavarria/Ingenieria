@@ -257,6 +257,10 @@
                                     <td>${enc.fechaNacimiento}</td>
                                 </tr>
                                 <tr>
+                                    <td>sexo:</td>
+                                    <td>${enc.sexo}</td>
+                                </tr>
+                                <tr>
                                     <td>Nivel:</td>
                                     <td>${nivel}</td>
                                 </tr>
