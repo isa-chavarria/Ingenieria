@@ -27,7 +27,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder Lulú</title>
+        <title>Kinder LulÃº</title>
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +59,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
+                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
             </div>
 
 
@@ -173,7 +173,7 @@
                                     out.print("encargado");
                                 }%>
 
-                               ">Regresar al menú</a>
+                               ">Regresar al menÃº</a>
                         </li>
                     </ul>
                 </div>
@@ -185,119 +185,57 @@
 
         <div class="container">
 
-
-            <div class="col-lg-12">
-                <hr>
-                <h2 class="intro-text text-center">Nuestros
-                    Estudiantes
-                </h2>
-                <hr>
-            </div>
-            <div class="imagenes" >
-                <div class="row"  >
-                    <div style=" overflow: scroll ; height: 400px " class="box">
-
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/aa.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/graduacion.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/profesiones.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/equipo.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/dos.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/ll.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/n.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/ninos.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/parq.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/pintar.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/tres.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/arreglada3.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-
+            <form:form method="POST" modelAttribute="album" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                <div  class="form-group">
+                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre del Album:</label>
+                    <div class="col-lg-10">
+                        <form:input type="text" class="form-control" path="nombre" id="nombre"
+                                    placeholder="Nombre del album"/>
                     </div>
+                </div>
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="submit" class="btn btn-info">Crear</button>
+                    <div class="form-group">
+                    </div>
+                </div>
+                <p>${msg}</p>
+            </form:form>
 
+            <c:forEach items="${albums}" var="al">
+                <p></p>
+                <div class="col-lg-12">
+                    <h2 class="intro-text text-center">${al.nombre}
+                    <form:form method="POST"  modelAttribute="album" action="eliminarAlbum">
+                    <form:hidden path="nombre" value="${al.nombre}"/>
+                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    </form:form>
+                    
+                    <form:form method="POST"  modelAttribute="album" action="agregarImagen">
+                    <form:hidden path="nombre" value="${al.nombre}"/>
+                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+                    </form:form>
+                    </h2>
+                </div>
+                <div class="imagenes" >
+                    <div class="row"  >
+                        
+                        <div style=" overflow: scroll ; height: 400px " class="box">
+                            <c:forEach items="${al.imagenes}" var="imagen">
+                                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                                    <a class="thumbnail" href="#">
+                                        <img class="img-responsive" src="${imagen.rutaImagen}" style="height: 300%; width: 400%;">
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="row">
-
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Nuestro
-                            <strong>Equipo</strong>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/rosi.jpg" alt="">
-                        <h3>Rosibeth Garcia
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/mari.jpg" alt="">
-                        <h3>Maria Solano
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/equipo.jpg" alt="">
-                        <h3>Maestras
-
-                        </h3>
-                    </div>
-                    <div class="clearfix"></div>
-
-                </div>
-
-
-            </div>
-
+            </c:forEach>
 
         </div>
 
@@ -305,7 +243,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>Administración del Kinder. Copyright 2016</p>
+                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>

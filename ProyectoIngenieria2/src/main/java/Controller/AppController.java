@@ -475,12 +475,7 @@ public class AppController {
         model.addAttribute("msg", "Se Modificó la noticia con éxito");
         return "ActualizarNoticia";
     }
-
-    @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
-    public String loadGaleria(ModelMap model) {
-        return "galeria";
-    }
-
+    
     @RequestMapping(value = {"/informacion-nino"}, method = RequestMethod.GET)
     public String loadInformacionNino(ModelMap model) {
         return "informacionNino";
