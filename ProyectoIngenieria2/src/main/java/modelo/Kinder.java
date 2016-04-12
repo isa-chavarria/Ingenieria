@@ -3,6 +3,8 @@ package modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,30 +41,40 @@ public class Kinder implements Serializable {
     private String mision;
     @Size(max = 5000)
     private String vision;
+    
+     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name="kinder")
+    Set<Contacto> contactos;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
-    Collection<Contacto> contactos;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    Set<Noticia> noticias;
+    
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
-    Collection<Noticia> noticias;
+    Set<Album> albums;
 
-    public Collection<Contacto> getContactos() {
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
+    }
+
+    public Set<Contacto> getContactos() {
         return contactos;
     }
 
-    public void setContactos(Collection<Contacto> contactos) {
+    public void setContactos(Set<Contacto> contactos) {
         this.contactos = contactos;
     }
 
-    public Collection<Noticia> getNoticias() {
+    public Set<Noticia> getNoticias() {
         return noticias;
     }
 
-   
-
-    public void setNoticias(Collection<Noticia> noticias) {
+    public void setNoticias(Set<Noticia> noticias) {
         this.noticias = noticias;
     }
 
@@ -136,7 +148,7 @@ public class Kinder implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Kinder[ nombre=" + nombre + " ]";
+        return "modelo.Kinder[ nombre=" + nombre + " ] " + getAlbums().toString();
     }
 
 }

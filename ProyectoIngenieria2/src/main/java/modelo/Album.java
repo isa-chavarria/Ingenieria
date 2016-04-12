@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,12 +37,22 @@ public class Album implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "nombre")
     private String nombre;
+    
+    @ManyToOne
+    @JoinColumn(name="kinder")
+    private Kinder kinder;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "album")
-    private Collection<Imagen> imagenes = new ArrayList<Imagen>();
+    private Collection<Imagen> imagenes;
 
-    ;
+    public Kinder getKinder() {
+        return kinder;
+    }
+
+    public void setKinder(Kinder kinder) {
+        this.kinder = kinder;
+    }
 
     public Collection<Imagen> getImagenes() {
         return imagenes;
@@ -81,7 +92,7 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Album[ nombre=" + nombre + " ]";
+        return "modelo.Album[ nombre=" + nombre + " ] " + getImagenes().toString();
     }
 
 }

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,14 +33,15 @@ public class Imagen implements Serializable {
     @Size(max = 1000)
     @Column(name = "ruta_imagen")
     private String rutaImagen;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "codigo")
-    private String codigo;
-    @JoinColumn(name = "album", referencedColumnName = "nombre")
+    @Column(name="codigo")
+    private Long codigo;
+    
     @ManyToOne
+    @JoinColumn(name = "album")
     private Album album;
 
     public String getRutaImagen() {
@@ -49,11 +52,11 @@ public class Imagen implements Serializable {
         this.rutaImagen = rutaImagen;
     }
 
-    public String getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 

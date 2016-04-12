@@ -255,6 +255,21 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`informacion` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+CREATE TABLE IF NOT EXISTS `kinderbd`.`imagen` (
+  `ruta_imagen` VARCHAR(1000) NULL DEFAULT NULL,
+  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `album` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `idx_imagen` (`album` ASC),
+  CONSTRAINT `fk_imagen`
+    FOREIGN KEY (`album`)
+    REFERENCES `kinderbd`.`album` (`nombre`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 -- -----------------------------------------------------
 -- FAMILIAR
 -- -----------------------------------------------------
