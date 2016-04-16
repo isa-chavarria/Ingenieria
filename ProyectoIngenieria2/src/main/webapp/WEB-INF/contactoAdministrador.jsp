@@ -197,7 +197,7 @@
                         <table class="table table-bordered table-hover">
                             <tbody class="cuerpoTabla">
                                 <c:forEach items="${contactos}" var="contacto1">
-                                    <tr class="active"><td><c:out value="${contacto1.titulo}"></c:out> </td><td><c:out value="${contacto1.descripcion}"></c:out></td>
+                                    <tr class="active"><td><strong><c:out value="${contacto1.titulo}"></c:out></strong></td><td><c:out value="${contacto1.descripcion}"></c:out></td>
 
                                                 <td><form:form method="POST"  modelAttribute="contacto" action="ModificarContacto">
                                                 <form:hidden path="codigo" value="${contacto1.codigo}"/>

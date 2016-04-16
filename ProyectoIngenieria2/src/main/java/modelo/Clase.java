@@ -8,11 +8,16 @@ package modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,32 +38,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Clase implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "id")
-    private String id;
-
+    @Column(name="id")
+    private Long id;
 
     @Size(max = 50)
     @Column(name = "nivel")
     private String nivel;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "grupo")
-    private Collection<Nino> ninos = new ArrayList<Nino>();
+    private Set<Nino> ninos = new HashSet<>(); ;
 
     @JoinColumn(name = "profesor", referencedColumnName = "id")
     @ManyToOne
     private Profesor profesor;
 
-    public Collection<Nino> getNinos() {
+    public Set<Nino> getNinos() {
         return ninos;
     }
 
-    public void setNinos(Collection<Nino> ninos) {
+    public void setNinos(Set<Nino> ninos) {
         this.ninos = ninos;
     }
+
+   
+
+    
 
     public String getNivel() {
         return nivel;
@@ -76,26 +83,25 @@ public class Clase implements Serializable {
         this.profesor = profesor;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
+
+    
 
     public Collection<Encargado> purga() {
         Collection<Encargado> purga = new ArrayList<Encargado>();
         for (Nino n : this.ninos) {
-            if (!purga.contains(n.getEncargado().iterator().next())) {
+           
                 purga.add(n.getEncargado().iterator().next());
-            }
+           
         }
         return purga;
     }
-    
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
-
 
     public String tablaEstudiantesPagos() {
         Collection<Encargado> lista = this.purga();

@@ -61,17 +61,26 @@ public class UsuarioDaoImpl extends AbstractDao<String, Usuario> implements Usua
         if (user != null) {
             if (user.getContrasena().equals(password)) {
                 Hibernate.initialize(user.getEncargado());
-                
+
                 return user;
             }
 
         }
         return null;
     }
-    
+
     @Override
     public boolean isIdUnique(String id) {
         Usuario user = getByKey(id);
+
+        return user == null;
+    }
+
+    @Override
+    public boolean isEmailUnique(String email) {
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("email", email));
+        Usuario user = (Usuario) crit.uniqueResult();
 
         return user == null;
     }

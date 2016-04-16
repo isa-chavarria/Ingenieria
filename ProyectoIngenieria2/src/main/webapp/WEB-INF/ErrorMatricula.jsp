@@ -28,12 +28,12 @@
     </head>
     <body>
         <div class="generic-container">
-            <div class="alert alert-success lead">
-                matrícula realizada correctamente
+            <div class="alert alert-danger lead">
+                Error: La  cédula del niño o el email ya son utilizados en el sistema.
             </div>
 
             <span class="well floatRight">
-                <a href="<c:url value='/Estudiantes' />">Continuar</a>
+                <a href="<c:url value='/matricula' />">Continuar</a>
             </span>
         </div>
     </body>

@@ -64,4 +64,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public boolean isIdUnique(String id) {
         return Usuario.isIdUnique(id);
     }
+    
+    @Override
+    public boolean isEmailUnique(String emial) {
+        return Usuario.isEmailUnique(emial);
+    }
 }

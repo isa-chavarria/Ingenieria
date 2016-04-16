@@ -6,19 +6,19 @@
 package dao;
 
 import java.util.List;
-import modelo.Clase;
+import modelo.Matricula;
 
 /**
  *
  * @author Isa
  */
-public interface ClaseDao {
+public interface MatriculaDao {
 
-    Clase findbyId(Long id);
+    Matricula findbyCodigo(Long codigo);
 
-    void save(Clase clase);
+    void save(Matricula matricula);
 
-    void DeletebyId(Long id);
+    void DeletebyCodigo(Long codigo);
 
-    List< Clase> findAll();
+    List<Matricula> findAll();
 }

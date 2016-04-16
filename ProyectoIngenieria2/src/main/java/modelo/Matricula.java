@@ -47,7 +47,7 @@ public class Matricula implements Serializable {
     @Column(name = "cursolectivo")
     private String cursolectivo;
 
-    @Size(max = 50)
+    @Size(max = 1000)
     @Column(name = "realizadoPor")
     private String realizadoPor;
 

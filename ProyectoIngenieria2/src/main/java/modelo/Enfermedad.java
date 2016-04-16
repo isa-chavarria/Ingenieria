@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -22,33 +21,25 @@ import javax.validation.constraints.Size;
  * @author josvr_000
  */
 @Entity
-@Table(name = "informacion")
-public class Informacion {
-
-     @Id
+@Table(name = "enfermedad")
+public class Enfermedad {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name="codigo")
     private Long codigo;
-    @Size(max = 2000)
+    
+    @Size(max = 1000)
     @Column(name = "descripcion")
     private String descripcion;
-
+    
     @Size(max = 50)
-    @Column(name = "titulo")
-    private String titulo;
-
-    @JoinColumn(name = "idnino", referencedColumnName = "id")
+    @Column(name = "nombre")
+    private String nombre;
+    
+    @JoinColumn(name = "id_nino", referencedColumnName = "id")
     @ManyToOne
     private Nino nino;
-
-    public Nino getNino() {
-        return nino;
-    }
-
-    public void setNino(Nino nino) {
-        this.nino = nino;
-    }
 
     public Long getCodigo() {
         return codigo;
@@ -58,8 +49,6 @@ public class Informacion {
         this.codigo = codigo;
     }
 
-   
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -68,15 +57,25 @@ public class Informacion {
         this.descripcion = descripcion;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    @Override
+    public Nino getNino() {
+        return nino;
+    }
+
+    public void setNino(Nino nino) {
+        this.nino = nino;
+    }
+    
+    
+    
+     @Override
     public int hashCode() {
         int hash = 0;
         hash += (codigo != null ? codigo.hashCode() : 0);
@@ -85,11 +84,11 @@ public class Informacion {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Informacion)) {
+
+        if (!(object instanceof Enfermedad)) {
             return false;
         }
-        Informacion other = (Informacion) object;
+        Enfermedad other = (Enfermedad) object;
         if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
@@ -98,6 +97,6 @@ public class Informacion {
 
     @Override
     public String toString() {
-        return "modelo.Informacion[ codigo=" + codigo + " ]";
+        return "modelo.clase[ id=" + codigo + " ]";
     }
 }

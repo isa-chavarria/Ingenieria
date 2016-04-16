@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -65,17 +67,19 @@ public class Profesor implements Serializable {
     @Column(name = "rol")
     private String rol;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "profesor")
-    private Collection<Clase> grupo=new ArrayList<Clase>();
+    private Set<Clase> grupo = new HashSet<>();
 
-    public Collection<Clase> getGrupo() {
+    public Set<Clase> getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(Collection<Clase> grupo) {
+    public void setGrupo(Set<Clase> grupo) {
         this.grupo = grupo;
     }
+
+    
 
     public String getNombre() {
         return nombre;

@@ -183,7 +183,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="matricula"><i class="fa fa-archive"></i> Matricula</a>
+                            <a href="matricula"><i class="fa fa-archive"></i> Matrícula</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Institución <b class="caret"></b></a>

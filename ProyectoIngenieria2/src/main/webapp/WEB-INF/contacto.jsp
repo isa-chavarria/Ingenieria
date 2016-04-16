@@ -113,7 +113,7 @@
                             <!--tr><th>Título</th><th>Descripción</th></tr-->
                             <tbody class="cuerpoTabla">
                                 <c:forEach items="${contactos}" var="contacto">
-                                    <tr class="active"><td><c:out value="${contacto.titulo}"></c:out> </td><td><c:out value="${contacto.descripcion}"></c:out></td></tr>
+                                    <tr class="active"><td><strong><c:out value="${contacto.titulo}"></c:out></strong> </td><td><c:out value="${contacto.descripcion}"></c:out></td></tr>
                                 </c:forEach>
                             </tbody>
                         </table>

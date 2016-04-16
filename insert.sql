@@ -4,10 +4,16 @@ Dicho Jardín lleva el nombre de Lulú, en honor al sobrenombre que se le utiliz
 
 -------------------INSERT GRUPOS----------------------------------------------------------
 
-insert into kinderbd.clase values ('1','4-0569-0203','Materno');
+/*insert into kinderbd.clase values ('1','4-0569-0203','Materno');
 insert into kinderbd.clase values ('2','1-07720-0892','Prekinder');
 insert into kinderbd.clase values ('3','2-0315-0116','kinder');
 insert into kinderbd.clase values ('4','1-0304-0551','Preparatoria');
+*/
+
+insert into kinderbd.clase (profesor,nivel)values ('4-0569-0203','Materno');
+insert into kinderbd.clase (profesor,nivel)values ('1-07720-0892','Prekinder');
+insert into kinderbd.clase (profesor,nivel)values ('2-0315-0116','kinder');
+insert into kinderbd.clase (profesor,nivel)values ('1-0304-0551','Preparatoria');
 
 -------------------INSERT PROFESORES----------------------------------------------------------
 insert into kinderbd.profesor values ('Maria','Solano','Jimenez',300000,'maria.solano@hotmail.com','1985-05-12','4-0569-0203','','','Profesor');

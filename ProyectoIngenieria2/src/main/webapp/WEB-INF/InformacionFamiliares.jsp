@@ -1,11 +1,12 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modelo.Usuario"%>
 <%@page import="modelo.Encargado"%>
 <!DOCTYPE html>
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-    Encargado enc = (Encargado) session.getAttribute("enc");
 
     if (user != null && user.isEncargado()) {
 
@@ -22,11 +23,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+        <script src="resources/js/validarForm.js"></script>
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
         <link href="resources/css/sb-admin.css" rel="stylesheet">
@@ -41,6 +42,17 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <script>
+
+            function eliminar(id) {
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+            }
+
+        </script>
+
     </head>
     <body>
         <div  id="arriba" class="row">
@@ -54,7 +66,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -64,7 +76,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">PERFIL</h3>
+            <h3 id="Titulo">Información de familiares</h3>
 
         </div>
 
@@ -84,7 +96,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
+
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -157,10 +169,10 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="encargado">Regresar al menÃº</a>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -180,13 +192,13 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="  <% out.print(enc.getRuta_imagen()); %> " width="50%" height="150px" alt="">
+                        <img class="img-circle" src=" ${enc.ruta_imagen} " width="50%" height="150px" alt="">
                     </div>
 
                     <div class="rightImage"  >
 
                         <hr>
-                        <h2 class="intro-text text-center" style=" color: #ffffff;" ><%  out.print(enc.getNombre() + " " + enc.getApellido1() + " " + enc.getApellido2());%> </h2>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
                         <hr>
 
 
@@ -221,13 +233,13 @@
                                     </div>
                                     <div class="navbar-collapse collapse sidebar-navbar-collapse" >
                                         <ul class="nav navbar-nav">
-                                            <li class="active"><a style="font-size: small;" href="#">InformaciÃ³n</a></li>
+                                            <li class="active"><a style="font-size: small;" href="#">Información</a></li>
 
                                             <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
 
-                                            <li><a style="font-size: small;" href="#">Familiares</a></li>
+                                            <li><a style="font-size: small;" href="informacionFamiliares">Familiares</a></li>
 
-                                            <li><a style="font-size: small;" href="#">Padecimientos</a></li>
+                                            <li><a style="font-size: small;" href="enfermedadesEstudiante">Padecimientos</a></li>
                                         </ul>
                                     </div><!--/.nav-collapse -->
                                 </div>
@@ -238,16 +250,95 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-9 text-center">
+                    <c:forEach items="${familiares}" var="familiar">
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <h4 style="color:red; ">${familiar.parentesco}</h4>
+                                <table class="tableInvisivle">
+
+                                    <tr>
+                                        <td><strong>Nombre:</strong></td>
+                                        <td>${familiar.nombre}</td>
+                                        <td><strong>Edad:</strong></td>
+                                        <td>${familiar.edad}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ocupación:</strong></td>
+                                        <td>${familiar.ocupacion}</td>
+                                        <td><strong>Telefono personal:</strong> </td>
+                                        <td>${familiar.numeroPersonal}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lugar de trabajo:</strong></td>
+                                        <td>${familiar.lugarTrabajo}</td>
+                                        <td><strong>Numero de trabajo:</strong></td>
+                                        <td>${familiar.numeroTrabajo}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Relación:</strong></td>
+                                        <td>${familiar.parentesco}</td>
+                                        <td><strong>Cédula:</strong></td>
+                                        <td>${familiar.id}</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td><a href="<c:url value='/editarFamiliares-${familiar.codigo}' />" class="btn btn-success custom-width">Editar información</a></td>
+                                        <td><button type="button" id="${familiar.codigo}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
+                                        <td></td>                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </c:forEach>
+
                     <div class="panel panel-default">
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
 
-
-
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <a href="<c:url value='/agregarFamiliares' />" class="btn btn-info custom-width">Agregar nuevo familiar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+
+
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
+                        </div>
+
+                        <form:form method="POST" action="EliminarFamiliares"  modelAttribute="familiar" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                            <form:input type="hidden" path="codigo"  id="valor"/>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger" >Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </form:form>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
 
 
 
@@ -265,7 +356,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
@@ -279,9 +370,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                                            $('.carousel').carousel({
+                                                interval: 5000 //changes the speed
+                                            })
         </script>
 
     </body>

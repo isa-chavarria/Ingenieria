@@ -346,7 +346,7 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="edadPadre" class="col-lg-2 control-label">Edad:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="edadPadre" type="text" class="form-control" id="edadPadre"
+                                    <form:input path="edadPadre" type="number" class="form-control" id="edadPadre"
                                                 placeholder="Edad del padre"  />
                                 </div>
                                 <label for="cedulaPadre" class="col-lg-2 control-label">Cédula:</label>
@@ -410,7 +410,7 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="edadMadre" class="col-lg-2 control-label">Edad:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="edadMadre" type="text" class="form-control" id="edadMadre"
+                                    <form:input path="edadMadre" type="number" class="form-control" id="edadMadre"
                                                 placeholder="Edad"  />
                                 </div>
                                 <label for="cedulaMadre" class="col-lg-2 control-label">Cédula:</label>
@@ -580,12 +580,12 @@
                             <div style='margin-bottom: 7%'  class="form-inline">
                                 <label for="monto" class="col-lg-2 control-label">Canceló matrícula ¢;</label>
                                 <div class="col-lg-4">
-                                    <form:input path="monto" type="text" class="form-control" id="monto"
+                                    <form:input path="monto" type="number" class="form-control" id="monto"
                                                 placeholder="monto" required="true" />
                                 </div>
                                 <label for="curso" class="col-lg-2 control-label">Curso:</label>
                                 <div class="col-lg-4">
-                                    <form:input path="curso" type="text" class="form-control" id="curso"
+                                    <form:input path="curso" type="number" class="form-control" id="curso"
                                                 placeholder="2016" required="true"  />
                                 </div>
                             </div>

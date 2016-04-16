@@ -1,13 +1,14 @@
-
-<%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="modelo.Usuario"%>
+<%@page import="modelo.Encargado"%>
 <!DOCTYPE html>
 <%
+
     Usuario user = (Usuario) session.getAttribute("user");
 
-    if (user != null && user.isAdministrador()) {
+    if (user != null && user.isEncargado()) {
 
     } else {
         response.sendRedirect("index");
@@ -26,23 +27,31 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <script src="resources/js/validarForm.js"></script>
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-
-
         <link href="resources/css/sb-admin.css" rel="stylesheet">
-
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script>
+
+            function eliminar(id) {
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+            }
+
+        </script>
 
     </head>
     <body>
@@ -66,9 +75,8 @@
 
         <div id="second"  class="row">
 
-            <h3 id="Titulo">Noticias</h3>
 
-
+            <h3 id="Titulo">Información médica del estudiante </h3>
 
         </div>
 
@@ -84,7 +92,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-
+                    <a class="navbar-brand" href="index">Business Casual</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -148,7 +156,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                    <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
                                     <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
@@ -164,7 +172,7 @@
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="administracion">Regresar al menú</a>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -177,53 +185,117 @@
         <div class="container">
 
 
+
+
             <div class="row">
-
-                <div style="margin-bottom: 5%;" class="col-lg-12">
-
-                    <h2 class="intro-text text-center">Noticias
-                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarNoticias'"></span>
-                        </button>
-                    </h2>
+                <div class="box">
+                    <div class="leftImage">
 
 
-                    <hr>
-                </div>
-                <div style=" overflow: scroll ; height: 400px " class="box">
-
-
-                    <div class="text-left">
-
-                        <table class="table table-bordered table-hover">
-                            <tbody class="cuerpoTabla">
-                                <c:forEach items="${noticias}" var="noticia1">
-                                    <tr class="active"><td><strong><c:out value="${noticia1.titulo}"></c:out></strong></td><td><c:out value="${noticia1.descripcion}"></c:out></td>
-
-                                                <td><form:form method="POST"  modelAttribute="noticia" action="ModificarNoticias">
-                                                <form:hidden path="codigo" value="${noticia1.codigo}"/>
-                                                <form:hidden path="titulo" value="${noticia1.titulo}"/>
-                                                <form:hidden path="descripcion" value="${noticia1.descripcion}"/>
-                                                <form:hidden path="kinder" value="${noticia1.kinder}"/>
-                                                <button type="submit" class="btn btn-default" aria-label="Left Align">
-                                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                                </button></form:form></td>
-
-                                            <td><form:form method="POST"  modelAttribute="noticia">
-                                                <form:hidden path="codigo" value="${noticia1.codigo}"/>
-                                                <button type="submit" class="btn btn-default" aria-label="Left Align">
-                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                </button></form:form></td>
-
-                                        </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                        <img class="img-circle" src=" ${enc.ruta_imagen} " width="50%" height="150px" alt="">
                     </div>
-                    <div class="clearfix"></div>
+
+                    <div class="rightImage"  >
+
+                        <hr>
+                        <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
+                        <hr>
+
+
+
+                    </div>
+
+                    <div class="dec">  </div>
 
                 </div>
+
             </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+                            <div class="sidebar-nav">
+                                <div role="navigation">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                                    </div>
+                                    <div class="navbar-collapse collapse sidebar-navbar-collapse" >
+                                         <ul class="nav navbar-nav">
+                                            <li class="active"><a style="font-size: small;" href="#">Información</a></li>
+
+                                            <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
+
+                                            <li><a style="font-size: small;" href="informacionFamiliares">Familiares</a></li>
+
+                                            <li><a style="font-size: small;" href="enfermedadesEstudiante">Padecimientos</a></li>
+                                        </ul>
+                                    </div><!--/.nav-collapse -->
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9 text-center">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                            <h4>Padecimientos del niño</h4>
+                            <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${enfermedad.descripcion}</textarea>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <a href="<c:url value='editarEnfermedades' />" class="btn btn-success custom-width">Editar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                            <h4>Medicamentos que utiliza</h4>
+
+                            <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${medicamento.descripcion}</textarea>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <a href="<c:url value='editarEnfermedades' />" class="btn btn-success custom-width">Editar</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div class="clearfix"></div>
+
+
 
 
         </div>
@@ -246,10 +318,11 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-                                $('.carousel').carousel({
-                                    interval: 5000 //changes the speed
-                                })
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
         </script>
 
     </body>
 </html>
+
