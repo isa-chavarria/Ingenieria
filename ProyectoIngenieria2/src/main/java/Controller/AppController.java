@@ -571,6 +571,7 @@ public class AppController {
         model.addAttribute("familiar", fam);
         return "EditarInformacionFamiliar";
     }
+    
 
     @RequestMapping(value = {"/EditarFamiliares"}, method = RequestMethod.POST)
     public String EditarFamiliares(@Valid Familiar familiar, ModelMap model, BindingResult result, HttpServletRequest request) {
@@ -622,8 +623,9 @@ public class AppController {
         model.addAttribute("enc", enc);
         model.addAttribute("familiares", familiares);
         return "InformacionFamiliares";
-
     }
+
+
 
     @RequestMapping(value = {"/matricula"}, method = RequestMethod.GET)
     public String loadMatricula(ModelMap model) {

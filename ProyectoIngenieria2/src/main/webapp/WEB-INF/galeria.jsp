@@ -29,7 +29,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder Lulú</title>
+        <title>Kinder LulÃº</title>
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
+                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
             </div>
 
 
@@ -175,7 +175,7 @@
                                     out.print("encargado");
                                 }%>
 
-                               ">Regresar al menú</a>
+                               ">Regresar al menÃº</a>
                         </li>
                     </ul>
                 </div>
@@ -245,7 +245,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>Administración del Kinder. Copyright 2016</p>
+                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
