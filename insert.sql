@@ -15,6 +15,12 @@ insert into kinderbd.clase (profesor,nivel)values ('1-07720-0892','Prekinder');
 insert into kinderbd.clase (profesor,nivel)values ('2-0315-0116','kinder');
 insert into kinderbd.clase (profesor,nivel)values ('1-0304-0551','Preparatoria');
 
+
+	insert into kinderbd.especialidad (profesor,nombre)values ('1-0304-0551','Ingles');
+	insert into kinderbd.especialidad (profesor,nombre)values ('3-3333-3333','Computación');
+	insert into kinderbd.especialidad (profesor,nombre)values ('4-0569-0203','Instrucción crstiana');
+	insert into kinderbd.especialidad (profesor,nombre)values ('2-2222-2222','educación fisica');
+
 -------------------INSERT PROFESORES----------------------------------------------------------
 insert into kinderbd.profesor values ('Maria','Solano','Jimenez',300000,'maria.solano@hotmail.com','1985-05-12','4-0569-0203','','','Profesor');
 insert into kinderbd.profesor values ('Carmen','Vargas','Soto',350000,'carmen06@hotmail.com','1985-06-08','1-07720-0892','','','Profesor');

@@ -1,12 +1,13 @@
-<%-- 
-    Document   : Administracion
-    Created on : 04/02/2016, 05:07:38 PM
+<%--
+    Document   : Estudiantes
+    Created on : 14/03/2016, 12:29:37 AM
     Author     : josvr_000
 --%>
 
-<%@page import="modelo.Encargado"%>
 <%@page import="modelo.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 
@@ -27,18 +28,22 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
+
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
         <link href="resources/css/sb-admin.css" rel="stylesheet">
-
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,6 +51,32 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script>
+
+            function eliminar(id) {
+
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+
+            }
+
+        </script>
+        
+        <script>
+
+            function eliminar2(id) {
+
+
+                var element = document.getElementById("valor2");
+
+                element.value = id;
+
+            }
+
+        </script>
 
     </head>
     <body>
@@ -60,7 +91,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -70,7 +101,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">AdministraciÃ³n </h3>
+            <h3 id="Titulo">Niveles </h3>
 
 
         </div>
@@ -166,70 +197,9 @@
                     </ul>
 
 
-
                     <ul class="nav navbar-nav">
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i> Pagos <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Registrar Pago</a>
-                                </li>
-                                <li class="divider"></li>
-
-                                <li>
-                                    <a href="Visualizar-Pagos"><i class="fa fa-search"></i> Verificar Pagos</a>
-                                </li>   
-                            </ul>
-                        </li>
                         <li>
-                            <a href="matricula"><i class="fa fa-archive"></i> MatrÃ­cula</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university"></i> InstituciÃ³n <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <!--li>
-                                    <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
-                                </li>
-                                <li class="divider"></li-->
-
-                                <li>
-                                    <a href="Estudiantes"><i class="fa fa-users"></i> Estudiantes</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="Profesores"><i class="fa fa-graduation-cap"></i> Profesores</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="NivelesKinder"><i class="fa fa-line-chart"></i> Niveles</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="CursosKinder"><i class="fa fa-language"></i> Cursos especiales</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> ConfiguraciÃ³n <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
-                                </li>
-                                <li class="divider"></li>
-
-                                <li>
-                                    <a href="quienesAdministrador"><i class="fa fa-university"></i> Â¿QuiÃ©nes Somos?</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Contacto</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="noticiasAdministrador"><i class="fa fa-bell"></i> Noticias</a>
-                                </li>
-                            </ul>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -243,55 +213,168 @@
 
 
             <div class="row">
-                <div class="box">
-                    <div class="col-lg-12 text-center">
-                        <div id="carousel-example-generic" class="carousel slide">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators hidden-xs">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
+                <div class="form-group">
+                    <!--div class="col-lg-offset-2 col-lg-8"-->
+                    <button style=" font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif;" type="button" id="" class="btn btn-info custom-width" data-toggle="modal" data-target="#myModal2">Agregar nivel</button>
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="img-responsive img-full" src="resources/img/18.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/aa.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/20.jpg" alt="">
-                                </div>
-                            </div>
-
-                            <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="icon-prev"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="icon-next"></span>
-                            </a>
-                        </div>
-                        <h2 class="brand-before">
-                            <small>Bienvenido</small>
-                        </h2>
-
-                        <hr class="tagline-divider">
-
-                    </div>
+                    <!--/div-->
                 </div>
+
+                <div id="tablita">
+
+                    <div style=" overflow: scroll ; height: 300px " class="box">
+
+
+
+
+                        <table class="table table-bordered table-hover">
+                            <thead class="titulosTabla">
+                                <tr>
+                                    <th>NIVEL</th>
+                                    <th>PROFESOR</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="cuerpoTabla">
+                                <c:forEach items="${niveles}" var="nivel">
+                                    <tr class="active">
+                                        <td>${nivel.nivel}</td>
+                                        <td>${nivel.getProfesorNombre()}</td>
+                                        <td><button type="button" id="${nivel.id}" class="btn btn-info custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Editar</button></td>
+                                        <td><button type="button" id="${nivel.id}" class="btn btn-danger custom-width" onclick="eliminar2(this.id)" data-toggle="modal" data-target="#myModal3">Eliminar</button></td>
+                                        <td><a href="<c:url value='EstudiantesNivel-${nivel.id}' />" class="btn btn-success custom-width">Ver estudiantes</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
+                <h5 style='color:red'>${error}</h5>
+                <h5 style='color:green'>${correcto}</h5>
             </div>
 
 
         </div>
 
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editar nivel</h4>
+                    </div>
+
+
+
+                    <form:form method="POST" action="EditarNivel"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <form:input type="hidden" path="id"  id="valor"/>
+
+                        <table class="tableInvisivle">
+                            <tr><td><strong>Nombre</strong></td><td><form:input path="nivel" type="text" class="form-control" id="nombre"
+                                        placeholder="Nombre del nivel" onkeydown="return validarLetras(event)" /></td></tr>
+                            <tr><td><strong>Profesor</strong></td><td><form:select path="profesor" items="${profesores}" style="width: 100%;" class="form-control input-sm" id="nivel" required="true" />
+                                </td></tr>
+
+                        </table>
+
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Guardar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Agregar nivel</h4>
+                    </div>
+
+
+
+                    <form:form method="POST" action="AgregarNivel"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <form:input type="hidden" path="id"  id="valor"/>
+
+                        <table class="tableInvisivle">
+                            <tr><td><strong>Nombre</strong></td><td><form:input path="nivel" type="text" class="form-control" id="nombre"
+                                        placeholder="Nombre del nivel" onkeydown="return validarLetras(event)" /></td></tr>
+                            <tr><td><strong>Profesor</strong></td><td><form:select path="profesor" items="${profesores}" style="width: 100%;" class="form-control input-sm" id="nivel" required="true" />
+                                </td></tr>
+
+                        </table>
+
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Guardar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
+        </div>
+            
+            
+            <div id="myModal3" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
+                    </div>
+
+                    <form:form method="POST" action="EliminarNivel"  modelAttribute="clase" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <form:input type="hidden" path="id"  id="valor2"/>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger" >Eliminar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
@@ -305,9 +388,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                                            $('.carousel').carousel({
+                                                interval: 5000 //changes the speed
+                                            })
         </script>
 
     </body>

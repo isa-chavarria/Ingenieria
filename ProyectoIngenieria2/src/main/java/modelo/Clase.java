@@ -40,16 +40,17 @@ public class Clase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
     @Size(max = 50)
     @Column(name = "nivel")
     private String nivel;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "grupo")
-    private Set<Nino> ninos = new HashSet<>(); ;
+    private Set<Nino> ninos = new HashSet<>();
+    ;
 
     @JoinColumn(name = "profesor", referencedColumnName = "id")
     @ManyToOne
@@ -62,10 +63,6 @@ public class Clase implements Serializable {
     public void setNinos(Set<Nino> ninos) {
         this.ninos = ninos;
     }
-
-   
-
-    
 
     public String getNivel() {
         return nivel;
@@ -87,14 +84,12 @@ public class Clase implements Serializable {
         return id;
     }
 
-    
-
     public Collection<Encargado> purga() {
         Collection<Encargado> purga = new ArrayList<Encargado>();
         for (Nino n : this.ninos) {
-           
-                purga.add(n.getEncargado().iterator().next());
-           
+
+            purga.add(n.getEncargado().iterator().next());
+
         }
         return purga;
     }
@@ -178,8 +173,8 @@ public class Clase implements Serializable {
             s.append("<td>" + e.getApellido2() + "</td>");
             s.append("<td>" + e.getFechaNacimiento() + "</td>");
             s.append("<td><a href='verEstudiante-" + e.getId() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
-            s.append("<td><button type=\"button\" id='"+e.getId()+"' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
-            
+            s.append("<td><button type=\"button\" id='" + e.getId() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+
             s.append("</tr>");
         }
 
@@ -190,6 +185,11 @@ public class Clase implements Serializable {
         s.append("</div>");// cerrar box
 
         return s.toString();
+    }
+
+    public String getProfesorNombre() {
+        
+        return (profesor!=null)? profesor.getNombre() :"NA";
     }
 
     @Override

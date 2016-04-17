@@ -23,6 +23,7 @@ import modelo.Clase;
 import modelo.Contacto;
 import modelo.Encargado;
 import modelo.Enfermedad;
+import modelo.Especialidad;
 import modelo.Factura;
 import modelo.Familiar;
 import modelo.Informacion;
@@ -31,6 +32,7 @@ import modelo.Kinder;
 import modelo.Matricula;
 import modelo.Mes;
 import modelo.Nino;
+import modelo.NivelModificar;
 import modelo.Noticia;
 import modelo.Pago;
 import modelo.Profesor;
@@ -53,6 +55,7 @@ import service.ContactoService;
 import service.ClaseService;
 import service.EncargadoService;
 import service.EnfermedadService;
+import service.EspecialidadService;
 import service.FacturaService;
 import service.FamiliarService;
 import service.InformacionService;
@@ -113,6 +116,9 @@ public class AppController {
 
     @Autowired
     EnfermedadService enfermedadService;
+
+    @Autowired
+    EspecialidadService especialidadService;
 
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
@@ -1212,6 +1218,13 @@ public class AppController {
             c.setProfesor(null);
             claseService.UpdateClase(c);
         }
+
+        Set<Especialidad> especiali = p.getEspecialidad();
+
+        for (Especialidad c : especiali) {
+            c.setProfesor(null);
+            especialidadService.UpdateEspecialidad(c);
+        }
         profesorService.DeletebyId(p.getId());
 
         model.addAttribute("correcto", "profesor eliminado correctamente");
@@ -1232,13 +1245,134 @@ public class AppController {
             model.addAttribute("error", "profesor no modificado correctamente");
             return loadProfesores(model);
         }
-        
-
 
         profesorService.UpdateProfesor(profe);
         model.addAttribute("correcto", "profesor modificado correctamente");
         return loadProfesores(model);
 
+    }
+
+    //-------NIVELES---------------------
+    @RequestMapping(value = {"/NivelesKinder"}, method = RequestMethod.GET)
+    public String loadNiveles(ModelMap model) {
+        Clase c = new Clase();
+        NivelModificar g = new NivelModificar();
+        List<Clase> niveles = claseService.findAll();
+        model.addAttribute("niveles", niveles);
+        model.addAttribute("grupo", g);
+        model.addAttribute("clase", c);
+
+        return "Niveles";
+    }
+
+    @RequestMapping(value = {"/EditarNivel"}, method = RequestMethod.POST)
+    public String EditarNivel(@Valid NivelModificar nivel, BindingResult result, ModelMap model) {
+        Clase n = claseService.findbyId(Long.parseLong(nivel.getId()));
+        Profesor f = profesorService.findbyId(buscar(nivel.getProfesor()));
+        if (!nivel.getNivel().equals("")) {
+            n.setNivel(nivel.getNivel());
+        }
+        n.setProfesor(f);
+        claseService.UpdateClase(n);
+        model.addAttribute("correcto", "nivel modificado correctamente");
+        return loadNiveles(model);
+    }
+
+    @RequestMapping(value = {"/AgregarNivel"}, method = RequestMethod.POST)
+    public String AgregarNivel(@Valid NivelModificar nivel, BindingResult result, ModelMap model) {
+        Clase n = new Clase();
+        Profesor f = profesorService.findbyId(buscar(nivel.getProfesor()));
+
+        n.setNivel(nivel.getNivel());
+        n.setProfesor(f);
+        claseService.save(n);
+        model.addAttribute("correcto", "nivel agregado correctamente");
+        return loadNiveles(model);
+    }
+
+    @RequestMapping(value = {"/EliminarNivel"}, method = RequestMethod.POST)
+    public String EliminarNivel(@Valid Clase nivel, BindingResult result, ModelMap model) {
+        Clase n = claseService.findbyId(nivel.getId());
+        n.setProfesor(null);
+
+        Set<Nino> ninos = n.getNinos();
+        for (Nino ni : ninos) {
+            ni.setClase(null);
+            ninoService.UpdateNino(ni);
+        }
+        claseService.UpdateClase(n);
+        claseService.DeletebyId(n.getId());
+        model.addAttribute("correcto", "nivel eliminado correctamente");
+        return loadNiveles(model);
+    }
+
+    @RequestMapping(value = {"/EstudiantesNivel-{id}"}, method = RequestMethod.GET)
+    public String EstudiantesNivel(@PathVariable Long id, ModelMap model, HttpServletRequest request) {
+        Clase c = claseService.findbyId(id);
+        model.addAttribute("grupito", c);
+        return "EstudiantesNivel";
+    }
+
+    //------------NIVELES--------------------------------------
+    @RequestMapping(value = {"/CursosKinder"}, method = RequestMethod.GET)
+    public String loadCursos(ModelMap model) {
+        Especialidad c = new Especialidad();
+        NivelModificar g = new NivelModificar();
+        List<Especialidad> niveles = especialidadService.findAll();
+        model.addAttribute("cursos", niveles);
+        model.addAttribute("grupo", g);
+        model.addAttribute("clase", c);
+
+        return "Especialidades";
+    }
+
+    @RequestMapping(value = {"/AgregarCurso"}, method = RequestMethod.POST)
+    public String AgregarCurso(@Valid NivelModificar nivel, BindingResult result, ModelMap model) {
+        Especialidad n = new Especialidad();
+        Profesor f = profesorService.findbyId(buscar(nivel.getProfesor()));
+
+        n.setNombre(nivel.getNivel());
+        n.setProfesor(f);
+        especialidadService.save(n);
+        model.addAttribute("correcto", "curso agregado correctamente");
+        return loadCursos(model);
+    }
+
+    @RequestMapping(value = {"/EditarCurso"}, method = RequestMethod.POST)
+    public String EditarCurso(@Valid NivelModificar nivel, BindingResult result, ModelMap model) {
+        Especialidad n = especialidadService.findbyId(Long.parseLong(nivel.getId()));
+        Profesor f = profesorService.findbyId(buscar(nivel.getProfesor()));
+        if (!nivel.getNivel().equals("")) {
+            n.setNombre(nivel.getNivel());
+        }
+        n.setProfesor(f);
+        especialidadService.UpdateEspecialidad(n);
+        model.addAttribute("correcto", "curso modificado correctamente");
+        return loadCursos(model);
+    }
+
+    @RequestMapping(value = {"/EliminarCurso"}, method = RequestMethod.POST)
+    public String EliminarCurso(@Valid Especialidad nivel, BindingResult result, ModelMap model) {
+        Especialidad n = especialidadService.findbyId(nivel.getId());
+        n.setProfesor(null);
+
+        especialidadService.UpdateEspecialidad(n);
+        especialidadService.DeletebyId(n.getId());
+        model.addAttribute("correcto", "curso eliminado correctamente");
+        return loadCursos(model);
+    }
+
+    //--------------------------------------------------------------
+    private String buscar(String profesor) {
+        List<Profesor> profesores = profesorService.findAll();
+
+        for (Profesor c : profesores) {
+            if (c.getNombre().equals(profesor)) {
+                return c.getId();
+            }
+        }
+
+        return "";
     }
 
     @ModelAttribute("niveles")
@@ -1266,6 +1400,16 @@ public class AppController {
         ArrayList<String> l = new ArrayList<>();
         l.add("Masculino");
         l.add("Femenino");
+        return l;
+    }
+
+    @ModelAttribute("profesores")
+    public ArrayList<String> initializeProfesores() {
+        List<Profesor> profesores = profesorService.findAll();
+        ArrayList<String> l = new ArrayList<>();
+        for (Profesor c : profesores) {
+            l.add(c.getNombre());
+        }
         return l;
     }
 

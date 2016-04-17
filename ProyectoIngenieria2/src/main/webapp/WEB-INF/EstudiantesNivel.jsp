@@ -1,12 +1,13 @@
-<%-- 
-    Document   : Administracion
-    Created on : 04/02/2016, 05:07:38 PM
+<%--
+    Document   : Estudiantes
+    Created on : 14/03/2016, 12:29:37 AM
     Author     : josvr_000
 --%>
 
-<%@page import="modelo.Encargado"%>
 <%@page import="modelo.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 
@@ -27,18 +28,20 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder Lulú</title>
+        <title>Kinder Lul�</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/validarForm.js"></script>
+
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
         <link href="resources/css/sb-admin.css" rel="stylesheet">
-
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,6 +49,19 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
+        <script>
+
+            function eliminar(id) {
+                
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+               
+            }
+
+        </script>
 
     </head>
     <body>
@@ -60,7 +76,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lul�</div>
             </div>
 
 
@@ -70,7 +86,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">Administración </h3>
+            <h3 id="Titulo">Estudiantes </h3>
 
 
         </div>
@@ -166,70 +182,9 @@
                     </ul>
 
 
-
                     <ul class="nav navbar-nav">
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i> Pagos <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Registrar Pago</a>
-                                </li>
-                                <li class="divider"></li>
-
-                                <li>
-                                    <a href="Visualizar-Pagos"><i class="fa fa-search"></i> Verificar Pagos</a>
-                                </li>   
-                            </ul>
-                        </li>
                         <li>
-                            <a href="matricula"><i class="fa fa-archive"></i> Matrícula</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university"></i> Institución <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <!--li>
-                                    <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
-                                </li>
-                                <li class="divider"></li-->
-
-                                <li>
-                                    <a href="Estudiantes"><i class="fa fa-users"></i> Estudiantes</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="Profesores"><i class="fa fa-graduation-cap"></i> Profesores</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="NivelesKinder"><i class="fa fa-line-chart"></i> Niveles</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="CursosKinder"><i class="fa fa-language"></i> Cursos especiales</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Configuración <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
-                                </li>
-                                <li class="divider"></li>
-
-                                <li>
-                                    <a href="quienesAdministrador"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Contacto</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="noticiasAdministrador"><i class="fa fa-bell"></i> Noticias</a>
-                                </li>
-                            </ul>
+                            <a href="NivelesKinder">Regresar al men�</a>
                         </li>
                     </ul>
                 </div>
@@ -243,55 +198,57 @@
 
 
             <div class="row">
-                <div class="box">
-                    <div class="col-lg-12 text-center">
-                        <div id="carousel-example-generic" class="carousel slide">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators hidden-xs">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="img-responsive img-full" src="resources/img/18.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/aa.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/20.jpg" alt="">
-                                </div>
-                            </div>
+                
+                <div id="tablita">
+                    <h4>Estudiantes de ${grupito.nivel}</h4>
 
-                            <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="icon-prev"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="icon-next"></span>
-                            </a>
-                        </div>
-                        <h2 class="brand-before">
-                            <small>Bienvenido</small>
-                        </h2>
+                    <div style=" overflow: scroll ; height: 500px " class="box">
 
-                        <hr class="tagline-divider">
 
+
+
+                        <table class="table table-bordered table-hover">
+                            <thead class="titulosTabla">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOMBRE</th>
+                                    <th>PRIMER APELLIDO</th>
+                                    <th>SEGUNDO APELLIDO</th>
+                                    <th>FECHA DE NACIMIENTO</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="cuerpoTabla">
+                                <c:forEach items="${grupito.purga()}" var="stu">
+                                    <tr class="active">
+                                        <td>${stu.id}</td>
+                                        <td>${stu.nombre}</td>
+                                        <td>${stu.apellido1}</td>
+                                        <td>${stu.apellido2}</td>
+                                        <td>${stu.fechaNacimiento}</td>                                     
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
 
 
         </div>
 
+
+
+        
+
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>Administración del Kinder. Copyright 2016</p>
+                        <p>Administraci�n del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
@@ -311,4 +268,18 @@
         </script>
 
     </body>
+
+    <script>
+        $(document).ready(function () {
+            $('#nivel').change(function (event) {
+                var nombreVar = $('#nivel').val();
+                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                $.post('seleccionar', {
+                    nombre: nombreVar
+                }, function (responseText) {
+                    $('#tablita').html(responseText);
+                });
+            });
+        });
+    </script>
 </html>

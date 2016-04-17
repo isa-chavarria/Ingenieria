@@ -6,9 +6,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -20,8 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -60,6 +55,20 @@ public class Profesor implements Serializable {
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "profesor")
     private Set<Clase> grupo = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "profesor")
+    private Set<Especialidad> especialidad = new HashSet<>();
+
+    public Set<Especialidad> getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Set<Especialidad> especialidad) {
+        this.especialidad = especialidad;
+    }
+    
+    
 
     public Set<Clase> getGrupo() {
         return grupo;

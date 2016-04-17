@@ -180,6 +180,25 @@ DEFAULT CHARACTER SET = utf8;
 
 -- GRUPO
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `kinderBD`.`Especialidad` ;
+CREATE TABLE IF NOT EXISTS `kinderBD`.`Especialidad` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `profesor` VARCHAR(50) NULL DEFAULT NULL,
+  `nombre` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_clase` (`profesor` ASC),
+  CONSTRAINT `fk_clase`
+    FOREIGN KEY (`profesor`)
+    REFERENCES `kinderBD`.`profesor` (`id`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+
+-- GRUPO
+-- -----------------------------------------------------
 DROP TABLE IF EXISTS `kinderBD`.`clase` ;
 CREATE TABLE IF NOT EXISTS `kinderBD`.`clase` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -430,6 +449,7 @@ DROP TABLE IF EXISTS `kinderBD`.`factura` ;
 DROP TABLE IF EXISTS `kinderBD`.`nino` ;
 DROP TABLE IF EXISTS `kinderBD`.`encargado` ;
 DROP TABLE IF EXISTS `kinderBD`.`clase` ;
+DROP TABLE IF EXISTS `kinderBD`.`Especialidad` ;
 DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
 DROP TABLE IF EXISTS `kinderBD`.`usuario` ;
 DROP TABLE IF EXISTS `kinderBD`.`meses` ;
