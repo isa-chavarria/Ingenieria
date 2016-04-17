@@ -177,8 +177,9 @@ public class Clase implements Serializable {
             s.append("<td>" + e.getApellido1() + "</td>");
             s.append("<td>" + e.getApellido2() + "</td>");
             s.append("<td>" + e.getFechaNacimiento() + "</td>");
-            s.append("<td><a href=\"<c:url value='" + e.getId() + "' />\" class=\"btn btn-success custom-width\">Editar</a></td>");
-            s.append("<td><a href=\"<c:url value='" + e.getId() + "' />\" class=\"btn btn-danger custom-width\">Eliminar</a></td>");
+            s.append("<td><a href='verEstudiante-" + e.getId() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
+            s.append("<td><button type=\"button\" id='"+e.getId()+"' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+            
             s.append("</tr>");
         }
 

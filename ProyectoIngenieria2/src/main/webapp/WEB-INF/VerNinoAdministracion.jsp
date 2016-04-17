@@ -49,19 +49,6 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
-        <script>
-
-            function eliminar(id) {
-                
-
-                var element = document.getElementById("valor");
-
-                element.value = id;
-               
-            }
-
-        </script>
 
     </head>
     <body>
@@ -184,7 +171,7 @@
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="administracion">Regresar al menú</a>
+                            <a href="Estudiantes">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -198,84 +185,136 @@
 
 
             <div class="row">
+                <div class="box">
 
-                <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-
-                    <div   class="form-inline">
-                        <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
-                        <div class="col-lg-4">
-                            <form:select path="nivel"  items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
+                    <div class="col-lg-3 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="navbar-collapse collapse sidebar-navbar-collapse" >
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a style="font-size: small;" href="verEstudiante-${enc.id}">Información niño</a></li>
+                                        <li class="active"><a style="font-size: small;" href="detallesMatricula-${enc.id}">Información matrícula</a></li>
+                                        <li class="active"><a style="font-size: small;" href="verFamiliares-${enc.id}">Información familiares</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
                         </div>
-                    </div>                 
-                </form:form>
-                <div id="tablita">
-                    <h4>Estudiantes de ${grupito.nivel}</h4>
 
-                    <div style=" overflow: scroll ; height: 500px " class="box">
+                    </div>
 
+                    <div class="col-lg-9 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <div class="media">
+                                    <div class="col-xs-2 col-md-2">
+                                        <a href="#" class="thumbnail">
+                                            <img src="${enc.ruta_imagen}" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                                
 
-
-
-                        <table class="table table-bordered table-hover">
-                            <thead class="titulosTabla">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRIMER APELLIDO</th>
-                                    <th>SEGUNDO APELLIDO</th>
-                                    <th>FECHA DE NACIMIENTO</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="cuerpoTabla">
-                                <c:forEach items="${grupito.purga()}" var="stu">
-                                    <tr class="active">
-                                        <td>${stu.id}</td>
-                                        <td>${stu.nombre}</td>
-                                        <td>${stu.apellido1}</td>
-                                        <td>${stu.apellido2}</td>
-                                        <td>${stu.fechaNacimiento}</td>
-                                        <td><a href="<c:url value='verEstudiante-${stu.id}' />" class="btn btn-success custom-width">Ver</a></td>
-                                        <td><button type="button" id="${stu.id}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
+                                <table class="tableInvisivle">
+                                    <tr>
+                                        <td><strong>Nombre completo:</strong></td>
+                                        <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
+                                        <td></td>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                                    <tr>
+                                        <td><strong>Cédula:</strong></td>
+                                        <td>${enc.id}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecha de nacimiento:</strong></td>
+                                        <td>${enc.fechaNacimiento}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>sexo:</strong></td>
+                                        <td>${enc.sexo}</td>
+                                        <td></td>
+                                    </tr>
 
-                </div>
-            </div>
+
+                                    <tr>
+                                        <td><strong>teléfono del domicilio:</strong></td>
+                                        <td>${enc.telefono}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Dirección del domicilio:</strong></td>
+                                        <td>${enc.direccion}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nivel:</strong></td>
+                                        <td>${nivel}</td>
+                                        <td><button type="button" id="${enc.id}" class="btn btn-success custom-width"  data-toggle="modal" data-target="#myModal">Editar nivel</button></td>
+                                    </tr>
+                                </table>
+
+                            </div>
 
 
-        </div>
+
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <h4>Padecimientos del niño</h4>
+                                <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${enfermedad.descripcion}</textarea>
+
+                            </div>
 
 
 
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <h4>Medicamentos que utiliza</h4>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
-                    </div>
+                                <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${medicamento.descripcion}</textarea>
 
-                    <form:form method="POST" action="EliminarEstudiante"  modelAttribute="estudiante" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-                        <form:input type="hidden" path="id"  id="valor"/>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-danger" >Eliminar</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                            </div>
+
                         </div>
 
-                    </form:form>
 
+                    </div>
 
                 </div>
 
             </div>
+
+
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Seleccione el nivel</h4>
+                        </div>
+
+
+
+                        <form:form method="POST" action="CambiarNivel"  modelAttribute="objeto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                            <form:input type="hidden" path="id"  id="valor"/>
+                            <form:select path="nivel" items="${niveles}" style="width: 50%; margin-left: 10%;" class="form-control input-sm" id="nivel" required="true" />
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" >Guardar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </form:form>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
 
         <footer>

@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`matricula` (
   `matricula` VARCHAR(1000) NULL DEFAULT NULL,
   `cursolectivo` varchar(50) NULL DEFAULT NULL,
   `realizadoPor` varchar(1000) NULL DEFAULT NULL,
-  `id_nino` VARCHAR(50) NOT NULL,
+  `id_nino` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
     CONSTRAINT `fk_matricula`
     FOREIGN KEY (`id_nino`)

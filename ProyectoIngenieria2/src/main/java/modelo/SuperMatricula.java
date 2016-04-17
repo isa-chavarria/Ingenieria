@@ -50,6 +50,10 @@ public class SuperMatricula {
     String tieneFotos;
     String monto;
     String curso;
+    
+    
+    
+    
 
     public String getSexo() {
         return sexo;

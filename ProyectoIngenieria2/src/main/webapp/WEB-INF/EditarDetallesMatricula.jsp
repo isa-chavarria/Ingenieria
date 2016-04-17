@@ -32,7 +32,6 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <script src="resources/js/validarForm.js"></script>
 
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
@@ -49,19 +48,6 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
-        <script>
-
-            function eliminar(id) {
-                
-
-                var element = document.getElementById("valor");
-
-                element.value = id;
-               
-            }
-
-        </script>
 
     </head>
     <body>
@@ -184,7 +170,7 @@
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="administracion">Regresar al menú</a>
+                            <a href="Estudiantes">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -198,84 +184,74 @@
 
 
             <div class="row">
+                <div class="box">
 
-                <form:form method="POST" action="seleccionar"  modelAttribute="grupo" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-
-                    <div   class="form-inline">
-                        <label for="nivel" class="col-lg-2 control-label">Seleccione el nivel:</label>
-                        <div class="col-lg-4">
-                            <form:select path="nivel"  items="${niveles}" class="form-control input-sm" id="nivel" required="true" />
+                    <div class="col-lg-3 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="navbar-collapse collapse sidebar-navbar-collapse" >
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a style="font-size: small;" href="verEstudiante-${enc.id}">Información niño</a></li>
+                                        <li class="active"><a style="font-size: small;" href="#">Información matrícula</a></li>
+                                        <li class="active"><a style="font-size: small;" href="verFamiliares-${enc.id}">Información familiares</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
                         </div>
-                    </div>                 
-                </form:form>
-                <div id="tablita">
-                    <h4>Estudiantes de ${grupito.nivel}</h4>
 
-                    <div style=" overflow: scroll ; height: 500px " class="box">
-
-
-
-
-                        <table class="table table-bordered table-hover">
-                            <thead class="titulosTabla">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRIMER APELLIDO</th>
-                                    <th>SEGUNDO APELLIDO</th>
-                                    <th>FECHA DE NACIMIENTO</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="cuerpoTabla">
-                                <c:forEach items="${grupito.purga()}" var="stu">
-                                    <tr class="active">
-                                        <td>${stu.id}</td>
-                                        <td>${stu.nombre}</td>
-                                        <td>${stu.apellido1}</td>
-                                        <td>${stu.apellido2}</td>
-                                        <td>${stu.fechaNacimiento}</td>
-                                        <td><a href="<c:url value='verEstudiante-${stu.id}' />" class="btn btn-success custom-width">Ver</a></td>
-                                        <td><button type="button" id="${stu.id}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
                     </div>
 
-                </div>
-            </div>
+                    <div class="col-lg-9 text-center">
 
-
-        </div>
-
-
-
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
-                    </div>
-
-                    <form:form method="POST" action="EliminarEstudiante"  modelAttribute="estudiante" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-                        <form:input type="hidden" path="id"  id="valor"/>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-danger" >Eliminar</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <div class="media-body">
+                                    <h4 class="media-heading">${enc.nombre} ${enc.apellido1} ${enc.apellido2}</h4>
+                                </div>
+                            </div>
                         </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <h4>Detalles de la matrícula</h4>
+                                <form:form method="POST" action="EditarDetallesMatriculaCambiar"  modelAttribute="objeto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                                    <form:input type="hidden" path="id"  id="id"/>
+                                    <table class="tableInvisivle">
+                                        <tr><td><strong>Documentación completa</strong></td>
+                                            <td><form:select path="infoCompleta" items="${opciones}" class="form-control input-sm" id="completa"/></td></tr>
+                                        <tr><td><strong>Presento carné de vacunas</strong></td>
+                                            <td><form:select path="vacunas" items="${opciones}" class="form-control input-sm" id="carnetVacunas"/></td></tr>
+                                        <tr><td><strong>Presento constancia de nacimiento</strong></td>
+                                            <td> <form:select path="consNacimiento" items="${opciones}" class="form-control input-sm" id="constanciaNacimeinto"/></td></tr>
+                                        <tr><td><strong>Presento Fotos</strong></td>
+                                            <td> <form:select path="tieneFotos" items="${opciones}" class="form-control input-sm" id="fotos" required="true" /></td></tr>
+                                        <tr><td><strong>Total del Pago ¢</strong></td>
+                                            <td><form:input path="monto" type="number" class="form-control" id="monto"
+                                                placeholder="monto" required="true" /></td></tr>
+                                       
+                                        <tr><td><strong>Curso lectivo</strong></td>
+                                            <td><form:input path="curso" type="number" class="form-control" id="curso"
+                                                placeholder="2016"/></td></tr>
+                                       
+                                    </table>
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-8">
+                                            <button type="submit" class="btn btn-info">Guardar</button>
+                                        </div>
+                                    </div>
 
-                    </form:form>
+                                </form:form>
 
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
             </div>
+
+
         </div>
 
         <footer>

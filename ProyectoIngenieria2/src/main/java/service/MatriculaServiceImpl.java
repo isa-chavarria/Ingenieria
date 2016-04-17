@@ -43,7 +43,15 @@ public class MatriculaServiceImpl implements MatriculaService {
     public void UpdateMatricula(Matricula matri) {
         Matricula ki = this.matricula.findbyCodigo(matri.getCodigo());
         if (ki != null) {
-           
+           ki.setCodigo(matri.getCodigo());
+           ki.setCompeta(matri.getCompeta());
+           ki.setCarnet(matri.getCarnet());
+           ki.setConstanciaNacimiento(matri.getConstanciaNacimiento());
+           ki.setFotos(matri.getFotos());
+           ki.setMatricula(matri.getMatricula());
+           ki.setCursolectivo(matri.getCursolectivo());
+           ki.setRealizadoPor(matri.getRealizadoPor());
+           ki.setNino(matri.getNino());
         }
     }
 }

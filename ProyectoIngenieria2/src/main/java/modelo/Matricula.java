@@ -29,7 +29,7 @@ public class Matricula implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name="codigo")
+    @Column(name = "codigo")
     private Long codigo;
     @Column(name = "completa")
     private Boolean competa;
@@ -62,8 +62,6 @@ public class Matricula implements Serializable {
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
-
-    
 
     public Boolean getCompeta() {
         return competa;
@@ -127,6 +125,27 @@ public class Matricula implements Serializable {
 
     public void setNino(Nino nino) {
         this.nino = nino;
+    }
+
+    public String Completa() {
+        return (this.competa == true) ? "Si" : "No";
+    }
+
+    public String ConstanciaNacimiento() {
+        return (this.constanciaNacimiento == true) ? "Si" : "No";
+    }
+
+    public String Carnet() {
+        return (this.carnet == true) ? "Si" : "No";
+    }
+
+    public String Fotos() {
+        return (this.fotos == true) ? "Si" : "No";
+    }
+
+    public float calcularMora() {
+        float monto = Float.parseFloat(matricula);
+        return 52000 - monto;
     }
 
     @Override

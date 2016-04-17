@@ -200,7 +200,7 @@
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/equipo.jpg" style="height: 300%; width: 400%;">
+                                <img class="img-responsive" src="resources/img/equipo.jpg" c>
                             </a>
                         </div>
 

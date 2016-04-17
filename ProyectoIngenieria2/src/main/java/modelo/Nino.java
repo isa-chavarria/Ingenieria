@@ -57,11 +57,11 @@ public class Nino implements Serializable {
                 @JoinColumn(name = "enc_id")})
     private Set<Encargado> encargado = new HashSet<Encargado>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "idnino")
     private Set<Informacion> informacion = new HashSet<>();
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "id_nino")
     private Set<Enfermedad> enfermedad = new HashSet<>();
 
@@ -75,11 +75,11 @@ public class Nino implements Serializable {
     @ManyToOne
     private Clase clase;
     
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_nino")
     private Set<Factura> facturas= new HashSet<>(); ;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_nino")
     private Set<Matricula> matricula= new HashSet<>(); 
 

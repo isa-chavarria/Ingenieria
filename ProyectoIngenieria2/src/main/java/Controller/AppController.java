@@ -291,16 +291,6 @@ public class AppController {
         String idma = madre.getId();
         String idenc = enc.getId();
 
-        if (!padre.getId().equals("")) {
-            n.getFamiliares().add(padre);
-        }
-        if (!madre.getId().equals("")) {
-            n.getFamiliares().add(madre);
-        }
-        if (!enc.getId().equals("")) {
-            n.getFamiliares().add(enc);
-        }
-
         usuarioService.save(u);
         encargadoService.save(encargado);
         ninoService.save(n);
@@ -316,6 +306,19 @@ public class AppController {
         if (!medicamento.equals("")) {
             medicame.setNino(n);
             this.informacionService.save(medicame);
+        }
+
+        if (!padre.getId().equals("")) {
+            padre.setNino(n);
+            familiarService.save(padre);
+        }
+        if (!madre.getId().equals("")) {
+            madre.setNino(n);
+            familiarService.save(madre);
+        }
+        if (!enc.getId().equals("")) {
+            enc.setNino(n);
+            familiarService.save(enc);
         }
 
         //        n.getEncargado().add(encargado);
@@ -571,7 +574,6 @@ public class AppController {
         model.addAttribute("familiar", fam);
         return "EditarInformacionFamiliar";
     }
-    
 
     @RequestMapping(value = {"/EditarFamiliares"}, method = RequestMethod.POST)
     public String EditarFamiliares(@Valid Familiar familiar, ModelMap model, BindingResult result, HttpServletRequest request) {
@@ -624,8 +626,6 @@ public class AppController {
         model.addAttribute("familiares", familiares);
         return "InformacionFamiliares";
     }
-
-
 
     @RequestMapping(value = {"/matricula"}, method = RequestMethod.GET)
     public String loadMatricula(ModelMap model) {
@@ -964,11 +964,166 @@ public class AppController {
 
     @RequestMapping(value = {"/Estudiantes"}, method = RequestMethod.GET)
     public String loadEstudiantes(ModelMap model) {
+        Usuario u = new Usuario();
         Clase g = new Clase();
         model.addAttribute("grupo", g);
         Clase c = claseService.findbyId(new Long(1));
         model.addAttribute("grupito", c);
+        model.addAttribute("estudiante", u);
         return "Estudiantes";
+    }
+
+    @RequestMapping(value = {"/EliminarEstudiante"}, method = RequestMethod.POST)
+    public String Eliminarestudiante(@Valid Usuario u, BindingResult result, ModelMap model) {
+
+        String id = u.getId();
+
+        Nino n = ninoService.findbyId(id);
+        n.setClase(null);
+
+        //-------------------------------------------------------------
+        int size1;
+        size1 = n.getInformacion().size();
+        if (size1 > 0) {
+            Informacion inf = n.getInformacion().iterator().next();
+            inf.setNino(null);
+            informacionService.UpdateInformacion(inf);
+            informacionService.DeletebyCodigo(inf.getCodigo());
+        }
+        //---------------------------------------------------------------------
+
+        int size2;
+        size2 = n.getEnfermedad().size();
+        if (size2 > 0) {
+            Enfermedad enf = n.getEnfermedad().iterator().next();
+            enf.setNino(null);
+            enfermedadService.UpdateEnfermedad(enf);
+            enfermedadService.DeletebyCodigo(enf.getCodigo());
+        }
+        //-------------
+        Set<Familiar> lista = n.getFamiliares();
+
+        for (Familiar f : lista) {
+            f.setNino(null);
+            familiarService.UpdateFamiliar(f);
+            familiarService.DeletebyCodigo(f.getCodigo());
+        }
+        n.setFamiliares(null);
+        //-----------------------------------------------------------------------
+        Matricula m = n.getMatricula().iterator().next();
+        m.setNino(null);
+        matriculaService.UpdateMatricula(m);
+        matriculaService.DeletebyCodigo(m.getCodigo());
+
+        //------------------------------------------------------------
+        Usuario usu = usuarioService.findbyId(id);
+        usuarioService.DeletebyId(usu.getId());
+        Encargado e = encargadoService.findbyId(id);
+        encargadoService.DeletebyId(e.getId());
+
+        ninoService.UpdateNino(n);
+        ninoService.DeletebyId(n.getId());
+
+        return loadEstudiantes(model);
+    }
+
+    @RequestMapping(value = {"/verEstudiante-{id}"}, method = RequestMethod.GET)
+    public String loadVerNinoAdinistrador(@PathVariable String id, ModelMap model) {
+        Informacion medicamentos = new Informacion();
+        Enfermedad enfermedad = new Enfermedad();
+        Encargado en = encargadoService.findbyId(id);
+        model.addAttribute("enc", en);
+        Nino n = en.getNino().iterator().next();
+        Clase c = n.getClase();
+        String nivel = c.getNivel();
+        model.addAttribute("nivel", nivel);
+        int size1 = n.getEnfermedad().size();
+        int size2 = n.getInformacion().size();
+
+        if (size1 > 0) {
+            enfermedad = n.getEnfermedad().iterator().next();
+        }
+
+        if (size2 > 0) {
+            medicamentos = n.getInformacion().iterator().next();
+        }
+        SuperMatricula ma = new SuperMatricula();
+        ma.setId(id);
+        ma.setNivel(nivel);
+        model.addAttribute("objeto", ma);
+        model.addAttribute("enfermedad", enfermedad);
+        model.addAttribute("medicamento", medicamentos);
+
+        return "VerNinoAdministracion";
+    }
+
+    @RequestMapping(value = {"/CambiarNivel"}, method = RequestMethod.POST)
+    public String cambiarNivel(@Valid SuperMatricula persona, ModelMap model) {
+        Nino n = ninoService.findbyId(persona.getId());
+
+        Clase c = claseService.findbyId(this.calcular(persona.getNivel()));
+        n.setClase(c);
+        ninoService.UpdateNino(n);
+
+        return loadVerNinoAdinistrador(persona.getId(), model);
+
+    }
+
+    @RequestMapping(value = {"/verFamiliares-{id}"}, method = RequestMethod.GET)
+    public String loadFamiliaresAdministracion(@PathVariable String id, ModelMap model) {
+        Encargado enc = encargadoService.findbyId(id);
+        Nino n = ninoService.findbyId(id);
+        Set<Familiar> familiares = n.getFamiliares();
+        model.addAttribute("familiares", familiares);
+        model.addAttribute("enc", enc);
+
+        return "InformacionFamiliarAdministracion";
+    }
+
+    @RequestMapping(value = {"/detallesMatricula-{id}"}, method = RequestMethod.GET)
+    public String loadDetallesMatricula(@PathVariable String id, ModelMap model) {
+        Encargado enc = encargadoService.findbyId(id);
+        Nino n = ninoService.findbyId(id);
+        Matricula m = n.getMatricula().iterator().next();
+        model.addAttribute("matricula", m);
+        model.addAttribute("enc", enc);
+
+        return "InformacionMatricula";
+    }
+
+    @RequestMapping(value = {"/EditardetallesMatricula-{id}"}, method = RequestMethod.GET)
+    public String loadEditarDetallesMatricula(@PathVariable String id, ModelMap model) {
+        Encargado enc = encargadoService.findbyId(id);
+        Nino n = ninoService.findbyId(id);
+        Matricula m = n.getMatricula().iterator().next();
+        SuperMatricula objeto = new SuperMatricula();
+        objeto.setInfoCompleta(m.Completa());
+        objeto.setVacunas(m.Carnet());
+        objeto.setConsNacimiento(m.ConstanciaNacimiento());
+        objeto.setTieneFotos(m.Fotos());
+        objeto.setMonto(m.getMatricula());
+        objeto.setCurso(m.getCursolectivo());
+        objeto.setId(id);
+
+        model.addAttribute("enc", enc);
+        model.addAttribute("objeto", objeto);
+
+        return "EditarDetallesMatricula";
+    }
+
+    @RequestMapping(value = {"/EditarDetallesMatriculaCambiar"}, method = RequestMethod.POST)
+    public String loadEditarDetallesMatriculaCambiar(@Valid SuperMatricula persona, ModelMap model) {
+        Nino n = ninoService.findbyId(persona.getId());
+        String id = n.getId();
+        Matricula m = n.getMatricula().iterator().next();
+        m.setCompeta(persona.EstaCompleta());
+        m.setCarnet(persona.EstaVacunas());
+        m.setConstanciaNacimiento(persona.EstaConstancia());
+        m.setFotos(persona.EstaFotos());
+        m.setMatricula(persona.getMonto());
+        m.setCursolectivo(persona.getCurso());
+        matriculaService.UpdateMatricula(m);
+        return loadDetallesMatricula(id, model);
     }
 
     @RequestMapping(value = {"/seleccionar"}, method = RequestMethod.POST)
