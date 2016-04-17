@@ -33,6 +33,7 @@ import modelo.Mes;
 import modelo.Nino;
 import modelo.Noticia;
 import modelo.Pago;
+import modelo.Profesor;
 import modelo.SuperMatricula;
 import modelo.Usuario;
 import modelo.UsuarioM;
@@ -1170,6 +1171,74 @@ public class AppController {
         nino.getFacturas().add(f);
         ninoService.UpdateNino(nino);
         return "PagoCorrecto";
+    }
+
+    //-----------------PROFESORES-------------------------------------------
+    @RequestMapping(value = {"/Profesores"}, method = RequestMethod.GET)
+    public String loadProfesores(ModelMap model) {
+        Profesor p = new Profesor();
+        List<Profesor> profesores = profesorService.findAll();
+        model.addAttribute("profesores", profesores);
+        model.addAttribute("profesor", p);
+        return "Profesores";
+    }
+
+    @RequestMapping(value = {"/AgregarProfesor"}, method = RequestMethod.POST)
+    public String AgregarProfesor(@Valid Profesor profe, BindingResult result, ModelMap model) {
+
+        if (this.profesorService.isIdUnique(profe.getId()) == false || result.hasErrors()) {
+            model.addAttribute("error", "profesor existente en el sistema");
+            return loadProfesores(model);
+        }
+        profesorService.save(profe);
+
+        model.addAttribute("correcto", "profesor agregado correctamente");
+        return loadProfesores(model);
+    }
+
+    @RequestMapping(value = {"/EliminarProfesor"}, method = RequestMethod.POST)
+    public String EliminarProfesor(@Valid Profesor profe, BindingResult result, ModelMap model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("error", "El profesor no se pudo eliminar");
+            return loadProfesores(model);
+        }
+
+        Profesor p = profesorService.findbyId(profe.getId());
+
+        Set<Clase> clases = p.getGrupo();
+
+        for (Clase c : clases) {
+            c.setProfesor(null);
+            claseService.UpdateClase(c);
+        }
+        profesorService.DeletebyId(p.getId());
+
+        model.addAttribute("correcto", "profesor eliminado correctamente");
+        return loadProfesores(model);
+    }
+
+    @RequestMapping(value = {"/EditarProfesor-{id}"}, method = RequestMethod.GET)
+    public String EditarProfesor(@PathVariable String id, ModelMap model, HttpServletRequest request) {
+        Profesor p = profesorService.findbyId(id);
+        model.addAttribute("profesor", p);
+
+        return "EditarProfesor";
+    }
+
+    @RequestMapping(value = {"/EditarProfesor"}, method = RequestMethod.POST)
+    public String EditarProfesorCambio(@Valid Profesor profe, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", "profesor no modificado correctamente");
+            return loadProfesores(model);
+        }
+        
+
+
+        profesorService.UpdateProfesor(profe);
+        model.addAttribute("correcto", "profesor modificado correctamente");
+        return loadProfesores(model);
+
     }
 
     @ModelAttribute("niveles")

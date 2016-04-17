@@ -17,4 +17,5 @@ public interface ProfesorDao {
     void save(Profesor profesor);
     void DeletebyId(String id);
     List< Profesor > findAll();
+    boolean isIdUnique(String id);
 }

@@ -54,7 +54,7 @@ public class NinoServiceImpl implements NinoService {
             ni.setEncargado(nino.getEncargado());
            // ni.setInformacion(nino.getInformacion());
            //  ni.setMatricula(nino.getMatricula());
-            ni.setFacturas(nino.getFacturas());
+           // ni.setFacturas(nino.getFacturas());
         }
     }
 }

@@ -33,33 +33,23 @@ import javax.validation.constraints.Size;
 @Table(name = "profesor")
 public class Profesor implements Serializable {
 
-    @Size(max = 50)
+    @Size(max = 1000)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 50)
-    @Column(name = "apellido1")
-    private String apellido1;
-    @Size(max = 50)
-    @Column(name = "apellido2")
-    private String apellido2;
+
 
     @Column(name = "salario")
     private Float salario;
     @Size(max = 50)
     @Column(name = "email")
     private String email;
-    @Column(name = "fechanacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechanacimiento;
+
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "id")
     private String id;
-    @Size(max = 1000)
-    @Column(name = "direccion")
-    private String direccion;
     @Size(max = 50)
     @Column(name = "telefono")
     private String telefono;
@@ -89,21 +79,7 @@ public class Profesor implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellido1() {
-        return apellido1;
-    }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
-    }
-
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
-    }
 
     public Float getSalario() {
         return salario;
@@ -121,13 +97,6 @@ public class Profesor implements Serializable {
         this.email = email;
     }
 
-    public Date getFechanacimiento() {
-        return fechanacimiento;
-    }
-
-    public void setFechanacimiento(Date fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
-    }
 
     public String getId() {
         return id;
@@ -137,13 +106,6 @@ public class Profesor implements Serializable {
         this.id = id;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getTelefono() {
         return telefono;

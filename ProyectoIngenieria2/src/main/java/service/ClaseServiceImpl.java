@@ -51,7 +51,7 @@ public class ClaseServiceImpl implements ClaseService {
             cla.setId(clase.getId());
             cla.setNivel(clase.getNivel());
             cla.setProfesor(clase.getProfesor());
-            cla.setNinos(clase.getNinos());
+           // cla.setNinos(clase.getNinos());
         }
     }
 }
