@@ -13,13 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -30,9 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class Imagen implements Serializable {
 
-    @Size(max = 1000)
-    @Column(name = "ruta_imagen")
-    private String rutaImagen;
+    @Column( name = "imagen" )
+    private String imagen;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,14 +39,15 @@ public class Imagen implements Serializable {
     @JoinColumn(name = "album")
     private Album album;
 
-    public String getRutaImagen() {
-        return rutaImagen;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setRutaImagen(String rutaImagen) {
-        this.rutaImagen = rutaImagen;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
+      
     public Long getCodigo() {
         return codigo;
     }
@@ -90,7 +86,7 @@ public class Imagen implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Imagen[ codigo=" + codigo + " ]";
+        return "modelo.Imagen[ codigo=" + codigo +" :"+album+" ]";
     }
 
 }

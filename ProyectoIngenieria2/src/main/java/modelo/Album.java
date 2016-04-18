@@ -90,9 +90,5 @@ public class Album implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "modelo.Album[ nombre=" + nombre + " ] " + getImagenes().toString();
-    }
 
 }

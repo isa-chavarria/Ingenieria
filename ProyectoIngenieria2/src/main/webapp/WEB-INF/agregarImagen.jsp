@@ -56,7 +56,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
+                <div id="tituloGRANDE" class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -113,14 +113,13 @@
 
                         <hr>
                     </div>
-
-
-                    <form:form method="POST" action="agregarImagenForm" modelAttribute="imagen" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                  
+                    <form method="POST" action="agregarImagenForm" enctype="multipart/form-data" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                         <div  class="form-group">
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Imagen</label>
                             <div class="col-lg-10">
-                                <form:input type="text" class="form-control" path="rutaImagen" id="rutaImagen"
-                                            placeholder="Ruta imagen"/>
+                                <input type="file" name="file" class="form-control">
+                                <input type="hidden" name="album" value="${imagen.album.nombre}">
                             </div>
                         </div>
                         <div class="col-lg-offset-2 col-lg-10">
@@ -129,7 +128,7 @@
                             </div>
                         </div>
                         <p>${msg}</p>
-                    </form:form>
+                    </form> 
 
                 </div>
             </div>

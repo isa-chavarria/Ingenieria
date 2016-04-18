@@ -49,17 +49,17 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- IMAGEN
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `kinderBD`.`imagen` ;
+DROP TABLE IF EXISTS `kinderbd`.`imagen` ;
 
-CREATE TABLE IF NOT EXISTS `kinderBD`.`imagen` (
-  `ruta_imagen` VARCHAR(1000) NULL DEFAULT NULL,
-  `codigo` VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `kinderbd`.`imagen` (
+  `imagen` VARCHAR(5000000),
+  `codigo` INT NOT NULL AUTO_INCREMENT,
   `album` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `idx_imagen` (`album` ASC),
   CONSTRAINT `fk_imagen`
     FOREIGN KEY (`album`)
-    REFERENCES `kinderBD`.`album` (`nombre`)
+    REFERENCES `kinderbd`.`album` (`nombre`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

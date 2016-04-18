@@ -47,8 +47,7 @@ public class ImagenServiceImpl implements ImagenService{
       if(ima!=null){
           ima.setCodigo(imagen.getCodigo());
           ima.setAlbum(imagen.getAlbum());
-          ima.setRutaImagen(imagen.getRutaImagen());
-          
+          ima.setImagen(imagen.getImagen());
       }
     }
 }

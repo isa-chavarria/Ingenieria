@@ -1,11 +1,7 @@
-<%--
-    Document   : galeria
-    Created on : 04/02/2016, 06:54:22 PM
-    Author     : josvr_000
---%>
-
 <%@page import="modelo.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <%
@@ -27,7 +23,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +55,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE" class="brand">Kinder Lul�</div>
             </div>
 
 
@@ -173,7 +169,7 @@
                                     out.print("encargado");
                                 }%>
 
-                               ">Regresar al menÃº</a>
+                               ">Regresar al men�</a>
                         </li>
                     </ul>
                 </div>
@@ -227,7 +223,7 @@
                             <c:forEach items="${al.imagenes}" var="imagen">
                                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                                     <a class="thumbnail" href="#">
-                                        <img class="img-responsive" src="${imagen.rutaImagen}" style="height: 300%; width: 400%;">
+                                        <img class="img-responsive" src="data:image/gif;base64,${imagen.imagen}">
                                     </a>
                                 </div>
                             </c:forEach>
@@ -243,7 +239,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
