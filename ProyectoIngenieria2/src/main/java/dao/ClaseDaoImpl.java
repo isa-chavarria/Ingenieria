@@ -16,10 +16,10 @@ import org.springframework.stereotype.Repository;
  * @author Isa
  */
 @Repository("ClaseDao")
-public class ClaseDaoImpl extends AbstractDao<String, Clase> implements ClaseDao {
+public class ClaseDaoImpl extends AbstractDao<Long, Clase> implements ClaseDao {
 
     @Override
-    public Clase findbyId(String id) {
+    public Clase findbyId(Long id) {
         Clase Clase = getByKey(id);
         return Clase;
     }
@@ -30,7 +30,7 @@ public class ClaseDaoImpl extends AbstractDao<String, Clase> implements ClaseDao
     }
 
     @Override
-    public void DeletebyId(String id) {
+    public void DeletebyId(Long id) {
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("id", id));
         Clase Clase = (Clase) crit.uniqueResult();

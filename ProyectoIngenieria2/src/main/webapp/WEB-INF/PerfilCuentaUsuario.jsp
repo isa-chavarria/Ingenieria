@@ -259,12 +259,14 @@
                                         <span class="visible-xs navbar-brand">Sidebar menu</span>
                                     </div>
                                     <div class="navbar-collapse collapse sidebar-navbar-collapse" >
-                                        <ul class="nav navbar-nav">
-                                            <li class="active"><a style="font-size: small;" href="perfil">Información</a></li>
+                                         <ul class="nav navbar-nav">
+                                            <li class="active"><a style="font-size: small;" href="#">Información</a></li>
 
                                             <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
 
+                                            <li><a style="font-size: small;" href="informacionFamiliares">Familiares</a></li>
 
+                                            <li><a style="font-size: small;" href="enfermedadesEstudiante">Padecimientos</a></li>
                                         </ul>
                                     </div><!--/.nav-collapse -->
                                 </div>
@@ -280,11 +282,11 @@
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
                             <table class="tableInvisivle">
                                 <tr>
-                                    <td>Nombre completo:</td>
+                                    <td><strong>Nombre completo:</strong></td>
                                     <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
                                 </tr>
                                 <tr>
-                                    <td>Correo electrónico:</td>
+                                    <td><strong>Correo electrónico:</strong></td>
                                     <td>${enc.email} </td>
                                 </tr>
 
@@ -301,18 +303,18 @@
                                     <table class="tableInvisivle">
 
                                         <tr>
-                                            <td>Contraseña anterior:</td>
+                                            <td><strong>Contraseña anterior:</strong></td>
                                             <td><form:input type="password"  path="contrasenaA" id="passwordA" required ="true" class="form-control input-sm" onchange="validarContrasenaAnterior()" /></td>
                                             <td><p  style=" font-size: small; color: red;" id="errorAnterior"></td>
                                         </tr>
                                         <tr>
-                                            <td>Contraseña nueva:</td>
+                                            <td><strong>Contraseña nueva:</strong></td>
                                             <td><form:input type="password"  path="contrasena" id="password" required ="true" class="form-control input-sm" /></td>
                                             <td></td>
                                         </tr>
 
                                         <tr>
-                                            <td>Repetir contraseña nueva:</td>
+                                            <td><strong>Repetir contraseña nueva:</strong></td>
                                             <td><form:input type="password"  path="" id="passwordC" required ="true" class="form-control input-sm" onchange="validarContrasena()" /></td>
                                             <td><p  style=" font-size: small; color: red;" id="error"></td>
                                         </tr>

@@ -51,8 +51,6 @@ public class FamiliarServiceImpl implements FamiliarService {
             al.setCodigo(familiar.getCodigo());
             al.setNombre(familiar.getNombre());
             al.setId(familiar.getId());
-            al.setApellido1(familiar.getApellido1());
-            al.setApellido2(familiar.getApellido2());
             al.setEdad(familiar.getEdad());
             al.setLugarTrabajo(familiar.getLugarTrabajo());
             al.setOcupacion(familiar.getOcupacion());

@@ -65,7 +65,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">PERFIL</h3>
+            <h3 id="Titulo">Información personal</h3>
 
         </div>
 
@@ -242,29 +242,29 @@
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
                             <table class="tableInvisivle">
                                 <tr>
-                                    <td>Nombre completo:</td>
+                                    <td><strong>Nombre completo:</strong></td>
                                     <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Cédula:</td>
+                                    <td><strong>Cédula:</strong></td>
                                     <td>${enc.id}</td>
                                 </tr>
                                 <tr>
-                                    <td>Fecha de nacimiento:</td>
+                                    <td><strong>Fecha de nacimiento:</strong></td>
                                     <td>${enc.fechaNacimiento}</td>
                                 </tr>
                                 <tr>
-                                    <td>sexo:</td>
+                                    <td><strong>sexo:</strong></td>
                                     <td>${enc.sexo}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>teléfono del domicilio:</td>
+                                    <td><strong>teléfono del domicilio:</strong></td>
                                     <td>${enc.telefono}</td>
                                 </tr>
                                 <tr>
-                                    <td>Dirección del domicilio:</td>
+                                    <td><strong>Dirección del domicilio:</strong></td>
                                     <td>${enc.direccion}</td>
                                 </tr>
                                 <tr>

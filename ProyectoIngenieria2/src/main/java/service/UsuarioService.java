@@ -27,4 +27,5 @@ public interface UsuarioService {
     Usuario findByLogin(String email, String password);
 
     boolean isIdUnique(String id);
+    boolean isEmailUnique(String email);
 }

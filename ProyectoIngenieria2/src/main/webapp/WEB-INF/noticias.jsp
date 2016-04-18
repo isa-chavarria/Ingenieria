@@ -197,8 +197,8 @@
                             <tbody class="cuerpoTabla">
 
                                 <c:forEach items="${noticias}" var="noticia">
-                                    <tr class="active"><td>${noticia.titulo}</td><td>${noticia.descripcion}</td></tr>
-                                </c:forEach>
+                                    <tr class="active"><td><strong>${noticia.titulo}</strong></td><td>${noticia.descripcion}</td></tr>
+                                            </c:forEach>
 
                             </tbody>
                         </table>

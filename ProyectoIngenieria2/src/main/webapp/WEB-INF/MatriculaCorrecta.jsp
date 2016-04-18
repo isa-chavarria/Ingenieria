@@ -13,29 +13,29 @@
     Usuario user = (Usuario) session.getAttribute("user");
 
     if (user != null && user.isAdministrador()) {
-        
+
     } else {
         response.sendRedirect("index");
     }
 %>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Registration Confirmation Page</title>
-	<link href="resources/css/app.css" rel="stylesheet">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Registration Confirmation Page</title>
+        <link href="resources/css/app.css" rel="stylesheet">
         <link href="resources/css/bootstrap.css" rel="stylesheet">
         <link href="resources/css/sb-admin.css" rel="stylesheet">
-</head>
-<body>
-<div class="generic-container">
-	<div class="alert alert-success lead">
-              Matrícula Completa correctamente
-	</div>
-	
-	<span class="well floatRight">
-		 <a href="<c:url value='/Estudiantes' />">Continuar</a>
-	</span>
-</div>
-</body>
+    </head>
+    <body>
+        <div class="generic-container">
+            <div class="alert alert-success lead">
+                matrícula realizada correctamente
+            </div>
+
+            <span class="well floatRight">
+                <a href="<c:url value='/Estudiantes' />">Continuar</a>
+            </span>
+        </div>
+    </body>
 
 </html>

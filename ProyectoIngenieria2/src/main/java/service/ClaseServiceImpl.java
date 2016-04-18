@@ -24,7 +24,7 @@ public class ClaseServiceImpl implements ClaseService {
     private ClaseDao Clase;
 
     @Override
-    public Clase findbyId(String id) {
+    public Clase findbyId(Long id) {
         return Clase.findbyId(id);
     }
     
@@ -34,7 +34,7 @@ public class ClaseServiceImpl implements ClaseService {
     }
     
     @Override
-    public void DeletebyId(String id) {
+    public void DeletebyId(Long id) {
         this.Clase.DeletebyId(id);
     }
     
@@ -51,7 +51,7 @@ public class ClaseServiceImpl implements ClaseService {
             cla.setId(clase.getId());
             cla.setNivel(clase.getNivel());
             cla.setProfesor(clase.getProfesor());
-            cla.setNinos(clase.getNinos());
+           // cla.setNinos(clase.getNinos());
         }
     }
 }

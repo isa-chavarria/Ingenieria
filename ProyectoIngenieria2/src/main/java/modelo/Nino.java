@@ -57,46 +57,66 @@ public class Nino implements Serializable {
                 @JoinColumn(name = "enc_id")})
     private Set<Encargado> encargado = new HashSet<Encargado>();
 
-//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "idnino")
-//    private Collection<Informacion> informacion = new ArrayList<Informacion>();
-//    ;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "idnino")
-    private Collection<Familiar> familiares = new ArrayList<Familiar>();
+    private Set<Informacion> informacion = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "id_nino")
+    private Set<Enfermedad> enfermedad = new HashSet<>();
+
+
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "idnino")
+    private Set<Familiar> familiares = new HashSet<>(); 
     
 
     @JoinColumn(name = "grupo", referencedColumnName = "id")
     @ManyToOne
     private Clase clase;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_nino")
-    private Collection<Factura> facturas = new ArrayList<Factura>();
+    private Set<Factura> facturas= new HashSet<>(); ;
 
-//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_nino")
-//    private Collection<Matricula> matricula;
-//
-//    public Collection<Matricula> getMatricula() {
-//        return matricula;
-//    }
-//
-//    public void setMatricula(Collection<Matricula> matricula) {
-//        this.matricula = matricula;
-//    }
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_nino")
+    private Set<Matricula> matricula= new HashSet<>(); 
 
-    public Collection<Factura> getFacturas() {
+    public Set<Informacion> getInformacion() {
+        return informacion;
+    }
+
+    public void setInformacion(Set<Informacion> informacion) {
+        this.informacion = informacion;
+    }
+
+    public Set<Enfermedad> getEnfermedad() {
+        return enfermedad;
+    }
+
+    public void setEnfermedad(Set<Enfermedad> enfermedad) {
+        this.enfermedad = enfermedad;
+    }
+    
+    
+    
+
+    public Set<Factura> getFacturas() {
         return facturas;
     }
 
-    public void setFacturas(Collection<Factura> facturas) {
+    public void setFacturas(Set<Factura> facturas) {
         this.facturas = facturas;
     }
 
-   
+    public Set<Matricula> getMatricula() {
+        return matricula;
+    }
 
+    public void setMatricula(Set<Matricula> matricula) {
+        this.matricula = matricula;
+    }
     
     public Clase getClase() {
         return clase;
@@ -106,13 +126,15 @@ public class Nino implements Serializable {
         this.clase = clase;
     }
 
-    public Collection<Familiar> getFamiliares() {
+    public Set<Familiar> getFamiliares() {
         return familiares;
     }
 
-    public void setFamiliares(Collection<Familiar> familiares) {
+    public void setFamiliares(Set<Familiar> familiares) {
         this.familiares = familiares;
     }
+
+  
 
 //    public Collection<Informacion> getInformacion() {
 //        return informacion;

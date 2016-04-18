@@ -89,11 +89,12 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- FECHA PAGO
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `kinderBD`.`fechaPago` ;
+DROP TABLE IF EXISTS `kinderBD`.`InformacionKinder` ;
 
-CREATE TABLE IF NOT EXISTS `kinderBD`.`fechaPago` (
-  `codigo` VARCHAR(50) NOT NULL,
-  `fecha` INT NULL DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `kinderBD`.`InformacionKinder` (
+  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `fecha` VARCHAR(50)NULL DEFAULT NULL,
+  `monto` VARCHAR(50)NULL DEFAULT NULL,
   `kinder` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_fecha`
@@ -164,14 +165,10 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
 
 CREATE TABLE IF NOT EXISTS `kinderBD`.`profesor` (
-  `nombre` VARCHAR(50) NULL DEFAULT NULL,
-  `apellido1` VARCHAR(50) NULL DEFAULT NULL,
-  `apellido2` VARCHAR(50) NULL DEFAULT NULL,
+  `nombre` VARCHAR(1000) NULL DEFAULT NULL,
   `salario` FLOAT NULL DEFAULT NULL,
   `email` VARCHAR(100) NULL DEFAULT NULL,
-  `fechanacimiento` DATE NULL DEFAULT NULL,
   `id` VARCHAR(50) NOT NULL,
-  `direccion` VARCHAR(1000) NULL DEFAULT NULL,
   `telefono` VARCHAR(50) NULL DEFAULT NULL,
   `rol` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -183,10 +180,28 @@ DEFAULT CHARACTER SET = utf8;
 
 -- GRUPO
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `kinderBD`.`Especialidad` ;
+CREATE TABLE IF NOT EXISTS `kinderBD`.`Especialidad` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `profesor` VARCHAR(50) NULL DEFAULT NULL,
+  `nombre` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_clase` (`profesor` ASC),
+  CONSTRAINT `fk_clase`
+    FOREIGN KEY (`profesor`)
+    REFERENCES `kinderBD`.`profesor` (`id`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+
+-- GRUPO
+-- -----------------------------------------------------
 DROP TABLE IF EXISTS `kinderBD`.`clase` ;
 CREATE TABLE IF NOT EXISTS `kinderBD`.`clase` (
-  `id` VARCHAR(50) NOT NULL,
-  `nombre` VARCHAR(50) NULL DEFAULT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `profesor` VARCHAR(50) NULL DEFAULT NULL,
   `nivel` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -194,8 +209,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`clase` (
   CONSTRAINT `fk_clase`
     FOREIGN KEY (`profesor`)
     REFERENCES `kinderBD`.`profesor` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
+ )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -207,13 +221,11 @@ DROP TABLE IF EXISTS `kinderBD`.`nino` ;
 CREATE TABLE IF NOT EXISTS `kinderBD`.`nino` (
    `id` VARCHAR(50) NOT NULL,
    `estado` TINYINT(1) NULL DEFAULT NULL,
-   `grupo` VARCHAR(50)NULL DEFAULT NULL,
+   `grupo` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_nino`
     FOREIGN KEY (`grupo`)
     REFERENCES `kinderBD`.`clase` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION
   )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -241,7 +253,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderBD`.`informacion` ;
 
 CREATE TABLE IF NOT EXISTS `kinderBD`.`informacion` (
-   `codigo` VARCHAR(50) NOT NULL,
+   `codigo` INT NOT NULL AUTO_INCREMENT,
    `idnino` VARCHAR(50) NULL DEFAULT NULL,
    `titulo` varchar(1000) NULL DEFAULT NULL,
    `descripcion` varchar(2000) NULL DEFAULT NULL,
@@ -279,8 +291,6 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`familiar` (
 `codigo` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NULL DEFAULT NULL,
   `id` VARCHAR(50)  NULL DEFAULT NULL,
-  `apellido1` VARCHAR(50) NULL DEFAULT NULL,
-  `apellido2` VARCHAR(50) NULL DEFAULT NULL,
   `edad` VARCHAR(50) NULL DEFAULT NULL,
   `lugarTrabajo` VARCHAR(1000) NULL DEFAULT NULL,
   `ocupacion` VARCHAR(100) NULL DEFAULT NULL,
@@ -361,8 +371,8 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`matricula` (
   `fotos` TINYINT(1) NULL DEFAULT NULL,
   `matricula` VARCHAR(1000) NULL DEFAULT NULL,
   `cursolectivo` varchar(50) NULL DEFAULT NULL,
-  `realizadoPor` varchar(50) NULL DEFAULT NULL,
-  `id_nino` VARCHAR(50) NOT NULL,
+  `realizadoPor` varchar(1000) NULL DEFAULT NULL,
+  `id_nino` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
     CONSTRAINT `fk_matricula`
     FOREIGN KEY (`id_nino`)
@@ -425,6 +435,7 @@ DROP TABLE IF EXISTS `kinderBD`.`contacto` ;
 DROP TABLE IF EXISTS `kinderBD`.`fechaPago` ;
 DROP TABLE IF EXISTS `kinderBD`.`imagen` ;
 DROP TABLE IF EXISTS `KinderBD`.`album` ;
+DROP TABLE IF EXISTS `kinderBD`.`InformacionKinder` ;
 DROP TABLE IF EXISTS `KinderBD`.`kinder` ;
 DROP TABLE IF EXISTS `kinderBD`.`matricula` ;
 DROP TABLE IF EXISTS `kinderBD`.`enfermedad` ;
@@ -434,10 +445,13 @@ DROP TABLE IF EXISTS `kinderBD`.`enc_nino` ;
 DROP TABLE IF EXISTS `kinderBD`.`usu_enc` ;
 DROP TABLE IF EXISTS `kinderBD`.`informacion` ;
 DROP TABLE IF EXISTS `kinderBD`.`familiar` ;
+DROP TABLE IF EXISTS `kinderBD`.`factura` ;
 DROP TABLE IF EXISTS `kinderBD`.`nino` ;
 DROP TABLE IF EXISTS `kinderBD`.`encargado` ;
 DROP TABLE IF EXISTS `kinderBD`.`clase` ;
+DROP TABLE IF EXISTS `kinderBD`.`Especialidad` ;
 DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
 DROP TABLE IF EXISTS `kinderBD`.`usuario` ;
+DROP TABLE IF EXISTS `kinderBD`.`meses` ;
 */
 

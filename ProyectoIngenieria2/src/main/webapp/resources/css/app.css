@@ -18,11 +18,11 @@ body, .form-control{
 
 .generic-container {
     position:fixed;
-    width:80%;
-    margin-left: 20px;
+    width:50%;
+    margin-left: 30%;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 3%;
     background-color: #EAE7E7;
     border: 1px solid #ddd;
     border-radius: 4px;

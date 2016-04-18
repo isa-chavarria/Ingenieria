@@ -32,6 +32,7 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+        <script src="resources/js/validarForm.js"></script>
 
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
@@ -48,6 +49,19 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
+        <script>
+
+            function eliminar(id) {
+                
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+               
+            }
+
+        </script>
 
     </head>
     <body>
@@ -223,11 +237,10 @@
                                         <td>${stu.apellido1}</td>
                                         <td>${stu.apellido2}</td>
                                         <td>${stu.fechaNacimiento}</td>
-                                        <td><a href="<c:url value='' />" class="btn btn-success custom-width">Editar</a></td>
-                                        <td><a href="<c:url value='' />" class="btn btn-danger custom-width">Eliminar</a></td>
+                                        <td><a href="<c:url value='verEstudiante-${stu.id}' />" class="btn btn-success custom-width">Ver</a></td>
+                                        <td><button type="button" id="${stu.id}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
                                     </tr>
                                 </c:forEach>
-
                             </tbody>
                         </table>
                     </div>
@@ -236,6 +249,33 @@
             </div>
 
 
+        </div>
+
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
+                    </div>
+
+                    <form:form method="POST" action="EliminarEstudiante"  modelAttribute="estudiante" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <form:input type="hidden" path="id"  id="valor"/>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger" >Eliminar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
         </div>
 
         <footer>

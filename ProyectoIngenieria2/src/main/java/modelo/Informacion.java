@@ -8,6 +8,8 @@ package modelo;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,12 +25,11 @@ import javax.validation.constraints.Size;
 @Table(name = "informacion")
 public class Informacion {
 
-    @Id
+     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "codigo")
-    private String codigo;
+    @Column(name="codigo")
+    private Long codigo;
     @Size(max = 2000)
     @Column(name = "descripcion")
     private String descripcion;
@@ -49,13 +50,15 @@ public class Informacion {
         this.nino = nino;
     }
 
-    public String getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
+
+   
 
     public String getDescripcion() {
         return descripcion;

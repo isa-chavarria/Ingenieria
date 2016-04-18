@@ -18,4 +18,5 @@ public interface ProfesorService {
     void DeletebyId(String id);
     List<Profesor> findAll();
     void UpdateProfesor(Profesor profesor);
+    boolean isIdUnique(String id);
 }

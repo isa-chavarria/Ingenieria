@@ -67,7 +67,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">EDITAR información PERFIL</h3>
+            <h3 id="Titulo">Editar Información personal</h3>
 
         </div>
 
@@ -223,14 +223,14 @@
                                         <span class="visible-xs navbar-brand">Sidebar menu</span>
                                     </div>
                                     <div class="navbar-collapse collapse sidebar-navbar-collapse" >
-                                        <ul class="nav navbar-nav">
+                                          <ul class="nav navbar-nav">
                                             <li class="active"><a style="font-size: small;" href="#">Información</a></li>
 
                                             <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
 
-                                            <li><a style="font-size: small;" href="#">Familiares</a></li>
+                                            <li><a style="font-size: small;" href="informacionFamiliares">Familiares</a></li>
 
-                                            <li><a style="font-size: small;" href="#">Padecimientos</a></li>
+                                            <li><a style="font-size: small;" href="enfermedadesEstudiante">Padecimientos</a></li>
                                         </ul>
                                     </div><!--/.nav-collapse -->
                                 </div>
@@ -251,57 +251,57 @@
                                 <table class="tableInvisivle">
 
                                     <tr>
-                                        <td>Nombre:</td>
+                                        <td><strong>Nombre:</strong></td>
                                         <td><form:input path="nombre" type="text" class="form-control col-lg-6" id="nombre"
                                                     placeholder="Nombre del niño" onkeydown="return validarLetras(event)"/></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Cédula:</td>
+                                        <td><strong>Cédula:</strong></td>
                                         <td><form:input type="text" path="id" id="id" itemValue="id" class="form-control input-sm" disabled="true"/></td>
                                         <td></td>
 
                                     </tr>
 
                                     <tr>
-                                        <td>Primer apellido:</td>
+                                        <td><strong>Primer apellido:</strong></td>
                                         <td><form:input path="apellido1" type="text" class="form-control col-lg-6" id="nombre"
                                                     placeholder="Primer apellido" onkeydown="return validarLetras(event)"/></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
                                     <tr>
-                                        <td>Segundo Apellido:</td>
+                                        <td><strong>Segundo Apellido:</strong></td>
                                         <td><form:input path="apellido2" type="text" class="form-control col-lg-6" id="nombre"
                                                     placeholder="Segundo apellido" onkeydown="return validarLetras(event)"/></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Fecha de nacimiento:</td>
+                                        <td><strong>Fecha de nacimiento:</strong></td>
                                         <td><form:input path="fechaNacimiento" itemValue="fechaNacimiento" type="Date" class="form-control" id="fechaN" /></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
                                     <tr>
-                                        <td>Sexo</td>
+                                        <td><strong>Sexo</strong></td>
                                         <td><form:select path="sexo" items="${genero}"   class="form-control input-sm" id="sexo"  /></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Nivel:</td>
+                                        <td><strong>Nivel:</strong></td>
                                         <td><input type="text"  id="nivel" value="${nivel}" placeholder="${nivel}" class="form-control input-sm" disabled="true"/></td>
                                         <td></td>
 
                                     </tr>
 
                                     <tr>
-                                        <td>teléfono del domicilio:</td>
+                                        <td><strong>teléfono del domicilio:</strong></td>
                                         <td><form:input path="telefono"  type="text" itemValue="telefono" class="form-control" placeholder="####-####" name="telefono" id="telefono"/></td>
                                         <td> <p style="color: red;" id="error"></p></td>
                                     </tr>
                                     <tr>
-                                        <td>Dirección del domicilio:</td>
+                                        <td><strong>Dirección del domicilio:</strong></td>
                                         <td><form:input path="direccion" type="text" class="form-control" id="direccion"
                                                     placeholder="Dirección del hogar"/></td>
                                         <td> <p style="color: red;" id="error"></p></td>

@@ -45,4 +45,10 @@ public class ProfesorDaoImpl extends AbstractDao<String,Profesor> implements Pro
         return profesor;
     }
     
+    @Override
+    public boolean isIdUnique(String id) {
+        Profesor user = getByKey(id);
+        return user == null;
+    }
+    
 }

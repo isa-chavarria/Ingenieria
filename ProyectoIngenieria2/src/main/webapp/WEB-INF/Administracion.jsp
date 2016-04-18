@@ -183,10 +183,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="matricula"><i class="fa fa-archive"></i> Matricula</a>
+                            <a href="matricula"><i class="fa fa-archive"></i> Matrícula</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Institución <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university"></i> Institución <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <!--li>
                                     <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
@@ -194,15 +194,19 @@
                                 <li class="divider"></li-->
 
                                 <li>
-                                    <a href="Estudiantes"><i class="fa fa-university"></i> Estudiantes</a>
+                                    <a href="Estudiantes"><i class="fa fa-users"></i> Estudiantes</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Personal docente</a>
+                                    <a href="Profesores"><i class="fa fa-graduation-cap"></i> Profesores</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="noticiasAdministrador"><i class="fa fa-bell"></i> Niveles</a>
+                                    <a href="NivelesKinder"><i class="fa fa-line-chart"></i> Niveles</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="CursosKinder"><i class="fa fa-language"></i> Cursos especiales</a>
                                 </li>
                             </ul>
                         </li>

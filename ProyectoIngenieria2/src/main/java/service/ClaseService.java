@@ -14,11 +14,11 @@ import modelo.Clase;
  */
 public interface ClaseService {
 
-    Clase findbyId(String id);
+    Clase findbyId(Long id);
 
     void save(Clase clase);
 
-    void DeletebyId(String id);
+    void DeletebyId(Long id);
 
     List<Clase> findAll();
 

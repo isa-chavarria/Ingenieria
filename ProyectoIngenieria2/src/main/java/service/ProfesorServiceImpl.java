@@ -19,46 +19,47 @@ import org.springframework.stereotype.Service;
 @Service("ProfesorService")
 @Transactional
 public class ProfesorServiceImpl implements ProfesorService {
-    
+
     @Autowired
     private ProfesorDao Profesor;
-    
+
     @Override
     public Profesor findbyId(String id) {
         return Profesor.findbyId(id);
     }
-    
+
     @Override
     public void save(Profesor profesor) {
         this.Profesor.save(profesor);
     }
-    
+
     @Override
     public void DeletebyId(String id) {
         this.Profesor.DeletebyId(id);
     }
-    
+
     @Override
     public List<Profesor> findAll() {
         return Profesor.findAll();
     }
-    
+
+    @Override
+    public boolean isIdUnique(String id) {
+        return Profesor.isIdUnique(id);
+    }
+
     @Override
     public void UpdateProfesor(Profesor profesor) {
-        Profesor profe = this.Profesor.findbyId(profesor.getNombre());
+        Profesor profe = this.Profesor.findbyId(profesor.getId());
         if (profe != null) {
             profe.setNombre(profesor.getNombre());
-            profe.setApellido1(profesor.getApellido1());
-            profe.setApellido2(profesor.getApellido2());
             profe.setId(profesor.getId());
             profe.setEmail(profesor.getEmail());
-            profe.setFechanacimiento(profesor.getFechanacimiento());
             profe.setRol(profesor.getRol());
-            profe.setTelefono(profesor.getTelefono());            
-            profe.setDireccion(profesor.getDireccion());
+            profe.setTelefono(profesor.getTelefono());
             profe.setSalario(profesor.getSalario());
-            profe.setGrupo(profesor.getGrupo());
-            
+           // profe.setGrupo(profesor.getGrupo());
+
         }
     }
 }

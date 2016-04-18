@@ -101,14 +101,16 @@
 
 
 
-                        <hr>
+
                     </div>
-                    <div style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif; text-align: center;' >
-                        <p>Monto de la matrícula.</p>
-                        <p>3 fotos tamaño pasaporte.</p>
-                        <p>constancia de nacimiento.</p>
-                        <p>Colpia del control de vacunas.</p>
-                        <p>Cédulas de los padres</p>
+                    <div style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif; margin-left: 30%; text-align: left;' >
+
+                        <p><i class="fa fa-check" aria-hidden="true"></i> Monto de la matrícula.</p>
+                        <p><i class="fa fa-check" aria-hidden="true"></i> 3 fotos tamaño pasaporte.</p>
+                        <p><i class="fa fa-check" aria-hidden="true"></i> constancia de nacimiento.</p>
+                        <p><i class="fa fa-check" aria-hidden="true"></i> Copia del control de vacunas.</p>
+                        <p><i class="fa fa-check" aria-hidden="true"></i> Cédulas de los padres</p>
+
                     </div>
 
                 </div>

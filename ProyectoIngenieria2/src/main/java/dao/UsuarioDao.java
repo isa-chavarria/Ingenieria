@@ -27,4 +27,6 @@ public interface UsuarioDao {
 
     boolean isIdUnique(String id);
 
+    boolean isEmailUnique(String email);
+
 }

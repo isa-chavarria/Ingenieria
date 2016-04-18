@@ -167,7 +167,7 @@
                     <ul class="nav navbar-nav">
                         
                         <li>
-                            <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
+                            <a href="galeriaImagenes"><i class="fa fa-picture-o"></i> Galeria</a>
                         </li>
                         
                         <li>

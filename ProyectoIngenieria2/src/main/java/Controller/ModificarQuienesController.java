@@ -35,7 +35,6 @@ public class ModificarQuienesController {
     }
         @RequestMapping(value = {"/ModificarQuienesModicado"}, method = RequestMethod.POST)
     public String updateQuienes2(@Valid Kinder kinder, BindingResult result, ModelMap model) {
-        System.out.println(kinder.toString());
         Kinder kin = kinderService.findbyName("Kinder Lulu");
         kin.setHistoria(kinder.getHistoria());
         kin.setMision(kinder.getMision());
