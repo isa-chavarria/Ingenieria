@@ -220,12 +220,20 @@
                     <div class="row"  >
                         
                         <div style=" overflow: scroll ; height: 400px " class="box">
-                            <c:forEach items="${al.imagenes}" var="imagen">
+                            <c:forEach items="${al.imagenes}" var="imag">
                                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                                    <form:form method="POST"  modelAttribute="imagen" action="eliminarImagen">
+                                            <form:hidden id="cod" path="codigo" value="${imag.codigo}"/>
+                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                            </form:form>
                                     <a class="thumbnail" href="#">
-                                        <img class="img-responsive" src="data:image/gif;base64,${imagen.imagen}">
+                                        <img class="img-responsive" src="data:image/gif;base64,${imag.imagen}">
                                     </a>
+                                           
                                 </div>
+                                 
                             </c:forEach>
                         </div>
                     </div>

@@ -47,6 +47,8 @@ public class AlbumController {
         }
         Album album = new Album();
         model.addAttribute("album", album);
+        Imagen imagen = new Imagen();
+        model.addAttribute("imagen", imagen);
         return "galeria";
     }
 
@@ -65,6 +67,8 @@ public class AlbumController {
             }
             Album al = new Album();
             model.addAttribute("album", al);
+            Imagen imagen = new Imagen();
+            model.addAttribute("imagen", imagen);
             return "galeria";
         }
 
@@ -77,12 +81,14 @@ public class AlbumController {
         model.addAttribute("albums", kinder.getAlbums());
         Album al = new Album();
         model.addAttribute("album", al);
+        Imagen imagen = new Imagen();
+        model.addAttribute("imagen", imagen);
         
         return "galeria";
     }
     
     @RequestMapping(value = {"/eliminarAlbum"}, method = RequestMethod.POST)
-    public String removeContacto(@Valid Album album, BindingResult result, ModelMap model) {
+    public String removeAlbum(@Valid Album album, BindingResult result, ModelMap model) {
 
         Album album2 = albumService.findbyId(album.getNombre());
         if (album2 != null) {
@@ -101,6 +107,8 @@ public class AlbumController {
         }
         Album al = new Album();
         model.addAttribute("album", al);
+        Imagen imagen = new Imagen();
+        model.addAttribute("imagen", imagen);
         return "galeria";
     }
     
@@ -130,6 +138,8 @@ public class AlbumController {
             }
             Album al = new Album();
             model.addAttribute("album", al);
+        Imagen imagen = new Imagen();
+        model.addAttribute("imagen", imagen);
             return "galeria";
         }
         Album alb = albumService.findbyId(album);
@@ -150,7 +160,34 @@ public class AlbumController {
         model.addAttribute("albums", kinder.getAlbums());
         Album al = new Album();
         model.addAttribute("album", al);
+        Imagen imag = new Imagen();
+        model.addAttribute("imagen", imag);
         
+        return "galeria";
+    }
+    
+    @RequestMapping(value = {"/eliminarImagen"}, method = RequestMethod.POST)
+    public String removeImagen(@Valid Imagen imagen, BindingResult result, ModelMap model) {
+
+        Imagen imagen2 = imagenService.findbyId(imagen.getCodigo());
+        if (imagen2 != null) {
+            imagenService.DeletebyId(imagen.getCodigo());
+            model.addAttribute("msg", "Se elimino la imagen con exito");
+        }
+        else{
+            model.addAttribute("msg", "No se elimino la imagen con exito");
+        }
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        System.out.println(kinder.toString());
+        if (kinder != null) {
+            model.addAttribute("albums", kinder.getAlbums());
+        } else {
+            model.addAttribute("albums", new Kinder().getAlbums());
+        }
+        Album al = new Album();
+        model.addAttribute("album", al);
+        Imagen imagen3 = new Imagen();
+        model.addAttribute("imagen", imagen3);
         return "galeria";
     }
 }
