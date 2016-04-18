@@ -39,7 +39,7 @@ public class AlbumController {
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-        System.out.println(kinder.toString());
+      ///  System.out.println(kinder.toString());
         if (kinder != null) {
             model.addAttribute("albums", kinder.getAlbums());
         } else {

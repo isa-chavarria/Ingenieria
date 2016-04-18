@@ -186,8 +186,8 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`Especialidad` (
   `profesor` VARCHAR(50) NULL DEFAULT NULL,
   `nombre` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idx_clase` (`profesor` ASC),
-  CONSTRAINT `fk_clase`
+  INDEX `idx_especialidad` (`profesor` ASC),
+  CONSTRAINT `fk_especilidad`
     FOREIGN KEY (`profesor`)
     REFERENCES `kinderBD`.`profesor` (`id`)
  )
