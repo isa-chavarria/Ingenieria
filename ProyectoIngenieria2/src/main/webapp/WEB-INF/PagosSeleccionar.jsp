@@ -208,8 +208,7 @@
                                     <th>ID</th>
                                     <th>NOMBRE</th>
                                     <th>PRIMER APELLIDO</th>
-                                    <th>SEGUNDO APELLIDO</th>
-                                    <th>FECHA DE NACIMIENTO</th>
+                                    <th>SEGUNDO APELLIDO</th>                                   
                                     <th></th>
                                 </tr>
                             </thead>
@@ -219,8 +218,7 @@
                                         <td>${stu.id}</td>
                                         <td>${stu.nombre}</td>
                                         <td>${stu.apellido1}</td>
-                                        <td>${stu.apellido2}</td>
-                                        <td>${stu.fechaNacimiento}</td>
+                                        <td>${stu.apellido2}</td>                                      
                                         <td><a href="<c:url value='/pagos-user-${stu.id}' />" class="btn btn-success custom-width">Realizar pago</a></td>
                                     </tr>
                                 </c:forEach>

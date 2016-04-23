@@ -27,20 +27,56 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <script src="resources/js/validarForm.js"></script>
+
+
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <style>
+            .vis{
+                display:block;
+
+            }
+
+            .inv{
+                display:none;
+
+            }
+        </style>
+
+        <script>
+            function Cambiar() {
+                var e2 = document.getElementById("1");
+                var element = document.getElementById("tipo_pago");
+
+                var val = element.value;
+                if(val=="Tarjeta"||val=="Deposito"){
+                    
+                    e2.className="vis";
+                }
+                else{
+                    
+                    e2.className="inv";
+                }
+            }
+
+
+
+        </script>
 
     </head>
     <body>
@@ -206,8 +242,36 @@
                         <div class="form-group">
                             <label for="monto" class="col-lg-2 control-label">Monto a pagar:</label>
                             <div class="col-lg-10">
-                                <form:input path="monto" type="text" class="form-control" id="nombre"
+                                <form:input path="monto" type="number" class="form-control" id="nombre"
                                             placeholder="monto" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monto" class="col-lg-2 control-label">Tipo de pago:</label>
+                            <div class="col-lg-10">
+                                <form:select path="tipo_pago" items="${TiposPago}" onchange="Cambiar()"  class="form-control input-sm" id="tipo_pago" required="true" />
+                            </div>
+                        </div>
+
+
+                        <div id="1" class="inv">
+                            <div id="1" class="form-group">
+                                <label for="monto" class="col-lg-2 control-label">Numero de comprobante:</label>
+                                <div class="col-lg-10">
+                                    <form:input path="comprobante" type="number" class="form-control" id="comprobante"
+                                                placeholder="comprobante" />
+                                </div>
+
+                            </div>
+
+                            <div id="2" class="form-group">
+                                <label for="monto" class="col-lg-2 control-label">Numero de factura:</label>
+                                <div class="col-lg-10">
+                                    <form:input path="factura" type="number" class="form-control" id="factura"
+                                                placeholder="factura" />
+                                </div>
+
                             </div>
                         </div>
 

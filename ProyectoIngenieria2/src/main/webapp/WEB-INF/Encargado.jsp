@@ -5,7 +5,9 @@
 --%>
 
 <%@page import="modelo.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 
@@ -26,7 +28,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +61,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -69,7 +71,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo" style="text-transform: uppercase">Bienvenido al sitio web del Kinder LulÃº</h3>
+            <h3 id="Titulo" style="text-transform: uppercase">Bienvenido al sitio web del Kinder Lulú</h3>
 
 
         </div>
@@ -165,6 +167,9 @@
                     </ul>
                     
                     <ul class="nav navbar-nav">
+                         <li>
+                            <a href="prueba.jsp"><i class="fa fa-picture-o"></i> Calendario</a>
+                        </li>
                         
                         <li>
                             <a href="galeriaImagenes"><i class="fa fa-picture-o"></i> Galeria</a>
@@ -175,7 +180,7 @@
                         </li>
                         
                         <li>
-                            <a href=""><i class="fa fa-money"></i> InformaciÃ³n de pagos</a>
+                            <a href="facturasEstudiante"><i class="fa fa-money"></i> Información de pagos</a>
                         </li>
 
 
@@ -206,14 +211,13 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="img-responsive img-full" src="resources/img/18.jpg" alt="">
+                                    <img class="img-responsive img-full" src="data:image/gif;base64,${primera.imagen}" alt="">
                                 </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/aa.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/20.jpg" alt="">
-                                </div>
+                                <c:forEach items="${imagenes}" var="imagen">
+                                    <div class="item">
+                                       <img class="img-responsive img-full" src="data:image/gif;base64,${imagen.imagen}" alt="">
+                                    </div>
+                                </c:forEach>
                             </div>
 
                             <!-- Controls -->
@@ -241,7 +245,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>

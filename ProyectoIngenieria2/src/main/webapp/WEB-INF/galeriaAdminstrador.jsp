@@ -37,7 +37,7 @@
         <script src="resources/js/jquery.js"></script>
         <script src="resources/js/validarForm.js"></script>
         <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
-        
+
 
     </head>
     <body>
@@ -174,8 +174,7 @@
 
             <div class="col-lg-12">
                 <hr>
-                <h2 class="intro-text text-center">Nuestros
-                    Estudiantes
+                <h2 class="intro-text text-center">Galería  de Imágenes
                 </h2>
                 <hr>
             </div>
@@ -183,103 +182,20 @@
                 <div class="row"  >
                     <div style=" overflow: scroll ; height: 400px " class="box">
 
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/aa.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/graduacion.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/profesiones.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/equipo.jpg" c>
-                            </a>
-                        </div>
+                        <c:forEach items="${imagenes}" var="imagen">
 
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/dos.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/ll.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/n.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/ninos.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/parq.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/pintar.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/tres.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                            <a class="thumbnail" href="#">
-                                <img class="img-responsive" src="resources/img/arreglada3.jpg" style="height: 300%; width: 400%;">
-                            </a>
-                        </div>
+                            <div class="col-lg-2 col-md-2 col-xs-2 thumb">
+                                <a class="thumbnail" href="#">
+                                    <img class="img-responsive" src="data:image/gif;base64,${imagen.imagen}" >
+                                </a>
+                            </div>
+                        </c:forEach>
 
                     </div>
 
                 </div>
 
-                <div class="row">
 
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Nuestro
-                            <strong>Equipo</strong>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/rosi.jpg" alt="">
-                        <h3>Rosibeth Garcia
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/mari.jpg" alt="">
-                        <h3>Maria Solano
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/equipo.jpg" alt="">
-                        <h3>Maestras
-
-                        </h3>
-                    </div>
-                    <div class="clearfix"></div>
-
-                </div>
 
 
             </div>

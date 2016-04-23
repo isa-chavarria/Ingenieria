@@ -47,6 +47,9 @@ public class FacturaServiceImpl implements FacturaService {
             ki.setMes(factura.getMes());
             ki.setMonto(factura.getMonto());
             ki.setNino(factura.getNino());
+            ki.setTipo_pago(factura.getTipo_pago());
+            ki.setComprobante(factura.getComprobante());
+            ki.setFactura(factura.getFactura());
         }
     }
 }

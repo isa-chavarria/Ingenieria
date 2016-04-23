@@ -6,10 +6,13 @@ package modelo;
  * and open the template in the editor.
  */
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -60,28 +63,27 @@ public class Nino implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "idnino")
     private Set<Informacion> informacion = new HashSet<>();
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_nino")
     private Set<Enfermedad> enfermedad = new HashSet<>();
 
-
-    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "idnino")
-    private Set<Familiar> familiares = new HashSet<>(); 
-    
+    private Set<Familiar> familiares = new HashSet<>();
 
     @JoinColumn(name = "grupo", referencedColumnName = "id")
     @ManyToOne
     private Clase clase;
-    
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_nino")
-    private Set<Factura> facturas= new HashSet<>(); ;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_nino")
-    private Set<Matricula> matricula= new HashSet<>(); 
+    private Set<Factura> facturas = new HashSet<>();
+    ;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_nino")
+    private Set<Matricula> matricula = new HashSet<>();
 
     public Set<Informacion> getInformacion() {
         return informacion;
@@ -98,9 +100,6 @@ public class Nino implements Serializable {
     public void setEnfermedad(Set<Enfermedad> enfermedad) {
         this.enfermedad = enfermedad;
     }
-    
-    
-    
 
     public Set<Factura> getFacturas() {
         return facturas;
@@ -117,7 +116,7 @@ public class Nino implements Serializable {
     public void setMatricula(Set<Matricula> matricula) {
         this.matricula = matricula;
     }
-    
+
     public Clase getClase() {
         return clase;
     }
@@ -133,16 +132,6 @@ public class Nino implements Serializable {
     public void setFamiliares(Set<Familiar> familiares) {
         this.familiares = familiares;
     }
-
-  
-
-//    public Collection<Informacion> getInformacion() {
-//        return informacion;
-//    }
-//
-//    public void setInformacion(Collection<Informacion> informacion) {
-//        this.informacion = informacion;
-//    }
 
     public Set<Encargado> getEncargado() {
         return encargado;
@@ -166,6 +155,133 @@ public class Nino implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Encargado getEncargadoReal() {
+        return encargado.iterator().next();
+    }
+
+    public String TablaFacturas(List<Mes> meses) {
+
+        Calendar c = Calendar.getInstance();
+//        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(c.getTime());
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>" + getEncargadoReal().getNombre() + " " + getEncargadoReal().getApellido1() + " " + getEncargadoReal().getApellido2() + "</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>" + formattedDate + "</th>");
+        s.append("<th>Fecha</th>");
+        s.append("<th>Monto mensualiad</th>");
+        s.append("<th>Monto mora</th>");
+        s.append("<th>Tipo pago</th>");
+        s.append("<th>Nº comprobante</th>");
+        s.append("<th>Nº factura</th>");
+        s.append("<th></th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+        for (Mes m : meses) {
+
+            if (buscarFactura(m).getCodigo() != null) {
+                s.append("<tr class=\"success\">");
+            } else {
+                s.append("<tr class=\"danger\">");
+            }
+
+            s.append("<th>" + m.getMes() + "</th>");
+            s.append("<td>" + this.buscarFactura(m).getFecha() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getMonto() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).calcularMontoMora() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getTipo_pago() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getComprobante() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getFactura() + "</td>");
+            if (buscarFactura(m).getCodigo() != null) {
+                s.append("<td><a href='editar-factura-" + buscarFactura(m).getCodigo() + "' class=\"btn btn-success custom-width\">Editar</a></td>");
+                s.append("<td><button type=\"button\" id='" + buscarFactura(m).getCodigo() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+            } else {
+                s.append("<td></td>");
+                s.append("<td></td>");
+            }
+            s.append("</tr>");
+        }
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
+    public String TablaFacturas2(List<Mes> meses) {
+
+        Calendar c = Calendar.getInstance();
+//        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(c.getTime());
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Registro de sus facturas</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>" + formattedDate + "</th>");
+        s.append("<th>Fecha</th>");
+        s.append("<th>Monto mensualiad</th>");
+        s.append("<th>Monto mora</th>");
+        s.append("<th>Tipo pago</th>");
+        s.append("<th>Nº comprobante</th>");
+        s.append("<th>Nº factura</th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+        for (Mes m : meses) {
+
+            if (buscarFactura(m).getCodigo() != null) {
+                s.append("<tr class=\"success\">");
+            } else {
+                s.append("<tr class=\"danger\">");
+            }
+
+            s.append("<th>" + m.getMes() + "</th>");
+            s.append("<td>" + this.buscarFactura(m).getFecha() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getMonto() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).calcularMontoMora() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getTipo_pago() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getComprobante() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).getFactura() + "</td>");
+            s.append("</tr>");
+        }
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
+    public Factura buscarFactura(Mes mes) {
+        for (Factura f : facturas) {
+
+
+            if (f.getMes().getMes().equalsIgnoreCase(mes.getMes())) {
+                return f;
+            }
+        }
+
+        return new Factura();
     }
 
     @Override

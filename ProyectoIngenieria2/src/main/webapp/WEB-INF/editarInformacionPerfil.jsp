@@ -8,7 +8,6 @@
 
     Usuario user = (Usuario) session.getAttribute("user");
 
-
     if (user != null && user.isAdministrador()) {
 
     } else {
@@ -193,6 +192,8 @@
                         <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
                         <hr>
 
+                       
+
 
 
                     </div>
@@ -244,9 +245,9 @@
                     <div class="panel panel-default">
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
                             <form:form method="POST" action="modificarPerfilAdministrador"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
-                               <form:input type="hidden" path="id" id="id"/>
-                               <form:input type="hidden" path="email" id="email"/>
-                               <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
+                                <form:input type="hidden" path="id" id="id"/>
+                                <form:input type="hidden" path="email" id="email"/>
+                                <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
                                 <table class="tableInvisivle">
 
                                     <tr>

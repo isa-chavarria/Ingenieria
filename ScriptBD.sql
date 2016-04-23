@@ -52,7 +52,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderbd`.`imagen` ;
 
 CREATE TABLE IF NOT EXISTS `kinderbd`.`imagen` (
-  `imagen` VARCHAR(5000000),
+  `imagen` VARCHAR(21600),
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `album` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
@@ -188,6 +188,8 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`Especialidad` (
   PRIMARY KEY (`id`),
   INDEX `idx_especialidad` (`profesor` ASC),
   CONSTRAINT `fk_especilidad`
+  INDEX `idx_espec` (`profesor` ASC),
+  CONSTRAINT `fk_espec`
     FOREIGN KEY (`profesor`)
     REFERENCES `kinderBD`.`profesor` (`id`)
  )
@@ -401,9 +403,11 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`factura` (
   `fecha_actual` VARCHAR(50) NULL DEFAULT NULL,
   `monto_final` VARCHAR(50) NULL DEFAULT NULL,
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `id_nino` VARCHAR(50),
-  `id_mes` INT,
-  `tipo_pago` VARCHAR(50),
+  `id_nino` VARCHAR(50) NULL DEFAULT NULL,
+  `id_mes` INT NULL DEFAULT NULL,
+  `tipo_pago` VARCHAR(50) NULL DEFAULT NULL,	
+  `comprobante` VARCHAR(50) NULL DEFAULT NULL,
+  `factura` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_factura`
     FOREIGN KEY (`id_nino`)
@@ -420,6 +424,14 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`factura` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+CREATE TABLE `kinderBD`.`events` (
+`event_id` int(11) NOT NULL AUTO_INCREMENT,
+`event_name` varchar(127) NOT NULL,
+`start_date` datetime NOT NULL,
+`end_date` datetime NOT NULL,
+PRIMARY KEY (`event_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

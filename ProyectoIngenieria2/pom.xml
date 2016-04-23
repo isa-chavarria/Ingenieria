@@ -70,18 +70,18 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.connector.version}</version>
         </dependency>
- <!-- Apache Commons Upload --> 
-	<dependency>
-		<groupId>commons-fileupload</groupId>
-		<artifactId>commons-fileupload</artifactId>
-		<version>1.2.2</version>
-	</dependency>
-	<!-- Apache Commons Upload --> 
-	<dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>1.3.2</version>
-	</dependency>
+        <!-- Apache Commons Upload --> 
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <!-- Apache Commons Upload --> 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
 
         <!-- Servlet+JSP+JSTL -->
         <dependency>
@@ -110,6 +110,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.dhtmlx</groupId>
+            <artifactId>javaplanner</artifactId>
+            <version>1.5</version>
         </dependency>
     </dependencies>
 

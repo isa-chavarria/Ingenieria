@@ -51,6 +51,7 @@ jQuery(function ($) {
 
 
 function validarContrasena() {
+
     document.getElementById("error").innerHTML = "";
     var c1 = document.getElementById("password").value;
     var c2 = document.getElementById("passwordC").value;

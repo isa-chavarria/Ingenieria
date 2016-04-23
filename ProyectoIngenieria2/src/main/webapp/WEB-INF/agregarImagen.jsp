@@ -107,7 +107,7 @@
 
                     <div class="col-lg-12 text-center">
 
-                        <h2 class="intro-text text-center">Agregar Contactos
+                        <h2 class="intro-text text-center">Agregar Imagen
                         </h2>
 
 

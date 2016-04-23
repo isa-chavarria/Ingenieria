@@ -33,15 +33,27 @@ public class Factura implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "codigo")
-    private Long codigo;
+    private Long codigo=null;
 
     @Size(max = 50)
     @Column(name = "fecha_actual")
-    private String fecha;
+    private String fecha="";
 
     @Size(max = 50)
     @Column(name = "monto_final")
-    private String monto;
+    private String monto="";
+
+    @Size(max = 50)
+    @Column(name = "tipo_pago")
+    private String tipo_pago="";
+
+    @Size(max = 50)
+    @Column(name = "comprobante")
+    private String comprobante="";
+
+    @Size(max = 50)
+    @Column(name = "factura")
+    private String factura="";
 
     @JoinColumn(name = "id_nino", referencedColumnName = "id")
     @ManyToOne
@@ -50,6 +62,39 @@ public class Factura implements Serializable {
     @JoinColumn(name = "id_mes", referencedColumnName = "codigo")
     @ManyToOne
     private Mes mes;
+
+    public String getTipo_pago() {
+        return tipo_pago;
+    }
+
+    public void setTipo_pago(String tipo_pago) {
+        this.tipo_pago = tipo_pago;
+    }
+
+    public String getComprobante() {
+        return comprobante;
+    }
+
+    public void setComprobante(String comprobante) {
+        this.comprobante = comprobante;
+    }
+
+    public String getFactura() {
+        return factura;
+    }
+
+    public void setFactura(String factura) {
+        this.factura = factura;
+    }
+
+    public String calcularMontoMora() {
+
+        if (!monto.equals("")) {
+            float monto = Float.parseFloat(this.monto);
+            return "" + (52000 - monto);
+        }
+        return "";
+    }
 
     public Long getCodigo() {
         return codigo;

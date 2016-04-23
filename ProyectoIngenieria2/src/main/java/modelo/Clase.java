@@ -97,6 +97,48 @@ public class Clase implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
+    public String tablaEstudiantesFacturas() {
+        Collection<Encargado> lista = this.purga();
+
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Estudiantes de " + nivel + "</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
+
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>NOMBRE</th>");
+        s.append("<th>PRIMER APELLIDO</th>");
+        s.append("<th>SEGUNDO APELLIDO</th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (Encargado e : lista) {
+            s.append("<tr class=\"active\">");
+            s.append("<td>" + e.getId() + "</td>");
+            s.append("<td>" + e.getNombre() + "</td>");
+            s.append("<td>" + e.getApellido1() + "</td>");
+            s.append("<td>" + e.getApellido2() + "</td>");
+            s.append("<td><a href='facturasAdministracion-" + e.getId() + "' class=\"btn btn-success custom-width\">Ver Facturas</a></td>");
+
+            s.append("</tr>");
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
 
     public String tablaEstudiantesPagos() {
         Collection<Encargado> lista = this.purga();
@@ -113,7 +155,6 @@ public class Clase implements Serializable {
         s.append("<th>NOMBRE</th>");
         s.append("<th>PRIMER APELLIDO</th>");
         s.append("<th>SEGUNDO APELLIDO</th>");
-        s.append("<th>FECHA DE NACIMIENTO</th>");
         s.append("<th></th>");
         s.append("</tr>");
         s.append("</thead>");
@@ -126,7 +167,6 @@ public class Clase implements Serializable {
             s.append("<td>" + e.getNombre() + "</td>");
             s.append("<td>" + e.getApellido1() + "</td>");
             s.append("<td>" + e.getApellido2() + "</td>");
-            s.append("<td>" + e.getFechaNacimiento() + "</td>");
             s.append("<td><a href='pagos-user-" + e.getId() + "' class=\"btn btn-success custom-width\">Realizar pago</a></td>");
 
             s.append("</tr>");

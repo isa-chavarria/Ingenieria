@@ -192,7 +192,7 @@
                                 <div class="navbar-collapse collapse sidebar-navbar-collapse" >
                                     <ul class="nav navbar-nav">
                                         <li class="active"><a style="font-size: small;" href="verEstudiante-${enc.id}">Información niño</a></li>
-                                        <li class="active"><a style="font-size: small;" href="#">Información matrícula</a></li>
+                                        <li class="active"><a style="font-size: small;" href="detallesMatricula-${enc.id}">Información matrícula</a></li>
                                         <li class="active"><a style="font-size: small;" href="verFamiliares-${enc.id}">Información familiares</a></li>
                                     </ul>
                                 </div>

@@ -141,14 +141,13 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="img-responsive img-full" src="resources/img/1.jpg" alt="">
+                                    <img class="img-responsive img-full" src="data:image/gif;base64,${primera.imagen}" alt="">
                                 </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/2.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="img-responsive img-full" src="resources/img/3.jpg" alt="">
-                                </div>
+                                <c:forEach items="${imagenes}" var="imagen">
+                                    <div class="item">
+                                       <img class="img-responsive img-full" src="data:image/gif;base64,${imagen.imagen}" alt="">
+                                    </div>
+                                </c:forEach>
                             </div>
 
                             <!-- Controls -->

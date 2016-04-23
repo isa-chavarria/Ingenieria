@@ -35,11 +35,10 @@ public class AlbumController {
     @Autowired
     ImagenService imagenService;
 
-
     @RequestMapping(value = {"/galeria"}, method = RequestMethod.GET)
     public String loadGaleria(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-      ///  System.out.println(kinder.toString());
+        ///  System.out.println(kinder.toString());
         if (kinder != null) {
             model.addAttribute("albums", kinder.getAlbums());
         } else {
@@ -58,7 +57,7 @@ public class AlbumController {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (result.hasErrors()) {
             System.out.println("has errors");
-            model.addAttribute("msg", "No se agrego el contacto con exito");
+            model.addAttribute("msg", "No se la imágen éxito");
 
             if (kinder != null) {
                 model.addAttribute("albums", kinder.getAlbums());
@@ -76,27 +75,26 @@ public class AlbumController {
         albumService.save(album);
         kinder.getAlbums().add(album);
 
-        model.addAttribute("msg", "Se agrego el contacto con exito");
-        
+        model.addAttribute("msg", "Se agrego el álbum con éxito");
+
         model.addAttribute("albums", kinder.getAlbums());
         Album al = new Album();
         model.addAttribute("album", al);
         Imagen imagen = new Imagen();
         model.addAttribute("imagen", imagen);
-        
+
         return "galeria";
     }
-    
+
     @RequestMapping(value = {"/eliminarAlbum"}, method = RequestMethod.POST)
     public String removeAlbum(@Valid Album album, BindingResult result, ModelMap model) {
 
         Album album2 = albumService.findbyId(album.getNombre());
         if (album2 != null) {
             albumService.DeletebyId(album.getNombre());
-            model.addAttribute("msg", "Se elimino el album con exito");
-        }
-        else{
-            model.addAttribute("msg", "No se elimino el album con exito");
+            model.addAttribute("msg", "Se elimino el álbum con éxito");
+        } else {
+            model.addAttribute("msg", "No se elimino el álbum con éxito");
         }
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         System.out.println(kinder.toString());
@@ -111,7 +109,7 @@ public class AlbumController {
         model.addAttribute("imagen", imagen);
         return "galeria";
     }
-    
+
     @RequestMapping(value = {"/agregarImagen"}, method = RequestMethod.POST)
     public String agregarImagen(@Valid Album album, BindingResult result, ModelMap model) {
         Imagen imagen = new Imagen();
@@ -119,17 +117,17 @@ public class AlbumController {
         model.addAttribute("imagen", imagen);
         return "agregarImagen";
     }
-    
+
     @RequestMapping(value = {"/agregarImagenForm"}, method = RequestMethod.POST)
-    public String addImagen(@RequestParam MultipartFile file, 
-                            @RequestParam String album,
-                            ModelMap model) {
+    public String addImagen(@RequestParam MultipartFile file,
+            @RequestParam String album,
+            ModelMap model) {
         System.out.println(file);
         System.out.println(album);
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         if (file.isEmpty()) {
             System.out.println("has errors");
-            model.addAttribute("msg", "No se agrego la imagen con exito");
+            model.addAttribute("msg", "No se agrego la imágen con exito");
 
             if (kinder != null) {
                 model.addAttribute("albums", kinder.getAlbums());
@@ -138,8 +136,8 @@ public class AlbumController {
             }
             Album al = new Album();
             model.addAttribute("album", al);
-        Imagen imagen = new Imagen();
-        model.addAttribute("imagen", imagen);
+            Imagen imagen = new Imagen();
+            model.addAttribute("imagen", imagen);
             return "galeria";
         }
         Album alb = albumService.findbyId(album);
@@ -152,30 +150,29 @@ public class AlbumController {
         }
         imagenService.save(imagen);
         alb.getImagenes().add(imagen);
-        
+
         kinder = kinderService.findbyName("Kinder Lulu");
 
-        model.addAttribute("msg", "Se agrego la imagen con exito");
-        
+        model.addAttribute("msg", "Se agrego la imágen con éxito");
+
         model.addAttribute("albums", kinder.getAlbums());
         Album al = new Album();
         model.addAttribute("album", al);
         Imagen imag = new Imagen();
         model.addAttribute("imagen", imag);
-        
+
         return "galeria";
     }
-    
+
     @RequestMapping(value = {"/eliminarImagen"}, method = RequestMethod.POST)
     public String removeImagen(@Valid Imagen imagen, BindingResult result, ModelMap model) {
 
         Imagen imagen2 = imagenService.findbyId(imagen.getCodigo());
         if (imagen2 != null) {
             imagenService.DeletebyId(imagen.getCodigo());
-            model.addAttribute("msg", "Se elimino la imagen con exito");
-        }
-        else{
-            model.addAttribute("msg", "No se elimino la imagen con exito");
+            model.addAttribute("msg", "Se elimino la imágen con éxito");
+        } else {
+            model.addAttribute("msg", "No se elimino la imágen con éxito");
         }
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
         System.out.println(kinder.toString());

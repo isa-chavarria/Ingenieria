@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import modelo.Album;
 import modelo.Clase;
 import modelo.Contacto;
 import modelo.Encargado;
@@ -26,6 +29,7 @@ import modelo.Enfermedad;
 import modelo.Especialidad;
 import modelo.Factura;
 import modelo.Familiar;
+import modelo.Imagen;
 import modelo.Informacion;
 import modelo.InformacionNino;
 import modelo.Kinder;
@@ -51,6 +55,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import service.AlbumService;
 import service.ContactoService;
 import service.ClaseService;
 import service.EncargadoService;
@@ -93,6 +98,9 @@ public class AppController {
 
     @Autowired
     ClaseService claseService;
+
+    @Autowired
+    AlbumService albumService;
 
     @Autowired
     FamiliarService familiarService;
@@ -143,6 +151,11 @@ public class AppController {
 
     @RequestMapping(value = {"/galeriaImagenes"}, method = RequestMethod.GET)
     public String loadGaleriaImagenes(ModelMap model, HttpServletRequest request) {
+        Album al = albumService.findbyId("Galeria");
+
+        Set<Imagen> imagenes = al.getImagenes();
+        
+        model.addAttribute("imagenes", imagenes);
         return "galeriaAdminstrador";
     }
 
@@ -153,6 +166,11 @@ public class AppController {
 
         //Cerrar sesion
         sesion.invalidate();
+        Album al = albumService.findbyId("Inicio");
+        Imagen first = al.getImagenes().iterator().next();
+        model.addAttribute("primera", first);
+        model.addAttribute("imagenes", al.getImagenes());
+
         //  sesion.removeAttribute("user");
         Usuario user = new Usuario();
         model.addAttribute("user", user);
@@ -357,12 +375,12 @@ public class AppController {
             if (usu.isAdministrador()) {
                 // model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
-                return "Administracion";
+                return loadAdministracion(model);
             }
             if (usu.isEncargado()) {
                 //  model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
-                return "Encargado";
+                return loadEncargado(model);
             }
         }
         Usuario u = new Usuario();
@@ -373,11 +391,23 @@ public class AppController {
 
     @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
     public String loadEncargado(ModelMap model) {
+        Album al = albumService.findbyId("Sistema");
+
+        Set<Imagen> imagenes = al.getImagenes();
+        Imagen first = al.getImagenes().iterator().next();
+        model.addAttribute("primera", first);
+        model.addAttribute("imagenes", imagenes);
         return "Encargado";
     }
 
     @RequestMapping(value = {"/administracion"}, method = RequestMethod.GET)
     public String loadAdministracion(ModelMap model) {
+        Album al = albumService.findbyId("Sistema");
+
+        Set<Imagen> imagenes = al.getImagenes();
+        Imagen first = al.getImagenes().iterator().next();
+        model.addAttribute("primera", first);
+        model.addAttribute("imagenes", imagenes);
         return "Administracion";
     }
 
@@ -654,19 +684,6 @@ public class AppController {
         Clase c = claseService.findbyId(new Long(1));
         model.addAttribute("grupito", c);
         return "PagosSeleccionar";
-    }
-
-    @RequestMapping(value = {"/seleccionarPagos"}, method = RequestMethod.POST)
-    public void seleccionarPagos(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("AQUIIIIIII");
-        String nivel = (String) request.getParameter("nombre");
-        // String nivel = clase.getNivel();
-        PrintWriter out = response.getWriter();
-        Clase g = new Clase();
-        model.addAttribute("grupo", g);
-        Clase c = claseService.findbyId(this.calcular(nivel));
-        //      model.addAttribute("grupito", c);
-        out.println(c.tablaEstudiantesPagos());
     }
 
     @RequestMapping(value = {"/perfil"}, method = RequestMethod.GET)
@@ -1145,6 +1162,7 @@ public class AppController {
         //      model.addAttribute("grupito", c);
         out.println(c.tablaEstudiantes());
     }
+//------------------------PAGOOOOOOOOOOOOOOOOOOOOOOOSS--------------------------------------------
 
     @RequestMapping(value = {"/pagos-user-{id}"}, method = RequestMethod.GET)
     public String loadPagos(@PathVariable String id, ModelMap model, HttpServletRequest request) {
@@ -1161,6 +1179,19 @@ public class AppController {
         return "pagos";
     }
 
+    @RequestMapping(value = {"/seleccionarPagos"}, method = RequestMethod.POST)
+    public void seleccionarPagos(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("AQUIIIIIII");
+        String nivel = (String) request.getParameter("nombre");
+        // String nivel = clase.getNivel();
+        PrintWriter out = response.getWriter();
+        Clase g = new Clase();
+        model.addAttribute("grupo", g);
+        Clase c = claseService.findbyId(this.calcular(nivel));
+        //      model.addAttribute("grupito", c);
+        out.println(c.tablaEstudiantesPagos());
+    }
+
     @RequestMapping(value = {"/RealizarPago"}, method = RequestMethod.POST)
     public String realizarPago(@Valid Pago fact, BindingResult result, ModelMap model, HttpServletRequest request) {
         //    System.out.println(contacto.toString());
@@ -1171,14 +1202,27 @@ public class AppController {
         String monto = fact.getMonto();
         Mes m = mesService.findbyId(mes);
         Factura f = new Factura();
-        f.setFecha("");
+
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(c.getTime());
+
+        f.setFecha(formattedDate);
+        f.setComprobante(fact.getComprobante());
+        f.setFactura(fact.getFactura());
+        f.setTipo_pago(fact.getTipo_pago());
         f.setMes(m);
         f.setMonto(fact.getMonto());
-        nino.getFacturas().add(f);
-        ninoService.UpdateNino(nino);
+        f.setNino(nino);
+        facturaService.save(f);
+        model.addAttribute("id", nino.getId());
         return "PagoCorrecto";
     }
 
+    //-------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------
     //-----------------PROFESORES-------------------------------------------
     @RequestMapping(value = {"/Profesores"}, method = RequestMethod.GET)
     public String loadProfesores(ModelMap model) {
@@ -1362,6 +1406,145 @@ public class AppController {
         return loadCursos(model);
     }
 
+//------------------------FACTURAS----------------------------------------------------------------------------------
+    @RequestMapping(value = {"/FacurasSeleccionar"}, method = RequestMethod.GET)
+    public String loadFacturasSelecionar(ModelMap model) {
+        Clase g = new Clase();
+        model.addAttribute("grupo", g);
+        Clase c = claseService.findbyId(new Long(1));
+        model.addAttribute("grupito", c);
+        return "SeleccionarEstudianteFacturas";
+
+    }
+
+    @RequestMapping(value = {"/seleccionarFacturas"}, method = RequestMethod.POST)
+    public void seleccionarFacturas(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("AQUIIIIIII");
+        String nivel = (String) request.getParameter("nombre");
+        // String nivel = clase.getNivel();
+        PrintWriter out = response.getWriter();
+        Clase g = new Clase();
+        model.addAttribute("grupo", g);
+        Clase c = claseService.findbyId(this.calcular(nivel));
+        //      model.addAttribute("grupito", c);
+        out.println(c.tablaEstudiantesFacturas());
+    }
+
+    @RequestMapping(value = {"/facturasAdministracion-{id}"}, method = RequestMethod.GET)
+    public String FacturasEstudianteAdministracion(@PathVariable String id, ModelMap model, HttpServletRequest request) {
+        Nino n = ninoService.findbyId(id);
+
+        Factura f = new Factura();
+
+        List<Mes> meses = mesService.findAll();
+        model.addAttribute("tabla", n.TablaFacturas(meses));
+        model.addAttribute("factura", f);
+        return "FacturasEstudianteAdministracion";
+    }
+
+    @RequestMapping(value = {"/facturasEstudiante"}, method = RequestMethod.GET)
+    public String FacturasEstudiante(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Nino n = ninoService.findbyId(usu.getId());
+        List<Mes> meses = mesService.findAll();
+        model.addAttribute("tabla", n.TablaFacturas2(meses));
+
+        return "FacturasUsuario";
+    }
+
+    @RequestMapping(value = {"/FacurasPorMes"}, method = RequestMethod.GET)
+    public String loadFacturasPorMes(ModelMap model) {
+        Mes m = mesService.findbyId(new Long(2));
+        Clase g = new Clase();
+        model.addAttribute("grupo", g);
+        model.addAttribute("tabla", this.TablaFacturasMeses(m));
+        return "FacturasMes";
+
+    }
+
+    @RequestMapping(value = {"/seleccionarMes"}, method = RequestMethod.POST)
+    public void seleccionarMes(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("AQUIIIIIII");
+        String nivel = (String) request.getParameter("nombre");
+        Long val = Long.parseLong(nivel);
+        Mes m = mesService.findbyId(new Long(val));
+        // String nivel = clase.getNivel();
+        PrintWriter out = response.getWriter();
+
+        //      model.addAttribute("grupito", c);
+        out.println(this.TablaFacturasMeses(m));
+    }
+
+    @RequestMapping(value = {"/editar-factura-{id}"}, method = RequestMethod.GET)
+    public String loadPagos(@PathVariable Long id, ModelMap model, HttpServletRequest request) {
+        Factura f = facturaService.findbyCodigo(id);
+        Encargado n = encargadoService.findbyId(f.getNino().getId());
+        model.addAttribute("id", n.getId());
+        Pago p = new Pago();
+        p.setId(f.getNino().getId());
+        String nombre = n.getNombre();
+        String apellido = n.getApellido1();
+        String apellido2 = n.getApellido2();
+        String nombreCompleto = nombre + " " + apellido + " " + apellido2;
+        p.setNombre(nombreCompleto);
+        p.setFactura(f.getFactura());
+        p.setMonto(f.getMonto());
+        p.setTipo_pago(f.getTipo_pago());
+        p.setComprobante(f.getComprobante());
+        p.setMes(f.getMes().getCodigo());
+        p.setFecha_actual(f.getFecha());
+        p.setCodigo(f.getCodigo());
+        model.addAttribute("factura", p);
+        return "EditarFactura";
+    }
+
+    @RequestMapping(value = {"/EditarLaFactura"}, method = RequestMethod.POST)
+    public String EditarLaFactura(@Valid Pago fact, BindingResult result, ModelMap model, HttpServletRequest request) {
+        Factura f = facturaService.findbyCodigo(fact.getCodigo());
+        Nino n = ninoService.findbyId(fact.getId());
+        Long mes = fact.getMes();
+
+        if (result.hasErrors()) {
+            model.addAttribute("error", "Error al modificar factura");
+            return FacturasEstudianteAdministracion(fact.getId(), model, request);
+        }
+
+        f.setTipo_pago(fact.getTipo_pago());
+
+        if (fact.getTipo_pago().equalsIgnoreCase("Efectivo")) {
+            f.setComprobante("");
+            f.setFactura("");
+        } else {
+            f.setComprobante(fact.getComprobante());
+            f.setFactura(fact.getFactura());
+        }
+        f.setFecha(fact.getFecha_actual());
+        f.setMonto(fact.getMonto());
+
+        facturaService.UpdateFactura(f);
+
+        model.addAttribute("correcto", "Factura modificada correctamente");
+
+        return FacturasEstudianteAdministracion(fact.getId(), model, request);
+    }
+
+    @RequestMapping(value = {"/EliminarFactura"}, method = RequestMethod.POST)
+    public String EliminarFactura(@Valid Factura fact, BindingResult result, ModelMap model, HttpServletRequest request) {
+        Factura f = facturaService.findbyCodigo(fact.getCodigo());
+        String id = f.getNino().getId();
+        if (result.hasErrors()) {
+            model.addAttribute("error", "Error al eliminar factura");
+            return FacturasEstudianteAdministracion(id, model, request);
+        }
+
+        f.setNino(null);
+        f.setMes(null);
+        facturaService.UpdateFactura(f);
+        facturaService.DeletebyCodigo(f.getCodigo());
+        model.addAttribute("correcto", "Factura eliminada correctamente");
+        return FacturasEstudianteAdministracion(id, model, request);
+    }
+
     //--------------------------------------------------------------
     private String buscar(String profesor) {
         List<Profesor> profesores = profesorService.findAll();
@@ -1378,7 +1561,8 @@ public class AppController {
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
         List<Clase> lista = claseService.findAll();
-        List<String> valores = new ArrayList<>();
+
+        List<String> valores = new ArrayList<String>();
         for (Clase c : lista) {
             valores.add(c.getNivel());
         }
@@ -1389,7 +1573,7 @@ public class AppController {
 
     @ModelAttribute("opciones")
     public ArrayList<String> initializeOpciones() {
-        ArrayList<String> l = new ArrayList<>();
+        ArrayList<String> l = new ArrayList<String>();
         l.add("Si");
         l.add("No");
         return l;
@@ -1397,7 +1581,7 @@ public class AppController {
 
     @ModelAttribute("genero")
     public ArrayList<String> initializeGenero() {
-        ArrayList<String> l = new ArrayList<>();
+        ArrayList<String> l = new ArrayList<String>();
         l.add("Masculino");
         l.add("Femenino");
         return l;
@@ -1406,7 +1590,7 @@ public class AppController {
     @ModelAttribute("profesores")
     public ArrayList<String> initializeProfesores() {
         List<Profesor> profesores = profesorService.findAll();
-        ArrayList<String> l = new ArrayList<>();
+        ArrayList<String> l = new ArrayList<String>();
         for (Profesor c : profesores) {
             l.add(c.getNombre());
         }
@@ -1416,6 +1600,16 @@ public class AppController {
     @ModelAttribute("Meses")
     public List<Mes> initializeMese() {
         return mesService.findAll();
+    }
+
+    @ModelAttribute("TiposPago")
+    public List<String> initializeTiposPago() {
+        ArrayList<String> l = new ArrayList<String>();
+        l.add("Efectivo");
+        l.add("Tarjeta");
+        l.add("Deposito");
+
+        return l;
     }
 
     public Long calcular(String ni) {
@@ -1428,6 +1622,62 @@ public class AppController {
         }
         return null;
 
+    }
+
+    //----------------TABLA FACTURAS MESES------------------------------------
+    private String TablaFacturasMeses(Mes m) {
+        List<Nino> ninos = ninoService.findAll();
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Registro de sus facturas</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>Estudiante</th>");
+        s.append("<th>Fecha</th>");
+        s.append("<th>Monto mensualiad</th>");
+        s.append("<th>Monto mora</th>");
+        s.append("<th>Nº comprobante</th>");
+        s.append("<th>Nº factura</th>");
+        s.append("<th>Tipo pago</th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (Nino n : ninos) {
+            if (n.buscarFactura(m).getCodigo() != null) {
+                s.append("<tr class=\"success\">");
+            } else {
+                s.append("<tr class=\"danger\">");
+            }
+
+            s.append("<td>" + n.getId() + "</td>");
+            s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
+            s.append("<td>" + n.buscarFactura(m).getFecha() + "</td>");
+            s.append("<td>" + n.buscarFactura(m).getMonto() + "</td>");
+            s.append("<td>" + n.buscarFactura(m).calcularMontoMora() + "</td>");
+            s.append("<td>" + n.buscarFactura(m).getComprobante() + "</td>");
+            s.append("<td>" + n.buscarFactura(m).getFactura() + "</td>");
+            if (n.buscarFactura(m).getCodigo() != null) {
+                s.append("<td>" + n.buscarFactura(m).getTipo_pago() + "</td>");
+            } else {
+                s.append("<td>Pendiente</td>");
+            }
+
+            s.append("</tr>");
+
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
     }
 
 }

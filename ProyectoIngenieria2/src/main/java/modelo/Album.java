@@ -8,6 +8,7 @@ package modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,7 +45,7 @@ public class Album implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "album")
-    private Collection<Imagen> imagenes;
+    private Set<Imagen> imagenes;
 
     public Kinder getKinder() {
         return kinder;
@@ -54,13 +55,15 @@ public class Album implements Serializable {
         this.kinder = kinder;
     }
 
-    public Collection<Imagen> getImagenes() {
+    public Set<Imagen> getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes(Collection<Imagen> imagenes) {
+    public void setImagenes(Set<Imagen> imagenes) {
         this.imagenes = imagenes;
     }
+
+    
 
     public String getNombre() {
         return nombre;

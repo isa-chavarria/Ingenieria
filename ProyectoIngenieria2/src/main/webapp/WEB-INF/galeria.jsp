@@ -86,7 +86,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
+
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -159,7 +159,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="<%
@@ -180,60 +180,47 @@
 
 
         <div class="container">
-
-            <form:form method="POST" modelAttribute="album" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-                <div  class="form-group">
-                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre del Album:</label>
-                    <div class="col-lg-10">
-                        <form:input type="text" class="form-control" path="nombre" id="nombre"
-                                    placeholder="Nombre del album"/>
-                    </div>
-                </div>
-                <div class="col-lg-offset-2 col-lg-10">
-                    <button type="submit" class="btn btn-info">Crear</button>
-                    <div class="form-group">
-                    </div>
-                </div>
-                <p>${msg}</p>
-            </form:form>
+            
+             <h5>${msg}</h5>
 
             <c:forEach items="${albums}" var="al">
                 <p></p>
                 <div class="col-lg-12">
-                    <h2 class="intro-text text-center">${al.nombre}
-                    <form:form method="POST"  modelAttribute="album" action="eliminarAlbum">
-                    <form:hidden path="nombre" value="${al.nombre}"/>
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </button>
-                    </form:form>
-                    
-                    <form:form method="POST"  modelAttribute="album" action="agregarImagen">
-                    <form:hidden path="nombre" value="${al.nombre}"/>
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </button>
-                    </form:form>
-                    </h2>
+                    <h1 class="intro-text text-center">Imágenes ${al.nombre}
+                        <form:form style="margin: 2%;" method="POST"  modelAttribute="album" action="agregarImagen">
+                            <form:hidden path="nombre" value="${al.nombre}"/>
+                            <!--button type="submit" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </button-->
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <button type="submit" class="btn btn-info">Agregar imágen</button>
+                                </div>
+                            </div>
+                        </form:form>
+                    </h1>
+
                 </div>
-                <div class="imagenes" >
+                <br/>
+                <br/>
+                <div style='margin-top: 3%;' class="imagenes" >
                     <div class="row"  >
-                        
+
                         <div style=" overflow: scroll ; height: 400px " class="box">
                             <c:forEach items="${al.imagenes}" var="imag">
-                                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                                <div class="col-lg-2 col-md-2 col-xs-2 thumb">
                                     <form:form method="POST"  modelAttribute="imagen" action="eliminarImagen">
-                                            <form:hidden id="cod" path="codigo" value="${imag.codigo}"/>
-                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            </button>
-                                            </form:form>
+                                        <form:hidden id="cod" path="codigo" value="${imag.codigo}"/>
+                                        <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                    </form:form>
                                     <a class="thumbnail" href="#">
                                         <img class="img-responsive" src="data:image/gif;base64,${imag.imagen}">
                                     </a>
-                                           
+
                                 </div>
-                                 
+
                             </c:forEach>
                         </div>
                     </div>
