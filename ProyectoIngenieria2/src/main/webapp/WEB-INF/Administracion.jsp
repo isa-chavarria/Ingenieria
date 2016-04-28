@@ -149,7 +149,8 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Perfil <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
@@ -187,7 +188,7 @@
                             <a href="matricula"><i class="fa fa-archive"></i> Matrícula</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university"></i> Institución <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university"></i> Población<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <!--li>
                                     <a href="galeria"><i class="fa fa-picture-o"></i> Galeria</a>
@@ -203,12 +204,14 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="NivelesKinder"><i class="fa fa-line-chart"></i> Niveles</a>
+                                    <a href="administradores"><i class="fa fa-user"></i> Administradores sistema</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="CursosKinder"><i class="fa fa-language"></i> Cursos especiales</a>
+                                    <a href="EstudiantesInactivos"><i class="fa fa-graduation-cap"></i> Estudiantes inactivos</a>
                                 </li>
+
+
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -234,6 +237,14 @@
                                 <li>
                                     <a href="noticiasAdministrador"><i class="fa fa-bell"></i> Noticias</a>
                                 </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="NivelesKinder"><i class="fa fa-line-chart"></i> Niveles</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="CursosKinder"><i class="fa fa-language"></i> Cursos especiales</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -248,7 +259,7 @@
 
 
             <div class="row">
-                <div class="box">
+                <div class="box" id="ContenedorCarousel">
                     <div class="col-lg-12 text-center">
                         <div id="carousel-example-generic" class="carousel slide">
                             <!-- Indicators -->
@@ -261,11 +272,11 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="img-responsive img-full" src="data:image/gif;base64,${primera.imagen}" alt="">
+                                    <img class="img-full img-responsive" src="data:image/gif;base64,${primera.imagen}" alt="">
                                 </div>
                                 <c:forEach items="${imagenes}" var="imagen">
                                     <div class="item">
-                                       <img class="img-responsive img-full" src="data:image/gif;base64,${imagen.imagen}" alt="">
+                                        <img class="img-full img-responsive" src="data:image/gif;base64,${imagen.imagen}" alt="">
                                     </div>
                                 </c:forEach>
                             </div>

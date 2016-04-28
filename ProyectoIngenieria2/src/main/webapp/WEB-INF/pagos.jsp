@@ -291,7 +291,7 @@
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-8">
-                                    <button type="submit" class="btn btn-info">Realizar pago</button>
+                                    <button type="submit" class="btn btn-info">Registrar pago</button>
                                 </div>
                             </div>
 

@@ -87,8 +87,9 @@ public class Clase implements Serializable {
     public Collection<Encargado> purga() {
         Collection<Encargado> purga = new ArrayList<Encargado>();
         for (Nino n : this.ninos) {
-
-            purga.add(n.getEncargado().iterator().next());
+            if (n.getEstado()) {
+                purga.add(n.getEncargado().iterator().next());
+            }
 
         }
         return purga;
@@ -97,8 +98,7 @@ public class Clase implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
+
     public String tablaEstudiantesFacturas() {
         Collection<Encargado> lista = this.purga();
 
@@ -212,8 +212,8 @@ public class Clase implements Serializable {
             s.append("<td>" + e.getApellido1() + "</td>");
             s.append("<td>" + e.getApellido2() + "</td>");
             s.append("<td>" + e.getFechaNacimiento() + "</td>");
-            s.append("<td><a href='verEstudiante-" + e.getId() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
-            s.append("<td><button type=\"button\" id='" + e.getId() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+            s.append("<td><a href='verEstudiante-" + e.getId() + "' class=\"btn btn-success custom-width\">Editar</a></td>");
+            s.append("<td><button type=\"button\" id='" + e.getId() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Marcar como inactivo</button></td>");
 
             s.append("</tr>");
         }
@@ -228,8 +228,8 @@ public class Clase implements Serializable {
     }
 
     public String getProfesorNombre() {
-        
-        return (profesor!=null)? profesor.getNombre() :"NA";
+
+        return (profesor != null) ? profesor.getNombre() : "NA";
     }
 
     @Override

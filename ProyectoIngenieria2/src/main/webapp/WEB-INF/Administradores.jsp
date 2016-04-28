@@ -1,13 +1,19 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--
+    Document   : Estudiantes
+    Created on : 14/03/2016, 12:29:37 AM
+    Author     : josvr_000
+--%>
+
 <%@page import="modelo.Usuario"%>
-<%@page import="modelo.Encargado"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
 
-
-    if (user != null && user.isEncargado()) {
+    if (user != null && user.isAdministrador()) {
 
     } else {
         response.sendRedirect("index");
@@ -22,24 +28,42 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
+
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script>
+
+            function eliminar(id) {
+
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+
+            }
+
+        </script>
 
     </head>
     <body>
@@ -54,7 +78,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -64,7 +88,8 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">InformaciÃ³n personal</h3>
+            <h3 id="Titulo">Profesores </h3>
+
 
         </div>
 
@@ -84,7 +109,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
+
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -144,7 +169,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
                                     <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
@@ -157,10 +182,11 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
+
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="encargado">Regresar al menÃº</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -173,138 +199,118 @@
         <div class="container">
 
 
-
-
             <div class="row">
-                <div class="box">
-                    <div class="leftImage">
+                <div class="form-group">
+                    <!--div class="col-lg-offset-2 col-lg-8"-->
+                    <button style=" font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif;" type="button" id="" class="btn btn-info custom-width" data-toggle="modal" data-target="#myModal2">Agregar administrador</button>
+
+                    <!--/div-->
+                </div>
+
+                <div id="tablita">
+
+                    <div style=" overflow: scroll ; height: 300px " class="box">
 
 
-                        <img class="img-circle" src=" ${enc.ruta_imagen} " width="40%" height="150px" alt="">
+                        ${administradores}
+
+
                     </div>
-
-                    <div class="rightImage"  >
-
-                        <hr>
-                        <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
-                        <hr>
-
-
-
-                    </div>
-
-                    <div class="dec">  </div>
+                    <h5 style='color:red'>${error}</h5>
+                    <h5 style='color:green'>${correcto}</h5>
 
                 </div>
+
 
             </div>
-
-
-
-
-            <div class="row">
-                <div class="col-lg-3 text-center">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-
-
-                            <div class="sidebar-nav">
-                                <div role="navigation">
-                                    <div class="navbar-header">
-                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-                                            <span class="sr-only">Toggle navigation</span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button>
-                                        <span class="visible-xs navbar-brand">Sidebar menu</span>
-                                    </div>
-                                    <div class="navbar-collapse collapse sidebar-navbar-collapse" >
-                                        <ul class="nav navbar-nav">
-                                            <li class="active"><a style="font-size: small;" href="#">InformaciÃ³n</a></li>
-
-                                            <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
-
-                                            <li><a style="font-size: small;" href="informacionFamiliares">Familiares</a></li>
-
-                                            <li><a style="font-size: small;" href="enfermedadesEstudiante">Padecimientos</a></li>
-                                        </ul>
-                                    </div><!--/.nav-collapse -->
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 text-center">
-                    <div class="panel panel-default">
-                        <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-
-                            <table class="tableInvisivle">
-                                <tr>
-                                    <td><strong>Nombre completo:</strong></td>
-                                    <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>CÃ©dula:</strong></td>
-                                    <td>${enc.id}</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Fecha de nacimiento:</strong></td>
-                                    <td>${enc.fechaNacimiento}</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>sexo:</strong></td>
-                                    <td>${enc.sexo}</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Nivel:</strong></td>
-                                    <td>${nivel}</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>telÃ©fono del domicilio:</strong></td>
-                                    <td>${enc.telefono}</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>DirecciÃ³n del domicilio:</strong></td>
-                                    <td>${enc.direccion}</td>
-                                </tr>
-                                <tr>
-                                    <td style="color: #33cc00">${msg}</td>
-                                    <td><a href='editarInformacionUsuario' class="btn btn-success custom-width">Editar informaciÃ³n</a></td>
-
-                                </tr>
-
-
-
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-            <div class="clearfix"></div>
-
-
 
 
         </div>
+
+
+
+
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
+                    </div>
+
+                    <form:form method="POST" action="EliminarAdministrador"  modelAttribute="administrador" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <form:input type="hidden" path="id"  id="valor"/>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger" >Eliminar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Agregar nuevo administrador</h4>
+                    </div>
+
+                    <form:form method="POST" action="agregarAdministrador"  modelAttribute="administrador" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+
+                        <div class="modal-footer">
+                            <table class="tableInvisivle">
+                                <tr><td><strong>cédula</strong></td><td><form:input path="id" type="text" class="form-control" id="cedula"
+                                            placeholder="#-###-###" required="true" /></td></tr>
+                                <tr><td><strong>Nombre</strong></td><td><form:input path="nombre" type="text" class="form-control" id="nombre"
+                                            placeholder="Nombre del administrador" onkeydown="return validarLetras(event)" /></td></tr>
+                                <tr><td><strong>Primero apellido</strong></td><td><form:input path="apellido1" type="text" class="form-control" id="apellido1"
+                                            placeholder="apellido" onkeydown="return validarLetras(event)" /></td></tr>
+                                <tr><td><strong>Segundo apellido</strong></td><td><form:input path="apellido2" type="text" class="form-control" id="apellido2"
+                                            placeholder="apellido" onkeydown="return validarLetras(event)" /></td></tr>
+                                <tr><td><strong>Correo electrónico</strong></td><td><form:input path="email" type="email" class="form-control" id="email"
+                                            placeholder="ejemplo@gmail.com" /></td></tr>
+                                <tr><td><strong>Teléfono</strong></td><td><form:input path="telefono" type="text" class="form-control" id="telefono"
+                                            placeholder="####-####" /></td></tr>
+
+                            </table>
+                            <br/>
+                            <button type="submit" class="btn btn-success" >Guardar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                        </div>
+
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
 
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
@@ -325,3 +331,4 @@
 
     </body>
 </html>
+

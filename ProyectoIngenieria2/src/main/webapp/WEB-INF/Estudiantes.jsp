@@ -237,8 +237,8 @@
                                         <td>${stu.apellido1}</td>
                                         <td>${stu.apellido2}</td>
                                         <td>${stu.fechaNacimiento}</td>
-                                        <td><a href="<c:url value='verEstudiante-${stu.id}' />" class="btn btn-success custom-width">Ver</a></td>
-                                        <td><button type="button" id="${stu.id}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
+                                        <td><a href="<c:url value='verEstudiante-${stu.id}' />" class="btn btn-success custom-width">Editar</a></td>
+                                        <td><button type="button" id="${stu.id}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Marcar como inactivo</button></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -260,13 +260,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
+                        <h4 class="modal-title">¿Marcar estudiante como inactivo?</h4>
                     </div>
 
-                    <form:form method="POST" action="EliminarEstudiante"  modelAttribute="estudiante" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                    <form:form method="POST" action="CambiarEstado"  modelAttribute="estudiante" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                         <form:input type="hidden" path="id"  id="valor"/>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-danger" >Eliminar</button>
+                            <button type="submit" class="btn btn-danger" >Aceptar</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         </div>
 

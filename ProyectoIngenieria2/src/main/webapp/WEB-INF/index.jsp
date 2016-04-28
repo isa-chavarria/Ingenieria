@@ -128,7 +128,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="box">
+                <div class="box" id="ContenedorCarousel">
                     <div class="col-lg-12 text-center">
                         <div id="carousel-example-generic" class="carousel slide">
                             <!-- Indicators -->
@@ -141,11 +141,11 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="img-responsive img-full" src="data:image/gif;base64,${primera.imagen}" alt="">
+                                    <img class="img-full img-responsive" src="data:image/gif;base64,${primera.imagen}"  alt="">
                                 </div>
                                 <c:forEach items="${imagenes}" var="imagen">
                                     <div class="item">
-                                       <img class="img-responsive img-full" src="data:image/gif;base64,${imagen.imagen}" alt="">
+                                       <img class="img-full img-responsive" src="data:image/gif;base64,${imagen.imagen}" alt="">
                                     </div>
                                 </c:forEach>
                             </div>

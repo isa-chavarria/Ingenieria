@@ -12,6 +12,7 @@ import static java.lang.System.out;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -154,7 +155,7 @@ public class AppController {
         Album al = albumService.findbyId("Galeria");
 
         Set<Imagen> imagenes = al.getImagenes();
-        
+
         model.addAttribute("imagenes", imagenes);
         return "galeriaAdminstrador";
     }
@@ -997,6 +998,31 @@ public class AppController {
         return "Estudiantes";
     }
 
+    @RequestMapping(value = {"/EstudiantesInactivos"}, method = RequestMethod.GET)
+    public String loadEstudiantesInactivos(ModelMap model) {
+        Usuario u = new Usuario();
+        Clase g = new Clase();
+        model.addAttribute("estudiante", u);
+        model.addAttribute("estudiantes", purga());
+        return "EstudiantesInactivos";
+    }
+
+    @RequestMapping(value = {"/CambiarEstado"}, method = RequestMethod.POST)
+    public String CambiarEstado(@Valid Usuario u, BindingResult result, ModelMap model) {
+        Nino n = ninoService.findbyId(u.getId());
+        n.setEstado(false);
+        ninoService.UpdateNino(n);
+        return loadEstudiantes(model);
+    }
+
+    @RequestMapping(value = {"/CambiarActivo"}, method = RequestMethod.POST)
+    public String CambiarActivo(@Valid Usuario u, BindingResult result, ModelMap model) {
+        Nino n = ninoService.findbyId(u.getId());
+        n.setEstado(true);
+        ninoService.UpdateNino(n);
+        return loadEstudiantesInactivos(model);
+    }
+
     @RequestMapping(value = {"/EliminarEstudiante"}, method = RequestMethod.POST)
     public String Eliminarestudiante(@Valid Usuario u, BindingResult result, ModelMap model) {
 
@@ -1033,6 +1059,18 @@ public class AppController {
             familiarService.DeletebyCodigo(f.getCodigo());
         }
         n.setFamiliares(null);
+
+        //-------------
+        Set<Factura> facturas = n.getFacturas();
+
+        for (Factura f : facturas) {
+            f.setNino(null);
+            f.setMes(null);
+            facturaService.UpdateFactura(f);
+            facturaService.DeletebyCodigo(f.getCodigo());
+        }
+        n.setFacturas(null);
+
         //-----------------------------------------------------------------------
         Matricula m = n.getMatricula().iterator().next();
         m.setNino(null);
@@ -1048,7 +1086,7 @@ public class AppController {
         ninoService.UpdateNino(n);
         ninoService.DeletebyId(n.getId());
 
-        return loadEstudiantes(model);
+        return loadEstudiantesInactivos(model);
     }
 
     @RequestMapping(value = {"/verEstudiante-{id}"}, method = RequestMethod.GET)
@@ -1558,6 +1596,60 @@ public class AppController {
         return "";
     }
 
+    //--------------------------------------------------------------------------------------
+    @RequestMapping(value = {"/administradores"}, method = RequestMethod.GET)
+    public String loadAdministradores(ModelMap model, HttpServletRequest request) {
+        Encargado e = new Encargado();
+
+        model.addAttribute("administradores", this.tablaAdministradores(request));
+        model.addAttribute("administrador", e);
+        return "Administradores";
+    }
+
+    @RequestMapping(value = {"/EliminarAdministrador"}, method = RequestMethod.POST)
+    public String EliminarAdministrador(@Valid Encargado enc, BindingResult result, ModelMap model, HttpServletRequest request) {
+
+        String id = enc.getId();
+        if (result.hasErrors()) {
+            model.addAttribute("error", "El administrador no se pudo eliminar");
+            return loadAdministradores(model, request);
+        }
+
+        Usuario s = usuarioService.findbyId(enc.getId());
+        s.setEncargado(null);
+        usuarioService.UpdateUsuario(s);
+        usuarioService.DeletebyId(s.getId());
+
+        encargadoService.DeletebyId(enc.getId());
+
+        model.addAttribute("correcto", "administrador eliminado correctamente");
+        return loadAdministradores(model, request);
+    }
+
+    @RequestMapping(value = {"/agregarAdministrador"}, method = RequestMethod.POST)
+    public String AgregarAdministrador(@Valid Encargado enc, BindingResult result, ModelMap model, HttpServletRequest request) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("error", "El administrador no se pudo agregar");
+            return loadAdministradores(model, request);
+        }
+
+        Usuario u = new Usuario();
+
+        u.setId(enc.getId());
+        u.setEmail(enc.getEmail());
+        u.setContrasena("admin");
+        u.serAdministrador();
+
+        usuarioService.save(u);
+        enc.getUsuario().add(u);
+        encargadoService.save(enc);
+
+        model.addAttribute("correcto", "administrador agregado correctamente");
+        return loadAdministradores(model, request);
+    }
+//-------------------------------------------------------------------------------------------------------------------------
+
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
         List<Clase> lista = claseService.findAll();
@@ -1648,27 +1740,102 @@ public class AppController {
         s.append("<tbody class=\"cuerpoTabla\">");
 
         for (Nino n : ninos) {
-            if (n.buscarFactura(m).getCodigo() != null) {
-                s.append("<tr class=\"success\">");
-            } else {
-                s.append("<tr class=\"danger\">");
+
+            if (n.getEstado()) {
+                if (n.buscarFactura(m).getCodigo() != null) {
+                    s.append("<tr class=\"success\">");
+                } else {
+                    s.append("<tr class=\"danger\">");
+                }
+
+                s.append("<td>" + n.getId() + "</td>");
+                s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
+                s.append("<td>" + n.buscarFactura(m).getFecha() + "</td>");
+                s.append("<td>" + n.buscarFactura(m).getMonto() + "</td>");
+                s.append("<td>" + n.buscarFactura(m).calcularMontoMora() + "</td>");
+                s.append("<td>" + n.buscarFactura(m).getComprobante() + "</td>");
+                s.append("<td>" + n.buscarFactura(m).getFactura() + "</td>");
+                if (n.buscarFactura(m).getCodigo() != null) {
+                    s.append("<td>" + n.buscarFactura(m).getTipo_pago() + "</td>");
+                } else {
+                    s.append("<td>Pendiente</td>");
+                }
+
+                s.append("</tr>");
             }
 
-            s.append("<td>" + n.getId() + "</td>");
-            s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
-            s.append("<td>" + n.buscarFactura(m).getFecha() + "</td>");
-            s.append("<td>" + n.buscarFactura(m).getMonto() + "</td>");
-            s.append("<td>" + n.buscarFactura(m).calcularMontoMora() + "</td>");
-            s.append("<td>" + n.buscarFactura(m).getComprobante() + "</td>");
-            s.append("<td>" + n.buscarFactura(m).getFactura() + "</td>");
-            if (n.buscarFactura(m).getCodigo() != null) {
-                s.append("<td>" + n.buscarFactura(m).getTipo_pago() + "</td>");
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
+    public Collection<Encargado> purga() {
+        Collection<Encargado> purga = new ArrayList<Encargado>();
+        List<Nino> ninos = ninoService.findAll();
+        for (Nino n : ninos) {
+            if (!n.getEstado()) {
+                purga.add(n.getEncargado().iterator().next());
+            }
+
+        }
+        return purga;
+    }
+
+    public Collection<Encargado> administraores() {
+        Collection<Encargado> administradores = new ArrayList<Encargado>();
+        List<Usuario> encargados = usuarioService.findAll();
+        for (Usuario n : encargados) {
+            if (n.isAdministrador()) {
+                administradores.add(n.getEncargado().iterator().next());
+            }
+
+        }
+        return administradores;
+    }
+
+    public String tablaAdministradores(HttpServletRequest request) {
+        StringBuilder s = new StringBuilder();
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Collection<Encargado> admins = administraores();
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>Nombre</th>");
+        s.append("<th>Email</th>");
+        s.append("<th>TELEFONO</th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (Encargado n : admins) {
+            
+            if (n.getId().equals(usu.getId())) {
+                s.append("<tr class=\"success\">");
             } else {
-                s.append("<td>Pendiente</td>");
+               s.append("<tr class=\"active\">");
+            }
+            
+            s.append("<td>" + n.getId() + "</td>");
+            s.append("<td>" + n.getNombre() + " " + n.getApellido1() + " " + n.getApellido2() + "</td>");
+            s.append("<td>" + n.getEmail() + "</td>");
+            s.append("<td>" + n.getTelefono() + "</td>");
+            if (n.getId().equals(usu.getId())) {
+                s.append("<td></td>");
+            } else {
+                s.append("<td><button type=\"button\" id='" + n.getId() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
             }
 
             s.append("</tr>");
-
         }
 
         s.append("</tbody>");
