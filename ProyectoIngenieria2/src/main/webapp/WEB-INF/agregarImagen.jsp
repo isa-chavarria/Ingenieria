@@ -65,7 +65,7 @@
 
         <div id="second"  class="row">
 
-            <h3 id="Titulo">AGREGAR CONTACTO</h3>
+            <h3 id="Titulo">AGREGAR Imágen</h3>
 
 
 
@@ -107,7 +107,7 @@
 
                     <div class="col-lg-12 text-center">
 
-                        <h2 class="intro-text text-center">Agregar Imagen
+                        <h2 class="intro-text text-center">Agregar Imágen
                         </h2>
 
 

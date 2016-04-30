@@ -66,7 +66,7 @@
 
         <div id="second"  class="row">
 
-            <h3 id="Titulo">Requerimientos</h3>
+            <h3 id="Titulo">Requerimientos de matrícula</h3>
 
 
 
@@ -180,9 +180,9 @@
             <div class="row">
 
                 <div style="margin-bottom: 5%;" class="col-lg-12">
-                    <h2 class="intro-text text-center">Requerimientos
+                    <h2 class="intro-text text-center">Requerimientos de matrícula
                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" onclick="location.href = 'AgregarContacto.html';"></span>
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" data-toggle="modal" data-target="#myModal"></span>
                         </button>
                     </h2>
 
@@ -201,10 +201,12 @@
 
                                         <td>${req.descripcion}</td>
 
-                                        <td>
-                                            <button type="submit" class="btn btn-default" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            </button>
+                                        <td><form:form method="POST"  modelAttribute="requerimiento">
+                                                <form:hidden path="codigo" value="${req.codigo}"/>
+                                                <button  type="submit" class="btn btn-default" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                            </form:form>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -215,11 +217,45 @@
 
                 </div>
             </div>
-            <div class="alert alert-warning alert-dismissible" role="alert">
+            <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong></strong> ${msg}
             </div>
 
+        </div>
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Agregar nuevo requerimiento de matrícula</h4>
+                    </div>
+
+                    <form:form method="POST" action="AgregarRequerimiento"  modelAttribute="requerimiento" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+
+                        <div class="modal-footer">
+
+                            <form:input path="descripcion" type="text" class="form-control" id="cedula"
+                                        placeholder="Escriba el requerimiento" required="true" />
+
+
+                            <br/>
+                            <button type="submit" class="btn btn-success" >Guardar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                        </div>
+
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
         </div>
 
         <footer>
@@ -240,9 +276,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-                                $('.carousel').carousel({
-                                    interval: 5000 //changes the speed
-                                })
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
         </script>
 
     </body>

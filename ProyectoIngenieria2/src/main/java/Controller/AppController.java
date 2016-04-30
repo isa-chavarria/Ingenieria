@@ -1008,14 +1008,6 @@ public class AppController {
     }
 
     //-------------------------------------------------------------------------------------------------
-    @RequestMapping(value = {"/requerimientosAdmin"}, method = RequestMethod.GET)
-    public String loadRequerimientosAdministracion(ModelMap model) {
-
-        List<Requerimiento> reqs = this.requerimientoService.findAll();
-        model.addAttribute("requerimientos", reqs);
-        return "requerimientosAdministracion";
-    }
-
     @RequestMapping(value = {"/Visualizar-Pagos"}, method = RequestMethod.GET)
     public String loadVisualizarPagos(ModelMap model) {
         return "visualizarPagos";
@@ -1682,8 +1674,47 @@ public class AppController {
         model.addAttribute("correcto", "administrador agregado correctamente");
         return loadAdministradores(model, request);
     }
-//-------------------------------------------------------------------------------------------------------------------------
+//----------------------- requerimientos--------------------------------------------------------------------------------------------------
 
+    @RequestMapping(value = {"/requerimientosAdmin"}, method = RequestMethod.GET)
+    public String loadRequerimientosAdministracion(ModelMap model) {
+
+        List<Requerimiento> reqs = this.requerimientoService.findAll();
+        model.addAttribute("requerimientos", reqs);
+        Requerimiento r = new Requerimiento();
+        model.addAttribute("requerimiento", r);
+        return "requerimientosAdministracion";
+    }
+
+    @RequestMapping(value = {"/requerimientosAdmin"}, method = RequestMethod.POST)
+    public String loadeliminarRequerimiento(@Valid Requerimiento requerimiento, BindingResult result, ModelMap model) {
+        Long c = requerimiento.getCodigo();
+        Requerimiento r = requerimientoService.findbyCodigo(c);
+        r.setKinder(null);
+        requerimientoService.UpdateRequerimiento(r);
+        requerimientoService.DeletebyCodigo(c);
+        model.addAttribute("msg", "Requerimiento eliminado correctamente");
+        return loadRequerimientosAdministracion(model);
+
+    }
+
+    @RequestMapping(value = {"/AgregarRequerimiento"}, method = RequestMethod.POST)
+    public String AgregarRequerimiento(@Valid Requerimiento requerimiento, BindingResult result, ModelMap model) {
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+
+        if (result.hasErrors()) {
+            model.addAttribute("msg", "Requerimiento no agregado correctamente");
+            return loadRequerimientosAdministracion(model);
+        }
+        requerimiento.setKinder(kinder);
+        requerimientoService.save(requerimiento);
+        kinder.getRequerimiento().add(requerimiento);
+        model.addAttribute("msg", "Requerimiento agregado correctamente");
+        return loadRequerimientosAdministracion(model);
+
+    }
+
+//---------------------------------------------------------------------------------------------------------------
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
         List<Clase> lista = claseService.findAll();

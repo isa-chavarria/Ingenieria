@@ -247,7 +247,7 @@
                                 </li>
                                  <li class="divider"></li>
                                 <li>
-                                    <a href="requerimientosAdmin"><i class="fa fa-book"></i>Requerimientos de matrícula</a>
+                                    <a href="requerimientosAdmin"><i class="fa fa-book"></i> Requerimientos de matrícula</a>
                                 </li>
                                 
                             </ul>

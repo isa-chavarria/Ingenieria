@@ -52,7 +52,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderbd`.`imagen` ;
 
 CREATE TABLE IF NOT EXISTS `kinderbd`.`imagen` (
-  `imagen` NVARCHAR(21600),
+  `imagen` LONGTEXT,
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `album` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`InformacionKinder` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `fecha` VARCHAR(50)NULL DEFAULT NULL,
   `monto` VARCHAR(50)NULL DEFAULT NULL,
+  `montoMatricula` VARCHAR(50)NULL DEFAULT NULL,
   `kinder` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_fecha`
