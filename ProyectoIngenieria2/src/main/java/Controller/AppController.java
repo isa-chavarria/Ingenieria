@@ -41,6 +41,7 @@ import modelo.NivelModificar;
 import modelo.Noticia;
 import modelo.Pago;
 import modelo.Profesor;
+import modelo.Requerimiento;
 import modelo.SuperMatricula;
 import modelo.Usuario;
 import modelo.UsuarioM;
@@ -70,6 +71,7 @@ import service.MesService;
 import service.NinoService;
 import service.NoticiaService;
 import service.ProfesorService;
+import service.RequerimientoService;
 import service.UsuarioService;
 import service.kinderService;
 
@@ -93,6 +95,9 @@ public class AppController {
 
     @Autowired
     ContactoService contactoService;
+
+    @Autowired
+    RequerimientoService requerimientoService;
 
     @Autowired
     NinoService ninoService;
@@ -168,8 +173,11 @@ public class AppController {
         //Cerrar sesion
         sesion.invalidate();
         Album al = albumService.findbyId("Inicio");
-        Imagen first = al.getImagenes().iterator().next();
-        model.addAttribute("primera", first);
+        if (al.getImagenes().size() > 0) {
+            Imagen first = al.getImagenes().iterator().next();
+            model.addAttribute("primera", first);
+        }
+
         model.addAttribute("imagenes", al.getImagenes());
 
         //  sesion.removeAttribute("user");
@@ -387,7 +395,16 @@ public class AppController {
         Usuario u = new Usuario();
         model.addAttribute("user", u);
         model.addAttribute("fallo", true);
+        Album al = albumService.findbyId("Inicio");
+        if (al.getImagenes().size() > 0) {
+            Imagen first = al.getImagenes().iterator().next();
+            model.addAttribute("primera", first);
+        }
+
+        model.addAttribute("imagenes", al.getImagenes());
+
         return "index";
+
     }
 
     @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
@@ -395,8 +412,11 @@ public class AppController {
         Album al = albumService.findbyId("Sistema");
 
         Set<Imagen> imagenes = al.getImagenes();
-        Imagen first = al.getImagenes().iterator().next();
-        model.addAttribute("primera", first);
+        if (al.getImagenes().size() > 0) {
+            Imagen first = al.getImagenes().iterator().next();
+
+            model.addAttribute("primera", first);
+        }
         model.addAttribute("imagenes", imagenes);
         return "Encargado";
     }
@@ -406,8 +426,10 @@ public class AppController {
         Album al = albumService.findbyId("Sistema");
 
         Set<Imagen> imagenes = al.getImagenes();
-        Imagen first = al.getImagenes().iterator().next();
-        model.addAttribute("primera", first);
+        if (al.getImagenes().size() > 0) {
+            Imagen first = al.getImagenes().iterator().next();
+            model.addAttribute("primera", first);
+        }
         model.addAttribute("imagenes", imagenes);
         return "Administracion";
     }
@@ -979,7 +1001,19 @@ public class AppController {
     ///-----------------------------------------------------------------------------------------
     @RequestMapping(value = {"/requerimientos"}, method = RequestMethod.GET)
     public String loadRequerimientos(ModelMap model) {
+
+        List<Requerimiento> reqs = this.requerimientoService.findAll();
+        model.addAttribute("requerimientos", reqs);
         return "requerimientos";
+    }
+
+    //-------------------------------------------------------------------------------------------------
+    @RequestMapping(value = {"/requerimientosAdmin"}, method = RequestMethod.GET)
+    public String loadRequerimientosAdministracion(ModelMap model) {
+
+        List<Requerimiento> reqs = this.requerimientoService.findAll();
+        model.addAttribute("requerimientos", reqs);
+        return "requerimientosAdministracion";
     }
 
     @RequestMapping(value = {"/Visualizar-Pagos"}, method = RequestMethod.GET)
@@ -1818,13 +1852,13 @@ public class AppController {
         s.append("<tbody class=\"cuerpoTabla\">");
 
         for (Encargado n : admins) {
-            
+
             if (n.getId().equals(usu.getId())) {
                 s.append("<tr class=\"success\">");
             } else {
-               s.append("<tr class=\"active\">");
+                s.append("<tr class=\"active\">");
             }
-            
+
             s.append("<td>" + n.getId() + "</td>");
             s.append("<td>" + n.getNombre() + " " + n.getApellido1() + " " + n.getApellido2() + "</td>");
             s.append("<td>" + n.getEmail() + "</td>");

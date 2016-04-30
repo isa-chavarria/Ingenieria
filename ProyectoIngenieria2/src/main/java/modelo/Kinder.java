@@ -53,6 +53,21 @@ public class Kinder implements Serializable {
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
     Set<Album> albums;
+    
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "kinder")
+    Set<Requerimiento> requerimiento;
+
+    public Set<Requerimiento> getRequerimiento() {
+        return requerimiento;
+    }
+
+    public void setRequerimiento(Set<Requerimiento> requerimiento) {
+        this.requerimiento = requerimiento;
+    }
+    
+    
+    
 
     public Set<Album> getAlbums() {
         return albums;

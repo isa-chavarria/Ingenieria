@@ -1,5 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
     <head>
 
@@ -9,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +43,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -52,7 +53,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">Requerimientos de matrÃ­cula</h3>
+            <h3 id="Titulo">Requerimientos de matrícula</h3>
 
 
         </div>
@@ -78,7 +79,7 @@
                             <a href="index"><i class="fa fa-home"></i> Inicio</a>
                         </li>
                         <li>
-                            <a href="quienes"><i class="fa fa-university"></i> Â¿QuiÃ©nes Somos?</a>
+                            <a href="quienes"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>
                         </li>
                         <li>
                             <a href="contacto"><i class="fa fa-phone"></i> Contactenos</a>
@@ -104,13 +105,9 @@
 
                     </div>
                     <div style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif; margin-left: 30%; text-align: left;' >
-
-                        <p><i class="fa fa-check" aria-hidden="true"></i> Monto de la matrÃ­cula.</p>
-                        <p><i class="fa fa-check" aria-hidden="true"></i> 3 fotos tamaÃ±o pasaporte.</p>
-                        <p><i class="fa fa-check" aria-hidden="true"></i> constancia de nacimiento.</p>
-                        <p><i class="fa fa-check" aria-hidden="true"></i> Copia del control de vacunas.</p>
-                        <p><i class="fa fa-check" aria-hidden="true"></i> CÃ©dulas de los padres</p>
-
+                        <c:forEach items="${requerimientos}" var="req">
+                            <p><i class="fa fa-check" aria-hidden="true"></i> ${req.descripcion}</p>                           
+                        </c:forEach>
                     </div>
 
                 </div>
@@ -122,7 +119,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>

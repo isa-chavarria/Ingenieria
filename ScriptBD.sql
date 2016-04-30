@@ -52,7 +52,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `kinderbd`.`imagen` ;
 
 CREATE TABLE IF NOT EXISTS `kinderbd`.`imagen` (
-  `imagen` VARCHAR(21600),
+  `imagen` NVARCHAR(21600),
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `album` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
@@ -434,6 +434,22 @@ PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS `kinderBD`.`requerimiento` ;
+CREATE TABLE IF NOT EXISTS `kinderBD`.`requerimiento` (
+  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(5000) NULL DEFAULT NULL,
+  `kinder` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `idx_descripcion` (`kinder` ASC),
+  CONSTRAINT `fk_descripcion`
+    FOREIGN KEY (`kinder`)
+    REFERENCES `kinderBD`.`kinder` (`nombre`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -442,6 +458,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 /*
+DROP TABLE IF EXISTS `kinderBD`.`requerimiento` ;
 DROP TABLE IF EXISTS `kinderBD`.`noticia` ;
 DROP TABLE IF EXISTS `kinderBD`.`contacto` ;
 DROP TABLE IF EXISTS `kinderBD`.`fechaPago` ;
@@ -466,4 +483,5 @@ DROP TABLE IF EXISTS `kinderBD`.`profesor` ;
 DROP TABLE IF EXISTS `kinderBD`.`usuario` ;
 DROP TABLE IF EXISTS `kinderBD`.`meses` ;
 */
+
 
