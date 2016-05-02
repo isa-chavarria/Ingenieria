@@ -32,11 +32,13 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <script src="resources/js/validarForm.js"></script>
 
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
         <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -197,6 +199,8 @@
                                         <li class="active"><a style="font-size: small;" href="verFamiliares-${enc.id}">Información familiares</a></li>
                                     </ul>
                                 </div>
+
+
                             </div>
 
                         </div>
@@ -206,97 +210,62 @@
                     <div class="col-lg-9 text-center">
                         <div class="panel panel-default">
                             <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <div class="media">
-                                    <div class="col-xs-2 col-md-2">
-                                        <a href="#" class="thumbnail">
-                                            <img src="${enc.ruta_imagen}" alt="...">
-                                        </a>
-                                    </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">${enc.nombre} ${enc.apellido1} ${enc.apellido2}</h4>
                                 </div>
-
-
-                                <table class="tableInvisivle">
-                                    <tr>
-                                        <td><strong>Nombre completo:</strong></td>
-                                        <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Cédula:</strong></td>
-                                        <td>${enc.id}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Fecha de nacimiento:</strong></td>
-                                        <td>${enc.fechaNacimiento}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>sexo:</strong></td>
-                                        <td>${enc.sexo}</td>
-                                        <td></td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td><strong>teléfono del domicilio:</strong></td>
-                                        <td>${enc.telefono}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Dirección del domicilio:</strong></td>
-                                        <td>${enc.direccion}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p style='color:green'>${msg}</p></td>
-                                        <td></td>   
-                                        <td><a href="<c:url value='editarInformacionNino-${enc.id}' />" class="btn btn-success custom-width">Editar información</a></td>
-                                    </tr>
-                                </table>
-
-                            </div>
-
-                        </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <table class="tableInvisivle">
-                                    <tr>
-                                        <td><strong>Nivel:</strong></td>
-                                        <td>${nivel}</td>
-                                        <td><button type="button" id="${enc.id}" class="btn btn-success custom-width"  data-toggle="modal" data-target="#myModal">Cambiar nivel</button></td>
-                                    </tr>
-
-                                </table>
                             </div>
                         </div>
 
                         <div class="panel panel-default">
-
                             <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <h4>Padecimientos del niño</h4>
-                                <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${enfermedad.descripcion}</textarea>
+                                <form:form method="POST" action="agregarFamiliaresAdministracion"  modelAttribute="familiar" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                                    <form:input type="hidden" path="nino" id="nino"/>
 
+
+                                    <h4 style="color:red">Agregar nuevo familiar</h4>
+                                    <table class="tableInvisivle">
+
+                                        <tr>
+                                            <td><strong>Nombre:</strong></td>
+                                            <td><form:input path="nombre" type="text" class="form-control col-lg-3" id="nombre"
+                                                        placeholder="Nombre" onkeydown="return validarLetras(event)"/></td>
+                                            <td><strong>Edad:</strong></td>
+                                            <td><form:input path="edad" type="number" class="form-control col-lg-3" id="edad"
+                                                        placeholder="edad" /></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Ocupación:</strong></td>
+                                            <td><form:input path="ocupacion" type="text" class="form-control col-lg-3" id="ocupacion"
+                                                        placeholder="ocupacion" /></td>
+                                            <td><strong>Telefono personal:</strong> </td>
+                                            <td><form:input path="numeroPersonal" type="text" class="form-control col-lg-3"  name="telefono" id="telefono"/></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Lugar de trabajo:</strong></td>
+                                            <td><form:input path="lugarTrabajo" type="text" class="form-control col-lg-3" id="lugarTrabajo"/></td>
+                                            <td><strong>Numero de trabajo:</strong></td>
+                                            <td><form:input path="numeroTrabajo" type="text" class="form-control col-lg-3" name="telefonoTrabajoPadre" id="telefonoTrabajoPadre"/></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Relación:</strong></td>
+                                            <td><form:input path="parentesco" type="text" class="form-control col-lg-3" id="parentesco"/></td>
+                                            <td><strong>Cédula:</strong></td>
+                                            <td><form:input path="id" id="cedula" type="text" class="form-control col-lg-3" placeholder="#-####-####"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong></strong></td>
+                                            <td></td>
+                                            <td><button type="submit" class="btn btn-success">Guardar</button></td>
+                                            <td></td>
+                                        </tr>
+
+                                    </table>
+                                </form:form>
                             </div>
-
-
-
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <h4>Medicamentos que utiliza</h4>
-
-                                <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${medicamento.descripcion}</textarea>
-
-
-                            </div>
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <a href="<c:url value='editarEnfermedadesAdministracion-${enc.id}' />" class="btn btn-success custom-width">Editar información</a>
-                            </div>
-                            <h6 style='color:green'>${msg}</h6>
-
                         </div>
-
-
 
 
                     </div>
@@ -305,36 +274,7 @@
 
             </div>
 
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Seleccione el nivel</h4>
-                        </div>
-
-
-
-                        <form:form method="POST" action="CambiarNivel"  modelAttribute="objeto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-                            <form:input type="hidden" path="id"  id="valor"/>
-                            <form:select path="nivel" items="${niveles}" style="width: 50%; margin-left: 10%;" class="form-control input-sm" id="nivel" required="true" />
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" >Guardar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            </div>
-
-                        </form:form>
-
-
-                    </div>
-
-                </div>
-            </div>
-                            
-                            
         </div>
 
         <footer>

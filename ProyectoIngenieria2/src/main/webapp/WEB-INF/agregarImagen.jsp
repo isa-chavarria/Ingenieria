@@ -116,7 +116,7 @@
                   
                     <form method="POST" action="agregarImagenForm" enctype="multipart/form-data" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                         <div  class="form-group">
-                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Imagen</label>
+                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Imágen</label>
                             <div class="col-lg-10">
                                 <input type="file" name="file" class="form-control">
                                 <input type="hidden" name="album" value="${imagen.album.nombre}">

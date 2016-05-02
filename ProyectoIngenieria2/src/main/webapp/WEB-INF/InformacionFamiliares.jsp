@@ -291,7 +291,8 @@
                                         <td></td>
                                         <td><a href="<c:url value='/editarFamiliares-${familiar.codigo}' />" class="btn btn-success custom-width">Editar información</a></td>
                                         <td><button type="button" id="${familiar.codigo}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
-                                        <td></td>                                    </tr>
+                                        <td></td>                                    
+                                    </tr>
 
                                 </table>
                             </div>

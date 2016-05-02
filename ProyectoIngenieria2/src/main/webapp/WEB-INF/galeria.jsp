@@ -208,7 +208,7 @@
 
                         <div style=" overflow: scroll ; height: 400px " class="box">
                             <c:forEach items="${al.imagenes}" var="imag">
-                                <div class="col-lg-2 col-md-2 col-xs-2 thumb">
+                                <div class="col-lg-2 col-md-2 col-xs-2">
                                     <form:form method="POST"  modelAttribute="imagen" action="eliminarImagen">
                                         <form:hidden id="cod" path="codigo" value="${imag.codigo}"/>
                                         <button type="submit" class="btn btn-default" aria-label="Left Align">

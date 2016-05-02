@@ -30,6 +30,7 @@ import modelo.Enfermedad;
 import modelo.Especialidad;
 import modelo.Factura;
 import modelo.Familiar;
+import modelo.FamiliarGrande;
 import modelo.Imagen;
 import modelo.Informacion;
 import modelo.InformacionNino;
@@ -333,14 +334,14 @@ public class AppController {
         encargadoService.UpdateEncargado(encargado);
         matricula.setNino(n);
         this.matriculaService.save(matricula);
-        if (!enfermedad.equals("")) {
-            enferme.setNino(n);
-            this.enfermedadService.save(enferme);
-        }
-        if (!medicamento.equals("")) {
-            medicame.setNino(n);
-            this.informacionService.save(medicame);
-        }
+        // if (!enfermedad.equals("")) {
+        enferme.setNino(n);
+        this.enfermedadService.save(enferme);
+        // }
+        //if (!medicamento.equals("")) {
+        medicame.setNino(n);
+        this.informacionService.save(medicame);
+        // }
 
         if (!padre.getId().equals("")) {
             padre.setNino(n);
@@ -1127,7 +1128,6 @@ public class AppController {
         model.addAttribute("nivel", nivel);
         int size1 = n.getEnfermedad().size();
         int size2 = n.getInformacion().size();
-
         if (size1 > 0) {
             enfermedad = n.getEnfermedad().iterator().next();
         }
@@ -1161,8 +1161,10 @@ public class AppController {
     public String loadFamiliaresAdministracion(@PathVariable String id, ModelMap model) {
         Encargado enc = encargadoService.findbyId(id);
         Nino n = ninoService.findbyId(id);
+        Familiar f = new Familiar();
         Set<Familiar> familiares = n.getFamiliares();
         model.addAttribute("familiares", familiares);
+        model.addAttribute("familiar", f);
         model.addAttribute("enc", enc);
 
         return "InformacionFamiliarAdministracion";
@@ -1714,7 +1716,187 @@ public class AppController {
 
     }
 
-//---------------------------------------------------------------------------------------------------------------
+//-----------------------------------EDITAR NINOS DESDE ADMINISTRACION----------------------------------------------------------------------------
+    @RequestMapping(value = {"/editarInformacionNino-{id}"}, method = RequestMethod.GET)
+    public String loadEditarNinoAdministracion(@PathVariable String id, ModelMap model) {
+        Encargado enc = encargadoService.findbyId(id);
+        model.addAttribute("enc", enc);
+        return "EditarNinoAdministacion";
+
+    }
+
+    @RequestMapping(value = {"/modificarNinoAdministracion"}, method = RequestMethod.POST)
+    public String modificarNinoAdministracion(@Valid Encargado enc, BindingResult result, ModelMap model) {
+        String msg = "";
+
+        String id = enc.getId();
+
+        Usuario u = this.usuarioService.findbyId(id);
+
+        enc.getUsuario().add(u);
+
+        Nino aux = ninoService.findbyId(id);
+
+        enc.getNino().add(aux);
+
+        if (result.hasErrors()) {
+            msg = "La Información no pudo modificarse";
+        } else {
+            msg = "Información modificada correctamente";
+            encargadoService.UpdateEncargado(enc);
+        }
+
+        model.addAttribute("msg", msg);
+        return loadVerNinoAdinistrador(id, model);
+
+    }
+
+    @RequestMapping(value = {"/editarEnfermedadesAdministracion-{id}"}, method = RequestMethod.GET)
+    public String EditarEnfermedadesAdministracion(@PathVariable String id, ModelMap model) {
+
+        Encargado enc = encargadoService.findbyId(id);
+        Enfermedad enfer = new Enfermedad();
+        Informacion inf = new Informacion();
+        model.addAttribute("enc", enc);
+        InformacionNino informacion = new InformacionNino();
+        Nino n = enc.getNino().iterator().next();
+        int size1 = n.getEnfermedad().size();
+        int size2 = n.getInformacion().size();
+        if (size1 > 0) {
+            enfer = n.getEnfermedad().iterator().next();
+            informacion.setEnfermedades(enfer.getDescripcion());
+            informacion.setMed(enfer.getCodigo());
+            informacion.setExiste1("Si");
+        } else {
+            informacion.setExiste1("No");
+        }
+        if (size1 > 0) {
+            inf = n.getInformacion().iterator().next();
+            informacion.setMedicamentos(inf.getDescripcion());
+            informacion.setEnf(inf.getCodigo());
+            informacion.setExiste2("Si");
+        } else {
+            informacion.setExiste2("No");
+        }
+
+        informacion.setId(n.getId());
+
+        model.addAttribute("informacion", informacion);
+        return "EditarEnfermedadesAdministracion";
+    }
+
+    @RequestMapping(value = {"/editarEnfermedadesAdministracionGuardar"}, method = RequestMethod.POST)
+    public String EditarEnfermedadesAdministracionGuardar(@Valid InformacionNino info, ModelMap model, HttpServletRequest request) {
+        Informacion inf = new Informacion();
+        Enfermedad enfer = new Enfermedad();
+        Nino n = ninoService.findbyId(info.getId());
+
+        if (info.getExiste1().equals("Si")) {
+            enfer = enfermedadService.findbyCodigo(info.getEnf());
+            enfer.setDescripcion(info.getEnfermedades());
+            enfermedadService.UpdateEnfermedad(enfer);
+
+        } else {
+            enfer.setCodigo(info.getEnf());
+            enfer.setDescripcion(info.getEnfermedades());
+            enfer.setNino(n);
+            enfermedadService.save(enfer);
+        }
+
+        //-------------------------------------------------------------------------------------------
+        if (info.getExiste2().equals("Si")) {
+            inf = informacionService.findbyCodigo(info.getEnf());
+            inf.setDescripcion(info.getMedicamentos());
+            informacionService.UpdateInformacion(inf);
+        } else {
+            inf.setCodigo(info.getMed());
+            inf.setDescripcion(info.getMedicamentos());
+            inf.setNino(n);
+            informacionService.save(inf);
+        }
+        model.addAttribute("msg", "Información modificada correctamente");
+        return loadVerNinoAdinistrador(n.getId(), model);
+    }
+
+    @RequestMapping(value = {"/editarFamiliaresadministracion-{codigo}"}, method = RequestMethod.GET)
+    public String loadEditarFamiliaresAdministracion(@PathVariable Long codigo, ModelMap model, HttpServletRequest request) {
+        Long c = codigo;
+        Familiar fam = this.familiarService.findbyCodigo(codigo);
+        Encargado enc = encargadoService.findbyId(fam.getNino().getId());
+        model.addAttribute("enc", enc);
+
+        model.addAttribute("familiar", fam);
+        return "EditarInformacionFamiliarAdministracion";
+    }
+
+    @RequestMapping(value = {"/EditarFamiliaresAdmin"}, method = RequestMethod.POST)
+    public String EditarFamiliaresAdministracion(@Valid Familiar familiar, ModelMap model, BindingResult result) {
+
+        if (result.hasErrors()) {
+
+        }
+
+        Familiar fam = this.familiarService.findbyCodigo(familiar.getCodigo());
+
+        Nino n = fam.getNino();
+        familiar.setNino(fam.getNino());
+        familiarService.UpdateFamiliar(familiar);
+
+        return loadFamiliaresAdministracion(n.getId(), model);
+
+    }
+
+    @RequestMapping(value = {"/EliminarFamiliaresAdministracion"}, method = RequestMethod.POST)
+    public String EliminarFamiliarAdministracion(@Valid Familiar familiar, ModelMap model, BindingResult result) {
+
+        Long c = familiar.getCodigo();
+
+        if (result.hasErrors()) {
+
+        }
+
+        Familiar aux = familiarService.findbyCodigo(c);
+
+        String id = aux.getNino().getId();
+
+        aux.setNino(null);
+        familiarService.UpdateFamiliar(aux);
+        familiarService.DeletebyCodigo(aux.getCodigo());
+        return loadFamiliaresAdministracion(id, model);
+    }
+
+    @RequestMapping(value = {"/agregarFamiliaresAdministracion-{id}"}, method = RequestMethod.GET)
+    public String loadAgregarFamiliaresAdministracion(@PathVariable String id, ModelMap model) {
+
+        Encargado enc = encargadoService.findbyId(id);
+        model.addAttribute("enc", enc);
+        FamiliarGrande f = new FamiliarGrande();
+        f.setNino(enc.getId());
+        model.addAttribute("familiar", f);
+        return "AgregarFamiliarAdministracion";
+    }
+
+    @RequestMapping(value = {"/agregarFamiliaresAdministracion"}, method = RequestMethod.POST)
+    public String AgregarFamiliaresAdministracion(@Valid FamiliarGrande familiar, ModelMap model, BindingResult result) {
+        Nino n = ninoService.findbyId(familiar.getNino());
+        Familiar f = new Familiar();
+
+        f.setNombre(familiar.getNombre());
+        f.setEdad(familiar.getEdad());
+        f.setId(familiar.getId());
+        f.setLugarTrabajo(familiar.getLugarTrabajo());
+        f.setNumeroPersonal(familiar.getNumeroPersonal());
+        f.setNumeroTrabajo(familiar.getNumeroTrabajo());
+        f.setOcupacion(familiar.getOcupacion());
+        f.setParentesco(familiar.getParentesco());
+        f.setNino(n);
+
+        familiarService.save(f);
+
+        return loadFamiliaresAdministracion(n.getId(), model);
+    }
+    //------------------------------------------------------------------------------------------------------------------------------------------
+
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
         List<Clase> lista = claseService.findAll();

@@ -32,7 +32,9 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+        <script src="resources/js/jquery.js"></script>
         <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
 
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
@@ -206,159 +208,121 @@
                     <div class="col-lg-9 text-center">
                         <div class="panel panel-default">
                             <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <div class="media">
-                                    <div class="col-xs-2 col-md-2">
-                                        <a href="#" class="thumbnail">
-                                            <img src="${enc.ruta_imagen}" alt="...">
-                                        </a>
-                                    </div>
-                                </div>
+                                <form:form method="POST" action="modificarNinoAdministracion"  modelAttribute="enc" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                                    <form:input type="hidden" path="id" id="id"/>
+                                    <form:input type="hidden" path="email" id="email"/>
+                                    <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
+                                    <table class="tableInvisivle">
+
+                                        <tr>
+                                            <td><strong>Nombre:</strong></td>
+                                            <td><form:input path="nombre" type="text" class="form-control col-lg-6" id="nombre"
+                                                        placeholder="Nombre del niño" onkeydown="return validarLetras(event)"/></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>Cédula:</strong></td>
+                                            <td><form:input type="text" path="id" id="id" itemValue="id" class="form-control input-sm" disabled="true"/></td>
+                                            <td></td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>Primer apellido:</strong></td>
+                                            <td><form:input path="apellido1" type="text" class="form-control col-lg-6" id="nombre"
+                                                        placeholder="Primer apellido" onkeydown="return validarLetras(event)"/></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Segundo Apellido:</strong></td>
+                                            <td><form:input path="apellido2" type="text" class="form-control col-lg-6" id="nombre"
+                                                        placeholder="Segundo apellido" onkeydown="return validarLetras(event)"/></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>Fecha de nacimiento:</strong></td>
+                                            <td><form:input path="fechaNacimiento" itemValue="fechaNacimiento" type="Date" class="form-control" id="fechaN" /></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sexo</strong></td>
+                                            <td><form:select path="sexo" items="${genero}"   class="form-control input-sm" id="sexo"  /></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
 
 
-                                <table class="tableInvisivle">
-                                    <tr>
-                                        <td><strong>Nombre completo:</strong></td>
-                                        <td>${enc.nombre} ${enc.apellido1} ${enc.apellido2}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Cédula:</strong></td>
-                                        <td>${enc.id}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Fecha de nacimiento:</strong></td>
-                                        <td>${enc.fechaNacimiento}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>sexo:</strong></td>
-                                        <td>${enc.sexo}</td>
-                                        <td></td>
-                                    </tr>
+
+                                        <tr>
+                                            <td><strong>teléfono del domicilio:</strong></td>
+                                            <td><form:input path="telefono"  type="text" itemValue="telefono" class="form-control" placeholder="####-####" name="telefono" id="telefono"/></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Dirección del domicilio:</strong></td>
+                                            <td><form:input path="direccion" type="text" class="form-control" id="direccion"
+                                                        placeholder="Dirección del hogar"/></td>
+                                            <td> <p style="color: red;" id="error"></p></td>
+                                        </tr>
 
 
-                                    <tr>
-                                        <td><strong>teléfono del domicilio:</strong></td>
-                                        <td>${enc.telefono}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Dirección del domicilio:</strong></td>
-                                        <td>${enc.direccion}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p style='color:green'>${msg}</p></td>
-                                        <td></td>   
-                                        <td><a href="<c:url value='editarInformacionNino-${enc.id}' />" class="btn btn-success custom-width">Editar información</a></td>
-                                    </tr>
-                                </table>
 
+                                        <tr>
+                                            <td></td>
+                                            <td><button type="submit" class="btn btn-success">Guardar</button></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+
+
+
+
+                                </form:form>
                             </div>
+
+
+
+
+
+
 
                         </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <table class="tableInvisivle">
-                                    <tr>
-                                        <td><strong>Nivel:</strong></td>
-                                        <td>${nivel}</td>
-                                        <td><button type="button" id="${enc.id}" class="btn btn-success custom-width"  data-toggle="modal" data-target="#myModal">Cambiar nivel</button></td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
-
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <h4>Padecimientos del niño</h4>
-                                <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${enfermedad.descripcion}</textarea>
-
-                            </div>
-
-
-
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <h4>Medicamentos que utiliza</h4>
-
-                                <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${medicamento.descripcion}</textarea>
-
-
-                            </div>
-                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                                <a href="<c:url value='editarEnfermedadesAdministracion-${enc.id}' />" class="btn btn-success custom-width">Editar información</a>
-                            </div>
-                            <h6 style='color:green'>${msg}</h6>
-
-                        </div>
-
-
-
 
                     </div>
 
                 </div>
 
+
+
+
+
+
+
             </div>
 
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Seleccione el nivel</h4>
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <p>Administración del Kinder. Copyright 2016</p>
                         </div>
-
-
-
-                        <form:form method="POST" action="CambiarNivel"  modelAttribute="objeto" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
-                            <form:input type="hidden" path="id"  id="valor"/>
-                            <form:select path="nivel" items="${niveles}" style="width: 50%; margin-left: 10%;" class="form-control input-sm" id="nivel" required="true" />
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" >Guardar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            </div>
-
-                        </form:form>
-
-
-                    </div>
-
-                </div>
-            </div>
-                            
-                            
-        </div>
-
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
-        <!-- jQuery -->
-        <script src="resources/js/jquery.js"></script>
+            <!-- jQuery -->
+            <script src="resources/js/jquery.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="resources/js/bootstrap.min.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="resources/js/bootstrap.min.js"></script>
 
-        <!-- Script to Activate the Carousel -->
-        <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
-        </script>
+            <!-- Script to Activate the Carousel -->
+            <script>
+                $('.carousel').carousel({
+                    interval: 5000 //changes the speed
+                })
+            </script>
 
     </body>
 

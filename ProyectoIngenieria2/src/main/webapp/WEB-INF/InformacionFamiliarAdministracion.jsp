@@ -48,6 +48,17 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
+         <script>
+
+            function eliminar(id) {
+
+                var element = document.getElementById("valor");
+
+                element.value = id;
+            }
+
+        </script>
 
     </head>
     <body>
@@ -170,7 +181,7 @@
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="administracion">Regresar al menú</a>
+                            <a href="Estudiantes">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -255,15 +266,58 @@
                                             <td>${familiar.id}</td>
 
                                         </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="<c:url value='/editarFamiliaresadministracion-${familiar.codigo}' />" class="btn btn-success custom-width">Editar información</a></td>
+                                            <td><button type="button" id="${familiar.codigo}" class="btn btn-danger custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
+                                            <td></td>                                    
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
                         </c:forEach>
 
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-8">
+                                        <a href="<c:url value='/agregarFamiliaresAdministracion-${enc.id}' />" class="btn btn-info custom-width">Agregar nuevo familiar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
 
+            </div>
+
+
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">¿Seguro que desea eliminarlo?</h4>
+                        </div>
+
+                        <form:form method="POST" action="EliminarFamiliaresAdministracion"  modelAttribute="familiar" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                            <form:input type="hidden" path="codigo"  id="valor"/>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger" >Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </form:form>
+
+
+                    </div>
+
+                </div>
             </div>
 
 
@@ -287,9 +341,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                                                $('.carousel').carousel({
+                                                    interval: 5000 //changes the speed
+                                                })
         </script>
 
     </body>

@@ -250,7 +250,7 @@
                                 <form:input type="hidden" path="codigo" id="codigo"/>
                                 
 
-                                <h4 style="color:red; ">${familiar.parentesco}</h4>
+                                <h4 style="color:red">Agregar nuevo familiar</h4>
                                 <table class="tableInvisivle">
 
                                     <tr>
