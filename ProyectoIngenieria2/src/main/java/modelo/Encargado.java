@@ -62,7 +62,7 @@ public class Encargado implements Serializable {
     @Size(max = 50)
     @Column(name = "fecha_nacimiento")
     private String fechaNacimiento;
-    @Size(max = 1000)
+
     @Column(name = "ruta_imagen")
     private String ruta_imagen;
 
@@ -93,8 +93,6 @@ public class Encargado implements Serializable {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
-    
 
     public Set<Nino> getNino() {
         return nino;
@@ -116,6 +114,13 @@ public class Encargado implements Serializable {
         return ruta_imagen;
     }
 
+    public String getRuta_imagen2() {
+       if (ruta_imagen.length() > 30) {
+            return "data:image/gif;base64,"+ruta_imagen;
+
+        }
+        return ruta_imagen;
+    }
     public void setRuta_imagen(String ruta_imagen) {
         this.ruta_imagen = ruta_imagen;
     }

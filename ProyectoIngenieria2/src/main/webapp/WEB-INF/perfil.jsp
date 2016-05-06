@@ -1,11 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modelo.Usuario"%>
-<%@page import="modelo.Encargado"%>
 <!DOCTYPE html>
 <%
 
     Usuario user = (Usuario) session.getAttribute("user");
-
 
     if (user != null && user.isEncargado()) {
 
@@ -22,7 +22,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder LulÃº</title>
+        <title>Kinder Lulú</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder LulÃº</div>
+                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -64,7 +64,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">InformaciÃ³n personal</h3>
+            <h3 id="Titulo">Información personal</h3>
 
         </div>
 
@@ -84,7 +84,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
+
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -157,10 +157,10 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="encargado">Regresar al menÃº</a>
+                            <a href="encargado">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -180,7 +180,7 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src=" ${enc.ruta_imagen} " width="40%" height="150px" alt="">
+                       <img class="img-circle" src="${enc.getRuta_imagen2()}" style="height:150px; width:50%; " alt="">
                     </div>
 
                     <div class="rightImage"  >
@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="navbar-collapse collapse sidebar-navbar-collapse" >
                                         <ul class="nav navbar-nav">
-                                            <li class="active"><a style="font-size: small;" href="#">InformaciÃ³n</a></li>
+                                            <li class="active"><a style="font-size: small;" href="#">Información</a></li>
 
                                             <li><a style="font-size: small;" href="perfilCuentaUsuario">cuenta</a></li>
 
@@ -249,7 +249,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td><strong>CÃ©dula:</strong></td>
+                                    <td><strong>Cédula:</strong></td>
                                     <td>${enc.id}</td>
                                 </tr>
                                 <tr>
@@ -266,16 +266,16 @@
                                 </tr>
 
                                 <tr>
-                                    <td><strong>telÃ©fono del domicilio:</strong></td>
+                                    <td><strong>teléfono del domicilio:</strong></td>
                                     <td>${enc.telefono}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>DirecciÃ³n del domicilio:</strong></td>
+                                    <td><strong>Dirección del domicilio:</strong></td>
                                     <td>${enc.direccion}</td>
                                 </tr>
                                 <tr>
                                     <td style="color: #33cc00">${msg}</td>
-                                    <td><a href='editarInformacionUsuario' class="btn btn-success custom-width">Editar informaciÃ³n</a></td>
+                                    <td><a href='editarInformacionUsuario' class="btn btn-success custom-width">Editar información</a></td>
 
                                 </tr>
 
@@ -304,7 +304,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
+                        <p>Administración del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>

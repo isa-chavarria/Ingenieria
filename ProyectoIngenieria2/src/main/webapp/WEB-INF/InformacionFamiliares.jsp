@@ -190,9 +190,9 @@
             <div class="row">
                 <div class="box">
                     <div class="leftImage">
-
-
-                        <img class="img-circle" src=" ${enc.ruta_imagen} " width="50%" height="150px" alt="">
+                        
+                      <img class="img-circle" src=" ${enc.getRuta_imagen2()} " width="50%" height="150px" alt="">
+                            
                     </div>
 
                     <div class="rightImage"  >

@@ -9,11 +9,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -51,6 +54,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import service.AlbumService;
 import service.ContactoService;
 import service.ClaseService;
@@ -594,6 +599,8 @@ public class AppController {
 
         Set<Familiar> familiares = n.getFamiliares();
         model.addAttribute("enc", enc);
+        boolean b = enc.getRuta_imagen().length() > 30;
+        model.addAttribute("bandera", b);
         model.addAttribute("familiares", familiares);
         model.addAttribute("familiar", f);
         return "InformacionFamiliares";
@@ -716,7 +723,8 @@ public class AppController {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
         model.addAttribute("enc", enc);
-        String nivel = enc.getNino().iterator().next().getClase().getNivel();
+        Nino n = enc.getNino().iterator().next();
+        String nivel = n.getClase().getNivel();
         model.addAttribute("nivel", nivel);
         return "perfil";
     }
@@ -726,7 +734,6 @@ public class AppController {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
         model.addAttribute("enc", enc);
-
         return "PerfilAdministrador";
     }
 
@@ -741,6 +748,8 @@ public class AppController {
         u.setPassAnt(pass);
         Encargado enc = encargadoService.findbyId(usu.getId());
         model.addAttribute("enc", enc);
+        boolean b = enc.getRuta_imagen().length() > 30;
+        model.addAttribute("bandera", b);
         model.addAttribute("usuario", u);
         return "PerfilCuenta";
     }
@@ -805,7 +814,7 @@ public class AppController {
         model.addAttribute("msg", msg);
 
         //       model.addAttribute("msg", "Su información se modifico correctamente");
-        return "PerfilAdministrador";
+        return loadPerfilAdministrador(model,request);
     }
 
     @RequestMapping(value = {"/modificarPerfilUsuario"}, method = RequestMethod.POST)
@@ -873,7 +882,7 @@ public class AppController {
         model.addAttribute("msg", msg);
 
         //       model.addAttribute("msg", "Su información se modifico correctamente");
-        return "PerfilCuenta";
+        return loadperfilCuenta(model,request);
     }
 
     @RequestMapping(value = {"/modificarCuentaUsuario"}, method = RequestMethod.POST)
@@ -907,7 +916,7 @@ public class AppController {
         model.addAttribute("msg", msg);
 
         //       model.addAttribute("msg", "Su información se modifico correctamente");
-        return "PerfilCuentaUsuario";
+        return loadperfilCuentaUsuario(model,request);
     }
 
     @RequestMapping(value = {"/enfermedadesEstudiante"}, method = RequestMethod.GET)
@@ -1974,7 +1983,96 @@ public class AppController {
         return "PagoCorrectoMatricula";
     }
 
-    //-----------------------------------------------------------------------------------
+    //---------------------------Cambiar foto perfil--------------------------------------------------------
+    @RequestMapping(value = {"/modificarImagenperfil"}, method = RequestMethod.POST)
+    public String modificarPerfilAdministrador(@Valid Encargado enc, BindingResult result, ModelMap model,
+            @RequestParam MultipartFile file, HttpServletRequest request) {
+        String msg = "";
+
+        String id = enc.getId();
+
+        Usuario u = this.usuarioService.findbyId(id);
+
+        enc.getUsuario().add(u);
+        if (file.isEmpty()) {
+            Usuario usu = (Usuario) request.getSession().getAttribute("user");
+            Encargado en = encargadoService.findbyId(usu.getId());
+            msg = "La imagen no pudo modificarse";
+            model.addAttribute("enc", en);
+            model.addAttribute("msg", msg);
+            return loadPerfilAdministrador(model, request);
+        }
+
+        try {
+            String url = Base64.getEncoder().encodeToString(file.getBytes());
+            System.out.print(url);
+            enc.setRuta_imagen(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException ex) {
+            Logger.getLogger(AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (result.hasErrors()) {
+            msg = "La Información no pudo modificarse";
+        } else {
+            msg = "Información modificada correctamente";
+            encargadoService.UpdateEncargado(enc);
+        }
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado en = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", en);
+        model.addAttribute("msg", msg);
+
+        //       model.addAttribute("msg", "Su información se modifico correctamente");
+        return loadPerfilAdministrador(model, request);
+    }
+
+    @RequestMapping(value = {"/modificarImagenperfilEnc"}, method = RequestMethod.POST)
+    public String modificarPerfilEnc(@Valid Encargado enc, BindingResult result, ModelMap model,
+            @RequestParam MultipartFile file, HttpServletRequest request) {
+        String msg = "";
+
+        String id = enc.getId();
+
+        Usuario u = this.usuarioService.findbyId(id);
+
+        enc.getUsuario().add(u);
+
+        Nino n = ninoService.findbyId(id);
+
+        enc.getNino().add(n);
+        if (file.isEmpty()) {
+            Usuario usu = (Usuario) request.getSession().getAttribute("user");
+            Encargado en = encargadoService.findbyId(usu.getId());
+            msg = "La imagen no pudo modificarse";
+            model.addAttribute("enc", en);
+            model.addAttribute("msg", msg);
+            return loadPerfil(model, request);
+        }
+
+        try {
+            enc.setRuta_imagen(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException ex) {
+            Logger.getLogger(AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (result.hasErrors()) {
+            msg = "La Información no pudo modificarse";
+        } else {
+            msg = "Información modificada correctamente";
+            encargadoService.UpdateEncargado(enc);
+        }
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado en = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", en);
+        model.addAttribute("msg", msg);
+
+        //       model.addAttribute("msg", "Su información se modifico correctamente");
+        return loadPerfil(model, request);
+    }
+
+    //-----------------------------------
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
         List<Clase> lista = claseService.findAll();

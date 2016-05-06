@@ -219,7 +219,8 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="  ${enc.ruta_imagen} " width="50%" height="150px" alt="">
+                       <img class="img-circle" src="${enc.getRuta_imagen2()}" style="height:150px; width:50%; " alt="">
+                            
                     </div>
 
                     <div class="rightImage"  >

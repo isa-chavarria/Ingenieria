@@ -209,7 +209,7 @@
                                 <div class="media">
                                     <div class="col-xs-2 col-md-2">
                                         <a href="#" class="thumbnail">
-                                            <img src="${enc.ruta_imagen}" alt="...">
+                                            <img src="${enc.getRuta_imagen2()}" alt="...">
                                         </a>
                                     </div>
                                 </div>

@@ -62,12 +62,12 @@
 
                 var formulario = document.getElementById('2');
                 var formulario1 = document.getElementById('1');
-                var div =document.getElementById("notificacion");
+                var div = document.getElementById("notificacion");
 
                 if (formulario.className == "inv") {
                     formulario.className = 'vis';
                     formulario1.className = 'inv';
-                    div.innerHTML="";
+                    div.innerHTML = "";
                 } else {
                     formulario.className = 'inv';
                     formulario1.className = 'btn btn-success btn-block';
@@ -219,7 +219,9 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="${enc.ruta_imagen}" width="50%" height="150px" alt="">
+
+                      <img class="img-circle" src="${enc.getRuta_imagen2()}" style="height:150px; width:50%; " alt="">
+                        
                     </div>
 
                     <div class="rightImage"  >

@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`encargado` (
   `direccion` VARCHAR(1000) NULL DEFAULT NULL,
   `telefono` VARCHAR(50) NULL DEFAULT NULL,
   `fecha_nacimiento` VARCHAR(50) NULL DEFAULT NULL,
-  `ruta_imagen` VARCHAR(1000) NULL DEFAULT NULL,
+  `ruta_imagen` LONGTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
   )
 ENGINE = InnoDB

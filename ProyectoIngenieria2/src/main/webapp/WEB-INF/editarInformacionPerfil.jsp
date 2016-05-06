@@ -183,7 +183,7 @@
                     <div class="leftImage">
 
 
-                        <img class="img-circle" src="  ${enc.ruta_imagen} " width="50%" height="150px" alt="">
+                       <img class="img-circle" src="${enc.getRuta_imagen2()}" style="height:150px; width:50%; " alt="">
                     </div>
 
                     <div class="rightImage"  >
@@ -192,7 +192,7 @@
                         <h2 class="intro-text text-center" style=" color: #ffffff;" >${enc.nombre} ${enc.apellido1} ${enc.apellido2} </h2>
                         <hr>
 
-                       
+
 
 
 
@@ -244,12 +244,11 @@
                 <div class="col-lg-9 text-center">
                     <div class="panel panel-default">
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
-                            <form:form method="POST" action="modificarPerfilAdministrador"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
-                                <form:input type="hidden" path="id" id="id"/>
-                                <form:input type="hidden" path="email" id="email"/>
-                                <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
-                                <table class="tableInvisivle">
-
+                            <table class="tableInvisivle">
+                                <form:form method="POST" action="modificarPerfilAdministrador"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                                    <form:input type="hidden" path="id" id="id"/>
+                                    <form:input type="hidden" path="email" id="email"/>
+                                    <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
                                     <tr>
                                         <td><strong>Nombre:</strong></td>
                                         <td><form:input path="nombre" type="text" class="form-control col-lg-6" id="nombre"
@@ -307,12 +306,35 @@
                                         <td><button type="submit" class="btn btn-success">Guardar</button></td>
                                         <td></td>
                                     </tr>
-                                </table>
+                                </form:form>
 
 
 
+                                <form:form method="POST" action="modificarImagenperfil" enctype="multipart/form-data"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal"role="form">
+                                    <form:input type="hidden" path="id" id="id"/>
+                                    <form:input type="hidden" path="email" id="email"/>
+                                    <form:input type="hidden" path="ruta_imagen" id="ruta_imagen"/>
+                                    <form:input type="hidden" path="direccion" id="direccion"/>
 
-                            </form:form>
+                                    <form:input type="hidden" path="telefono" id="telefono"/>
+                                    <form:input type="hidden" path="fechaNacimiento" id="fechaNacimiento"/>
+                                    <form:input type="hidden" path="sexo" id="sexo"/>
+                                    <form:input type="hidden" path="apellido2" id="apellido2"/>
+                                    <form:input type="hidden" path="apellido1" id="apellido1"/>
+                                    <form:input type="hidden" path="nombre" id="nombre"/>
+
+                                    <tr>
+                                        <td><strong>Foto:</strong></td>
+                                        <td><input type="file" name="file" class="form-control"></td>
+                                        <td> <p style="color: red;" id="error"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button type="submit" class="btn btn-success">Cambiar Imagen</button></td>
+                                        <td></td>
+                                    </tr>
+                                </form:form>
+                            </table>
                         </div>
                     </div>
                 </div>
