@@ -14,31 +14,31 @@ import org.springframework.stereotype.Service;
 
 @Service("contactoService")
 @Transactional
-public class ContactoServiceImpl implements ContactoService{
+public class ContactoServiceImpl implements ContactoService {
     
     @Autowired
     private ContactoDao contacto;
-
+    
     @Override
     public Contacto findbyCodigo(Long codigo) {
         return contacto.findbyCodigo(codigo);
     }
-
+    
     @Override
     public void save(Contacto contacto) {
         this.contacto.save(contacto);
     }
-
+    
     @Override
     public void DeletebyCodigo(Long name) {
         this.contacto.DeletebyCodigo(name);
     }
-
+    
     @Override
     public List<Contacto> findAll() {
         return contacto.findAll();
     }
-
+    
     @Override
     public void UpdateContacto(Contacto contacto) {
         Contacto ki = this.contacto.findbyCodigo(contacto.getCodigo());
@@ -46,6 +46,7 @@ public class ContactoServiceImpl implements ContactoService{
             ki.setDescripcion(contacto.getDescripcion());
             ki.setTitulo(contacto.getTitulo());
             ki.setKinder(contacto.getKinder());
+            ki.setSitioWeb(contacto.getSitioWeb());
         }
     }
 }

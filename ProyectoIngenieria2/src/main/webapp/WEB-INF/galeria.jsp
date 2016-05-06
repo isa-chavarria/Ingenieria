@@ -8,7 +8,7 @@
 
     Usuario user = (Usuario) session.getAttribute("user");
 
-    if (user != null) {
+    if (user != null&&user.isAdministrador()) {
 
     } else {
         response.sendRedirect("index");
@@ -162,14 +162,7 @@
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<%
-                                if (user.isAdministrador()) {
-                                    out.print("administracion");
-                                } else {
-                                    out.print("encargado");
-                                }%>
-
-                               ">Regresar al menú</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

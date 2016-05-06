@@ -33,7 +33,7 @@
 	</div>
 	
 	<span class="well floatRight">
-		 <a href="<c:url value='/facturasAdministracion-${id}' />">Continuar</a>
+		 <a href="<c:url value='/morosos' />">Continuar</a>
 	</span>
 </div>
 </body>

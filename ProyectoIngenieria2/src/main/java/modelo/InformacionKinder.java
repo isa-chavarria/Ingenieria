@@ -32,30 +32,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "InformacionKinder")
 
-
 public class InformacionKinder implements Serializable {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name="codigo")
+    @Column(name = "codigo")
     private Long codigo;
-    
+
     @Size(max = 50)
     @Column(name = "fecha")
     private String fecha;
-    
+
     @Size(max = 50)
     @Column(name = "monto")
     private String monto;
-    
+
     @Size(max = 50)
     @Column(name = "montoMatricula")
     private String montoMatricula;
-    
+
     @ManyToOne
-    @JoinColumn(name="kinder")
+    @JoinColumn(name = "kinder")
     private Kinder kinder;
 
     public String getFecha() {
@@ -82,8 +80,6 @@ public class InformacionKinder implements Serializable {
         this.montoMatricula = montoMatricula;
     }
 
-    
-    
     public Kinder getKinder() {
         return kinder;
     }
@@ -91,13 +87,14 @@ public class InformacionKinder implements Serializable {
     public void setKinder(Kinder kinder) {
         this.kinder = kinder;
     }
-    
 
     public InformacionKinder() {
     }
 
-
-   
+    public boolean esFechaDePago(int dia) {
+        int d = Integer.parseInt(fecha);
+        return dia >= d;
+    }
 
     public Long getCodigo() {
         return codigo;
@@ -106,9 +103,6 @@ public class InformacionKinder implements Serializable {
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
-
-   
- 
 
     @Override
     public int hashCode() {

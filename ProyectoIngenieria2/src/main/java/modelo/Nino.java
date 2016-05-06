@@ -161,7 +161,7 @@ public class Nino implements Serializable {
         return encargado.iterator().next();
     }
 
-    public String TablaFacturas(List<Mes> meses) {
+    public String TablaFacturas(List<Mes> meses, String mo) {
 
         Calendar c = Calendar.getInstance();
 //        System.out.println("Current time => " + c.getTime());
@@ -191,7 +191,11 @@ public class Nino implements Serializable {
         for (Mes m : meses) {
 
             if (buscarFactura(m).getCodigo() != null) {
-                s.append("<tr class=\"success\">");
+                if (buscarFactura(m).calcularMontoMora(mo) > 0) {
+                    s.append("<tr class=\"warning\">");
+                } else {
+                    s.append("<tr class=\"success\">");
+                }
             } else {
                 s.append("<tr class=\"danger\">");
             }
@@ -199,7 +203,7 @@ public class Nino implements Serializable {
             s.append("<th>" + m.getMes() + "</th>");
             s.append("<td>" + this.buscarFactura(m).getFecha() + "</td>");
             s.append("<td>" + this.buscarFactura(m).getMonto() + "</td>");
-            s.append("<td>" + this.buscarFactura(m).calcularMontoMora() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).calcularMontoMora(mo) + "</td>");
             s.append("<td>" + this.buscarFactura(m).getTipo_pago() + "</td>");
             s.append("<td>" + this.buscarFactura(m).getComprobante() + "</td>");
             s.append("<td>" + this.buscarFactura(m).getFactura() + "</td>");
@@ -221,7 +225,40 @@ public class Nino implements Serializable {
         return s.toString();
     }
 
-    public String TablaFacturas2(List<Mes> meses) {
+    public String TablaMatricula(String str) {
+        StringBuilder s = new StringBuilder();
+
+        s.append("<h4>Pago de matrícula </h4>");
+        s.append("<div style=\" overflow: scroll ; height: 150px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>Estudiante</th>");
+        s.append("<th>Monto mora </th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+        if (matricula.iterator().next().calcularMora(str) > 0) {
+            s.append("<tr class=\"danger\">");
+        }
+        else{
+        s.append("<tr class=\"success\">");
+        }
+        s.append("<td>" + id + "</td>");
+        s.append("<td>" + this.getEncargadoReal().getNombre() + " " + getEncargadoReal().getApellido1() + getEncargadoReal().getApellido2() + "</td>");
+        s.append("<td>" + matricula.iterator().next().calcularMora(str) + "</td>");
+        s.append("</tr>");
+
+        s.append("</tbody>");
+        s.append("</table>");// cerrar table
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
+    public String TablaFacturas2(List<Mes> meses, String mont) {
 
         Calendar c = Calendar.getInstance();
 //        System.out.println("Current time => " + c.getTime());
@@ -229,7 +266,7 @@ public class Nino implements Serializable {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c.getTime());
         StringBuilder s = new StringBuilder();
-        s.append("<h4>Registro de sus facturas</h4>");
+        s.append("<h4>Registro de sus facturas mensuales</h4>");
         s.append("<div style=\" overflow: scroll ; height: 500px \" class=\"box\">");// abrir box
         s.append("<table class=\"table table-bordered table-hover\">");// abrir table
 
@@ -249,7 +286,11 @@ public class Nino implements Serializable {
         for (Mes m : meses) {
 
             if (buscarFactura(m).getCodigo() != null) {
-                s.append("<tr class=\"success\">");
+                if (buscarFactura(m).calcularMontoMora(mont) > 0) {
+                    s.append("<tr class=\"warning\">");
+                } else {
+                    s.append("<tr class=\"success\">");
+                }
             } else {
                 s.append("<tr class=\"danger\">");
             }
@@ -257,7 +298,7 @@ public class Nino implements Serializable {
             s.append("<th>" + m.getMes() + "</th>");
             s.append("<td>" + this.buscarFactura(m).getFecha() + "</td>");
             s.append("<td>" + this.buscarFactura(m).getMonto() + "</td>");
-            s.append("<td>" + this.buscarFactura(m).calcularMontoMora() + "</td>");
+            s.append("<td>" + this.buscarFactura(m).calcularMontoMora(mont) + "</td>");
             s.append("<td>" + this.buscarFactura(m).getTipo_pago() + "</td>");
             s.append("<td>" + this.buscarFactura(m).getComprobante() + "</td>");
             s.append("<td>" + this.buscarFactura(m).getFactura() + "</td>");
@@ -274,7 +315,6 @@ public class Nino implements Serializable {
 
     public Factura buscarFactura(Mes mes) {
         for (Factura f : facturas) {
-
 
             if (f.getMes().getMes().equalsIgnoreCase(mes.getMes())) {
                 return f;

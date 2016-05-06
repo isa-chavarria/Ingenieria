@@ -167,7 +167,7 @@ public class Clase implements Serializable {
             s.append("<td>" + e.getNombre() + "</td>");
             s.append("<td>" + e.getApellido1() + "</td>");
             s.append("<td>" + e.getApellido2() + "</td>");
-            s.append("<td><a href='pagos-user-" + e.getId() + "' class=\"btn btn-success custom-width\">Realizar pago</a></td>");
+            s.append("<td><a href='pagos-user-" + e.getId() + "' class=\"btn btn-success custom-width\">Registrar pago</a></td>");
 
             s.append("</tr>");
         }

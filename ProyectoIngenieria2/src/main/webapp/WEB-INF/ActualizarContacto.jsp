@@ -204,14 +204,21 @@
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Titulo:</label>
                             <div class="col-lg-10">
                                 <form:input type="text" class="form-control" path="titulo" id="titulo"
-                                            placeholder="Facebook" value="${contactoBase.titulo}"/>
+                                            placeholder="Facebook" />
                             </div>
                         </div>
                         <div  class="form-group">
                             <label for="ejemplo_password_3" class="col-lg-2 control-label">Descripción:</label>
                             <div class="col-lg-10">
                                 <form:input type="text" class="form-control" path="descripcion" id="descripcion" 
-                                            placeholder="kinder@facebook.com" value="${contactoBase.descripcion}" />
+                                            placeholder="kinder@facebook.com"  />
+                            </div>
+                        </div>
+                        <div  class="form-group">
+                            <label for="sitioWeb" class="col-lg-2 control-label">Es un sitio web:</label>
+                            <div class="col-lg-10">
+                                <form:select path="sitioWeb" items="${opciones}" class="form-control input-sm" id="sitioWeb" />
+
                             </div>
                         </div>
                         <form:hidden path="codigo" value="${contactoBase.codigo}"/>

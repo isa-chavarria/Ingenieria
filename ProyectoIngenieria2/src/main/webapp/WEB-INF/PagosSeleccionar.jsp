@@ -219,7 +219,7 @@
                                         <td>${stu.nombre}</td>
                                         <td>${stu.apellido1}</td>
                                         <td>${stu.apellido2}</td>                                      
-                                        <td><a href="<c:url value='/pagos-user-${stu.id}' />" class="btn btn-success custom-width">Realizar pago</a></td>
+                                        <td><a href="<c:url value='/pagos-user-${stu.id}' />" class="btn btn-success custom-width">Registrar pago</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `kinderBD`.`contacto` (
   `titulo` VARCHAR(1000) NULL DEFAULT NULL,
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(5000) NULL DEFAULT NULL,
+  `sitioWeb` VARCHAR(50) NULL DEFAULT NULL,
   `kinder` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `idx_contacto` (`kinder` ASC),

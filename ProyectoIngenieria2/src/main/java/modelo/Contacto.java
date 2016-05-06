@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "contacto")
 public class Contacto implements Serializable {
@@ -28,15 +27,19 @@ public class Contacto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name="codigo")
+    @Column(name = "codigo")
     private Long codigo;
-    
+
     @Size(max = 5000)
     @Column(name = "descripcion")
     private String descripcion;
-    
+
+    @Size(max = 50)
+    @Column(name = "sitioWeb")
+    private String sitioWeb;
+
     @ManyToOne
-    @JoinColumn(name="kinder")
+    @JoinColumn(name = "kinder")
     private Kinder kinder;
 
     public Kinder getKinder() {
@@ -46,7 +49,6 @@ public class Contacto implements Serializable {
     public void setKinder(Kinder kinder) {
         this.kinder = kinder;
     }
-    
 
     public Contacto() {
     }
@@ -78,6 +80,16 @@ public class Contacto implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String getSitioWeb() {
+        return sitioWeb;
+    }
+
+    public void setSitioWeb(String sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+    
+    
 
     @Override
     public int hashCode() {

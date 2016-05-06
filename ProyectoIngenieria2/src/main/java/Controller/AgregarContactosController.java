@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import java.util.ArrayList;
 import javax.validation.Valid;
 import modelo.Contacto;
 import modelo.Kinder;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.ContactoService;
@@ -39,6 +41,8 @@ public class AgregarContactosController {
     //Usar siempre post aca
     @RequestMapping(method = RequestMethod.POST)
     public String addContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
+
+        String cont = contacto.getSitioWeb();
         System.out.println(contacto.toString());
         if (result.hasErrors()) {
             System.out.println("has errors");
@@ -53,6 +57,16 @@ public class AgregarContactosController {
 
         model.addAttribute("msg", "Se agregó el contacto con éxito");
         return "agregarContacto";
+    }
+    
+    
+    
+    @ModelAttribute("opciones")
+    public ArrayList<String> initializeOpciones() {
+        ArrayList<String> l = new ArrayList<String>();
+        l.add("Si");
+        l.add("No");
+        return l;
     }
 
 }

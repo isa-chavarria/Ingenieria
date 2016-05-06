@@ -187,4 +187,73 @@ public class AlbumController {
         model.addAttribute("imagen", imagen3);
         return "galeria";
     }
+
+    @RequestMapping(value = {"/galeriaEncargado"}, method = RequestMethod.GET)
+    public String loadGaleriaEncargado(ModelMap model) {
+
+        Album al = albumService.findbyId("Galeria");
+        model.addAttribute("al", al);
+        Album album = new Album();
+        model.addAttribute("album", album);
+        Imagen imagen = new Imagen();
+        model.addAttribute("imagen", imagen);
+        return "EditarGaleria";
+    }
+
+    @RequestMapping(value = {"/eliminarImagenEncarado"}, method = RequestMethod.POST)
+    public String removeImagenEncargado(@Valid Imagen imagen, BindingResult result, ModelMap model) {
+
+        Imagen imagen2 = imagenService.findbyId(imagen.getCodigo());
+        if (imagen2 != null) {
+            imagenService.DeletebyId(imagen.getCodigo());
+            model.addAttribute("msg", "Se elimino la imágen con éxito");
+        } else {
+            model.addAttribute("msg", "No se elimino la imágen con éxito");
+        }
+
+        return loadGaleriaEncargado(model);
+    }
+    
+    
+    @RequestMapping(value = {"/agregarImagenForm2"}, method = RequestMethod.POST)
+    public String addImagen2(@RequestParam MultipartFile file,
+            @RequestParam String album,
+            ModelMap model) {
+        System.out.println(file);
+        System.out.println(album);
+        Kinder kinder = kinderService.findbyName("Kinder Lulu");
+        if (file.isEmpty()) {
+            System.out.println("has errors");
+            model.addAttribute("msg", "No se agrego la imágen con exito");
+
+            if (kinder != null) {
+                model.addAttribute("albums", kinder.getAlbums());
+            } else {
+                model.addAttribute("albums", new Kinder().getAlbums());
+            }
+            Album al = new Album();
+            model.addAttribute("album", al);
+            Imagen imagen = new Imagen();
+            model.addAttribute("imagen", imagen);
+            return "galeria";
+        }
+        Album alb = albumService.findbyId(album);
+        Imagen imagen = new Imagen();
+        imagen.setAlbum(alb);
+        try {
+            imagen.setImagen(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException ex) {
+            Logger.getLogger(AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        imagenService.save(imagen);
+        alb.getImagenes().add(imagen);
+
+        kinder = kinderService.findbyName("Kinder Lulu");
+
+        model.addAttribute("msg", "Se agrego la imágen con éxito");
+
+       
+
+        return loadGaleriaEncargado(model) ;
+    }
 }

@@ -5,10 +5,8 @@
  */
 package Controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,8 +14,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import javax.imageio.spi.ServiceRegistry;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,6 +29,7 @@ import modelo.Familiar;
 import modelo.FamiliarGrande;
 import modelo.Imagen;
 import modelo.Informacion;
+import modelo.InformacionKinder;
 import modelo.InformacionNino;
 import modelo.Kinder;
 import modelo.Matricula;
@@ -46,11 +43,7 @@ import modelo.Requerimiento;
 import modelo.SuperMatricula;
 import modelo.Usuario;
 import modelo.UsuarioM;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -66,6 +59,7 @@ import service.EnfermedadService;
 import service.EspecialidadService;
 import service.FacturaService;
 import service.FamiliarService;
+import service.InformacionKinderService;
 import service.InformacionService;
 import service.MatriculaService;
 import service.MesService;
@@ -135,6 +129,9 @@ public class AppController {
     @Autowired
     EspecialidadService especialidadService;
 
+    @Autowired
+    InformacionKinderService informacionKinderService;
+
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
 
@@ -189,7 +186,8 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/Matricular"}, method = RequestMethod.POST)
-    public String matricular(@Valid SuperMatricula persona, BindingResult result, ModelMap model) {
+    public String matricular(@Valid SuperMatricula persona, BindingResult result, ModelMap model, HttpServletRequest request) {
+
         String nombre = persona.getNombre();
         String apellido1 = persona.getApellido1();
         String apellido2 = persona.getApellido2();
@@ -210,6 +208,8 @@ public class AppController {
             model.addAttribute("fallo", false);
             return "ErrorMatricula";
         }
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado e = usu.getEncargadoOriginal();
 
         //------------PADRE--------------------------
         String nombrePadre = persona.getNombrePadre();
@@ -238,8 +238,10 @@ public class AppController {
         boolean carnetVacunas = persona.EstaVacunas();
         boolean fotos = persona.EstaFotos();
         String monto = persona.getMonto();
-        String curso = persona.getCurso();
-        String per = persona.getPersona();
+
+        Calendar c = Calendar.getInstance();
+        String curso = Integer.toString(c.get(Calendar.YEAR));
+        String per = e.getNombre() + " " + e.getApellido1() + " " + e.getApellido2();
 
         ///--------------------USUARIO----------------------------------------
         Usuario u = new Usuario();
@@ -440,7 +442,7 @@ public class AppController {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
 
         List<Contacto> contactos = this.contactoService.findAll();
-        model.addAttribute("contactos", contactos);
+        model.addAttribute("contactos", tablaContactos());
 
         return "contacto";
     }
@@ -474,7 +476,6 @@ public class AppController {
             model.addAttribute("msg", "No se elimino el contacto con éxito");
         }
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
-
         List<Contacto> contactos = this.contactoService.findAll();
         model.addAttribute("contactos", contactos);
 //        if (kinder != null) {
@@ -488,11 +489,10 @@ public class AppController {
 
     @RequestMapping(value = {"/ModificarContacto"}, method = RequestMethod.POST)
     public String updateContacto(@Valid Contacto contacto, BindingResult result, ModelMap model) {
+        Contacto d = contactoService.findbyCodigo(contacto.getCodigo());
         System.out.println(contacto.toString());
-        Contacto cont = new Contacto();
-        model.addAttribute("contacto", cont);
-
-        model.addAttribute("contactoBase", contacto);
+        String c = d.getSitioWeb();
+        model.addAttribute("contacto", d);
 
         return "ActualizarContacto";
     }
@@ -504,10 +504,11 @@ public class AppController {
         Contacto con = contactoService.findbyCodigo(contacto.getCodigo());
         con.setTitulo(contacto.getTitulo());
         con.setDescripcion(contacto.getDescripcion());
+        con.setSitioWeb(contacto.getSitioWeb());
         contactoService.UpdateContacto(con);
 
         model.addAttribute("msg", "Se Modificó el contacto con éxito");
-        return "agregarContacto";
+        return loadContactoAdmin(model);
     }
 
     @RequestMapping(value = {"/noticias"}, method = RequestMethod.GET)
@@ -1174,8 +1175,9 @@ public class AppController {
     public String loadDetallesMatricula(@PathVariable String id, ModelMap model) {
         Encargado enc = encargadoService.findbyId(id);
         Nino n = ninoService.findbyId(id);
+        InformacionKinder inf = informacionKinderService.findbyCodigo(new Long(1));
         Matricula m = n.getMatricula().iterator().next();
-        model.addAttribute("matricula", m);
+        model.addAttribute("matricula", m.getTabla(inf.getMontoMatricula()));
         model.addAttribute("enc", enc);
 
         return "InformacionMatricula";
@@ -1235,7 +1237,6 @@ public class AppController {
         Nino n = ninoService.findbyId(id);
         Pago p = new Pago();
         p.setId(n.getId());
-        request.getSession().setAttribute("select", n);
         String nombre = n.getEncargado().iterator().next().getNombre();
         String apellido = n.getEncargado().iterator().next().getApellido1();
         String apellido2 = n.getEncargado().iterator().next().getApellido2();
@@ -1261,19 +1262,34 @@ public class AppController {
     @RequestMapping(value = {"/RealizarPago"}, method = RequestMethod.POST)
     public String realizarPago(@Valid Pago fact, BindingResult result, ModelMap model, HttpServletRequest request) {
         //    System.out.println(contacto.toString());
-        Nino n = (Nino) request.getSession().getAttribute("select");
+        Nino n = ninoService.findbyId(fact.getId());
         String id = n.getId();
         Nino nino = ninoService.findbyId(id);
         Long mes = fact.getMes();
-        String monto = fact.getMonto();
         Mes m = mesService.findbyId(mes);
-        Factura f = new Factura();
+
+        String monto = fact.getMonto();
 
         Calendar c = Calendar.getInstance();
         System.out.println("Current time => " + c.getTime());
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c.getTime());
+
+        if (nino.buscarFactura(m).getCodigo() != null) {
+            Factura fa = nino.buscarFactura(m);
+            fa.setFecha(formattedDate);
+            fa.setComprobante(fact.getComprobante());
+            fa.setFactura(fact.getFactura());
+            fa.setTipo_pago(fact.getTipo_pago());
+            fa.setMes(m);
+            fa.actualizarMonto(fact.getMonto());
+            facturaService.UpdateFactura(fa);
+            model.addAttribute("id", nino.getId());
+            return "PagoCorrecto";
+        }
+
+        Factura f = new Factura();
 
         f.setFecha(formattedDate);
         f.setComprobante(fact.getComprobante());
@@ -1503,7 +1519,8 @@ public class AppController {
         Factura f = new Factura();
 
         List<Mes> meses = mesService.findAll();
-        model.addAttribute("tabla", n.TablaFacturas(meses));
+        InformacionKinder inf = informacionKinderService.findbyCodigo(new Long(1));
+        model.addAttribute("tabla", n.TablaFacturas(meses, inf.getMonto()));
         model.addAttribute("factura", f);
         return "FacturasEstudianteAdministracion";
     }
@@ -1513,7 +1530,9 @@ public class AppController {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Nino n = ninoService.findbyId(usu.getId());
         List<Mes> meses = mesService.findAll();
-        model.addAttribute("tabla", n.TablaFacturas2(meses));
+        InformacionKinder inf = informacionKinderService.findbyCodigo(new Long(1));
+        model.addAttribute("tablaM", n.TablaMatricula(inf.getMontoMatricula()));
+        model.addAttribute("tabla", n.TablaFacturas2(meses, inf.getMonto()));
 
         return "FacturasUsuario";
     }
@@ -1523,6 +1542,7 @@ public class AppController {
         Mes m = mesService.findbyId(new Long(2));
         Clase g = new Clase();
         model.addAttribute("grupo", g);
+
         model.addAttribute("tabla", this.TablaFacturasMeses(m));
         return "FacturasMes";
 
@@ -1895,8 +1915,66 @@ public class AppController {
 
         return loadFamiliaresAdministracion(n.getId(), model);
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------
 
+    @RequestMapping(value = {"/cambiosConfpagos"}, method = RequestMethod.POST)
+    public String cambiosConfpagos(@Valid InformacionKinder info, ModelMap model, BindingResult result) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("msg", "Información no modificada correctamente");
+            return loadPagosConfiguracion(model);
+        }
+
+        informacionKinderService.UpdateInformacionkinder(info);
+
+        model.addAttribute("msg", "Información modificada correctamente");
+        return loadPagosConfiguracion(model);
+
+    }
+
+    //--------Pagos configuracion-------------------------------------------------------------------------------------
+    @RequestMapping(value = {"/pagosConfiguracion"}, method = RequestMethod.GET)
+    public String loadPagosConfiguracion(ModelMap model) {
+        InformacionKinder info = informacionKinderService.findbyCodigo(new Long(1));
+        model.addAttribute("informacion", info);
+        return "ConfiguracionPagos";
+    }
+
+    //---------------------Morosos---------------------------------------------------------------------------------------------------------------------
+    @RequestMapping(value = {"/morosos"}, method = RequestMethod.GET)
+    public String morosos(ModelMap model) {
+        model.addAttribute("tabla", morososMatricula());
+        model.addAttribute("tablaMes", morososMensualidad());
+
+        return "Morosos";
+    }
+
+    //-----------------Matricula-------------------------------------------------------
+    @RequestMapping(value = {"/pagosMatricula-user-{id}"}, method = RequestMethod.GET)
+    public String loadPagosMatricula(@PathVariable String id, ModelMap model, HttpServletRequest request) {
+        Nino n = ninoService.findbyId(id);
+        Pago p = new Pago();
+        p.setId(n.getId());
+        String nombre = n.getEncargado().iterator().next().getNombre();
+        String apellido = n.getEncargado().iterator().next().getApellido1();
+        String apellido2 = n.getEncargado().iterator().next().getApellido2();
+        String nombreCompleto = nombre + " " + apellido + " " + apellido2;
+        p.setNombre(nombreCompleto);
+        model.addAttribute("matricula", p);
+        return "PagarMatricula";
+    }
+
+    @RequestMapping(value = {"/RealizarPagoMatricula"}, method = RequestMethod.POST)
+    public String realizarPagoMatricula(@Valid Pago fact, BindingResult result, ModelMap model, HttpServletRequest request) {
+        Nino n = ninoService.findbyId(fact.getId());
+        Matricula m = n.getMatricula().iterator().next();
+        m.actualizarMonto(fact.getMonto());
+
+        matriculaService.UpdateMatricula(m);
+
+        return "PagoCorrectoMatricula";
+    }
+
+    //-----------------------------------------------------------------------------------
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
         List<Clase> lista = claseService.findAll();
@@ -1965,6 +2043,7 @@ public class AppController {
 
     //----------------TABLA FACTURAS MESES------------------------------------
     private String TablaFacturasMeses(Mes m) {
+        InformacionKinder inf = informacionKinderService.findbyCodigo(new Long(1));
         List<Nino> ninos = ninoService.findAll();
         StringBuilder s = new StringBuilder();
         s.append("<h4>Registro de sus facturas</h4>");
@@ -1990,7 +2069,11 @@ public class AppController {
 
             if (n.getEstado()) {
                 if (n.buscarFactura(m).getCodigo() != null) {
-                    s.append("<tr class=\"success\">");
+                    if (n.buscarFactura(m).calcularMontoMora(inf.getMonto()) > 0) {
+                        s.append("<tr class=\"warning\">");
+                    } else {
+                        s.append("<tr class=\"success\">");
+                    }
                 } else {
                     s.append("<tr class=\"danger\">");
                 }
@@ -1999,11 +2082,18 @@ public class AppController {
                 s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
                 s.append("<td>" + n.buscarFactura(m).getFecha() + "</td>");
                 s.append("<td>" + n.buscarFactura(m).getMonto() + "</td>");
-                s.append("<td>" + n.buscarFactura(m).calcularMontoMora() + "</td>");
+
+                s.append("<td>" + n.buscarFactura(m).calcularMontoMora(inf.getMonto()) + "</td>");
                 s.append("<td>" + n.buscarFactura(m).getComprobante() + "</td>");
                 s.append("<td>" + n.buscarFactura(m).getFactura() + "</td>");
                 if (n.buscarFactura(m).getCodigo() != null) {
-                    s.append("<td>" + n.buscarFactura(m).getTipo_pago() + "</td>");
+
+                    if (n.buscarFactura(m).calcularMontoMora(inf.getMonto()) > 0) {
+                        s.append("<td>Debe</td>");
+                    } else {
+                        s.append("<td>" + n.buscarFactura(m).getTipo_pago() + "</td>");
+                    }
+
                 } else {
                     s.append("<td>Pendiente</td>");
                 }
@@ -2090,6 +2180,150 @@ public class AppController {
         s.append("</table>");// cerrar table
 
         s.append("</div>");// cerrar box
+
+        return s.toString();
+    }
+
+    public String tablaContactos() {
+        List<Contacto> contactos = this.contactoService.findAll();
+        StringBuilder s = new StringBuilder();
+        for (Contacto c : contactos) {
+            s.append("<tr>");
+            s.append("<td><strong>" + c.getTitulo() + "</strong></td>");
+            if (c.getSitioWeb().equals("Si")) {
+                s.append("<td><a href='" + c.getDescripcion() + "' >" + c.getDescripcion() + "</a></td>");
+            } else {
+                s.append("<td>" + c.getDescripcion() + "</td>");
+            }
+            s.append("</tr>");
+        }
+
+        return s.toString();
+    }
+
+    public String morososMatricula() {
+        List<Nino> ninos = ninoService.findAll();
+        InformacionKinder inf = informacionKinderService.findbyCodigo(new Long(1));
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Morosos matrícula</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 300px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th>ID</th>");
+        s.append("<th>Estudiante</th>");
+        s.append("<th>Monto mora </th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+        for (Nino n : ninos) {
+            if (n.getEstado()) {
+                if (n.getMatricula().iterator().next().calcularMora(inf.getMontoMatricula()) > 0) {
+                    s.append("<tr class=\"danger\">");
+                    s.append("<td>" + n.getId() + "</td>");
+                    s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
+                    s.append("<td>" + n.getMatricula().iterator().next().calcularMora(inf.getMontoMatricula()) + "</td>");
+                    s.append("<td><a href='pagosMatricula-user-" + n.getId() + "' class='btn btn-success custom-width'>Registrar Pago</a></td>");
+
+                    s.append("</tr>");
+                }
+            }
+        }
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+
+        return s.toString();
+
+    }
+
+    public String morososMensualidad() {
+
+        List<Nino> ninos = ninoService.findAll();
+        InformacionKinder inf = informacionKinderService.findbyCodigo(new Long(1));
+        Calendar c = Calendar.getInstance();
+        int d = c.get(Calendar.MONTH) + 1;
+
+        int dia = c.get(Calendar.DATE);
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Morosos Mensualidad</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 600px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+
+        s.append("<thead class=\"titulosTabla\">");
+        s.append("<tr>");
+        s.append("<th></th>");
+        s.append("<th>ID</th>");
+        s.append("<th>Estudiante</th>");
+        s.append("<th>Monto mora </th>");
+        s.append("<th></th>");
+        s.append("</tr>");
+        s.append("</thead>");
+
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (int i = 2; i < d; i++) {
+            Mes mes = mesService.findbyId(new Long(i));
+            for (Nino n : ninos) {
+                if (n.getEstado()) {
+                    if (n.buscarFactura(mes).getCodigo() == null || n.buscarFactura(mes).calcularMontoMora(inf.getMonto()) > 0) {
+                        s.append("<tr class=\"danger\">");
+                        s.append("<td><strong>" + mes.getMes() + "</strong></td>");
+                        s.append("<td>" + n.getId() + "</td>");
+                        s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
+                        if (n.buscarFactura(mes).getCodigo() != null) {
+                            s.append("<td>" + n.buscarFactura(mes).calcularMontoMora(inf.getMonto()) + "</td>");
+                        } else {
+                            s.append("<td>" + inf.getMonto() + "</td>");
+                        }
+                        s.append("<td><a href='pagos-user-" + n.getId() + "' class='btn btn-success custom-width'>Registrar Pago</a></td>");
+                        s.append("</tr>");
+                    }
+                }
+            }
+
+            s.append("<tr class=\"active\">");
+            s.append("<td></td>");
+            s.append("<td></td>");
+            s.append("<td></td>");
+            s.append("<td></td>");
+            s.append("<td></td>");
+            s.append("</tr>");
+
+        }
+
+        if (inf.esFechaDePago(dia)) {
+            Mes mes = mesService.findbyId(new Long(d));
+            for (Nino n : ninos) {
+                if (n.getEstado()) {
+                    if (n.buscarFactura(mes).getCodigo() == null || n.buscarFactura(mes).calcularMontoMora(inf.getMonto()) > 0) {
+                        s.append("<tr class=\"danger\">");
+                        s.append("<td><strong>" + mes.getMes() + "</strong></td>");
+                        s.append("<td>" + n.getId() + "</td>");
+                        s.append("<td>" + n.getEncargadoReal().getNombre() + " " + n.getEncargadoReal().getApellido1() + " " + n.getEncargadoReal().getApellido2() + "</td>");
+                        if (n.buscarFactura(mes).getCodigo() != null) {
+                            s.append("<td>" + n.buscarFactura(mes).calcularMontoMora(inf.getMonto()) + "</td>");
+                        } else {
+                            s.append("<td>" + inf.getMonto() + "</td>");
+                        }
+                        s.append("<td><a href='pagos-user-" + n.getId() + "' class='btn btn-success custom-width'>Registrar Pago</a></td>");
+                        s.append("</tr>");
+                    }
+                }
+            }
+
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");//
 
         return s.toString();
     }

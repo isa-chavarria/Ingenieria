@@ -143,9 +143,18 @@ public class Matricula implements Serializable {
         return (this.fotos == true) ? "Si" : "No";
     }
 
-    public float calcularMora() {
+    public float calcularMora(String matri) {
         float monto = Float.parseFloat(matricula);
-        return 52000 - monto;
+        float m = Float.parseFloat(matri);
+        return m - monto;
+    }
+
+    public void actualizarMonto(String m) {
+        float v1 = Float.parseFloat(m);
+        float v2 = Float.parseFloat(this.matricula);
+        float res = v1 + v2;
+
+        matricula = "" + res;
     }
 
     @Override
@@ -171,6 +180,21 @@ public class Matricula implements Serializable {
     @Override
     public String toString() {
         return "modelo.clase[ id=" + codigo + " ]";
+    }
+
+    public String getTabla(String matric) {
+
+        StringBuilder s = new StringBuilder();
+        s.append(" <tr><td><strong>Documentación completa</strong></td><td>" + Completa() + "</td></tr>");
+        s.append(" <tr><td><strong>Presento carné de vacunas</strong></td><td>" + Carnet() + "</td></tr>");
+        s.append(" <tr><td><strong>Presento constancia de nacimiento</strong></td><td>" + ConstanciaNacimiento() + "</td></tr>");
+        s.append("<tr><td><strong>Presento Fotos</strong></td><td>" + Fotos() + "</td></tr>");
+        s.append("<tr><td><strong>Total del Pago ¢</strong></td><td>" + matricula + "</td></tr>");
+        s.append("<tr><td><strong>Monto de Mora ¢</strong></td><td>" + calcularMora(matric) + "</td></tr>");
+        s.append("<tr><td><strong>Curso lectivo</strong></td><td>" + cursolectivo + "</td></tr>");
+        s.append("<tr><td><strong>Matrícula realizada por</strong></td><td>" + realizadoPor + "</td></tr>");
+
+        return s.toString();
     }
 
 }

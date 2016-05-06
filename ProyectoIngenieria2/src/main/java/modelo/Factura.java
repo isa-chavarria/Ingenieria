@@ -33,27 +33,27 @@ public class Factura implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "codigo")
-    private Long codigo=null;
+    private Long codigo = null;
 
     @Size(max = 50)
     @Column(name = "fecha_actual")
-    private String fecha="";
+    private String fecha = "";
 
     @Size(max = 50)
     @Column(name = "monto_final")
-    private String monto="";
+    private String monto = "";
 
     @Size(max = 50)
     @Column(name = "tipo_pago")
-    private String tipo_pago="";
+    private String tipo_pago = "";
 
     @Size(max = 50)
     @Column(name = "comprobante")
-    private String comprobante="";
+    private String comprobante = "";
 
     @Size(max = 50)
     @Column(name = "factura")
-    private String factura="";
+    private String factura = "";
 
     @JoinColumn(name = "id_nino", referencedColumnName = "id")
     @ManyToOne
@@ -87,13 +87,14 @@ public class Factura implements Serializable {
         this.factura = factura;
     }
 
-    public String calcularMontoMora() {
-
+    public float calcularMontoMora(String m) {
+        float m1 = Float.parseFloat(m);
         if (!monto.equals("")) {
+
             float monto = Float.parseFloat(this.monto);
-            return "" + (52000 - monto);
+            return (m1 - monto);
         }
-        return "";
+        return m1;
     }
 
     public Long getCodigo() {
@@ -134,6 +135,14 @@ public class Factura implements Serializable {
 
     public void setMes(Mes mes) {
         this.mes = mes;
+    }
+
+    public void actualizarMonto(String m) {
+        float v1 = Float.parseFloat(m);
+        float v2 = Float.parseFloat(this.monto);
+        float res = v1 + v2;
+
+        monto = "" + res;
     }
 
     @Override

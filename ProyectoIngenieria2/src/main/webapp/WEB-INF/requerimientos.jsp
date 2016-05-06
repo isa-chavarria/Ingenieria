@@ -76,7 +76,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="index"><i class="fa fa-home"></i> Inicio</a>
+                            <a href="index"><i  class="fa fa-home"></i> Inicio</a>
                         </li>
                         <li>
                             <a href="quienes"><i class="fa fa-university"></i> ¿Quiénes Somos?</a>
@@ -106,7 +106,7 @@
                     </div>
                     <div style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif; margin-left: 30%; text-align: left;' >
                         <c:forEach items="${requerimientos}" var="req">
-                            <p><i class="fa fa-check" aria-hidden="true"></i> ${req.descripcion}</p>                           
+                            <p><i style="color: #33ff33" class="fa fa-check" aria-hidden="true"></i> ${req.descripcion}</p>                           
                         </c:forEach>
                     </div>
 

@@ -12,7 +12,15 @@ function mostrarError(mensaje, id) {
 
 
 
+function fecha() {
 
+    $('#fechaN').datetimepicker({
+        dateFormat: 'yy-mm-dd',
+        maxDate: '+1970/01/01'
+    });
+
+
+}
 
 
 

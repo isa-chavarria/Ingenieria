@@ -1,3 +1,8 @@
+<%--
+    Document   : Estudiantes
+    Created on : 14/03/2016, 12:29:37 AM
+    Author     : josvr_000
+--%>
 
 <%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
@@ -5,15 +10,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
+
     Usuario user = (Usuario) session.getAttribute("user");
 
-    if (user != null && user.isEncargado()) {
+    if (user != null && user.isAdministrador()) {
 
     } else {
         response.sendRedirect("index");
     }
 %>
-<!DOCTYPE html>
 <html lang="en">
     <head>
 
@@ -27,16 +32,26 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <script src="resources/js/jquery.js"></script>
+        <script src="resources/js/validarForm.js"></script>
+        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
+
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
         <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-        <script src="resources/js/jquery.js"></script>
-        <script src="resources/js/validarForm.js"></script>
-        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
 
 
     </head>
@@ -62,7 +77,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">IMAGENES DEL KINDER</h3>
+            <h3 id="Titulo">Información para pagos </h3>
 
 
         </div>
@@ -143,7 +158,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
                                     <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
@@ -157,9 +172,10 @@
                         </li>
                     </ul>
 
+
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="encargado">Regresar al menú</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>
@@ -172,39 +188,48 @@
         <div class="container">
 
 
-            <div class="col-lg-12">
-                <hr>
-                <h2 class="intro-text text-center">Galería  de Imágenes
-                </h2>
-                <hr>
-            </div>
-            <div class="imagenes" >
-                <a href='galeriaEncargado' class="btn btn-default custom-width">Editar galería</a>
-                <br/>
-                <div class="row"  >
+            <div class="row">
 
-                    <div style=" overflow: scroll ; height: 400px " class="box">
 
-                        <c:forEach items="${imagenes}" var="imagen">
+                <div style=" overflow: scroll ; height: 400px " class="box">
+                    <form:form method="POST" action="cambiosConfpagos"  modelAttribute="informacion" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" onsubmit="return validarContrasena()" role="form">
+                        <form:input type="hidden" path="codigo" id="codigo"/>
+                        <table class="tableInvisivle">
+                            <tr>
+                                <td><strong>Monto de matrícula:</strong></td>
+                                <td><form:input path="montoMatricula" type="number" class="form-control col-lg-6" id="montoMatricula"
+                                            placeholder=""/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monto de mensualidad</strong></td>
+                                <td><form:input path="monto" type="number" class="form-control col-lg-6" id="monto"
+                                            placeholder=""/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Día limite de pago de mensualidad</strong></td>
+                                <td><form:input path="fecha" type="number" class="form-control col-lg-6" id="fecha"
+                                            placeholder="" min="1" max="29"/></td>
+                                <td></td>
+                            </tr>
 
-                            <div class="col-lg-2 col-md-2 col-xs-2 thumb">
-                                <a class="thumbnail" href="#">
-                                    <img class="img-responsive" src="data:image/gif;base64,${imagen.imagen}" >
-                                </a>
-                            </div>
-                        </c:forEach>
+                            <tr>
+                                <td style="color:green">${msg}</td>
+                                <td><button type="submit" class="btn btn-success">Guardar Cambios</button></td>
+                                <td></td>
+                            </tr>
 
-                    </div>
+                        </table>
+                    </form:form>
 
                 </div>
-
-
-
 
             </div>
 
 
         </div>
+
 
         <footer>
             <div class="container">

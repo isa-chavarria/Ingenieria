@@ -101,7 +101,7 @@
 
                 <div style="margin-bottom: 5%;" class="col-lg-12">
                     <h2 class="intro-text text-center">Contactos
-                        
+
                     </h2>
 
 
@@ -112,9 +112,7 @@
                         <table class="table table-bordered table-hover">
                             <!--tr><th>Título</th><th>Descripción</th></tr-->
                             <tbody class="cuerpoTabla">
-                                <c:forEach items="${contactos}" var="contacto">
-                                    <tr class="active"><td><strong><c:out value="${contacto.titulo}"></c:out></strong> </td><td><c:out value="${contacto.descripcion}"></c:out></td></tr>
-                                </c:forEach>
+                                ${contactos}
                             </tbody>
                         </table>
                     </div>
@@ -146,9 +144,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-                                $('.carousel').carousel({
-                                    interval: 5000 //changes the speed
-                                })
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
         </script>
 
     </body>

@@ -204,6 +204,14 @@
                                             placeholder="kinder@facebook.com"/>
                             </div>
                         </div>
+
+                        <div  class="form-group">
+                            <label for="sitioWeb" class="col-lg-2 control-label">Es un sitio web:</label>
+                            <div class="col-lg-10">
+                                <form:select path="sitioWeb" items="${opciones}" class="form-control input-sm" id="sitioWeb" required="true" />
+
+                            </div>
+                        </div>
                         <div class="col-lg-offset-2 col-lg-10">
                             <button type="submit" class="btn btn-info">Agregar</button>
                             <div class="form-group">
@@ -211,7 +219,7 @@
                         </div>
                         <p></p>
                     </form:form>
-                    
+
 
                 </div>
             </div>

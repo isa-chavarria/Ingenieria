@@ -1,10 +1,11 @@
-
 <%@page import="modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
 <%
+
     Usuario user = (Usuario) session.getAttribute("user");
 
     if (user != null && user.isEncargado()) {
@@ -13,7 +14,6 @@
         response.sendRedirect("index");
     }
 %>
-<!DOCTYPE html>
 <html lang="en">
     <head>
 
@@ -23,21 +23,38 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Kinder Lulú</title>
-
+        <title>Kinder LulÃº</title>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-        <script src="resources/js/jquery.js"></script>
-        <script src="resources/js/validarForm.js"></script>
-        <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
 
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+        <script>
+
+            function eliminar(id) {
+
+
+                var element = document.getElementById("album");
+
+                element.value = id;
+
+            }
+
+        </script>
 
     </head>
     <body>
@@ -52,7 +69,7 @@
 
 
             <div class="col-sm-8" style="  padding: 1%">
-                <div id="tituloGRANDE"class="brand">Kinder Lulú</div>
+                <div id="tituloGRANDE" class="brand">Kinder Lulú</div>
             </div>
 
 
@@ -62,7 +79,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">IMAGENES DEL KINDER</h3>
+            <h3 id="Titulo">IMáGENES DEL KINDER</h3>
 
 
         </div>
@@ -79,7 +96,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    <a class="navbar-brand" href="index">Business Casual</a>
+
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -171,46 +188,78 @@
 
         <div class="container">
 
+            <h5>${msg}</h5>
 
+            <p></p>
             <div class="col-lg-12">
-                <hr>
-                <h2 class="intro-text text-center">Galería  de Imágenes
-                </h2>
-                <hr>
+                <h1 class="intro-text text-center">Imágenes ${al.nombre}
+                    <button type="button" id="${al.nombre}" class="btn btn-info custom-width" onclick="eliminar(this.id)" data-toggle="modal" data-target="#myModal">Agregar imágen</button>
+                </h1>
+
             </div>
-            <div class="imagenes" >
-                <a href='galeriaEncargado' class="btn btn-default custom-width">Editar galería</a>
-                <br/>
+            <br/>
+            <br/>
+            <div style='margin-top: 3%;' class="imagenes" >
                 <div class="row"  >
 
                     <div style=" overflow: scroll ; height: 400px " class="box">
-
-                        <c:forEach items="${imagenes}" var="imagen">
-
-                            <div class="col-lg-2 col-md-2 col-xs-2 thumb">
+                        <c:forEach items="${al.imagenes}" var="imag">
+                            <div class="col-lg-2 col-md-2 col-xs-2">
+                                <form:form method="POST"  modelAttribute="imagen" action="eliminarImagenEncarado">
+                                    <form:hidden id="cod" path="codigo" value="${imag.codigo}"/>
+                                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </form:form>
                                 <a class="thumbnail" href="#">
-                                    <img class="img-responsive" src="data:image/gif;base64,${imagen.imagen}" >
+                                    <img class="img-responsive" src="data:image/gif;base64,${imag.imagen}">
                                 </a>
+
                             </div>
+
                         </c:forEach>
-
                     </div>
-
                 </div>
-
-
-
-
             </div>
 
 
+        </div>
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Agregar Imágen</h4>
+                    </div>
+
+                    <form method="POST" action="agregarImagenForm2" enctype="multipart/form-data" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <div  class="form-group">
+                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Imágen</label>
+                            <div class="col-lg-10">
+                                <input type="file" name="file" class="form-control">
+                                <input type="hidden" name="album" id="album">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Agregar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form> 
+                </div>
+
+            </div>
         </div>
 
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <p>Administración del Kinder. Copyright 2016</p>
+                        <p>AdministraciÃ³n del Kinder. Copyright 2016</p>
                     </div>
                 </div>
             </div>
@@ -224,9 +273,9 @@
 
         <!-- Script to Activate the Carousel -->
         <script>
-            $('.carousel').carousel({
-                interval: 5000 //changes the speed
-            })
+                        $('.carousel').carousel({
+                            interval: 5000 //changes the speed
+                        })
         </script>
 
     </body>

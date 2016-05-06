@@ -184,7 +184,11 @@
 
 
             <div class="row">
-                
+
+                <div id="tablita">
+                    ${tablaM}
+                </div>
+
                 <div id="tablita">
                     ${tabla}
                 </div>

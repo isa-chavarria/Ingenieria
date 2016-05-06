@@ -214,15 +214,7 @@
                             <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
                                 <h4>Detalles de la matrícula</h4>
                                 <table class="tableInvisivle">
-                                    <tr><td><strong>Documentación completa</strong></td><td>${matricula.Completa()}</td></tr>
-                                    <tr><td><strong>Presento carné de vacunas</strong></td><td>${matricula.Carnet()}</td></tr>
-                                    <tr><td><strong>Presento constancia de nacimiento</strong></td><td>${matricula.ConstanciaNacimiento()}</td></tr>
-                                    <tr><td><strong>Presento Fotos</strong></td><td>${matricula.Fotos()}</td></tr>
-                                    <tr><td><strong>Total del Pago ¢</strong></td><td>${matricula.matricula}</td></tr>
-                                    <tr><td><strong>Monto de Mora ¢</strong></td><td>${matricula.calcularMora()}</td></tr>
-                                    <tr><td><strong>Curso lectivo</strong></td><td>${matricula.cursolectivo}</td></tr>
-                                    <tr><td><strong>Matrícula realizada por</strong></td><td>${matricula.realizadoPor}</td></tr>
-
+                                    ${matricula}
                                 </table>
                                 <br/>
                                 <div class="form-group">

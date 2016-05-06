@@ -64,13 +64,12 @@
                 var element = document.getElementById("tipo_pago");
 
                 var val = element.value;
-                if(val=="Tarjeta"||val=="Deposito"){
-                    
-                    e2.className="vis";
-                }
-                else{
-                    
-                    e2.className="inv";
+                if (val == "Tarjeta" || val == "Deposito") {
+
+                    e2.className = "vis";
+                } else {
+
+                    e2.className = "inv";
                 }
             }
 
@@ -101,7 +100,7 @@
         <div id="second"  class="row">
 
 
-            <h3 id="Titulo">PAGOS</h3>
+            <h3 id="Titulo">PAGO MENSUAL</h3>
 
 
         </div>
@@ -216,7 +215,7 @@
 
 
                     <form:form method="POST" action="RealizarPago"  modelAttribute="factura" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;'class="form-horizontal" onsubmit="return validarContrasena()" role="form">
-
+                        <form:input type="hidden" path="id" id="id"/>
                         <div class="form-group">
 
                             <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre Completo:</label>

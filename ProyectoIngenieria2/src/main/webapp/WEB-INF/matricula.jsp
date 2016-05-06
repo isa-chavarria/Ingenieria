@@ -34,6 +34,14 @@
         <script src="resources/js/validarForm.js"></script>
         <script src="resources/js/jquery.maskedinput.js" type="text/javascript"></script>
 
+
+        <link href="jquery.datetimepicker.css" rel="stylesheet" type="text/css"/>
+        <script src="jquery.datetimepicker.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="./jquery.datetimepicker.js"></script>
+        <link href="JQuery/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -107,6 +115,16 @@
                     formulario1.className = 'btn btn-dafault btn-block';
 
                 }
+
+            }
+
+            function fecha() {
+
+                $('#fechaN').datetimepicker({
+                    dateFormat: 'yy-mm-dd',
+                    maxDate: '+1970/01/01'
+                });
+
 
             }
         </script>
@@ -578,25 +596,15 @@
                             </div>
 
                             <div style='margin-bottom: 7%'  class="form-inline">
-                                <label for="monto" class="col-lg-2 control-label">Canceló matrícula ¢;</label>
+                                <label for="monto" class="col-lg-2 control-label">Canceló matrícula ¢:</label>
                                 <div class="col-lg-4">
                                     <form:input path="monto" type="number" class="form-control" id="monto"
                                                 placeholder="monto" required="true" />
                                 </div>
-                                <label for="curso" class="col-lg-2 control-label">Curso:</label>
-                                <div class="col-lg-4">
-                                    <form:input path="curso" type="number" class="form-control" id="curso"
-                                                placeholder="2016" required="true"  />
-                                </div>
+
                             </div>
 
-                            <div  class="form-group">
-                                <label for="persona" class="col-lg-2 control-label">Matrícula realizada por:</label>
-                                <div class="col-lg-8">
-                                    <form:input path="persona" type="text" class="form-control" id="persona"
-                                                placeholder="Nombre persona que realizo la matrícula " onkeydown="return validarLetras(event)"/>
-                                </div>
-                            </div>
+
 
                         </div>
 

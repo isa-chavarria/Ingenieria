@@ -175,13 +175,21 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i> Pagos <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Registrar Pago</a>
+                                    <a href="pagosSeleccionar"><i class="fa fa-money"></i> Registrar pago de mensualidad</a>
                                 </li>
                                 <li class="divider"></li>
-
                                 <li>
-                                    <a href="FacurasSeleccionar"><i class="fa fa-search"></i> Verificar Pagos</a>
+                                    <a href="FacurasSeleccionar"><i class="fa fa-search"></i> Verificar Pagos mensuales</a>
                                 </li>   
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="morosos"><i class="fa fa-money"></i> Lista de morosos</a>
+                                </li>  
+                                <li class="divider"></li>
+                                <li>
+                                    <a href=" pagosConfiguracion"><i class="fa fa-search"></i> Configurar información de pagos</a>
+                                </li>  
+
                             </ul>
                         </li>
                         <li>
@@ -231,7 +239,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Contacto</a>
+                                    <a href="contactoAdministrador"><i class="fa fa-phone"></i> Contactos</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
@@ -245,11 +253,11 @@
                                 <li>
                                     <a href="CursosKinder"><i class="fa fa-language"></i> Cursos especiales</a>
                                 </li>
-                                 <li class="divider"></li>
+                                <li class="divider"></li>
                                 <li>
                                     <a href="requerimientosAdmin"><i class="fa fa-book"></i> Requerimientos de matrícula</a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>

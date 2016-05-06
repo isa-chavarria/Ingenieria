@@ -208,6 +208,13 @@
                     <div class="col-lg-9 text-center">
                         <div class="panel panel-default">
                             <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
+                                <div class="media-body">
+                                    <h4 class="media-heading">${enc.nombre} ${enc.apellido1} ${enc.apellido2}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
                                 <form:form method="POST" action="editarEnfermedadesAdministracionGuardar" modelAttribute="informacion" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                                     <form:input type="hidden" path="id" id="id"/>
                                     <form:input type="hidden" path="existe1" id="existe1"/>
