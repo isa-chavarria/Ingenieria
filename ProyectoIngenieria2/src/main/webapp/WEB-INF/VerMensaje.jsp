@@ -86,7 +86,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-right top-nav">
-                       
+
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
@@ -95,7 +95,7 @@
                                     <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
-                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                    <a href="listaMensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
                                 </li>
 
                                 <li class="divider"></li>
@@ -191,10 +191,17 @@
                             <br/>
                             <br/>
 
+
+
                             <label>Asunto: </label><p>${mensaje.asunto}</p>
 
                             <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${mensaje.mensaje}</textarea>
-                            
+                            <c:if test="${!adjunto}">
+                                <br/>
+                                <br/>
+                                <label style="margin:3%;">Archivo adjunto: </label><a href="descargar1-${mensaje.codigo}">${mensaje.name} <i class="fa fa-download" aria-hidden="true"></i></a>
+                            </c:if>
+
                         </div>
                     </div>
                 </div>

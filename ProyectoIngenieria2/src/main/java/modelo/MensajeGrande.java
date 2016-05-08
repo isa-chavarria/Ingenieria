@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
  * @author josvr_000
@@ -21,6 +23,43 @@ public class MensajeGrande {
     private String mensaje;
 
     public Boolean estado;
+    
+    MultipartFile file;
+    
+    private String type;
+    
+   
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+    
+    
 
     public String getMensaje() {
         return mensaje;

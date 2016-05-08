@@ -39,8 +39,8 @@ public class Correo {
             message.setFrom(new InternetAddress("monitor3bases@gmail.com", "Monitor 3"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject("Cambio de Contraseña");
-            message.setText("Hola esta es tu nueva contraseña: " + contra + "\n"
-                    + "Ingrese al siguiente link para proceder a cambiarla: http://localhost:8090/monitor3.v02/extra.jsp");
+            message.setText("Hola has sido registrado en el Sistema de Administración del Kinder Lulú \n"
+                    + "Hola esta es tu nueva contraseña: " + contra);
 
             Transport.send(message);
         } catch (Exception e) {

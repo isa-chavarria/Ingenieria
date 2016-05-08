@@ -54,6 +54,7 @@ import modelo.UsuarioM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -153,16 +154,16 @@ public class AppController {
 
     Correo correo;
 
+    //-------------------------------------------------------------------------------------------------------------------------
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
+        MensajeGrande m = new MensajeGrande();
+        model.addAttribute("mensaje", m);
 
-        //Usuario user = usuarioService.findbyId("402270021");
-//        model.addAttribute("user", user);
-//        String nombre = user.getEncargado().iterator().next().getNombre();
-//        model.addAttribute("nombre", nombre);
         return "prueba";
     }
 
+    //---------------------------------------------------------------------------------------------------------------------
     @RequestMapping(value = {"/quienes"}, method = RequestMethod.GET)
     public String listKinder(ModelMap model) {
         Kinder kinder = kinderService.findbyName("Kinder Lulu");
@@ -2093,8 +2094,11 @@ public class AppController {
 
     //----------------------MENSAJES--------------------------------------------
     @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
-    public String loadMensajes(ModelMap model) {
-        MensajeKinder m = new MensajeKinder();
+    public String loadMensajes(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        MensajeGrande m = new MensajeGrande();
         model.addAttribute("mensaje", m);
         return "mensajes";
     }
@@ -2131,6 +2135,9 @@ public class AppController {
         m.setEstado(false);
         mensajeService.UpdateMensaje(m);
 
+        boolean band = m.getContent() == null;
+        model.addAttribute("adjunto", band);
+
         model.addAttribute("mensaje", m);
 
         return "VerMensaje";
@@ -2146,21 +2153,37 @@ public class AppController {
         m.setEstado(false);
         mensajeKinderService.UpdateMensajeKinder(m);
 
+        boolean band = m.getContent() == null;
+        model.addAttribute("adjunto", band);
+
         model.addAttribute("mensaje", m);
 
         return "VerMensajeEnviado";
     }
 
     @RequestMapping(value = {"/enviarMensajeKinder"}, method = RequestMethod.POST)
-    public String enviarMensajeKinder(@Valid MensajeKinder mensaje, BindingResult result, ModelMap model, HttpServletRequest request) {
+    public String enviarMensajeKinder(@Valid MensajeGrande mensaje, BindingResult result, ModelMap model, HttpServletRequest request) throws IOException {
         Usuario usu = (Usuario) request.getSession().getAttribute("user");
         Encargado enc = encargadoService.findbyId(usu.getId());
-        mensaje.setPersona(enc);
-        mensaje.setEstado(true);
-        mensaje.setKin(true);
-        mensaje.setUsu(true);
+        MensajeKinder newmensaje = new MensajeKinder();
+        newmensaje.setPersona(enc);
+        newmensaje.setEstado(true);
+        newmensaje.setKin(true);
+        newmensaje.setUsu(true);
 
-        mensajeKinderService.save(mensaje);
+        newmensaje.setAsunto(mensaje.getAsunto());
+        newmensaje.setMensaje(mensaje.getMensaje());
+
+        int t = mensaje.getFile().getBytes().length;
+
+        if (mensaje.getFile().getBytes().length > 0) {
+            MultipartFile multipartFile = mensaje.getFile();
+            newmensaje.setContent(multipartFile.getBytes());
+            newmensaje.setName(multipartFile.getOriginalFilename());
+            newmensaje.setType(multipartFile.getContentType());
+        }
+
+        mensajeKinderService.save(newmensaje);
 
         return loadListaMensajesEnviadosEnc(model, request);
 
@@ -2190,6 +2213,9 @@ public class AppController {
         m.setEstado(false);
         mensajeKinderService.UpdateMensajeKinder(m);
 
+        boolean band = m.getContent() == null;
+        model.addAttribute("adjunto", band);
+
         model.addAttribute("mensaje", m);
 
         return "VerMensajeKinder";
@@ -2216,6 +2242,9 @@ public class AppController {
         Mensaje m = mensajeService.findbyCodigo(codigo);
         m.setEstado(false);
         mensajeService.UpdateMensaje(m);
+
+        boolean band = m.getContent() == null;
+        model.addAttribute("adjunto", band);
 
         model.addAttribute("mensaje", m);
 
@@ -2264,7 +2293,10 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/enviarMensajeEncargado"}, method = RequestMethod.POST)
-    public String enviarMensajeEncargado(@Valid MensajeGrande mensaje, BindingResult result, ModelMap model, HttpServletRequest request) {
+    public String enviarMensajeEncargado(@Valid MensajeGrande mensaje, BindingResult result, ModelMap model, HttpServletRequest request) throws IOException {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
         String id = mensaje.getPersona();
         Encargado e = encargadoService.findbyId(id);
 
@@ -2272,11 +2304,19 @@ public class AppController {
         newMensaje.setPersona(e);
         newMensaje.setEstado(true);
         newMensaje.setAsunto(mensaje.getAsunto());
-        newMensaje.setContent(mensaje.getContent());
         newMensaje.setMensaje(mensaje.getMensaje());
 
         newMensaje.setKin(true);
         newMensaje.setUsu(true);
+
+        int t = mensaje.getFile().getBytes().length;
+
+        if (mensaje.getFile().getBytes().length > 0) {
+            MultipartFile multipartFile = mensaje.getFile();
+            newMensaje.setContent(multipartFile.getBytes());
+            newMensaje.setName(multipartFile.getOriginalFilename());
+            newMensaje.setType(multipartFile.getContentType());
+        }
 
         mensajeService.save(newMensaje);
 
@@ -2346,6 +2386,87 @@ public class AppController {
 
         return loadPListaMensajesEnviadosKinder(model, request);
 
+    }
+
+    @RequestMapping(value = {"/descargar1-{codigo}"}, method = RequestMethod.GET)
+    public String download1(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+        Mensaje m = mensajeService.findbyCodigo(codigo);
+        response.setContentType(m.getType());
+        response.setContentLength(m.getContent().length);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + m.getName() + "\"");
+
+        FileCopyUtils.copy(m.getContent(), response.getOutputStream());
+
+        return loadVermesnaje(codigo, model, request);
+    }
+    
+    
+    @RequestMapping(value = {"/descargar2-{codigo}"}, method = RequestMethod.GET)
+    public String download2(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+        MensajeKinder m = mensajeKinderService.findbyCodigo(codigo);
+        response.setContentType(m.getType());
+        response.setContentLength(m.getContent().length);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + m.getName() + "\"");
+
+        FileCopyUtils.copy(m.getContent(), response.getOutputStream());
+
+        return loadVermesnajeEnviado(codigo, model, request);
+    }
+    
+    @RequestMapping(value = {"/descargar3-{codigo}"}, method = RequestMethod.GET)
+    public String download3(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+        MensajeKinder m = mensajeKinderService.findbyCodigo(codigo);
+        response.setContentType(m.getType());
+        response.setContentLength(m.getContent().length);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + m.getName() + "\"");
+
+        FileCopyUtils.copy(m.getContent(), response.getOutputStream());
+
+        return loadVermesnajekinder(codigo, model, request);
+    }
+    
+    
+    @RequestMapping(value = {"/descargar4-{codigo}"}, method = RequestMethod.GET)
+    public String download4(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+        Mensaje m = mensajeService.findbyCodigo(codigo);
+        response.setContentType(m.getType());
+        response.setContentLength(m.getContent().length);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + m.getName() + "\"");
+
+        FileCopyUtils.copy(m.getContent(), response.getOutputStream());
+
+        return loadVermesnajeEnviadokinder(codigo, model, request);
+    }
+
+    @RequestMapping(value = {"/cargarArchivo"}, method = RequestMethod.POST)
+    public String uploadDocument(@Valid MensajeGrande fileBucket, BindingResult result, ModelMap model) throws IOException {
+        MultipartFile multipartFile = fileBucket.getFile();
+
+        Mensaje m = mensajeService.findbyCodigo(new Long(4));
+
+        m.setContent(multipartFile.getBytes());
+        m.setName(multipartFile.getOriginalFilename());
+        m.setType(multipartFile.getContentType());
+
+        mensajeService.UpdateMensaje(m);
+
+        return loadPrueba(model);
+    }
+
+    @RequestMapping(value = {"/download-document"}, method = RequestMethod.GET)
+    public String downloadDocument(ModelMap model, HttpServletResponse response) throws IOException {
+        Mensaje m = mensajeService.findbyCodigo(new Long(4));
+        response.setContentType(m.getType());
+        response.setContentLength(m.getContent().length);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + m.getName() + "\"");
+
+        FileCopyUtils.copy(m.getContent(), response.getOutputStream());
+
+        return loadPrueba(model);
     }
 
     //-----------------------------------

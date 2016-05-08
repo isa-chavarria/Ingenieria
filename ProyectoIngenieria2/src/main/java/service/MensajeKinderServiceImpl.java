@@ -51,6 +51,8 @@ public class MensajeKinderServiceImpl implements MensajeKinderService {
             ki.setEstado(contacto.getEstado());
             ki.setKin(contacto.getKin());
             ki.setUsu(contacto.getUsu());
+            ki.setType(contacto.getType());
+            ki.setName(contacto.getName());
         }
     }
 }

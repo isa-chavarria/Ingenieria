@@ -121,7 +121,7 @@
                                     </li>
                                 </c:forEach>
                                 <li class="message-footer">
-                                    <a href="listaMensajesKinder">todos los mensajes</a>
+                                    <a style="color: blue;" href="listaMensajesKinder">todos los mensajes</a>
                                 </li>
                             </ul>
                         </li>

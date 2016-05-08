@@ -463,6 +463,8 @@ CREATE TABLE IF NOT EXISTS `kinderbd`.`mensaje` (
   `estado` TINYINT(1) NULL DEFAULT NULL,
   `kin` TINYINT(1) NULL DEFAULT NULL,
   `usu` TINYINT(1) NULL DEFAULT NULL,
+  `tipo` VARCHAR(100) NULL DEFAULT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_mensaje`
     FOREIGN KEY (`persona`)
@@ -486,6 +488,8 @@ CREATE TABLE IF NOT EXISTS `kinderbd`.`mensajeKinder` (
   `estado` TINYINT(1) NULL DEFAULT NULL,
   `kin` TINYINT(1) NULL DEFAULT NULL,
   `usu` TINYINT(1) NULL DEFAULT NULL,
+  `tipo` VARCHAR(100) NULL DEFAULT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_mensajeKinder`
     FOREIGN KEY (`persona`)

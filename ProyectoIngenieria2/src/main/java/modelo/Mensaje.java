@@ -36,6 +36,14 @@ public class Mensaje implements Serializable {
     @Size(max = 5000)
     @Column(name = "mensaje")
     private String mensaje;
+    
+    @Size(max = 100)
+    @Column(name = "tipo")
+    private String type;
+    
+    @Size(max = 100)
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "persona")
@@ -64,6 +72,25 @@ public class Mensaje implements Serializable {
         this.codigo = codigo;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    
     public Boolean getKin() {
         return kin;
     }

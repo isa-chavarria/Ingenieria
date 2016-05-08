@@ -96,7 +96,7 @@
                                     <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
-                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                    <a href="listaMensajesKinder"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
                                 </li>
 
                                 <li class="divider"></li>
@@ -196,7 +196,11 @@
                             <label>Asunto: </label><p>${mensaje.asunto}</p>
 
                             <textarea rows="3" style=' width: 80%; padding:2%;' disabled="true">${mensaje.mensaje}</textarea>
-                           
+                           <c:if test="${!adjunto}">
+                                <br/>
+                                <br/>
+                                <label style="margin:3%;">Archivo adjunto: </label><a href="descargar4-${mensaje.codigo}">${mensaje.name} <i class="fa fa-download" aria-hidden="true"></i></a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

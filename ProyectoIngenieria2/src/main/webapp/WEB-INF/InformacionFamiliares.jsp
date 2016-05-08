@@ -107,7 +107,7 @@
                                     <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
-                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                    <a href="listaMensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
                                 </li>
 
                                 <li class="divider"></li>

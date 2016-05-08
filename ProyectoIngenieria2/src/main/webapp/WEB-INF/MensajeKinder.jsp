@@ -88,7 +88,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-right top-nav">
-                      
+
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
@@ -191,7 +191,7 @@
                         <div class="panel-body" style="font-family: 'Josefin Slab','Helvetica Neue',Helvetica,Arial,sans-serif; ">
                             <h4 class="media-heading" style="color: red">Nuevo mensaje para ${mensaje1.getNombrePersona()} </h4>
                             <br/>
-                            <form:form method="POST" action="enviarMensajeEncargado"  modelAttribute="mensaje" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                            <form:form method="POST" action="enviarMensajeEncargado"   modelAttribute="mensaje" enctype="multipart/form-data" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
                                 <form:input type="hidden" path="persona"  id="persona"/>
                                 <div class="form-group">
                                     <label for="ejemplo_email_3" class="col-lg-2 control-label">Asunto:</label>
@@ -209,8 +209,15 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Adjuntar archivo</label>
+                                    <div  class="col-lg-10">
+                                        <form:input type="file" path="file" id="file" class="form-control input-sm"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button type="submit" class="btn btn-default" style="alignment-adjust: central">Enviar</button>
+                                        <button type="submit" class="btn btn-success" style="alignment-adjust: central">Enviar</button>
                                     </div>
                                 </div>
                             </form:form>

@@ -13,7 +13,41 @@
     <body>
         <h2>Spring MVC + jQuery + Autocomplete example</h2>
 
-        <div>
+        <form:form method="POST" action="cargarArchivo" modelAttribute="mensaje" enctype="multipart/form-data" class="form-horizontal">
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-lable" for="file">Upload a document</label>
+                    <div class="col-md-7">
+                        <form:input type="file" path="file" id="file" class="form-control input-sm"/>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-lable" for="file">Description</label>
+                    <div class="col-md-7">
+                        <form:input type="text" path="mensaje" id="description" class="form-control input-sm"/>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-actions floatRight">
+                    <input type="submit" value="Upload" class="btn btn-primary btn-sm">
+                </div>
+            </div>
+
+        </form:form>
+
+
+
+
+        <a type="button" href="<c:url value='/download-document' />" class="btn btn-success custom-width">download</a>
+
+        <!--div>
             
             <input   id="valor" type="hidden">
             
@@ -23,11 +57,11 @@
             <span>
                 <button id="w-button-search" onclick="jaja()" type="button">Search</button>
             </span>
-        </div>
+        </div-->
 
         <script>
 
-            
+
 
             $(document).ready(function () {
 

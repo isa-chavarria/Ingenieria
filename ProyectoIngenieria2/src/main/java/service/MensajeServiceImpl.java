@@ -52,6 +52,8 @@ public class MensajeServiceImpl implements MensajeService {
             ki.setEstado(contacto.getEstado());
             ki.setKin(contacto.getKin());
             ki.setUsu(contacto.getUsu());
+            ki.setType(contacto.getType());
+            ki.setName(contacto.getName());
         }
     }
 }

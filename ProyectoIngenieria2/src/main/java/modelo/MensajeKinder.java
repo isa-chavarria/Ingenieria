@@ -37,6 +37,13 @@ public class MensajeKinder implements Serializable {
     @Column(name = "mensaje")
     private String mensaje;
 
+    @Size(max = 100)
+    @Column(name = "tipo")
+    private String type;
+
+    @Size(max = 100)
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "persona")
@@ -49,12 +56,30 @@ public class MensajeKinder implements Serializable {
 
     @Column(name = "estado")
     private Boolean estado;
-    
+
     @Column(name = "kin")
     private Boolean kin;
-    
+
     @Column(name = "usu")
     private Boolean usu;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public MensajeKinder() {
     }
@@ -78,8 +103,6 @@ public class MensajeKinder implements Serializable {
     public void setUsu(Boolean usu) {
         this.usu = usu;
     }
-    
-    
 
     public Boolean getEstado() {
         return estado;
@@ -97,8 +120,6 @@ public class MensajeKinder implements Serializable {
         this.persona = persona;
     }
 
-   
-
     public String getAsunto() {
         return asunto;
     }
@@ -114,12 +135,10 @@ public class MensajeKinder implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
+
     public String getNombrePersona() {
         return persona.getNombre() + " " + persona.getApellido1();
     }
-
-
 
     public byte[] getContent() {
         return content;
@@ -128,7 +147,6 @@ public class MensajeKinder implements Serializable {
     public void setContent(byte[] content) {
         this.content = content;
     }
-
 
     public Long getCodigo() {
         return codigo;
