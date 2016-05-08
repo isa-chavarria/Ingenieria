@@ -16,7 +16,7 @@
     }
 %>
 <html lang="en">
-    <head>
+     <head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,10 +31,11 @@
 
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,7 +73,7 @@
         </div>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default" role="navigation">
+         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -87,9 +88,30 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-right top-nav">
+                     
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                </li>
+
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="index"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="contactoAdministrador">Regresar al menú</a>
+                            <a href="administracion">Regresar al menú</a>
                         </li>
                     </ul>
                 </div>

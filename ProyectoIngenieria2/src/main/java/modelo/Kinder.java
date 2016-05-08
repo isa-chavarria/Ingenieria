@@ -41,22 +41,25 @@ public class Kinder implements Serializable {
     private String mision;
     @Size(max = 5000)
     private String vision;
-    
-     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name="kinder")
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "kinder")
     Set<Contacto> contactos;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
     Set<Noticia> noticias;
-    
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
     Set<Album> albums;
-    
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "kinder")
     Set<Requerimiento> requerimiento;
+
+
+
 
     public Set<Requerimiento> getRequerimiento() {
         return requerimiento;
@@ -65,9 +68,6 @@ public class Kinder implements Serializable {
     public void setRequerimiento(Set<Requerimiento> requerimiento) {
         this.requerimiento = requerimiento;
     }
-    
-    
-    
 
     public Set<Album> getAlbums() {
         return albums;
@@ -165,5 +165,9 @@ public class Kinder implements Serializable {
     public String toString() {
         return "modelo.Kinder[ nombre=" + nombre + " ] " + getAlbums().toString();
     }
+
+   
+
+   
 
 }

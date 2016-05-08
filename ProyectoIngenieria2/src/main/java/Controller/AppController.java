@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import modelo.Album;
 import modelo.Clase;
 import modelo.Contacto;
+import modelo.Correo;
 import modelo.Encargado;
 import modelo.Enfermedad;
 import modelo.Especialidad;
@@ -36,6 +37,9 @@ import modelo.InformacionKinder;
 import modelo.InformacionNino;
 import modelo.Kinder;
 import modelo.Matricula;
+import modelo.Mensaje;
+import modelo.MensajeGrande;
+import modelo.MensajeKinder;
 import modelo.Mes;
 import modelo.Nino;
 import modelo.NivelModificar;
@@ -44,6 +48,7 @@ import modelo.Pago;
 import modelo.Profesor;
 import modelo.Requerimiento;
 import modelo.SuperMatricula;
+import modelo.Tag;
 import modelo.Usuario;
 import modelo.UsuarioM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +60,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import service.AlbumService;
 import service.ContactoService;
@@ -67,6 +73,8 @@ import service.FamiliarService;
 import service.InformacionKinderService;
 import service.InformacionService;
 import service.MatriculaService;
+import service.MensajeKinderService;
+import service.MensajeService;
 import service.MesService;
 import service.NinoService;
 import service.NoticiaService;
@@ -136,6 +144,14 @@ public class AppController {
 
     @Autowired
     InformacionKinderService informacionKinderService;
+
+    @Autowired
+    MensajeService mensajeService;
+
+    @Autowired
+    MensajeKinderService mensajeKinderService;
+
+    Correo correo;
 
     @RequestMapping(value = {"/prueba"}, method = RequestMethod.GET)
     public String loadPrueba(ModelMap model) {
@@ -372,6 +388,9 @@ public class AppController {
         Usuario user = new Usuario();
         model.addAttribute("user", user);
         model.addAttribute("fallo", false);
+
+        correo = new Correo();
+        correo.enviarCorreo(email, password);
         return "MatriculaCorrecta";
     }
 
@@ -392,12 +411,13 @@ public class AppController {
             if (usu.isAdministrador()) {
                 // model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
-                return loadAdministracion(model);
+
+                return loadAdministracion(model, request);
             }
             if (usu.isEncargado()) {
                 //  model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
-                return loadEncargado(model);
+                return loadEncargado(model, request);
             }
         }
         Usuario u = new Usuario();
@@ -416,7 +436,7 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/encargado"}, method = RequestMethod.GET)
-    public String loadEncargado(ModelMap model) {
+    public String loadEncargado(ModelMap model, HttpServletRequest request) {
         Album al = albumService.findbyId("Sistema");
 
         Set<Imagen> imagenes = al.getImagenes();
@@ -425,12 +445,15 @@ public class AppController {
 
             model.addAttribute("primera", first);
         }
+
+        mensajesEnargado(model, request);
+
         model.addAttribute("imagenes", imagenes);
         return "Encargado";
     }
 
     @RequestMapping(value = {"/administracion"}, method = RequestMethod.GET)
-    public String loadAdministracion(ModelMap model) {
+    public String loadAdministracion(ModelMap model, HttpServletRequest request) {
         Album al = albumService.findbyId("Sistema");
 
         Set<Imagen> imagenes = al.getImagenes();
@@ -438,6 +461,7 @@ public class AppController {
             Imagen first = al.getImagenes().iterator().next();
             model.addAttribute("primera", first);
         }
+        this.mensajesKinder(model, request);
         model.addAttribute("imagenes", imagenes);
         return "Administracion";
     }
@@ -704,11 +728,6 @@ public class AppController {
         return "matricula";
     }
 
-    @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
-    public String loadMensajes(ModelMap model) {
-        return "mensajes";
-    }
-
     @RequestMapping(value = {"/pagosSeleccionar"}, method = RequestMethod.GET)
     public String loadPagoSelecionar(ModelMap model) {
         Clase g = new Clase();
@@ -814,7 +833,7 @@ public class AppController {
         model.addAttribute("msg", msg);
 
         //       model.addAttribute("msg", "Su información se modifico correctamente");
-        return loadPerfilAdministrador(model,request);
+        return loadPerfilAdministrador(model, request);
     }
 
     @RequestMapping(value = {"/modificarPerfilUsuario"}, method = RequestMethod.POST)
@@ -882,7 +901,7 @@ public class AppController {
         model.addAttribute("msg", msg);
 
         //       model.addAttribute("msg", "Su información se modifico correctamente");
-        return loadperfilCuenta(model,request);
+        return loadperfilCuenta(model, request);
     }
 
     @RequestMapping(value = {"/modificarCuentaUsuario"}, method = RequestMethod.POST)
@@ -916,7 +935,7 @@ public class AppController {
         model.addAttribute("msg", msg);
 
         //       model.addAttribute("msg", "Su información se modifico correctamente");
-        return loadperfilCuentaUsuario(model,request);
+        return loadperfilCuentaUsuario(model, request);
     }
 
     @RequestMapping(value = {"/enfermedadesEstudiante"}, method = RequestMethod.GET)
@@ -2072,6 +2091,263 @@ public class AppController {
         return loadPerfil(model, request);
     }
 
+    //----------------------MENSAJES--------------------------------------------
+    @RequestMapping(value = {"/mensajes"}, method = RequestMethod.GET)
+    public String loadMensajes(ModelMap model) {
+        MensajeKinder m = new MensajeKinder();
+        model.addAttribute("mensaje", m);
+        return "mensajes";
+    }
+
+    @RequestMapping(value = {"/listaMensajes"}, method = RequestMethod.GET)
+    public String loadPListaMensajes(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        Mensaje m = new Mensaje();
+        model.addAttribute("mensaje", m);
+        model.addAttribute("enc", enc);
+        model.addAttribute("tabla", enc.tablaMensajesRecibidos());
+        return "ListaMensajes";
+    }
+
+    @RequestMapping(value = {"/listaMensajesEnviadosEncargado"}, method = RequestMethod.GET)
+    public String loadListaMensajesEnviadosEnc(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        model.addAttribute("tabla", enc.tablaMensajesEnviadas());
+        MensajeKinder m = new MensajeKinder();
+        model.addAttribute("mensaje", m);
+        return "ListaMensajesEnviadosEncargado";
+    }
+
+    @RequestMapping(value = {"/verMensaje-{codigo}"}, method = RequestMethod.GET)
+    public String loadVermesnaje(@PathVariable Long codigo, ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+
+        Mensaje m = mensajeService.findbyCodigo(codigo);
+        m.setEstado(false);
+        mensajeService.UpdateMensaje(m);
+
+        model.addAttribute("mensaje", m);
+
+        return "VerMensaje";
+    }
+
+    @RequestMapping(value = {"/verMensajeEnviado-{codigo}"}, method = RequestMethod.GET)
+    public String loadVermesnajeEnviado(@PathVariable Long codigo, ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+
+        MensajeKinder m = mensajeKinderService.findbyCodigo(codigo);
+        m.setEstado(false);
+        mensajeKinderService.UpdateMensajeKinder(m);
+
+        model.addAttribute("mensaje", m);
+
+        return "VerMensajeEnviado";
+    }
+
+    @RequestMapping(value = {"/enviarMensajeKinder"}, method = RequestMethod.POST)
+    public String enviarMensajeKinder(@Valid MensajeKinder mensaje, BindingResult result, ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        mensaje.setPersona(enc);
+        mensaje.setEstado(true);
+        mensaje.setKin(true);
+        mensaje.setUsu(true);
+
+        mensajeKinderService.save(mensaje);
+
+        return loadListaMensajesEnviadosEnc(model, request);
+
+    }
+
+    @RequestMapping(value = {"/listaMensajesKinder"}, method = RequestMethod.GET)
+    public String loadPListaMensajesKinder(ModelMap model, HttpServletRequest request) {
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        model.addAttribute("tabla", tablaMensajesRecibidosKinder());
+
+        MensajeKinder m = new MensajeKinder();
+        model.addAttribute("mensaje", m);
+
+        return "listamensajesKinder";
+    }
+
+    @RequestMapping(value = {"/verMensajeKinder-{codigo}"}, method = RequestMethod.GET)
+    public String loadVermesnajekinder(@PathVariable Long codigo, ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+
+        MensajeKinder m = mensajeKinderService.findbyCodigo(codigo);
+        m.setEstado(false);
+        mensajeKinderService.UpdateMensajeKinder(m);
+
+        model.addAttribute("mensaje", m);
+
+        return "VerMensajeKinder";
+    }
+
+    @RequestMapping(value = {"/listaMensajesEnviadosKinder"}, method = RequestMethod.GET)
+    public String loadPListaMensajesEnviadosKinder(ModelMap model, HttpServletRequest request) {
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        model.addAttribute("tabla", this.tablaMensajesEnviadosKinder());
+        Mensaje m = new Mensaje();
+        model.addAttribute("mensaje", m);
+        return "listamensajesenviadoskinder";
+    }
+
+    @RequestMapping(value = {"/verMensajeEnviadoKinder-{codigo}"}, method = RequestMethod.GET)
+    public String loadVermesnajeEnviadokinder(@PathVariable Long codigo, ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+
+        Mensaje m = mensajeService.findbyCodigo(codigo);
+        m.setEstado(false);
+        mensajeService.UpdateMensaje(m);
+
+        model.addAttribute("mensaje", m);
+
+        return "VerMensajeEnviandoKinder";
+
+    }
+
+    @RequestMapping(value = {"/MensajeSeleccionar"}, method = RequestMethod.GET)
+    public String loadMensajeSelecionar(ModelMap model) {
+        Clase g = new Clase();
+        model.addAttribute("grupo", g);
+        Clase c = claseService.findbyId(new Long(1));
+        model.addAttribute("grupito", c);
+        return "SeleccionarEstudiantesMensaje";
+
+    }
+
+    @RequestMapping(value = {"/seleccionarMensajes"}, method = RequestMethod.POST)
+    public void seleccionarMensajes(@Valid Clase clase, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("AQUIIIIIII");
+        String nivel = (String) request.getParameter("nombre");
+        // String nivel = clase.getNivel();
+        PrintWriter out = response.getWriter();
+        Clase g = new Clase();
+        model.addAttribute("grupo", g);
+        Clase c = claseService.findbyId(this.calcular(nivel));
+        //      model.addAttribute("grupito", c);
+        out.println(c.tablaEstudiantesMensajes());
+    }
+
+    @RequestMapping(value = {"/mensajesKinder-{id}"}, method = RequestMethod.GET)
+    public String loadMensajesKinder(@PathVariable String id, ModelMap model, HttpServletRequest request) {
+
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        model.addAttribute("enc", enc);
+        Mensaje m1 = new Mensaje();
+        Encargado e = encargadoService.findbyId(id);
+        m1.setPersona(e);
+        model.addAttribute("mensaje1", m1);
+        MensajeGrande m = new MensajeGrande();
+
+        m.setPersona(e.getId());
+        model.addAttribute("mensaje", m);
+        return "MensajeKinder";
+    }
+
+    @RequestMapping(value = {"/enviarMensajeEncargado"}, method = RequestMethod.POST)
+    public String enviarMensajeEncargado(@Valid MensajeGrande mensaje, BindingResult result, ModelMap model, HttpServletRequest request) {
+        String id = mensaje.getPersona();
+        Encargado e = encargadoService.findbyId(id);
+
+        Mensaje newMensaje = new Mensaje();
+        newMensaje.setPersona(e);
+        newMensaje.setEstado(true);
+        newMensaje.setAsunto(mensaje.getAsunto());
+        newMensaje.setContent(mensaje.getContent());
+        newMensaje.setMensaje(mensaje.getMensaje());
+
+        newMensaje.setKin(true);
+        newMensaje.setUsu(true);
+
+        mensajeService.save(newMensaje);
+
+        return loadPListaMensajesEnviadosKinder(model, request);
+
+    }
+
+    @RequestMapping(value = {"/EliminarMensajeKinder"}, method = RequestMethod.POST)
+    public String EliminarMensajeKinder(@Valid Mensaje m, ModelMap model, BindingResult result, HttpServletRequest request) {
+        Mensaje me = mensajeService.findbyCodigo(m.getCodigo());
+
+        if (me.getKin()) {
+            me.setUsu(false);
+            mensajeService.UpdateMensaje(me);
+        } else {
+            me.setPersona(null);
+            mensajeService.DeletebyCodigo(me.getCodigo());
+        }
+
+        return loadPListaMensajes(model, request);
+
+    }
+
+    @RequestMapping(value = {"/EliminarMensajeEnviadoKinder"}, method = RequestMethod.POST)
+    public String EliminarMensajeEnviadoKinder(@Valid MensajeKinder m, ModelMap model, BindingResult result, HttpServletRequest request) {
+        MensajeKinder me = mensajeKinderService.findbyCodigo(m.getCodigo());
+
+        if (me.getKin()) {
+            me.setUsu(false);
+            mensajeKinderService.UpdateMensajeKinder(me);
+        } else {
+            me.setPersona(null);
+            mensajeKinderService.DeletebyCodigo(me.getCodigo());
+        }
+
+        return loadListaMensajesEnviadosEnc(model, request);
+
+    }
+
+    @RequestMapping(value = {"/EliminarMensajeUsuario"}, method = RequestMethod.POST)
+    public String EliminarMensajeUsurario(@Valid MensajeKinder m, ModelMap model, BindingResult result, HttpServletRequest request) {
+        MensajeKinder me = mensajeKinderService.findbyCodigo(m.getCodigo());
+
+        if (me.getUsu()) {
+            me.setKin(false);
+            mensajeKinderService.UpdateMensajeKinder(me);
+        } else {
+            me.setPersona(null);
+            mensajeKinderService.DeletebyCodigo(me.getCodigo());
+        }
+
+        return loadPListaMensajesKinder(model, request);
+
+    }
+
+    @RequestMapping(value = {"/EliminarMensajeEnviadoUsuario"}, method = RequestMethod.POST)
+    public String EliminarMensajeEnviadoUsurario(@Valid Mensaje m, ModelMap model, BindingResult result, HttpServletRequest request) {
+        Mensaje me = mensajeService.findbyCodigo(m.getCodigo());
+
+        if (me.getUsu()) {
+            me.setKin(false);
+            mensajeService.UpdateMensaje(me);
+        } else {
+            me.setPersona(null);
+            mensajeService.DeletebyCodigo(me.getCodigo());
+        }
+
+        return loadPListaMensajesEnviadosKinder(model, request);
+
+    }
+
     //-----------------------------------
     @ModelAttribute("niveles")
     public List<String> initializeProfiles() {
@@ -2424,6 +2700,102 @@ public class AppController {
         s.append("</div>");//
 
         return s.toString();
+    }
+
+    public String tablaMensajesRecibidosKinder() {
+        List<MensajeKinder> recibidos = mensajeKinderService.findAll();
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Bandeja de entrada</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 300px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (MensajeKinder m : recibidos) {
+            if (m.getKin()) {
+                if (m.getEstado()) {
+                    s.append("<tr style='background: #E6F0FF;'>");
+                    s.append("<td><strong>De:    " + m.getNombrePersona() + "</strong></td>");
+                    s.append("<td><strong>" + m.getAsunto() + "</strong></td>");
+
+                } else {
+                    s.append("<tr class=\"active\">");
+                    s.append("<td>De:    " + m.getNombrePersona() + "</td>");
+                    s.append("<td>" + m.getAsunto() + "</td>");
+                }
+
+                s.append("<td><a href='verMensajeKinder-" + m.getCodigo() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
+                s.append("<td><button type=\"button\" id='" + m.getCodigo() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+
+                s.append("</tr>");
+            }
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+        return s.toString();
+    }
+
+    public String tablaMensajesEnviadosKinder() {
+        List<Mensaje> enviados = mensajeService.findAll();
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Mensajes enviados</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 300px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (Mensaje m : enviados) {
+            if (m.getKin()) {
+                s.append("<tr class=\"active\">");
+                s.append("<td>Para:    " + m.getNombrePersona() + "</td>");
+                s.append("<td>" + m.getAsunto() + "</td>");
+
+                s.append("<td><a href='verMensajeEnviadoKinder-" + m.getCodigo() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
+                s.append("<td><button type=\"button\" id='" + m.getCodigo() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+
+                s.append("</tr>");
+            }
+        }
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+        return s.toString();
+    }
+
+    public void mensajesKinder(ModelMap model, HttpServletRequest request) {
+        List<MensajeKinder> lista1 = mensajeKinderService.findAll();
+        List<MensajeKinder> lista2 = new ArrayList<>();
+
+        for (MensajeKinder m : lista1) {
+            if (m.getEstado()) {
+                lista2.add(m);
+            }
+        }
+
+        int tam = lista2.size();
+        boolean n = tam > 0;
+
+        model.addAttribute("existen", n);
+        model.addAttribute("tam", tam);
+        model.addAttribute("mensajesKinder", lista2);
+
+    }
+
+    public void mensajesEnargado(ModelMap model, HttpServletRequest request) {
+        Usuario usu = (Usuario) request.getSession().getAttribute("user");
+
+        Encargado enc = encargadoService.findbyId(usu.getId());
+        int tam = enc.mensajes().size();
+        boolean n = tam > 0;
+
+        model.addAttribute("existen", n);
+        model.addAttribute("tam", tam);
+        model.addAttribute("mensajesEncargado", enc.mensajes());
+
     }
 
 }

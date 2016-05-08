@@ -6,8 +6,10 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -86,6 +88,30 @@ public class Encargado implements Serializable {
                 @JoinColumn(name = "nino_id")})
     private Set<Nino> nino = new HashSet<Nino>();
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "persona")
+    Set<Mensaje> recibidos;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "persona")
+    Set<MensajeKinder> enviados;
+
+    public Set<MensajeKinder> getEnviados() {
+        return enviados;
+    }
+
+    public void setEnviados(Set<MensajeKinder> enviados) {
+        this.enviados = enviados;
+    }
+
+    public Set<Mensaje> getRecibidos() {
+        return recibidos;
+    }
+
+    public void setRecibidos(Set<Mensaje> recibidos) {
+        this.recibidos = recibidos;
+    }
+
     public String getSexo() {
         return sexo;
     }
@@ -115,12 +141,13 @@ public class Encargado implements Serializable {
     }
 
     public String getRuta_imagen2() {
-       if (ruta_imagen.length() > 30) {
-            return "data:image/gif;base64,"+ruta_imagen;
+        if (ruta_imagen.length() > 30) {
+            return "data:image/gif;base64," + ruta_imagen;
 
         }
         return ruta_imagen;
     }
+
     public void setRuta_imagen(String ruta_imagen) {
         this.ruta_imagen = ruta_imagen;
     }
@@ -212,6 +239,86 @@ public class Encargado implements Serializable {
     @Override
     public String toString() {
         return "modelo.Encargado[ id=" + id + " ]";
+    }
+
+    public String tablaMensajesRecibidos() {
+
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Bandeja de entrada</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 300px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (Mensaje m : recibidos) {
+            if (m.getUsu()) {
+
+                if (m.getEstado()) {
+                    s.append("<tr style='background: #E6F0FF;'>");
+                    s.append("<td><strong>De:    Kinder Lulú</strong></td>");
+                    s.append("<td><strong>" + m.getAsunto() + "</strong></td>");
+
+                } else {
+                    s.append("<tr class=\"active\">");
+                    s.append("<td>De:    Kinder Lulú</td>");
+                    s.append("<td>" + m.getAsunto() + "</td>");
+                }
+
+                s.append("<td><a href='verMensaje-" + m.getCodigo() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
+                s.append("<td><button type=\"button\" id='" + m.getCodigo() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+
+                s.append("</tr>");
+            }
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+        return s.toString();
+    }
+
+    public String tablaMensajesEnviadas() {
+
+        StringBuilder s = new StringBuilder();
+        s.append("<h4>Mensajes enviados al kinder</h4>");
+        s.append("<div style=\" overflow: scroll ; height: 300px \" class=\"box\">");// abrir box
+        s.append("<table class=\"table table-bordered table-hover\">");// abrir table
+        s.append("<tbody class=\"cuerpoTabla\">");
+
+        for (MensajeKinder m : enviados) {
+            if (m.getUsu()) {
+                s.append("<tr class=\"active\">");
+                s.append("<td>Para:    Kinder Lulú</td>");
+                s.append("<td>" + m.getAsunto() + "</td>");
+
+                s.append("<td><a href='verMensajeEnviado-" + m.getCodigo() + "' class=\"btn btn-success custom-width\">Ver</a></td>");
+                s.append("<td><button type=\"button\" id='" + m.getCodigo() + "' class=\"btn btn-danger custom-width\" onclick=\"eliminar(this.id)\" data-toggle=\"modal\" data-target=\"#myModal\">Eliminar</button></td>");
+
+                s.append("</tr>");
+            }
+        }
+
+        s.append("</tbody>");
+
+        s.append("</table>");// cerrar table
+
+        s.append("</div>");// cerrar box
+        return s.toString();
+    }
+
+    public List<Mensaje> mensajes() {
+
+        List<Mensaje> lista2 = new ArrayList<>();
+
+        for (Mensaje m : recibidos) {
+            if (m.getEstado()) {
+                lista2.add(m);
+            }
+        }
+
+        return lista2;
+
     }
 
 }

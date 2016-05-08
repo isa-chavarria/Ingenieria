@@ -92,58 +92,36 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
+
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+
+                            <c:if test="${existen}">
+                                <a style="color: greenyellow;" href="#" class="dropdown-toggle" data-toggle="dropdown">${tam} <i style="color: greenyellow;" class="fa fa-envelope"></i> <b class="caret"></b></a>
+                                </c:if>
+
+                            <c:if test="${!existen}">
+                                <a  href="#" class="dropdown-toggle" data-toggle="dropdown">${tam} <i  class="fa fa-envelope"></i> <b class="caret"></b></a>
+                                </c:if>
                             <ul class="dropdown-menu message-dropdown">
-                                <li class="message-preview">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="pull-left">
-                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                            </span>
-                                            <div class="media-body">
-                                                <h5 class="media-heading"><strong>John Smith</strong>
-                                                </h5>
-                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                <c:forEach items="${mensajesEncargado}" var="mensaje">
+                                    <li class="message-preview">
+                                        <a href="verMensaje-${mensaje.codigo}">
+                                            <div class="media">
+                                                <span class="pull-left">
+                                                    <img class="media-object" style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
+                                                </span>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading"><strong>Kinder Lulú</strong>
+                                                    </h5>
+                                                    <p>${mensaje.asunto}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="message-preview">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="pull-left">
-                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                            </span>
-                                            <div class="media-body">
-                                                <h5 class="media-heading"><strong>John Smith</strong>
-                                                </h5>
-                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="message-preview">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="pull-left">
-                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                            </span>
-                                            <div class="media-body">
-                                                <h5 class="media-heading"><strong>John Smith</strong>
-                                                </h5>
-                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
+                                </c:forEach>
                                 <li class="message-footer">
-                                    <a href="#">Read All New Messages</a>
+                                    <a href="listaMensajes">todos los mensajes</a>
                                 </li>
                             </ul>
                         </li>
@@ -155,7 +133,7 @@
                                     <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>
                                 </li>
                                 <li>
-                                    <a href="mensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                                    <a href="listaMensajes"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
                                 </li>
 
                                 <li class="divider"></li>
@@ -165,26 +143,26 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav">
-                         <li>
+                        <li>
                             <a href="prueba.jsp"><i class="fa fa-picture-o"></i> Calendario</a>
                         </li>
-                        
+
                         <li>
                             <a href="galeriaImagenes"><i class="fa fa-picture-o"></i> Galeria</a>
                         </li>
-                        
+
                         <li>
                             <a href="noticias"><i  class="fa fa-bell"></i> Noticias</a>
                         </li>
-                        
+
                         <li>
                             <a href="facturasEstudiante"><i class="fa fa-money"></i> Información de pagos</a>
                         </li>
 
 
-                        
+
                         </li>
                     </ul>
                 </div>
@@ -215,7 +193,7 @@
                                 </div>
                                 <c:forEach items="${imagenes}" var="imagen">
                                     <div class="item">
-                                       <img class="img-full img-responsive" src="data:image/gif;base64,${imagen.imagen}" alt="">
+                                        <img class="img-full img-responsive" src="data:image/gif;base64,${imagen.imagen}" alt="">
                                     </div>
                                 </c:forEach>
                             </div>

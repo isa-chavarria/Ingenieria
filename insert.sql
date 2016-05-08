@@ -165,5 +165,7 @@ insert into kinderbd.familiar (nombre,id,apellido1,apellido2,edad,lugarTrabajo,o
 values ('Amalia','567538754','Noguera','Duran','','','','123125634','Encargado','','40808226');
 
 
-
+insert into kinderbd.album values('Inicio','Kinder Lulu');
+insert into kinderbd.album values('Galeria','Kinder Lulu');
+insert into kinderbd.album values('Sistema','Kinder Lulu');
 
