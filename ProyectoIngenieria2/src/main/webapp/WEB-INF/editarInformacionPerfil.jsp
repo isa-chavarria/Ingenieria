@@ -89,7 +89,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-right top-nav">
-                       
+
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
@@ -131,7 +131,7 @@
                     <div class="leftImage">
 
 
-                       <img class="img-circle" src="${enc.getRuta_imagen2()}" style="height:150px; width:50%; " alt="">
+                        <img class="img-circle" src="${enc.getRuta_imagen2()}" style="height:150px; width:50%; " alt="">
                     </div>
 
                     <div class="rightImage"  >
@@ -256,7 +256,16 @@
                                     </tr>
                                 </form:form>
 
-
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
 
                                 <form:form method="POST" action="modificarImagenperfil" enctype="multipart/form-data"  modelAttribute="encargado" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal"role="form">
                                     <form:input type="hidden" path="id" id="id"/>

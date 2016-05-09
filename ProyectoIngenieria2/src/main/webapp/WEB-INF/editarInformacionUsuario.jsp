@@ -263,6 +263,17 @@
                                         <td></td>
                                     </tr>
                                 </form:form>
+                                    
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
 
 
                                 <form:form method="POST" action="modificarImagenperfilEnc" enctype="multipart/form-data"  modelAttribute="enc" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal"role="form">

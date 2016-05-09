@@ -412,7 +412,7 @@ public class AppController {
             if (usu.isAdministrador()) {
                 // model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
-
+                
                 return loadAdministracion(model, request);
             }
             if (usu.isEncargado()) {
@@ -2400,8 +2400,7 @@ public class AppController {
 
         return loadVermesnaje(codigo, model, request);
     }
-    
-    
+
     @RequestMapping(value = {"/descargar2-{codigo}"}, method = RequestMethod.GET)
     public String download2(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
 
@@ -2414,7 +2413,7 @@ public class AppController {
 
         return loadVermesnajeEnviado(codigo, model, request);
     }
-    
+
     @RequestMapping(value = {"/descargar3-{codigo}"}, method = RequestMethod.GET)
     public String download3(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
 
@@ -2427,8 +2426,7 @@ public class AppController {
 
         return loadVermesnajekinder(codigo, model, request);
     }
-    
-    
+
     @RequestMapping(value = {"/descargar4-{codigo}"}, method = RequestMethod.GET)
     public String download4(@PathVariable Long codigo, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws IOException {
 
