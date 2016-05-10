@@ -61,6 +61,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
     
     @Override
+    public Usuario findByEmail(String email) {
+        return Usuario.findbyEmail(email);
+    }
+    
+    @Override
     public boolean isIdUnique(String id) {
         return Usuario.isIdUnique(id);
     }

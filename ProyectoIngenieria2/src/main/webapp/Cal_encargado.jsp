@@ -4,8 +4,20 @@
     Author     : Kenneth
 --%>
 
+<%@page import="modelo.Usuario"%>
 <%@page import="com.dhtmlx.planner.controls.DHXLocalization"%>
 <%@page import="java.util.Calendar"%>
+
+<%
+
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    if (user != null && user.isAdministrador()) {
+
+    } else {
+        response.sendRedirect("index");
+    }
+%>
 <html>
     <body>
 
@@ -66,61 +78,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-right top-nav">
+                            
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                                <ul class="dropdown-menu message-dropdown">
-                                    <li class="message-preview">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="pull-left">
-                                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                                </span>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                                    </h5>
-                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="message-preview">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="pull-left">
-                                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                                </span>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                                    </h5>
-                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="message-preview">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="pull-left">
-                                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                                </span>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                                    </h5>
-                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="message-footer">
-                                        <a href="#">Read All New Messages</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Perfil <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="perfil"><i class="fa fa-fw fa-user"></i> Perfil</a>

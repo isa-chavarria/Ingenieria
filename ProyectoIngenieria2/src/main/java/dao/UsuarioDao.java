@@ -24,6 +24,8 @@ public interface UsuarioDao {
     List< Usuario> findAll();
 
     Usuario findbyLogin(String email, String password);
+    
+    Usuario findbyEmail(String email);
 
     boolean isIdUnique(String id);
 

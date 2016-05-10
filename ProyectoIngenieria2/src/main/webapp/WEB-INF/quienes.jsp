@@ -36,7 +36,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
+                <img style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -143,39 +143,7 @@
                     <div class="clearfix"></div>
 
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="box">
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Nuestro Equipo
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/rosi.jpg" alt="">
-                        <h3>Rosibeth Garcia
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/mari.jpg" alt="">
-                        <h3>Maria Solano
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/equipo.jpg" alt="">
-                        <h3>Maestras
-
-                        </h3>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-
-
+            </div>            
         </div>
 
         <footer>

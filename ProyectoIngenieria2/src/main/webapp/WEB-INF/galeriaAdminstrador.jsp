@@ -45,7 +45,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
+                <img style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -125,7 +125,7 @@
                 <hr>
             </div>
             <div class="imagenes" >
-                <a href='galeriaEncargado' class="btn btn-default custom-width">Editar galería</a>
+                <a href='galeriaEncargado' class="btn btn-default custom-width">Agregar/Eliminar imágenes a la galería</a>
                 <br/>
                 <div class="row"  >
 

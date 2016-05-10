@@ -52,7 +52,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
+                <img style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -95,7 +95,7 @@
                         
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Perfil <%=user.getEncargadoOriginal().getNombre()%> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="perfilAdministrador"><i class="fa fa-fw fa-user"></i> Perfil</a>
@@ -183,35 +183,7 @@
                 </div>
             </form:form>
 
-            <div class="row">
-                <div class="box">
-                    <div class="col-lg-12">
-                        <hr>
-                        <h2 class="intro-text text-center">Nuestro Equipo
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/rosi.jpg" alt="">
-                        <h3>Rosibeth Garcia
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/mari.jpg" alt="">
-                        <h3>Maria Solano
-
-                        </h3>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img class="img-responsive" src="resources/img/equipo.jpg" alt="">
-                        <h3>Maestras
-
-                        </h3>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+           
 
 
         </div>

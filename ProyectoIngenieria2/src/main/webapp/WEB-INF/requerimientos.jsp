@@ -1,6 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html lang="en">
     <head>
 
@@ -14,10 +16,10 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
         <!-- Custom CSS -->
         <link href="resources/css/business-casual.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -36,7 +38,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
+                <img style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -52,8 +54,8 @@
 
         <div id="second"  class="row">
 
-
             <h3 id="Titulo">Requerimientos de matrícula</h3>
+
 
 
         </div>
@@ -75,7 +77,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li>
+                       <li>
                             <a href="index"><i  class="fa fa-home"></i> Inicio</a>
                         </li>
                         <li>

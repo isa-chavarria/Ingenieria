@@ -54,7 +54,7 @@
             <div class="col-sm-4">
 
 
-                <img style="height: 50%; width: 50%; " src="resources/img/escudo.png" alt="">
+                <img style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
 
 
             </div>
@@ -94,7 +94,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-right top-nav">
-                         <li class="dropdown">
+                        <li class="dropdown">
 
                             <c:if test="${existen}">
                                 <a style="color: greenyellow;" href="#" class="dropdown-toggle" data-toggle="dropdown">${tam} <i style="color: greenyellow;" class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -109,10 +109,10 @@
                                         <a href="verMensajeKinder-${mensaje.codigo}">
                                             <div class="media">
                                                 <span class="pull-left">
-                                                    <img class="media-object" style="height: 35%; width: 35%; " src="resources/img/escudo.png" alt="">
+                                                    <img class="media-object" style="height: 30%; width: 30%; " src="${mensaje.persona.getRuta_imagen2()}" alt="">
                                                 </span>
                                                 <div class="media-body">
-                                                    <h5 class="media-heading"><strong>Kinder Lulú</strong>
+                                                    <h5 class="media-heading"><strong>${mensaje.getNombrePersona()}</strong>
                                                     </h5>
                                                     <p>${mensaje.asunto}</p>
                                                 </div>

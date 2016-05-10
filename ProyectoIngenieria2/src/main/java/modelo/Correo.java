@@ -13,7 +13,7 @@ import javax.mail.internet.*;
 
 public class Correo {
 
-    public void enviarCorreo(String to, String contra) {
+    public void enviarCorreo(String to, String mensaje,String asunto) {
 
         Properties propiedades = new Properties();
 
@@ -38,9 +38,8 @@ public class Correo {
 
             message.setFrom(new InternetAddress("monitor3bases@gmail.com", "Monitor 3"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            message.setSubject("Cuenta Sistema administración del Kinder Lulú");
-            message.setText("Hola has sido registrado en el Sistema de Administración del Kinder Lulú \n"
-                    + "esta es tu nueva contraseña:   " + contra);
+            message.setSubject(asunto);
+            message.setText(mensaje);
 
             Transport.send(message);
         } catch (Exception e) {

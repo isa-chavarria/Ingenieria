@@ -390,8 +390,11 @@ public class AppController {
         model.addAttribute("user", user);
         model.addAttribute("fallo", false);
 
+        String mensaje = "Hola has sido registrado en el Sistema de Administración del Kinder Lulú \n"
+                + "esta es tu nueva contraseña:   " + password;
+        String asunto = "Cuenta Sistema administración del Kinder Lulú";
         correo = new Correo();
-        correo.enviarCorreo(email, password);
+        correo.enviarCorreo(email, mensaje, asunto);
         return "MatriculaCorrecta";
     }
 
@@ -412,13 +415,16 @@ public class AppController {
             if (usu.isAdministrador()) {
                 // model.addAttribute("nombre", nombre);
                 request.getSession().setAttribute("user", usu);
-                
+
                 return loadAdministracion(model, request);
             }
-            if (usu.isEncargado()) {
-                //  model.addAttribute("nombre", nombre);
-                request.getSession().setAttribute("user", usu);
-                return loadEncargado(model, request);
+            Nino n = usu.getEncargadoOriginal().getNino().iterator().next();
+            if (n.getEstado()) {
+                if (usu.isEncargado()) {
+                    //  model.addAttribute("nombre", nombre);
+                    request.getSession().setAttribute("user", usu);
+                    return loadEncargado(model, request);
+                }
             }
         }
         Usuario u = new Usuario();
@@ -2183,6 +2189,10 @@ public class AppController {
             newmensaje.setType(multipartFile.getContentType());
         }
 
+//        String msn = "Hola, has recibido un nuevo mensaje en el sistema";
+//        String asunto = "Nuevo mensaje";
+//        correo = new Correo();
+//        correo.enviarCorreo("josvr0511@gmail.com", msn, asunto);
         mensajeKinderService.save(newmensaje);
 
         return loadListaMensajesEnviadosEnc(model, request);
@@ -2318,7 +2328,10 @@ public class AppController {
             newMensaje.setType(multipartFile.getContentType());
         }
 
-        mensajeService.save(newMensaje);
+        String msn = "Hola, has recibido un nuevo mensaje del Kinder Lulú en tu cuenta su sistema";
+        String asunto = "Nuevo mensaje";
+        correo = new Correo();
+        correo.enviarCorreo(e.getEmail(), msn, asunto);
 
         return loadPListaMensajesEnviadosKinder(model, request);
 
@@ -2465,6 +2478,27 @@ public class AppController {
         FileCopyUtils.copy(m.getContent(), response.getOutputStream());
 
         return loadPrueba(model);
+    }
+
+    @RequestMapping(value = {"/olvidoContrasena"}, method = RequestMethod.POST)
+    public String olvidoContrasena(@Valid Usuario user, BindingResult result,
+            ModelMap model, HttpServletRequest request) {
+
+        String email = user.getEmail();
+        Usuario s = usuarioService.findByEmail(email);
+
+        if (s != null) {
+            String password = s.getContrasena();
+            String mensaje = "¿Has olvidado tu contraseña?  \n"
+                    + "Esta es tu contraseña ,guardala bien!:   " + password;
+            String asunto = "Contraseña";
+            correo = new Correo();
+            correo.enviarCorreo(email, mensaje, asunto);
+            model.addAttribute("correo", true);
+        }
+
+        return loadIndex(model, request);
+
     }
 
     //-----------------------------------

@@ -53,6 +53,11 @@
 
 
         <div style="text-align: center;" id="second"  class="row">
+            <c:if test="${correo}">
+                <div  class="alert alert-success">
+                    <p>La contraseña fue enviada a su correo, en caso contrario reintentar proceso.</p>
+                </div>
+            </c:if>
 
             <c:if test="${fallo}">
                 <div  class="alert alert-danger">
@@ -79,8 +84,7 @@
                 </div>
 
                 <button type="submit" style=" box-shadow: 0px 0px 20px   rgba(0,0,0,0.2);text-transform:uppercase; margin-right: 5%;" class="btn btn-info">Iniciar sesión</button>
-
-                <a href='administracion' class="btn btn-default custom-width">¿Olvido su constraseña?</a>
+                <button type="button" id="" class="btn btn-default custom-width"  data-toggle="modal" data-target="#myModal">¿Olvido su constraseña?</button>
                 <form:input type="hidden"  class="form-control" path="id" id="id"/>
 
             </form:form>
@@ -145,7 +149,7 @@
                                 </div>
                                 <c:forEach items="${imagenes}" var="imagen">
                                     <div class="item">
-                                       <img class="img-full img-responsive" src="data:image/gif;base64,${imagen.imagen}" alt="">
+                                        <img class="img-full img-responsive" src="data:image/gif;base64,${imagen.imagen}" alt="">
                                     </div>
                                 </c:forEach>
                             </div>
@@ -172,6 +176,40 @@
 
 
 
+        </div>
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">La contraseña le sera enviada a su correo</h4>
+                    </div>
+                    <br/>
+
+                    <form:form method="POST" action="olvidoContrasena"  modelAttribute="user" style='font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;' class="form-horizontal" role="form">
+                        <form:input type="hidden" path="id"  id="valor2"/>
+
+                        <div class="form-group">
+                            <label for="email" class="col-lg-4 control-label">Correo electrónico:</label>
+                            <div class="col-lg-6">
+                                <form:input path="email" type="email" class="form-control" id="email"
+                                            placeholder="ejemplo@gmail.com" required="true"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Enviar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </form:form>
+
+
+                </div>
+
+            </div>
         </div>
 
         <footer>

@@ -70,6 +70,18 @@ public class UsuarioDaoImpl extends AbstractDao<String, Usuario> implements Usua
     }
 
     @Override
+    public Usuario findbyEmail(String email) {
+        System.out.println("Email : " + email);
+
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("email", email));
+        Usuario user = (Usuario) crit.uniqueResult();
+
+        return user;
+
+    }
+
+    @Override
     public boolean isIdUnique(String id) {
         Usuario user = getByKey(id);
 
